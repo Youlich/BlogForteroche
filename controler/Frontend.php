@@ -41,15 +41,16 @@ Class Frontend
 
     public function addComment($postId, $author, $comment)
     {
-        $commentManager = new \model\CommentManager();
-        $affectedLines = $commentManager->PostComment($postId, $author, $comment);
-        if ($affectedLines === false) {
+        $CommentManager = new \model\CommentManager();
+        $addcomment = $CommentManager->PostComment($postId, $author, $comment);
+        if ($addcomment === false) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
             header('Location: Blog.php?action=post&id=' . $postId . '&success=ok' );
         }
     }
+
     public function ModifComment()
     {
         $ModifManager = new CommentManager();

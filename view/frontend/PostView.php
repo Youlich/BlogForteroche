@@ -52,6 +52,18 @@ foreach ($comments as $comment)
 
     <?php
 }
+
+foreach ($addcomment as $comment)
+{
+    ?>
+    <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
+
+        (<a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>)
+
+    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+
+    <?php
+}
 ?>
 
 

@@ -48,24 +48,19 @@ class CommentManager extends DbConnect
 
     public function PostComment ($postId, $author, $comment) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
-        $addcomments = array();
+        $addcomment = array();
         $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr) VALUES(?, ?, ?, NOW())');
-
-        $comments->bindValue(':author', $_POST['author'], \PDO::PARAM_STR);
-        $comments->bindValue(':comment', $_POST['comment'], \PDO::PARAM_STR);
-        $addcomments = $comments->execute(array($postId, $author, $comment));
-        while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
+        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+        $req->execute(array($postId, $author, $comment));
+        while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->setAuthor($data['author']);
             $comment->setId($data['id']);
             $comment->setCommentDate($data['comment_date_fr']);
             $comment->setComment($data['comment']);
-            $comment->setPostId($data['post_id']);
-
-            $addcomments[] = $comment;
+            $addcomment[] = $comment;
         }
-        return $addcomments;
+          return $addcomment;
     }
 
 
