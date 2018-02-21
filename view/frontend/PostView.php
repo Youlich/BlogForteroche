@@ -46,19 +46,21 @@ foreach ($comments as $comment)
     ?>
     <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
 
-        (<a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>)
+        <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>
 
     <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 
     <?php
 }
+?>
 
+<?php
 foreach ($addcomment as $comment)
 {
     ?>
     <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
 
-        (<a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>)
+        <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>
 
     <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 

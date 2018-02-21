@@ -79,7 +79,7 @@ class CommentManager extends DbConnect
             $comment->setCommentDate($data['comment_date_fr']);
             $comment->setComment($data['comment']);
             $comment->setPostId($data['post_id']);
-            $comment->setMembreId($data['membre_id']);
+
         }
         return $modifLines;
     }

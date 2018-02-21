@@ -10,25 +10,9 @@ class Comment
     private $comment;
     private $comment_date;
     private $post_id;
-    private $membre_id;
 
-    /**
-     * @return mixed
-     */
-    public function getMembreId ()
-    {
-        return $this->membre_id;
-    }
 
-    /**
-     * @param mixed $membre_id
-     */
-    public function setMembreId ($membre_id)
-    {
-        $this->membre_id = $membre_id;
-    }
-
-    /**
+       /**
      * @return mixed
      */
 

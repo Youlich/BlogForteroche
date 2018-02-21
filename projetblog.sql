@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 21 fév. 2018 à 17:02
+-- Généré le :  mer. 21 fév. 2018 à 20:09
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -56,27 +56,27 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `comment_date` datetime NOT NULL,
   `post_id` int(11) NOT NULL,
-  `membre_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
 --
 
-INSERT INTO `comments` (`id`, `author`, `comment`, `comment_date`, `post_id`, `membre_id`) VALUES
-(1, 'juju', 'chouette', '2018-02-07 16:40:10', 1, 0),
-(2, 'dd', 'dd', '2018-02-12 17:47:10', 1, 0),
-(3, 'dd', 'dd', '2018-02-12 17:47:29', 1, 0),
-(4, 'gg', 'C\'est magnifique ', '2018-02-12 17:48:19', 1, 0),
-(5, 'juju', 'chouette !', '2018-02-12 17:51:02', 3, 0),
-(6, 'juju', 'c\'est beau !!!', '2018-02-12 17:52:44', 4, 0),
-(7, 'juju', 'bravo !!', '2018-02-12 20:59:16', 2, 0),
-(8, 'juju', 'hello !!', '2018-02-14 18:08:22', 1, 0),
-(9, 'dd', 'cc', '2018-02-15 16:29:17', 1, 0),
-(10, 'cc', 'vvvvv', '2018-02-15 16:29:35', 1, 0),
-(11, 'vbe', 'zzzzzt', '2018-02-15 16:30:50', 1, 0),
-(12, 'dd', 'cccn', '2018-02-15 16:38:46', 1, 0);
+INSERT INTO `comments` (`id`, `author`, `comment`, `comment_date`, `post_id`) VALUES
+(1, 'juju', 'chouette', '2018-02-07 16:40:10', 1),
+(2, 'dd', 'dd', '2018-02-12 17:47:10', 1),
+(3, 'dd', 'dd', '2018-02-12 17:47:29', 1),
+(4, 'gg', 'C\'est magnifique ', '2018-02-12 17:48:19', 1),
+(5, 'juju', 'chouette !!', '2018-02-12 17:51:02', 3),
+(6, 'juju', 'c\'est beau !!!', '2018-02-12 17:52:44', 4),
+(7, 'juju', 'bravo !!', '2018-02-12 20:59:16', 2),
+(8, 'juju', 'hello !!', '2018-02-14 18:08:22', 1),
+(9, 'dd', 'cc', '2018-02-15 16:29:17', 1),
+(10, 'cc', 'vvvvv', '2018-02-15 16:29:35', 1),
+(11, 'vbe', 'zzzzzt', '2018-02-15 16:30:50', 1),
+(12, 'dd', 'cccnv', '2018-02-15 16:38:46', 1),
+(13, 'féfé', 'nfnfnf', '2018-02-21 21:08:08', 3);
 
 -- --------------------------------------------------------
 
