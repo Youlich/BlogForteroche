@@ -20,13 +20,11 @@ foreach ($posts as $post)
         <br/><br/>
         <strong><a href="Blog.php?action=post&amp;id=<?= $post->getId() ?>" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Lire la suite</a></strong>
         <br/><br/>
-
-
-        <br/><br/>
     </div>
     <?php
 }
 ?>
+
 <?php $content = ob_get_clean(); ?>
 
 

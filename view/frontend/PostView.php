@@ -8,25 +8,45 @@ if (isset($_GET['success'])) {
 ?>
 
 
-    <p><a href="Blog.php">Retour à la liste des chapitres</a></p>
+    <h4><a href="Blog.php">Retour à la liste des chapitres</a></h4>
 
     <div class="post">
         <p>
             <img src="public/images/<?php echo $post->getImage();?>" />
         </p>
-        <h3>
+        <h3><br>
             <?= htmlspecialchars($post->getTitle()) ?>
-        </h3>
+        </h3><br>
         <p>
             <?= nl2br(htmlspecialchars($post->getContent())) ?>
         </p>
-
-
     </div>
+    <br><br>
+<div class="nbcomms">
+    <h4><span class="badge badge-success"><?= $nbComms ?> Commentaires</span></h4>
+</div>
+    <br>
+<?php
+foreach ($comments as $comment)
+{
+    ?>
+    <hr/>
+    <h5><em><?= htmlspecialchars($comment->getAuthor()) ?></em></h5>
 
-    <h2>Commentaires</h2>
+        <?= $comment->getCommentDate() ?><br/>
+        <br>
+    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+    <br>
+    <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>"><button type="button" class="btn btn-success btn-sm">Modifier</button></a>
 
+    <?php
+}
+?>
+    <div class="jumbotron">
+        <h5>Laisser un commentaire</h5>
+        <br>
     <form action="Blog.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
+
         <div>
             <label for="author">Auteur</label><br />
             <input type="text" id="author" name="author" />
@@ -39,34 +59,11 @@ if (isset($_GET['success'])) {
             <input type="submit" />
         </div>
     </form>
+    </div>
 
-<?php
-foreach ($comments as $comment)
-{
-    ?>
-    <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
 
-        <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>
 
-    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 
-    <?php
-}
-?>
-
-<?php
-foreach ($addcomment as $comment)
-{
-    ?>
-    <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?>
-
-        <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>">modifier</a>
-
-    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
-
-    <?php
-}
-?>
 
 
 <?php $content = ob_get_clean(); ?>

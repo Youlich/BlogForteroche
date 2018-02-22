@@ -24,10 +24,9 @@ Class Frontend
     {
         $postManager = new PostManager(); // lieu où se trouve la fonction getPost
         $commentManager = new CommentManager(); // lieu où se trouve la fonction getComments
-
         $post = $postManager->getPost($_GET['id']); // affiche le post en question grâce à la fonction getPost se trouvant dans PostManager
         $comments = $commentManager->getComments($_GET['id']); // affiche les commentaires qui lui sont associés
-        // $nbComms = $postManager->Count($_GET['id']);// affiche le nb de commentaires par post
+        $nbComms = $commentManager->CountComments($_GET['id']);// affiche le nb de commentaires par post
 
         require('view/frontend/postView.php'); //page qui gère l'affichage associé
     }
@@ -47,7 +46,7 @@ Class Frontend
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
-            header('Location: Blog.php?action=post&id=' . $postId . '&success=ok' );
+            header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
         }
     }
 
@@ -60,8 +59,13 @@ Class Frontend
         }
         else {
 
-            header('Location: Blog.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
+            header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
         }
+    }
+
+    public function accueil()
+    {
+        require('view/frontend/accueil.php');
     }
 
 }

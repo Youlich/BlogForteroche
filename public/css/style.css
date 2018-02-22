@@ -31,7 +31,10 @@ li {
     padding-left: 10%;
     padding-right: 10%;
 }
-
+/*postView.php*/
+.nbcomms{
+    color : #18bc9c;
+}
 /*blog*/
 .chapter
 {
@@ -63,4 +66,10 @@ li {
 h1
 {
     text-transform: uppercase;
+}
+/*en responsive*/
+a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover, button#sendMessageButton:hover
+{
+    background-color: grey!important;
+    border : grey;
 }

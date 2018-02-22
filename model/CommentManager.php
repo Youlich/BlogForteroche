@@ -15,7 +15,7 @@ class CommentManager extends DbConnect
     {
         $comments = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
         $req->execute(array($postId));
         while ($data = $req->fetch()) {
             $comment = new Comment();
@@ -33,7 +33,7 @@ class CommentManager extends DbConnect
     public function getComment ($numcomm) // affiche un commentaire pour pouvoir le modifier si besoin
     {
         $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC');
+        $PDOStatement = $pdo->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC');
         $PDOStatement->execute(array($numcomm));
         while ($data = $PDOStatement->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -50,7 +50,7 @@ class CommentManager extends DbConnect
     {
         $addcomment = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr) VALUES(?, ?, ?, NOW())');
         $req->execute(array($postId, $author, $comment));
         while ($data = $req->fetch()) {
             $comment = new Comment();
@@ -83,7 +83,14 @@ class CommentManager extends DbConnect
         }
         return $modifLines;
     }
-
+    public function CountComments($post_id)
+    {
+        $pdo = $this->dbConnect();
+        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE post_id = ?');
+        $PDOStatement->execute(array($post_id));
+        $data = $PDOStatement->fetch();
+        return $data['total'];
+    }
 
 
 }

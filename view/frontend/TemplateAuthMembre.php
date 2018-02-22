@@ -27,8 +27,9 @@
 
     <?php require('AuthView.php'); ?>
 
-    <a href="">Créer votre compte ici</a>
+    <h5><em><a href="">Créer votre compte ici</a></em></h5>
 </div>
+<br/>
 <?php include('Footer.php');?>
 
 <!-- Scroll to Top Button -->

@@ -34,7 +34,7 @@ if(isset($_POST['submit']))
                 $_SESSION['id'] = $resultat['id'];
                 $_SESSION['pseudo'] = $resultat['pseudo'];
                 $_SESSION['pass'] = $resultat['pass'];
-                header('location:index.php');
+                header('location:accueil.php');
             } else {
                 $error_message = 'Erreur dans le mot de passe';
             }

@@ -1,5 +1,7 @@
 <?php
 // on a plusieurs routes : par ex : listPosts, addComment, ect qui sont des instance de Route
+
+
 namespace router;
 
 
@@ -24,6 +26,14 @@ class Route
 
     }
     public function ModifComment()
+    {
+
+    }
+    public function AuthAdmin()
+    {
+
+    }
+    public function AuthMembre()
     {
 
     }

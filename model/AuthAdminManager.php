@@ -22,8 +22,9 @@ if(isset($_POST['submit']))
 
         if ($resultat) { // Le pseudo existe
             // Dans la requete précédente qui consistait à savoir si le pseudo existe on a récupéré le pass haché
-
-            $pass_hache_dans_bdd = $resultat['pass'];
+            // le pass haché a été simulé avec la commande $mdp=password_hash('mdp',PASSWORD_DEFAULT); puis récupéré par un var_dump ($mdp)
+            // et copié en haché dans la bdd. Cette commande a ensuite été supprimée
+            $pass_hache_dans_bdd = $resultat['pass']; // on récupère le mdp haché dans la bdd
 
             // Super on a le mot de passe haché de la personne dont le pseudo est $pseudo
             // Maintenant on peut vérifier si le pass saisi correspond au pass de la base de données
