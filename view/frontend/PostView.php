@@ -8,7 +8,7 @@ if (isset($_GET['success'])) {
 ?>
 
 
-    <h4><a href="Blog.php">Retour à la liste des chapitres</a></h4>
+    <h4><a href="index.php?action=listPosts&amp">Retour à la liste des chapitres</a></h4>
 
     <div class="post">
         <p>
@@ -37,7 +37,7 @@ foreach ($comments as $comment)
         <br>
     <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
     <br>
-    <a href="Blog.php?action=Comment&numComm=<?=$comment->getId()?>"><button type="button" class="btn btn-success btn-sm">Modifier</button></a>
+    <a href="index.php?action=Comment&numComm=<?=$comment->getId()?>"><button type="button" class="btn btn-success btn-sm">Modifier</button></a>
 
     <?php
 }
@@ -45,7 +45,7 @@ foreach ($comments as $comment)
     <div class="jumbotron">
         <h5>Laisser un commentaire</h5>
         <br>
-    <form action="Blog.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
+    <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
 
         <div>
             <label for="author">Auteur</label><br />

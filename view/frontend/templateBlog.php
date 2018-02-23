@@ -30,7 +30,7 @@
 <body id="top">
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-        <a href="view/frontend/accueil.php#masthead"><img src="public/images/LOGO.png" width="200px"/>
+        <a href=index.php?action=accueil&amp"><img src="public/images/LOGO.png" width="200px"/>
             <a class="navbar-brand js-scroll-trigger" href="#top"></a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -39,13 +39,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/accueil.php#portfolio">Blog</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#portfolio">Blog</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/accueil.php#actualités">Mes Actualités</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#actualités">Mes Actualités</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/accueil.php#contact">Contact</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#contact">Contact</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/TemplateAuthMembre.php">Se connecter</a>
@@ -135,19 +135,19 @@
 </body>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
+<script src="/js/jqBootstrapValidation.js"></script>
+<script src="/js/contact_me.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/freelancer.min.js"></script>
+<script src="/js/freelancer.min.js"></script>
 </html>
 
 

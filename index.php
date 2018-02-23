@@ -1,4 +1,5 @@
 <?php
+
 require_once("controler/Autoload.php");
 Autoload::register(); // j'appelle la fonction register de ma class Autoload
 // on a plusieurs routes : par ex : listPosts, addComment, ect qui sont des instance de Route

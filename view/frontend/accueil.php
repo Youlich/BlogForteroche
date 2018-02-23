@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="fr">
 
 <head>
 
@@ -12,18 +12,18 @@
     <title>Site de Jean Forteroche</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/css/style.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/css/style.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="../../vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="../../css/freelancer.min.css" rel="stylesheet">
+    <link href="css/freelancer.min.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +32,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-        <a href="#masthead"><img src="../../public/images/LOGO.png" width="200px"/>
+        <a href="#masthead"><img src="public/images/LOGO.png" width="200px"/>
             <a class="navbar-brand js-scroll-trigger" href="#top"></a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -50,7 +50,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="TemplateAuthMembre.php">Se connecter</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/TemplateAuthMembre.php">Se connecter</a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +65,7 @@
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">
-            <img class="img-fluid mb-5 d-block mx-auto" src="../../public/images/forteroche.jpg" alt="Jean Forteroche" >
+            <img class="img-fluid mb-5 d-block mx-auto" src="public/images/forteroche.jpg" alt="Jean Forteroche" >
         </p>
         <p class="message">
             Je m'appelle Jean Forteroche, auteur de Roman mon métier, ma passion.<br/>
@@ -90,23 +90,23 @@
         <hr class="star-dark mb-5">
         <h3 class="titre roman text-center">Billet simple pour l'Alaska</h3>
         <br/>
-        <em><h5 class="link text-center"><a href="../../index.php">Voir tous les chapitres</h5></em>
+        <em><h5 class="link text-center"><a href="index.php?action=listPosts&amp">Voir tous les chapitres</h5></em>
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="../../index.php?action=post&amp;id=1" class="chapter"><img class="img-fluid" src="../../public/images/reve.jpg" alt="">Chapitre 1 : Quand le rêve devient réalité</a>
+                    <a href="index.php?action=post&amp;id=1" class="chapter"><img class="img-fluid" src="public/images/reve.jpg" alt="">Chapitre 1 : Quand le rêve devient réalité</a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="../../index.php?action=post&amp;id=2" class="chapter"><img class="img-fluid" src="../../public/images/decouverte.jpg" alt="">Chapitre 2 : découverte de l'Alaska</a>
+                    <a href="index.php?action=post&amp;id=2" class="chapter"><img class="img-fluid" src="public/images/decouverte.jpg" alt="">Chapitre 2 : découverte de l'Alaska</a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="../../index.php?action=post&amp;id=3" class="chapter"><img class="img-fluid" src="../../public/images/etudes.jpg" alt="">Chapitre 3 : les études en Alaska</a>
+                    <a href="index.php?action=post&amp;id=3" class="chapter"><img class="img-fluid" src="public/images/etudes.jpg" alt="">Chapitre 3 : les études en Alaska</a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="../../index.php?action=post&amp;id=4" class="chapter"><img class="img-fluid" src="../../public/images/glacier.jpg" alt="">Chapitre 4 : expérience unique</a>
+                    <a href="index.php?action=post&amp;id=4" class="chapter"><img class="img-fluid" src="public/images/glacier.jpg" alt="">Chapitre 4 : expérience unique</a>
             </div>
         </div>
     </section>
@@ -222,8 +222,8 @@
 <div class="copyright">
     <div class="copyright py-4 text-center text-white">
         <div class="container">
-            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="MentionsLegales.php">Mentions légales</a> -
-                <a href="TemplateAuthAdmin.php">Administration</a></small>
+            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="view/frontend/MentionsLegales.php">Mentions légales</a> -
+                <a href="view/frontend/TemplateAuthAdmin.php">Administration</a></small>
         </div>
     </div>
 </div>
@@ -239,17 +239,17 @@
 </body>
 
 <!-- Bootstrap core JavaScript -->
-<script src="../../vendor/jquery/jquery.min.js"></script>
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="../../js/jqBootstrapValidation.js"></script>
-<script src="../../js/contact_me.js"></script>
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="../../js/freelancer.min.js"></script>
+<script src="js/freelancer.min.js"></script>
 </html>
