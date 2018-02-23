@@ -14,17 +14,15 @@ Class Backend
     {
         $authMembreManager = new AuthMembreManager();
         $connMembre = $authMembreManager->AuthMembre();
-
-
         require('view/frontend/AuthMembreView.php');
     }
     public function connectAdmin()
     {
         $authMembreManager = new AuthAdminManager();
         $connMembre = $authMembreManager->connectAdmin();
-
-
         require('view/frontend/AuthAdminView.php');
     }
+
+
 
 }

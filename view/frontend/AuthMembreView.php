@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('Header.php'); ?>
+<?php
+
+
+require ('Header.php'); ?>
+
 
 <body id="top">
 

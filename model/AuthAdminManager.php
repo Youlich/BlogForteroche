@@ -8,14 +8,14 @@ class AuthAdminManager extends DbConnect
 {
     public function connectAdmin()
     {
-
         // toutes les vérifications
         if (isset($_POST['submit'])) {
             if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
                 $pass = htmlspecialchars($_POST['pass']);
                 $pseudo = htmlspecialchars($_POST['pseudo']);
                 // On vérifie si le pseudo existe en base de données
-                $req = $bdd->prepare('SELECT * FROM admin WHERE pseudo = :pseudo');
+                $db = $this->dbConnect();
+                $req = $db->prepare('SELECT * FROM admin WHERE pseudo = :pseudo');
                 $req->execute(array('pseudo' => $pseudo));
                 $resultat = $req->fetch();
 

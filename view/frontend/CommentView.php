@@ -10,7 +10,7 @@ if (isset($_GET['success'])) {
 <br></br>
 
 
-<form action="Blog.php?action=ModifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
+<form action="index.php?action=ModifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
 
     <div>
 
@@ -29,7 +29,7 @@ if (isset($_GET['success'])) {
     </div>
     <div>
         <p>
-            <a href="Blog.php?action=post&id=<?=$comment->getPostId(); ?>">Retour vers la liste des commentaires du billet</a>
+            <a href="index.php?action=post&id=<?=$comment->getPostId(); ?>">Retour vers la liste des commentaires du billet</a>
         </p>
     </div>
 </form>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -57,11 +58,15 @@
     </div>
 </nav>
 
-
 <!-- Header -->
 <header class="masthead bg-primary text-white text-justify" id="masthead">
     <div class="container">
-        <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site</h2>
+        <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
+            session_start();
+            if(isset($_SESSION['id']))
+            {
+            echo $_SESSION['pseudo'] . ' !';}
+            ?></h2>
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">

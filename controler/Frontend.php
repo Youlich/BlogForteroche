@@ -46,7 +46,7 @@ Class Frontend
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
-            header('Location: router.php?action=post&id=' . $postId . '&success=ok' );
+            header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
         }
     }
 
@@ -59,7 +59,7 @@ Class Frontend
         }
         else {
 
-            header('Location: router.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
+            header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
         }
     }
 
