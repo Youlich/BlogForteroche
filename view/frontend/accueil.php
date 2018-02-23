@@ -50,7 +50,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="view/frontend/TemplateAuthMembre.php">Se connecter</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=connectMembre">Se connecter</a>
                     </li>
                 </ul>
             </div>
@@ -222,8 +222,8 @@
 <div class="copyright">
     <div class="copyright py-4 text-center text-white">
         <div class="container">
-            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="view/frontend/MentionsLegales.php">Mentions légales</a> -
-                <a href="view/frontend/TemplateAuthAdmin.php">Administration</a></small>
+            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="index.php?action=mentionslegales">Mentions légales</a> -
+                <a href="index.php?action=connectAdmin">Administration</a></small>
         </div>
     </div>
 </div>

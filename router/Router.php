@@ -55,6 +55,18 @@ class Router
                     $frontend = new \controler\Frontend();
                     $frontend->accueil();
                 }
+                elseif ($_GET['action'] == 'connectMembre') {
+                    $backend = new \controler\Backend();
+                    $backend->connectMembre();
+                }
+                elseif ($_GET['action'] == 'connectAdmin') {
+                    $backend = new \controler\Backend();
+                    $backend->connectAdmin();
+                }
+                elseif ($_GET['action'] == 'mentionslegales') {
+                    $frontend = new \controler\Frontend();
+                    $frontend->mentionslegales();
+                }
             } else {
                 $frontend = new \controler\Frontend();
                 $frontend->accueil(); // fonction par défaut détaillée dans frontend.php
@@ -65,4 +77,5 @@ class Router
                 echo 'Erreur : ' . $e->getMessage();
             }
 }
+
 }

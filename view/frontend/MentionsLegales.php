@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php include ('head.php'); ?>
 
-
-<body id="top">
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-    <div class="container">
-        <a href="../../index.php?action=accueil&amp"><img src="../../public/images/LOGO.png" width="200px"/>
-            <a class="navbar-brand js-scroll-trigger" href="#top"></a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../index.php?action=accueil&amp#portfolio">Blog</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../index.php?action=accueil&amp#actualités">Mes Actualités</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../index.php?action=accueil&amp#contact">Contact</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="TemplateAuthMembre.php">Se connecter</a>
-                    </li>
-                </ul>
-            </div>
-    </div>
-</nav>
+<?php require ('Header.php'); ?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -39,6 +10,7 @@
         </br></br></br>
     </div>
 </header>
+<body class="top">
 <div class="ml">
     <h3>1. Présentation du site.</h3>
     <p>En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site <a href="http://projet3.jutatibouet.fr/">projet3.jutatibouet.fr</a> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :</p>
@@ -98,30 +70,10 @@
 </div>
 
 
-<!-- Bootstrap core JavaScript -->
-<script src="../../vendor/jquery/jquery.min.js"></script>
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-<!-- Contact Form JavaScript -->
-<script src="../../js/jqBootstrapValidation.js"></script>
-<script src="../../js/contact_me.js"></script>
-
-<!-- Custom scripts for this template -->
-<script src="../../js/freelancer.min.js"></script>
-
 
 <!-- Footer -->
 <?php require('Footer.php'); ?>
 
-<!-- Scroll to Top Button -->
-<div class="scroll-to-top position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-        <i class="fa fa-chevron-up"></i>
-    </a>
-</div>
+
 </body>
 </html>

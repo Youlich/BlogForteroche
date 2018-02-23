@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html lang="fr">
 <!-- Footer -->
 <footer class="footer text-center">
     <div class="container">
@@ -52,8 +53,31 @@
 <div class="copyright">
     <div class="copyright py-4 text-center text-white">
         <div class="container">
-            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="MentionsLegales.php">Mentions légales</a> -
-                <a href="TemplateAuthAdmin.php">Administration</a></small>
+            <small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="index.php?action=mentionslegales">Mentions légales</a> -
+                <a href="index.php?action=connectAdmin">Administration</a></small>
         </div>
     </div>
 </div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Contact Form JavaScript -->
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/freelancer.min.js"></script>
+
+<!-- Scroll to Top Button -->
+<div class="scroll-to-top position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>
+</html>

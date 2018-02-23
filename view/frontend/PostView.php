@@ -61,11 +61,6 @@ foreach ($comments as $comment)
     </form>
     </div>
 
-
-
-
-
-
 <?php $content = ob_get_clean(); ?>
 
 <?php require('templateBlog.php'); ?>

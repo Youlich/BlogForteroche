@@ -9,3 +9,4 @@ Autoload::register(); // j'appelle la fonction register de ma class Autoload
 // faire une classe Route
 $router = new \router\Router();
 $router->diriger();
+

@@ -68,4 +68,9 @@ Class Frontend
         require('view/frontend/accueil.php');
     }
 
+    public function mentionslegales()
+    {
+        require('view/frontend/MentionsLegales.php');
+    }
+
 }
