@@ -1,13 +1,14 @@
 <?php
-
 namespace model;
+
 use entity\Membres;
 
-require ("DbConnect.php");
+require("DbConnect.php");
 
-class AuthMembreManager extends DbConnect
+class MembreManager extends DbConnect
 {
-    public function AuthMembre()
+
+    public function AuthMembre ()
     {
 
         // toutes les vérifications
@@ -15,7 +16,10 @@ class AuthMembreManager extends DbConnect
             if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
                 $pass = htmlspecialchars($_POST['pass']);
                 $pseudo = htmlspecialchars($_POST['pseudo']);
+                $error_message = new ErrorManager();
+
                 // On vérifie si le pseudo existe en base de données
+
                 $db = $this->dbConnect();
                 $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
                 $req->execute(array('pseudo' => $pseudo));
@@ -31,7 +35,7 @@ class AuthMembreManager extends DbConnect
                     // Maintenant on peut vérifier si le pass saisi correspond au pass de la base de donnée
                     // Si ca correspond, on peut faire se connecter la personne
                     // On le fait avec la fonction password_verify()
-                    session_start();
+
                     if (password_verify($pass, $pass_hache_dans_bdd)) {
                         $_SESSION['id'] = $resultat['id'];
                         $_SESSION['pseudo'] = $resultat['pseudo'];
@@ -49,5 +53,28 @@ class AuthMembreManager extends DbConnect
             }
         }
     }
-}
 
+    public function InscrMembre()
+    {
+
+        $pseudo = htmlspecialchars($_POST['pseudo']);
+        $pass = htmlspecialchars($_POST['pass']);
+        $newpass = htmlspecialchars($_POST['newpass']);
+        $email = htmlspecialchars($_POST['email']);
+
+        // Hachage du mot de passe
+
+        $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+
+          // Insertion
+
+         $db = $this->Dbconnect();
+         $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES (:pseudo, :pass, :email, CURDATE())');
+         $req->execute(array(
+         'pseudo' => $pseudo,
+         'pass' => $pass_hache,
+         'email' => $email));
+
+
+        }
+ }

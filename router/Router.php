@@ -3,6 +3,9 @@
 // on execute $frontend->listPosts(); ou $frontend->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
 // il a un attribute $routes c'est un tableau d'instances de Route.
 namespace router;
+use controler\Backend;
+
+session_start();
 
 class Router
 {
@@ -63,9 +66,22 @@ class Router
                     $backend = new \controler\Backend();
                     $backend->connectAdmin();
                 }
+                elseif ($_GET['action'] == 'addMembre') {
+                    $backend = new Backend();
+                    $backend->addMembre();
+                }
+                elseif ($_GET['action'] == 'inscripMembre') {
+                    $frontend = new \controler\Frontend();
+                    $frontend->inscripMembre();
+                }
+
                 elseif ($_GET['action'] == 'mentionslegales') {
                     $frontend = new \controler\Frontend();
                     $frontend->mentionslegales();
+                }
+                elseif ($_GET['action'] == 'charte') {
+                    $frontend = new \controler\Frontend();
+                    $frontend->charte();
                 }
             } else {
                 $frontend = new \controler\Frontend();

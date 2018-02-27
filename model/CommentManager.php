@@ -50,15 +50,15 @@ class CommentManager extends DbConnect
     {
         $addcomment = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr) VALUES(?, ?, ?, NOW())');
+        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES (?, ?, ?, NOW())');
         $req->execute(array($postId, $author, $comment));
         while ($data = $req->fetch()) {
-            $comment = new Comment();
-            $comment->setAuthor($data['author']);
-            $comment->setId($data['id']);
-            $comment->setCommentDate($data['comment_date_fr']);
-            $comment->setComment($data['comment']);
-            $addcomment[] = $comment;
+            $commentadd = new Comment();
+            $commentadd->setAuthor($data['author']);
+            $commentadd->setPostId($data['post_id']);
+            $commentadd->setCommentDate($data['comment_date']);
+            $commentadd->setComment($data['comment']);
+            $addcomment[] = $commentadd;
         }
           return $addcomment;
     }

@@ -1,11 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
+<br><br>
+
+<?php require ('Header.php'); ?>
+
 <?php
-
-
-require ('Header.php'); ?>
-
+if (isset($_GET['success=ok'])) {
+    echo "Vous êtes bien inscrit, merci de vous connecter";
+}
+?>
 
 <body id="top">
 
@@ -17,12 +22,13 @@ require ('Header.php'); ?>
     <form action="" method="post">
 
         <?php
+
         // Si la variable $error_message est setté
         if (isset($error_message)) {
-            echo "<h4>" . $error_message . "</h4>";
+            $session->setFlash('$error_message', 'alert');
+
         }
         ?>
-
         <table>
             <tr>
                 <td align="right">
@@ -52,15 +58,16 @@ require ('Header.php'); ?>
                 <td align="right">
                 </td>
                 <td>
-                    <input type="submit" name= "submit" value="Se connecter" />
+                    <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
             </tr>
         </table>
         </br></br>
 
+
     </form>
 
-    <h5><em><a href="">Créer votre compte ici</a></em></h5>
+       <h5><em><a href="index.php?action=inscripMembre">Créer votre compte ici</a></em></h5>
 </div>
 <br/>
 <?php include('Footer.php');?>
@@ -72,3 +79,4 @@ require ('Header.php'); ?>
     </a>
 </div>
 </body>
+</html>

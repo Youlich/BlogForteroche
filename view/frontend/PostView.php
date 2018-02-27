@@ -22,9 +22,9 @@ if (isset($_GET['success'])) {
         </p>
     </div>
     <br><br>
-<div class="nbcomms">
-    <h4><span class="badge badge-success"><?= $nbComms ?> Commentaires</span></h4>
-</div>
+
+    <h4><span class="badge"><?= $nbComms ?> Commentaires</span></h4>
+
     <br>
 <?php
 foreach ($comments as $comment)
@@ -42,11 +42,11 @@ foreach ($comments as $comment)
     <?php
 }
 ?>
+
     <div class="jumbotron">
         <h5>Laisser un commentaire</h5>
         <br>
     <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
-
         <div>
             <label for="author">Auteur</label><br />
             <input type="text" id="author" name="author" />
@@ -56,7 +56,7 @@ foreach ($comments as $comment)
             <textarea id="comment" name="comment"></textarea>
         </div>
         <div>
-            <input type="submit" />
+            <input type="submit" value="Envoyer" />
         </div>
     </form>
     </div>

@@ -2,7 +2,15 @@
   <dictionary name="jutat">
     <words>
       <w>addcomment</w>
+      <w>addmembre</w>
+      <w>banni</w>
+      <w>commentadd</w>
       <w>comms</w>
+      <w>derniere</w>
+      <w>inscr</w>
+      <w>membreadd</w>
+      <w>newpass</w>
+      <w>visite</w>
     </words>
   </dictionary>
 </component>

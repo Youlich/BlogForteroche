@@ -32,9 +32,25 @@ li {
     padding-right: 10%;
 }
 /*postView.php*/
-.nbcomms{
+.btn btn-success
+{
     color : #18bc9c;
 }
+
+.badge {
+    padding: 1px 9px 2px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+}
+
+#comment
+{
+    width : 100%;
+}
+
+
 /*blog*/
 .chapter
 {
@@ -72,4 +88,26 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 {
     background-color: grey!important;
     border : grey;
+}
+
+/* view*/
+.btn-success
+{
+    background-color : #18bc9c;
+    border-color : #18bc9c;
+}
+
+/*charte*/
+.charte
+{}
+
+/*message d'erreur*/
+.alert
+{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1060;
+    display:none;
 }

@@ -7,7 +7,7 @@ if (isset($_GET['success'])) {
     echo "Commentaire modifié avec succès";
 }
 ?>
-<br></br>
+<br><br>
 
 
 <form action="index.php?action=ModifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
@@ -25,7 +25,7 @@ if (isset($_GET['success'])) {
         <textarea id="comment" name="comment"><?php echo $comment->getComment()?></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input type="submit" class="btn btn-success btn-sm"/>
     </div>
     <div>
         <p>

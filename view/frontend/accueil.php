@@ -51,7 +51,18 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=connectMembre">Se connecter</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=connectMembre"><?php
+
+                            if(isset($_SESSION['id']))
+                            {
+                                echo "Se déconnecter";
+                                session_destroy();
+                            }
+                                else {
+                                echo "Se connecter";
+                                }
+                            ?></a>
+
                     </li>
                 </ul>
             </div>
@@ -62,11 +73,14 @@
 <header class="masthead bg-primary text-white text-justify" id="masthead">
     <div class="container">
         <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
-            session_start();
+
             if(isset($_SESSION['id']))
             {
-            echo $_SESSION['pseudo'] . ' !';}
-            ?></h2>
+                echo $_SESSION['pseudo'] . ' !';
+            }
+            ?>
+            </h2>
+
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">

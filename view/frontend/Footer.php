@@ -73,6 +73,7 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/freelancer.min.js"></script>
+<script src="public/js/main.js"></script>
 
 <!-- Scroll to Top Button -->
 <div class="scroll-to-top position-fixed ">

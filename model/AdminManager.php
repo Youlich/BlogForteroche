@@ -1,15 +1,22 @@
 <?php
-
 namespace model;
+
+use entity\Session;
+
+require ('entity/Session.php');
+$session = new Session();
 
 require_once("DbConnect.php");
 
-class AuthAdminManager extends DbConnect
+class AdminManager extends DbConnect
 {
+
     public function connectAdmin()
     {
+
         // toutes les vérifications
         if (isset($_POST['submit'])) {
+
             if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
                 $pass = htmlspecialchars($_POST['pass']);
                 $pseudo = htmlspecialchars($_POST['pseudo']);

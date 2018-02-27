@@ -62,6 +62,10 @@ Class Frontend
             header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
         }
     }
+    public function inscripMembre()
+    {
+        require('view/frontend/InscriptionMembreView.php');
+    }
 
     public function accueil()
     {
@@ -73,4 +77,8 @@ Class Frontend
         require('view/frontend/MentionsLegales.php');
     }
 
+    public function charte()
+    {
+        require('view/frontend/charte.php');
+    }
 }

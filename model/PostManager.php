@@ -4,8 +4,6 @@ use entity\Post;
 
 require_once("DbConnect.php");
 
-
-
 /**
  * Class PostManager
  * @package model

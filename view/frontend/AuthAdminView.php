@@ -47,7 +47,7 @@
                 <td align="right">
                 </td>
                 <td>
-                    <input type="submit" name= "submit" value="Se connecter" />
+                    <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
             </tr>
         </table>
