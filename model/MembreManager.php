@@ -16,7 +16,7 @@ class MembreManager extends DbConnect
             if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
                 $pass = htmlspecialchars($_POST['pass']);
                 $pseudo = htmlspecialchars($_POST['pseudo']);
-                $error_message = new ErrorManager();
+
 
                 // On vérifie si le pseudo existe en base de données
 
@@ -42,6 +42,7 @@ class MembreManager extends DbConnect
                         $_SESSION['pass'] = $resultat['pass'];
                         header('Location: index.php?action=accueil');
 
+
                     } else {
                         $error_message = 'Erreur dans le mot de passe';
                     }
@@ -56,25 +57,44 @@ class MembreManager extends DbConnect
 
     public function InscrMembre()
     {
-
         $pseudo = htmlspecialchars($_POST['pseudo']);
         $pass = htmlspecialchars($_POST['pass']);
         $newpass = htmlspecialchars($_POST['newpass']);
         $email = htmlspecialchars($_POST['email']);
 
         // Hachage du mot de passe
-
         $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
           // Insertion
-
          $db = $this->Dbconnect();
          $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES (:pseudo, :pass, :email, CURDATE())');
-         $req->execute(array(
+         $resultat=$req->execute(array(
          'pseudo' => $pseudo,
          'pass' => $pass_hache,
          'email' => $email));
 
-
         }
- }
+
+     public function deleteMembre()
+     {
+          //  $pseudo = htmlspecialchars($_GET['pseudo']);
+             $db = $this->dbConnect();
+         //    $req = $db->prepare('DELETE FROM membres WHERE pseudo= :pseudo');
+         $req = $db->prepare("DELETE FROM membres WHERE pseudo = :pseudo");
+         foreach($_GET['pseudo'] as $valeur) {
+             $resultat = $req->execute(array(':pseudo'=>$valeur));
+         }
+          // $resultat=$req->execute(array(':pseudo'=>$pseudo));
+           //  $resultat=$req->execute();
+     }
+         //    $req->bindValue(':pseudo' , $_GET['pseudo'], \PDO::PARAM_INT);
+         //    $executeIsOk = $req->execute(array($pseudo,$id));
+         //       if ($executeIsOk) {
+          //       $req = $db->prepare('DELETE FROM comments WHERE membre_id=$id');
+         //        $req->execute();
+          //       $message = "Le membre a été supprimé";
+          //      } else {
+           //          $message = "Echec de la suppression du membre";
+          //       }
+
+}

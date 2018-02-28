@@ -4,6 +4,7 @@
 // il a un attribute $routes c'est un tableau d'instances de Route.
 namespace router;
 use controler\Backend;
+use controler\Frontend;
 
 session_start();
 
@@ -69,6 +70,15 @@ class Router
                 elseif ($_GET['action'] == 'addMembre') {
                     $backend = new Backend();
                     $backend->addMembre();
+                }
+                elseif ($_GET['action'] =='suppMembre'){
+                    $backend = new Backend();
+                    $backend->suppMembre();
+                }
+                elseif ($_GET['action']=='accesSuppMembre')
+                {
+                    $frontend = new Frontend();
+                    $frontend->suppressionMembre();
                 }
                 elseif ($_GET['action'] == 'inscripMembre') {
                     $frontend = new \controler\Frontend();

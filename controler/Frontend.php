@@ -43,7 +43,7 @@ Class Frontend
         $CommentManager = new \model\CommentManager();
         $addcomment = $CommentManager->PostComment($postId, $author, $comment);
         if ($addcomment === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire !');
+            throw new Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
             header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
@@ -55,7 +55,7 @@ Class Frontend
         $ModifManager = new CommentManager();
         $modifLines = $ModifManager->ModifComment();
         if ($modifLines === false) {
-            throw new \Exception('Impossible de modifier le commentaire !');
+            throw new Exception('Impossible de modifier le commentaire !');
         }
         else {
 
@@ -65,6 +65,11 @@ Class Frontend
     public function inscripMembre()
     {
         require('view/frontend/InscriptionMembreView.php');
+    }
+
+    public function suppressionMembre()
+    {
+    require('view/frontend/SuppressionMembre.php');
     }
 
     public function accueil()

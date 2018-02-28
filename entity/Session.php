@@ -6,6 +6,21 @@ namespace entity;
 class Session
 {
 
+    private $pseudo;
+    private $id;
+
+    public function sessionPseudo(){
+        $_SESSION['pseudo'] = $this->pseudo;
+        return $_SESSION['pseudo'];
+    }
+
+    public function sessionId(){
+        $_SESSION['id'] = $this->id;
+        return $_SESSION['id'];
+    }
+
+
+
     public function setFlash($message, $type = 'error')
     {
         $_SESSION['flash'] = array (

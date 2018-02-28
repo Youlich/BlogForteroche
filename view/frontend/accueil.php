@@ -50,24 +50,44 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=connectMembre"><?php
 
-                            if(isset($_SESSION['id']))
-                            {
-                                echo "Se déconnecter";
-                                session_destroy();
-                            }
-                                else {
-                                echo "Se connecter";
-                                }
-                            ?></a>
+                    <li class="nav-item dropdown mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
+                            <ul class="dropdown-menu">
 
+                                <li><a class="dropdown-item" href="index.php?action=connectMembre">
+                                        <?php
+                                                if(isset($_SESSION['id']))
+                                                {
+                                                    echo "Se déconnecter";
+                                                    session_destroy();
+                                                }
+                                                    else {
+                                                    echo "Se connecter";
+                                                    }
+                                         ?>
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="index.php?action=accesSuppMembre&amp;pseudo=<?php echo $_SESSION['pseudo']?>">
+
+                                        <?php
+                                                if(isset($_SESSION['id']))
+                                                {
+                                                    echo "Supprimer mon compte";
+                                                }
+                                                    else {
+                                                        echo "";
+                                                    }
+                                        ?>
+                                    </a>
+                                </li>
+                            </ul>
                     </li>
                 </ul>
             </div>
     </div>
 </nav>
+
 
 <!-- Header -->
 <header class="masthead bg-primary text-white text-justify" id="masthead">

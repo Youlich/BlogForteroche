@@ -7,8 +7,10 @@
 <?php require ('Header.php'); ?>
 
 <?php
-if (isset($_GET['success=ok'])) {
+if (isset($_GET['success'])) {
     echo "Vous êtes bien inscrit, merci de vous connecter";
+} elseif (isset($_GET['supp'])) {
+    echo "Votre compte membre est supprimé";
 }
 ?>
 
@@ -21,14 +23,6 @@ if (isset($_GET['success=ok'])) {
 
     <form action="" method="post">
 
-        <?php
-
-        // Si la variable $error_message est setté
-        if (isset($error_message)) {
-            $session->setFlash('$error_message', 'alert');
-
-        }
-        ?>
         <table>
             <tr>
                 <td align="right">
@@ -67,7 +61,7 @@ if (isset($_GET['success=ok'])) {
 
     </form>
 
-       <h5><em><a href="index.php?action=inscripMembre">Créer votre compte ici</a></em></h5>
+       <h5><em><a href="index.php?action=inscripMembre">Créer votre compte</a></em></h5>
 </div>
 <br/>
 <?php include('Footer.php');?>

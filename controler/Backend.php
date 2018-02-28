@@ -30,12 +30,25 @@ Class Backend
         $newMembre = new MembreManager();
         $inscripMembre = $newMembre->InscrMembre();
         if ($inscripMembre === false) {
-            throw new \Exception('Impossible d\'ajouter le membre !');
+            throw new Exception('Impossible d\'ajouter le membre !');
         }
         else {
             header ('Location: index.php?action=connectMembre' . '&success=ok');
         }
     }
+
+    public function suppMembre()
+    {
+        $suppMembre = new MembreManager();
+        $deleteMembre = $suppMembre->deleteMembre();
+        if ($deleteMembre === false){
+            throw new Exception('Impossible de supprimer le membre !');
+        }
+        else {
+            header ('Location: index.php?action=connectMembre' . '&supp=ok');
+        }
+    }
+
 
 
 
