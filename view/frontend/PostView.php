@@ -8,7 +8,7 @@ if (isset($_GET['success'])) {
 ?>
 
 
-    <h4><a href="index.php?action=listPosts&amp">Retour à la liste des chapitres</a></h4>
+    <h4><a href="index.php?action=listPosts">Retour à la liste des chapitres</a></h4>
 
     <div class="post">
         <p>

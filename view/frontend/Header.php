@@ -46,8 +46,26 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#contact">Contact</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=connectMembre">Se connecter</a>
+                    <li class="nav-item dropdown mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
+                        <ul class="dropdown-menu">
+                            <?php if (isset($_SESSION['id'])) { ?>
+
+                                <li><a class="dropdown-item" href="index.php?action=deconnectMembre">Se déconnecter</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="index.php?action=accesSuppMembre">
+                                        Supprimer mon compte
+                                    </a>
+                                </li>
+
+                            <?php } else { ?>
+
+                                <li><a class="dropdown-item" href="index.php?action=connectMembre">Se connecter</a></li>
+                                <li><a class="dropdown-item" href="index.php?action=inscripMembre">S'inscrire</a></li>
+                            <?php } ?>
+
+
+                        </ul>
                     </li>
                 </ul>
             </div>

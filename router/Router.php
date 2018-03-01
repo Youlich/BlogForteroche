@@ -5,13 +5,10 @@
 namespace router;
 use controler\Backend;
 use controler\Frontend;
-
 session_start();
-
 class Router
 {
     private $routes;
-
     public function diriger ()
     {
         try {
@@ -63,6 +60,10 @@ class Router
                     $backend = new \controler\Backend();
                     $backend->connectMembre();
                 }
+                elseif ($_GET['action'] == 'deconnectMembre') {
+                    $backend = new \controler\Backend();
+                    $backend->deconnectMembre();
+                }
                 elseif ($_GET['action'] == 'connectAdmin') {
                     $backend = new \controler\Backend();
                     $backend->connectAdmin();
@@ -70,6 +71,10 @@ class Router
                 elseif ($_GET['action'] == 'addMembre') {
                     $backend = new Backend();
                     $backend->addMembre();
+                }
+                elseif ($_GET['action'] == 'accesMembre') {
+                    $frontend = new Frontend();
+                    $frontend->accesMembre();
                 }
                 elseif ($_GET['action'] =='suppMembre'){
                     $backend = new Backend();
@@ -84,7 +89,6 @@ class Router
                     $frontend = new \controler\Frontend();
                     $frontend->inscripMembre();
                 }
-
                 elseif ($_GET['action'] == 'mentionslegales') {
                     $frontend = new \controler\Frontend();
                     $frontend->mentionslegales();
@@ -99,9 +103,8 @@ class Router
             }
         }
         catch
-            (Exception $e) {
-                echo 'Erreur : ' . $e->getMessage();
-            }
-}
-
+        (Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+    }
 }

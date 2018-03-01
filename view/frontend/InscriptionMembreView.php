@@ -2,8 +2,7 @@
 <html lang="fr">
 
 <?php
-require('entity/Session.php');
-$session = new \entity\Session();
+
 require ('Header.php'); ?>
 
 <body id="top">
@@ -11,21 +10,20 @@ require ('Header.php'); ?>
 <div class = "corps" align="center">
 
     <h1>Inscription Membre</h1>
-    <br />
 
+    <?php
+    if (isset($addMembre)) {
+        echo $addMembre;
+    }
+    ?>
+
+</br></br>
     <form action="index.php?action=addMembre" method="post">
 
         <p>Bienvenue sur la page d'inscription de mon site !<br/>
 
             Merci de remplir les champs (*) obligatoires et de prendre connaissance de <a href="index.php?action=charte"><strong>ma charte</strong></a> pour continuer.</p>
         <br>
-
-        <?php
-        // Si la variable $error_message est setté
-        if (isset($error_message)) {
-            $session->setFlash('$error_message', 'alert');
-        }
-        ?>
 
         <table>
             <tr>

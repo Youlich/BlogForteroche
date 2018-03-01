@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,13 +5,6 @@
 
 <?php require ('Header.php'); ?>
 
-<?php
-if (isset($_GET['success'])) {
-    echo "Vous êtes bien inscrit, merci de vous connecter";
-} elseif (isset($_GET['supp'])) {
-    echo "Votre compte membre est supprimé";
-}
-?>
 
 <body id="top">
 
@@ -20,6 +12,18 @@ if (isset($_GET['success'])) {
 
     <h1>Connexion Membre</h1>
     <br /> <br />
+    <?php
+    if (isset($_GET['success'])) {
+        echo "Vous êtes bien inscrit, merci de vous connecter";
+        }
+   if (isset($_GET['supp'])) {
+        echo "Votre compte membre est supprimé";
+    }
+    if (isset($authMembre)) {
+        echo $authMembre;
+    }
+
+    ?>
 
     <form action="" method="post">
 
@@ -61,7 +65,7 @@ if (isset($_GET['success'])) {
 
     </form>
 
-       <h5><em><a href="index.php?action=inscripMembre">Créer votre compte</a></em></h5>
+    <h5><em><a href="index.php?action=inscripMembre">Si vous n'avez pas de compte, veuillez vous inscrire ici</a></em></h5>
 </div>
 <br/>
 <?php include('Footer.php');?>

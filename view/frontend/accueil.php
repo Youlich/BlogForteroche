@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -53,35 +52,24 @@
 
                     <li class="nav-item dropdown mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
-                            <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">
+                            <?php if (isset($_SESSION['id'])) { ?>
 
-                                <li><a class="dropdown-item" href="index.php?action=connectMembre">
-                                        <?php
-                                                if(isset($_SESSION['id']))
-                                                {
-                                                    echo "Se déconnecter";
-                                                    session_destroy();
-                                                }
-                                                    else {
-                                                    echo "Se connecter";
-                                                    }
-                                         ?>
+                                <li><a class="dropdown-item" href="index.php?action=deconnectMembre">Se déconnecter</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="index.php?action=accesSuppMembre">
+                                        Supprimer mon compte
                                     </a>
                                 </li>
-                                <li><a class="dropdown-item" href="index.php?action=accesSuppMembre&amp;pseudo=<?php echo $_SESSION['pseudo']?>">
 
-                                        <?php
-                                                if(isset($_SESSION['id']))
-                                                {
-                                                    echo "Supprimer mon compte";
-                                                }
-                                                    else {
-                                                        echo "";
-                                                    }
-                                        ?>
-                                    </a>
-                                </li>
-                            </ul>
+                            <?php } else { ?>
+
+                                <li><a class="dropdown-item" href="index.php?action=connectMembre">Se connecter</a></li>
+                                <li><a class="dropdown-item" href="index.php?action=inscripMembre">S'inscrire</a></li>
+                            <?php } ?>
+
+
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -93,13 +81,12 @@
 <header class="masthead bg-primary text-white text-justify" id="masthead">
     <div class="container">
         <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
-
             if(isset($_SESSION['id']))
             {
                 echo $_SESSION['pseudo'] . ' !';
             }
             ?>
-            </h2>
+        </h2>
 
         <hr class="star-light mb-5">
         <br/>

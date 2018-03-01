@@ -43,8 +43,19 @@ Vous êtes donc propriétaire de votre compte et responsable de celui-ci (ainsi 
     <br>
     <br>
 </p>
+
+
+    <form action="index.php?action=inscripMembre&amp;reponse=accept" method="post">
+        <div>
+            <div>
+                <input type="submit" name="accept" class="btn btn-success btn-sm" value="J'accepte le réglement"/>
+            </div><br>
+            <h4><em><a href="index.php?action=accueil">Retour Accueil</a></em></h4>
+        </div>
+    </form>
+</br></br>
 </div>
-</div>
+
 <!-- Footer -->
 <?php require('Footer.php'); ?>
 
