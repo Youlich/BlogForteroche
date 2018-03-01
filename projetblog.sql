@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 21 fév. 2018 à 20:09
+-- Généré le :  jeu. 01 mars 2018 à 20:12
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(255) NOT NULL,
-  `pass` text NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `mdp` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Déchargement des données de la table `admin`
 --
 
-INSERT INTO `admin` (`id`, `pseudo`, `pass`) VALUES
-(2, 'jforteroche', 'soleil123');
+INSERT INTO `admin` (`id`, `login`, `mdp`) VALUES
+(2, 'jforteroche', '$2y$10$6vQ.hVb.jmmhTtvGNBK6PuXcZTlx545A9XZZGbNl6WSPm6NKuoi0i');
 
 -- --------------------------------------------------------
 
@@ -56,27 +56,34 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `comment_date` datetime NOT NULL,
   `post_id` int(11) NOT NULL,
+  `membre_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
 --
 
-INSERT INTO `comments` (`id`, `author`, `comment`, `comment_date`, `post_id`) VALUES
-(1, 'juju', 'chouette', '2018-02-07 16:40:10', 1),
-(2, 'dd', 'dd', '2018-02-12 17:47:10', 1),
-(3, 'dd', 'dd', '2018-02-12 17:47:29', 1),
-(4, 'gg', 'C\'est magnifique ', '2018-02-12 17:48:19', 1),
-(5, 'juju', 'chouette !!', '2018-02-12 17:51:02', 3),
-(6, 'juju', 'c\'est beau !!!', '2018-02-12 17:52:44', 4),
-(7, 'juju', 'bravo !!', '2018-02-12 20:59:16', 2),
-(8, 'juju', 'hello !!', '2018-02-14 18:08:22', 1),
-(9, 'dd', 'cc', '2018-02-15 16:29:17', 1),
-(10, 'cc', 'vvvvv', '2018-02-15 16:29:35', 1),
-(11, 'vbe', 'zzzzzt', '2018-02-15 16:30:50', 1),
-(12, 'dd', 'cccnv', '2018-02-15 16:38:46', 1),
-(13, 'féfé', 'nfnfnf', '2018-02-21 21:08:08', 3);
+INSERT INTO `comments` (`id`, `author`, `comment`, `comment_date`, `post_id`, `membre_id`) VALUES
+(1, 'juju', 'chouette', '2018-02-07 16:40:10', 1, NULL),
+(2, 'dd', 'dd', '2018-02-12 17:47:10', 1, NULL),
+(3, 'dd', 'dd', '2018-02-12 17:47:29', 1, NULL),
+(4, 'gg', 'C\'est magnifique ', '2018-02-12 17:48:19', 1, NULL),
+(5, 'juju', 'chouette !!', '2018-02-12 17:51:02', 3, NULL),
+(6, 'juju', 'c\'est beau !!', '2018-02-12 17:52:44', 4, NULL),
+(7, 'juju', 'bravo !!!!', '2018-02-12 20:59:16', 2, NULL),
+(8, 'juju', 'hello !!', '2018-02-14 18:08:22', 1, NULL),
+(9, 'dd', 'cc', '2018-02-15 16:29:17', 1, NULL),
+(10, 'cc', 'vvvvv', '2018-02-15 16:29:35', 1, NULL),
+(11, 'vbe', 'zzzzzt', '2018-02-15 16:30:50', 1, NULL),
+(12, 'dd', 'cccnv', '2018-02-15 16:38:46', 1, NULL),
+(13, 'féfé', 'nfnfnf', '2018-02-21 21:08:08', 3, NULL),
+(14, 'dédé', 'salut', '2018-02-21 21:21:10', 2, NULL),
+(15, 'Paul', 'salut', '2018-02-25 22:04:00', 2, NULL),
+(16, 'gégé', 'super', '2018-02-26 11:57:45', 2, NULL),
+(17, 'juju', 'gfgfggf', '2018-02-27 12:47:49', 2, NULL),
+(18, 'toto', 'héhé', '2018-02-28 20:47:31', 3, NULL),
+(19, 'bobo', 'dhdhhd', '2018-03-01 21:11:47', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,30 +96,22 @@ CREATE TABLE IF NOT EXISTS `membres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(255) CHARACTER SET utf8 NOT NULL,
   `pass` text CHARACTER SET utf8 NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(255) CHARACTER SET ascii NOT NULL,
   `date_inscription` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `membres`
 --
 
 INSERT INTO `membres` (`id`, `pseudo`, `pass`, `email`, `date_inscription`) VALUES
-(1, 'juju', '$2y$10$n0VR8HUSDK6N78U/uw8Jje2jNUgpcID.hlq9H7zIJAbTMijwe2Cku', 'jutatibouet@yahoo.fr', '2017-12-03'),
-(18, 'bonbon', '$2y$10$5LudME5B9Ih7o33UHKq8geDqyTEcIU4bekoe5lY2O3Zh02jvBsEXm', 'jutatibouet@yahoo.fr', '2018-02-15'),
-(5, 'trutu', '$2y$10$QKunwGjJvtNPBB6t/6aOgexnrwWV2rlDwBbVDnoryiy20TdTcGfnq', 'UTU@g1mail.com', '2017-12-03'),
-(6, 'tutu', '$2y$10$6rMLAHx3Z9ZwW8/AYUXjL.UC8LAvR9cIVffWBQUPBq0XYMzduiX7C', 'UTU@g1mail.com', '2017-12-03'),
-(17, 'juju', '$2y$10$k.NT4eI.cdHYXHOigNoX1Osgi0nWKGjZEKSwTV4Cv.TffRofxSx9q', 'juju.tatibouet@gmail.com', '2017-12-18'),
-(8, 'toto', '$2y$10$phuBkJeaFaaNVYtYR1DB1OsbDjJghBtweISlVdQbT4pIhNKO4w5si', 'toto@gmail.com', '2017-12-04'),
-(9, 'toto', '$2y$10$XL/Hx2zIVpn/blKompWgl.WHgGAq./.k3TCdM5bKom7X1vzdjXBva', 'toto@gmail.com', '2017-12-04'),
-(10, 'toto', '$2y$10$/mRW6XeLxeNjk8UwvYpcC..hDwcYzM6Y9y9N7GXs9uNw..GnJW.WG', 'toto@gmail.com', '2017-12-04'),
-(11, 'toto', '$2y$10$vjjbrFJjwWUAhA3ZvPUxcer6SZDJiFsrDykqWpOpr9op.QTsZ.ufG', 'toto@gmail.com', '2017-12-04'),
-(12, 'titi', '$2y$10$xgne0FOjxVVyzHKDppF4o.Q28HjbWQY5/sz0kwsOGTMcoRafWRDai', 'ju.tatibouet@gmail.com', '2017-12-08'),
-(13, 'tutu', '$2y$10$Co8RBeSxXl3tJNU4rQ.q8ODhVxjKv8.wb9I0YuJoZallJyO11b7tO', 'tutu.tutu@gmail.com', '2017-12-08'),
-(14, 'georgio', '$2y$10$jCr8Fv3i7amY2MYIabvOa.OlCsv/KcTFEjKu1RxlGIZw8B1xnZC8m', 'georgio@yahoo.fr', '2017-12-11'),
-(15, 'didine', '$2y$10$fw276QQ7BlUsPjCRy17wUOONf/byhZsRHjEvfp3.lViQ9WDINsbuK', 'didine@yahoo.fr', '2017-12-11'),
-(16, 'didino', '$2y$10$iPFWjkrHJpMO2.9o9bxhNOBWEH6xTkGvGjvySutKqw1P0gxTM7ZRS', 'didino@yahoo.fr', '2017-12-11');
+(21, 'Youlich', '$2y$10$GZ9YHOEescXbUGnCbnz89edYqJh0uulVGljDsfeHLcdQjIb7veZ3m', '', '2018-03-01'),
+(66, 'juju', '$2y$10$zrAz0xCUnGiHojWR2ckrauDCtfoJhqa092yx3FJzwi8VdHJJ2tI0K', 'jutatibouet@yahoo.fr', '2018-03-01'),
+(65, 'Hugo', '$2y$10$fqF2EkPFpw/jbk4u.7d9cuSAUjdpRm.kDy/qWHsmpm2bLkQngkZRO', 'jutatibouet@yahoo.fr', '2018-03-01'),
+(64, 'Lucas', '$2y$10$ix6uPusCX6pasMocWR.mUOFagg2d1BtvEyJl5L2zFhsfdTD1NyHl2', 'jutatibouet@yahoo.fr', '2018-03-01'),
+(63, 'néné', '$2y$10$8AEJSfWh6qZKPEQ9gLAEL.f0ajmRFHV2SFNhFvG.o/ZoiGoBUeFqW', 'jutatibouet@yahoo.fr', '2018-03-01'),
+(62, 'bébé', '$2y$10$ZlOGpU31MEAhh/rnEBUlq.1gClP1d9doz65WeYEAbquqT0sC/zr6C', 'jutatibouet@yahoo.fr', '2018-03-01');
 
 -- --------------------------------------------------------
 
@@ -130,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `image` varchar(1000) DEFAULT NULL,
   `nbcomms` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `posts`

@@ -12,10 +12,11 @@
     <form action="" method="post">
 
         <?php
-        // Si la variable $error_message est setté
-        if (isset($error_message)) {
-            echo "<h4>" . $error_message . "</h4>";
+
+        if (isset($connAdmin)) {
+            echo $connAdmin;
         }
+
         ?>
 
         <table>
@@ -24,7 +25,7 @@
                     <label for="pseudo">Pseudo</label>
                 </td>
                 <td>
-                    <input type="text" name="pseudo" id="pseudo" />
+                    <input type="text" name="login" id="login" />
                 </td>
             </tr>
             <tr>
@@ -32,17 +33,10 @@
                     <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" name="pass" id="pass" />
+                    <input type="password" name="mdp" id="mdp" /><br/><br/>
                 </td>
             </tr>
-            <tr>
-                <td align="left">
-                    <label for="auto">Connexion automatique</label>
-                </td>
-                <td>
-                    <input type="checkbox" checked="true" id="case" />
-                </td>
-            </tr>
+
             <tr>
                 <td align="right">
                 </td>
@@ -51,7 +45,7 @@
                 </td>
             </tr>
         </table>
-        </br></br>
+        <br/><br/>
 
     </form>
 
