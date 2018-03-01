@@ -8,13 +8,20 @@
 <header class="bg-primary text-white">
     <div class="container text-center">
         <br><br><br>
-        <h1>Billet simple pour l'Alaska</h1>
+        <h1>Votre profil</h1>
         <br><br><br>
     </div>
 </header>
-<div class="contain">
+<div align="center">
+<p>
+    <br><br><br>
+    <h5>Votre pseudo : </h5><?php echo $_SESSION['pseudo']; ?>
+    <br><br><br>
+        <h5>Nombre de commentaires : </h5>
+    <?php $nbComms ?>
+    <br><br><br>
+</p>
 
-    <?= $content; ?>
 </div>
 
 <?php require ('Footer.php'); ?>

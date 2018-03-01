@@ -73,4 +73,8 @@ Class Frontend
     {
         require('view/frontend/charte.php');
     }
+    public function profil()
+    {
+        require('view/frontend/profilMembreView.php');
+    }
 }

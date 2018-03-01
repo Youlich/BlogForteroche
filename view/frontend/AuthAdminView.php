@@ -22,7 +22,7 @@
         <table>
             <tr>
                 <td align="right">
-                    <label for="pseudo">Pseudo</label>
+                    <label for="login">Login</label>
                 </td>
                 <td>
                     <input type="text" name="login" id="login" />
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td align="right">
-                    <label for="pass">Mot de passe</label>
+                    <label for="mdp">Mot de passe</label>
                 </td>
                 <td>
                     <input type="password" name="mdp" id="mdp" /><br/><br/>

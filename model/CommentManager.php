@@ -52,19 +52,19 @@ class CommentManager extends DbConnect
     {
         $addcomment = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES (?, ?, ?, NOW())');
+        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date, membre_id) VALUES (?, ?, ?, NOW(), ?)');
         $req->execute(array($postId, $author, $comment));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->setAuthor($data['author']);
             $commentadd->setPostId($data['post_id']);
             $commentadd->setComment($data['comment']);
+            $commentadd->setMembreId($data['membre_id']);
 
             $addcomment[] = $commentadd;
         }
           return $addcomment;
     }
-
 
     public function ModifComment () // modifie le commentaire dans la BDD
     {

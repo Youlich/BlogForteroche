@@ -10,7 +10,23 @@ class Membres
     private $pass;
     private $email;
     private $date_inscription;
+    private $nbcomms;
 
+    /**
+     * @return mixed
+     */
+    public function getNbcomms ()
+    {
+        return $this->nbcomms;
+    }
+
+    /**
+     * @param mixed $nbcomms
+     */
+    public function setNbcomms ($nbcomms)
+    {
+        $this->nbcomms = $nbcomms;
+    }
 
     /**
      * @return mixed

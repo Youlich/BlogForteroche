@@ -48,8 +48,13 @@ foreach ($comments as $comment)
         <br>
     <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
         <div>
-            <label for="author">Auteur</label><br />
-            <input type="text" id="author" name="author" />
+            <?php
+            if (isset($_SESSION['id'])) {
+                echo $_SESSION['pseudo'];
+            } else { ?>
+                <label for="author">Auteur</label><br />
+                <input type="text" id="author" name="author" />
+           <?php } ?>
         </div>
         <div>
             <label for="comment">Commentaire</label><br />

@@ -107,4 +107,29 @@ class MembreManager extends DbConnect
 
         }
 
+    public function CountComments($membre_id)
+    {
+        $pdo = $this->dbConnect();
+        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE membre_id = ?');
+        $PDOStatement->execute(array($membre_id));
+        $data = $PDOStatement->fetch();
+        return $data['total'];
+    }
+
+    public function getMembre($membreId) // affiche un membre
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM membres WHERE id = ?');
+        $req->execute(array($membreId));
+        while ($data = $req->fetch())
+        {
+            $membre = new Membres();
+            $membre->setId($data['id']);
+            $membre->setPseudo($data['pseudo']);
+            $membre->setDateInscription($data['date_inscription']);
+            $membre->setEmail($data['email']);
+            $membre->setNbcomms($data['nbcomms']);
+
+        }
+        return $membre;
 }

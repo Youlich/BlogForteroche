@@ -97,6 +97,10 @@ class Router
                     $frontend = new \controler\Frontend();
                     $frontend->charte();
                 }
+                elseif ($_GET['action'] == 'profilMembre') {
+                    $frontend = new Frontend();
+                    $frontend->profil();
+                }
             } else {
                 $frontend = new \controler\Frontend();
                 $frontend->accueil(); // fonction par défaut détaillée dans frontend.php
