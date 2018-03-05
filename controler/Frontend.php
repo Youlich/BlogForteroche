@@ -53,6 +53,10 @@ Class Frontend
     {
         require('view/frontend/InscriptionMembreView.php');
     }
+    public function postContact()
+    {
+        require('view/frontend/PostContact.php');
+    }
     public function accesMembre()
     {
         require('view/frontend/AuthMembreView.php');
@@ -73,8 +77,5 @@ Class Frontend
     {
         require('view/frontend/charte.php');
     }
-    public function profil()
-    {
-        require('view/frontend/profilMembreView.php');
-    }
+
 }

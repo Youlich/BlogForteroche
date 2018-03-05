@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php
-
-require ('Header.php'); ?>
-
-<body id="top">
-
-<div class = "corps" align="center">
-
-    <h1>Inscription Membre</h1>
-
+<?php require ('Header.php'); ?>
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        </br></br></br>
+        <h1>Inscription Membre</h1>
+        </br></br>
+    </div>
+</header>
+</br>
+<body class="top">
+<div align="center">
     <?php
     if (isset($addMembre)) {
         echo $addMembre;

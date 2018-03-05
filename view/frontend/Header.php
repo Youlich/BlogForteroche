@@ -57,11 +57,7 @@
                                         Supprimer mon compte
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="index.php?action=profilMembre">
-                                        Votre profil
-                                    </a>
-                                </li>
+
 
                             <?php } else { ?>
 

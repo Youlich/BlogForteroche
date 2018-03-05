@@ -67,12 +67,12 @@ class MembreManager extends DbConnect
                                     // Insertion
                                     $db = $this->Dbconnect();
                                     $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES (:pseudo, :pass, :email, CURDATE())');
-                                    $resultat=$req->execute(array(
+                                    $resultat = $req->execute(array(
                                         'pseudo' => $pseudo,
                                         'pass' => $pass_hache,
                                         'email' => $email));
 
-                                    header ('location: index.php?action=accesMembre&amp;' . '$success');
+                                    header('location: index.php?action=accesMembre&amp;' . '$success');
                                     exit();
 
 
@@ -90,7 +90,7 @@ class MembreManager extends DbConnect
                         return 'Votre pseudo doit faire plus de 3 caractères';
                     }
                 } else {
-                    return'Votre pseudo doit faire moins de 255 caractères';
+                    return 'Votre pseudo doit faire moins de 255 caractères';
                 }
             } else {
                 return 'Merci de remplir tous les champs';
@@ -99,30 +99,29 @@ class MembreManager extends DbConnect
     }
 
 
-        public function deleteMembre ()
-        {
-            $db = $this->dbConnect();
-            $req = $db->prepare("DELETE FROM membres WHERE id = :id");
-            return $req->execute(array(':id' => $_GET['id']));
+    public function deleteMembre ()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare("DELETE FROM membres WHERE id = :id");
+        return $req->execute(array(':id' => $_GET['id']));
 
-        }
+    }
 
-    public function CountComments($membre_id)
+    public function CountComments ($membre_id)
     {
         $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE membre_id = ?');
+        $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membre_id = ?');
         $PDOStatement->execute(array($membre_id));
         $data = $PDOStatement->fetch();
         return $data['total'];
     }
 
-    public function getMembre($membreId) // affiche un membre
+    public function getMembre ($membreId) // affiche un membre
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM membres WHERE id = ?');
         $req->execute(array($membreId));
-        while ($data = $req->fetch())
-        {
+        while ($data = $req->fetch()) {
             $membre = new Membres();
             $membre->setId($data['id']);
             $membre->setPseudo($data['pseudo']);
@@ -132,4 +131,5 @@ class MembreManager extends DbConnect
 
         }
         return $membre;
+    }
 }

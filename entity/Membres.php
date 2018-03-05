@@ -15,7 +15,7 @@ class Membres
     /**
      * @return mixed
      */
-    public function getNbcomms ()
+    public function getNbcomms()
     {
         return $this->nbcomms;
     }

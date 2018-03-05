@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<br><br>
-
 <?php require ('Header.php'); ?>
-
-
-<body id="top">
-
-<div class = "corps" align="center">
-
-    <h1>Connexion Membre</h1>
-    <br /> <br />
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        </br></br></br>
+        <h1>Connexion Membre</h1>
+        </br></br>
+    </div>
+</header>
+</br></br>
+<body class="top">
+<div align="center">
     <?php
     if (isset($_GET['success'])) {
         echo "Vous êtes bien inscrit, merci de vous connecter";
@@ -22,7 +22,6 @@
     if (isset($authMembre)) {
         echo $authMembre;
     }
-
     ?>
 
     <form action="" method="post">
@@ -65,7 +64,7 @@
 
     </form>
 
-    <h5><em><a href="index.php?action=inscripMembre">Si vous n'avez pas de compte, veuillez vous inscrire ici</a></em></h5>
+    <h5><em><a href="index.php?action=inscripMembre">S'inscrire</a></em></h5>
 </div>
 <br/>
 <?php include('Footer.php');?>

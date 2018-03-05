@@ -2,7 +2,7 @@
 namespace controler;
 use model\AdminManager;
 use model\AuthAdminManagerOld;
-use model\ErrorManager;
+use model\Validator;
 use model\MembreManager;
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();

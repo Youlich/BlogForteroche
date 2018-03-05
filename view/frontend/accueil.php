@@ -61,11 +61,7 @@
                                         Supprimer mon compte
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="index.php?action=profilMembre">
-                                        Votre profil
-                                    </a>
-                                </li>
+
 
                             <?php } else { ?>
 
@@ -167,25 +163,25 @@
             <hr class="star-dark mb-5">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form action="index.php?action=postcontact" method="post">
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nom</label>
-                                <input class="form-control" id="name" type="text" placeholder="Nom" required="required" data-validation-required-message="Rentrez votre nom.">
+                                <input class="form-control" name='name' type="text" placeholder="Nom" required="required" data-validation-required-message="Rentrez votre nom.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Adresse mail</label>
-                                <input class="form-control" id="email" type="email" placeholder="Adresse mail" required="required" data-validation-required-message="Rentrez votre adresse mail.">
+                                <input class="form-control" name='email' type="email" placeholder="Adresse mail" required="required" data-validation-required-message="Rentrez votre adresse mail.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Message</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Saisissez votre message."></textarea>
+                                <textarea class="form-control" name='message' rows="5" placeholder="Message" required="required" data-validation-required-message="Saisissez votre message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

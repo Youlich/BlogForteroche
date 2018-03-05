@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <?php require ('Header.php'); ?>
 
-<body id="top">
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        </br></br></br>
+        <h1>Connexion Administrateur</h1>
+        </br></br>
+    </div>
+</header>
+</br></br>
 
-<div class = "corps" align="center">
-
-    <h1>Connexion Admin</h1>
-    <br /> <br />
-
+<body class="top">
+<div align="center">
     <form action="" method="post">
 
         <?php
@@ -60,3 +65,4 @@
     </a>
 </div>
 </body>
+</html>
