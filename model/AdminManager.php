@@ -1,10 +1,6 @@
 <?php
 namespace model;
 
-use entity\Session;
-
-require ('entity/Session.php');
-$session = new Session();
 
 require_once("DbConnect.php");
 

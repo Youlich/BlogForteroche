@@ -159,11 +159,13 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
+
             <h2 class="text-center text-uppercase text-secondary mb-0">Me contacter</h2>
             <hr class="star-dark mb-5">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <form action="index.php?action=postcontact" method="post">
+
+                    <form action="index.php?action=contact" method="post" name="contactform">
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nom</label>
@@ -189,6 +191,16 @@
                         <div id="success"></div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Envoyer</button>
+                            <?php if(array_key_exists('errors',$_SESSION)): ?>
+                                <div class="alert alert-danger">
+                                    <?= implode('<br>', $_SESSION['errors']); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(array_key_exists('success',$_SESSION)): ?>
+                                <div class="alert alert-success">
+                                    Votre email à bien été transmis !
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </form>
                 </div>
@@ -280,3 +292,8 @@
 <!-- Custom scripts for this template -->
 <script src="js/freelancer.min.js"></script>
 </html>
+<?php
+unset($_SESSION['success']);
+unset($_SESSION['errors']);
+?>
+

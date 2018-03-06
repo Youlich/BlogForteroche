@@ -46,4 +46,18 @@ Class Backend
             exit();
         }
     }
+ //   public function verif($_POST)
+ //   {
+  //      $verif = new Validator($_POST);
+ //       $veriferror = $verif->verifPseudo($pseudo);
+  //      $veriferror = $verif->verifPass($pass);
+  //      $veriferror = $verif->verifmail($email);
+  //      $veriferror = $verif->verifNewPass($pass, $newpass);
+  //      $veriferror = $verif->errors();
+   //     $veriferror = $verif->validate_required($name);
+  //  }
+    public function Contact()
+    {
+        require('view/backend/Contact_me.php');
+    }
 }

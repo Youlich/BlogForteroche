@@ -97,9 +97,9 @@ class Router
                     $frontend = new \controler\Frontend();
                     $frontend->charte();
                 }
-                elseif ($_GET['action'] == 'postcontact'){
-                    $frontend = new \controler\Frontend();
-                    $frontend->postContact();
+                elseif ($_GET['action'] == 'contact'){
+                    $backend = new Backend();
+                    $backend ->Contact();
                 }
 
             } else {
