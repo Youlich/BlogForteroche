@@ -1,5 +1,6 @@
 <?php
 namespace controler;
+use entity\Membres;
 use model\AdminManager;
 use model\AuthAdminManagerOld;
 use model\Validator;
@@ -59,5 +60,15 @@ Class Backend
     public function Contact()
     {
         require('view/backend/Contact_me.php');
+    }
+
+    public function loggedOnly(){ // fonction qui gère les droits d'accès aux commentaires, seules les personnes connectés peuvent saisir un commentaire
+        $autoris = new MembreManager();
+        $autoris->Autoris();
+
+    }
+    function membre_est_connecte() {
+
+        return !empty($_SESSION['id']);
     }
 }

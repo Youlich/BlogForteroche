@@ -191,18 +191,20 @@
                         <div id="success"></div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Envoyer</button>
-                            <?php if(array_key_exists('errors',$_SESSION)): ?>
-                                <div class="alert alert-danger">
-                                    <?= implode('<br>', $_SESSION['errors']); ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if(array_key_exists('success',$_SESSION)): ?>
-                                <div class="alert alert-success">
-                                    Votre email à bien été transmis !
-                                </div>
-                            <?php endif; ?>
                         </div>
+                        <?php
+                        if(array_key_exists('errors',$_SESSION)){ ?>
+                            <div class="alert alert-danger">
+                                <?= implode('<br>', $_SESSION['errors']); ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="alert alert-success">
+                                Votre email à bien été transmis !
+                            </div>
+                            <?php unset($_SESSION['errors']); }?>
                     </form>
+
+
                 </div>
             </div>
         </div>
@@ -292,8 +294,5 @@
 <!-- Custom scripts for this template -->
 <script src="js/freelancer.min.js"></script>
 </html>
-<?php
-unset($_SESSION['success']);
-unset($_SESSION['errors']);
-?>
+
 

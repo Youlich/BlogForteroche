@@ -12,27 +12,26 @@
 </br></br>
 <body class="top">
 <div align="center">
-    <?php
-    if (isset($_GET['success'])) {
-        echo "Vous êtes bien inscrit, merci de vous connecter";
-        }
-   if (isset($_GET['supp'])) {
-        echo "Votre compte membre est supprimé";
-    }
-    if (isset($authMembre)) {
-        echo $authMembre;
-    }
-    ?>
 
     <form action="" method="post">
-
+        <?php
+        if (isset($_GET['success'])) {
+            echo "Vous êtes bien inscrit, merci de vous connecter";
+        }
+        if (isset($_GET['supp'])) {
+            echo "Votre compte membre est supprimé";
+        }
+      //  if (isset($authMembre)) {
+      //      echo $authMembre;
+     //   }
+        ?>
         <table>
             <tr>
                 <td align="right">
                     <label for="pseudo">Pseudo</label>
                 </td>
                 <td>
-                    <input type="text" name="pseudo" id="pseudo" />
+                    <input type="text" name="pseudo" id="pseudo" required="required" />
                 </td>
             </tr>
             <tr>
@@ -40,7 +39,7 @@
                     <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" name="pass" id="pass" />
+                    <input type="password" name="pass" id="pass" required="required" />
                 </td>
             </tr>
             <tr>
@@ -57,6 +56,9 @@
                 <td>
                     <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
+                <?php if (isset($_SESSION['error'])){
+                    echo $_SESSION['error'];
+                }?>
             </tr>
         </table>
         </br></br>

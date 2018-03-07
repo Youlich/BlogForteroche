@@ -36,6 +36,7 @@ Class Frontend
         }
         else {
             header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
+            exit();
         }
     }
     public function ModifComment()
@@ -47,6 +48,7 @@ Class Frontend
         }
         else {
             header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
+            exit();
         }
     }
     public function inscripMembre()

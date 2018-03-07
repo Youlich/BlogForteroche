@@ -48,12 +48,12 @@ class CommentManager extends DbConnect
         return $comment;
     }
 
-    public function PostComment ($postId, $author, $comment) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
+    public function PostComment ($postId, $author, $comment, $membre_id) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date, membre_id) VALUES (?, ?, ?, NOW(), ?)');
-        $req->execute(array($postId, $author, $comment));
+        $req->execute(array($postId, $author, $comment, $membre_id));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->setAuthor($data['author']);

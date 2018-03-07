@@ -32,7 +32,7 @@
                     <label for="pseudo">Pseudo </label>
                 </td>
                 <td>
-                    <input type="text" placeholder="Votre pseudo" name="pseudo" id="pseudo"/>(*) <em>supérieur à 3 caractères</em>
+                    <input type="text" placeholder="Votre pseudo" name="pseudo" id="pseudo" required="required"/>(*) <em>supérieur à 3 caractères</em>
                 </td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
                     <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Votre mot de passe" name="pass" id="pass" />(*) <em>supérieur à 6 caractères</em>
+                    <input type="password" placeholder="Votre mot de passe" name="pass" id="pass" required="required" />(*) <em>supérieur à 6 caractères</em>
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                     <label for="pass">Retapez votre mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Confirmation mot de passe" name="newpass" id="newpass" />(*)
+                    <input type="password" placeholder="Confirmation mot de passe" name="newpass" id="newpass" required="required" />(*)
                 </td>
             </tr>
             <tr>
@@ -56,7 +56,7 @@
                     <label for="email">Adresse e-mail</label>
                 </td>
                 <td>
-                    <input type="text" placeholder="Votre adresse mail" name="email" id="email" />(*)
+                    <input type="text" placeholder="Votre adresse mail" name="email" id="email" required="required" />(*)
                 </td>
             </tr>
             <tr>
@@ -65,6 +65,9 @@
                     <br><br>
                     <input class="btn btn-success btn-md" type="submit" name="submit" value="S'inscrire" />
                 </td>
+                <?php if (isset($_SESSION['error'])){
+                    echo $_SESSION['error'];
+                }?>
             </tr>
         </table>
     </form>

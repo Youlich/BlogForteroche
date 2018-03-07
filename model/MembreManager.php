@@ -1,135 +1,133 @@
 <?php
 namespace model;
+use entity\Connexion;
 use entity\Membres;
+use entity\Inscription;
 require("DbConnect.php");
+
 class MembreManager extends DbConnect
 {
+
     public function AuthMembre ()
     {
         // toutes les vérifications
         if (isset($_POST['submit'])) {
-            if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
-                $pass = htmlspecialchars($_POST['pass']);
-                $pseudo = htmlspecialchars($_POST['pseudo']);
-                // On vérifie si le pseudo existe en base de données
-                $db = $this->dbConnect();
-                $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
-                $req->execute(array('pseudo' => $pseudo));
-                $authMembre = $req->fetch();
-                if ($authMembre) { // Le pseudo existe
-                    // Dans la requete précédente qui consistait à savoir si le pseudo existe on a récupéré le pass haché
-                    // le pass haché a été simulé avec la commande $mdp=password_hash('mdp',PASSWORD_DEFAULT); puis récupéré par un var_dump ($mdp)
-                    // et copié en haché dans la bdd. Cette commande a ensuite été supprimée
-                    $pass_hache_dans_bdd = $authMembre['pass'];
-                    // Super on a le mot de passe haché de la personne dont le pseudo est $pseudo
-                    // Maintenant on peut vérifier si le pass saisi correspond au pass de la base de donnée
-                    // Si ca correspond, on peut faire se connecter la personne
-                    // On le fait avec la fonction password_verify()
-                    if (password_verify($pass, $pass_hache_dans_bdd)) {
-                        $_SESSION['id'] = $authMembre['id'];
-                        $_SESSION['pseudo'] = $authMembre['pseudo'];
-                        $_SESSION['pass'] = $authMembre['pass'];
-                        header('Location: index.php?action=accueil');
+            $connexion = new Connexion($_POST['pseudo'], $_POST['pass']);
+            $verif = $connexion->verifPseudo();
+            if ($verif == "success") { //on continue
+                $verif = $connexion->verifPass();
+                if ($verif == "success") { //on continue
+                    // On vérifie si le pseudo existe en base de données
+                    $verif = $connexion->pseudoExist();
+                    if ($verif == "success") { //on continue
+                        $verif = $connexion->verifHachPass();
+                        if ($verif == "success") {
+                            header('Location: index.php?action=accueil');
+                            exit();
+                        } else {
+                            $_SESSION['error'] = $verif;
+                        }
+                        } else {
+                            $_SESSION['error'] = $verif;
+                        }
+                        } else {
+                            $_SESSION['error'] = $verif;
+                        }
                     } else {
-                        return 'Erreur dans le mot de passe';
+                        $_SESSION['error'] = $verif;
                     }
-                } else { // Le pseudo n'existe pas en base de données
-                    return 'Pseudo non reconnu';
                 }
-            } else {
-                return 'Merci de remplir tous les champs';
             }
-        }
-    }
-
-    public function InscrMembre ()
-    {
-        if (isset($_POST['submit'])) {
-            // vérification que tous les champs sont remplis
-            if (!empty($_POST['pseudo'] AND !empty($_POST['pass'] AND !empty($_POST['newpass'] AND !empty($_POST['email']))))) {
-                $pseudo = htmlspecialchars($_POST['pseudo']);
-                $pass = htmlspecialchars($_POST['pass']);
-                $newpass = htmlspecialchars($_POST['newpass']);
-                $email = htmlspecialchars($_POST['email']);
 
 
-                if (strlen($pseudo) < 255) {
-                    if (strlen($pseudo) > 3) {
-                        if ($pass == $newpass) {
-                            if (strlen($pass) > 6) {
-                                if (strlen($pass) < 255) {
-
+        public function InscrMembre ()
+        {
+            if (isset($_POST['submit'])) {
+                $inscription = new Inscription($_POST['pseudo'], $_POST['pass'], $_POST['newpass'], $_POST['email']);
+                $verif = $inscription->verifPseudo();
+                if ($verif == "success") {
+                    //on vérifie s'il n'est pas déjà existant
+                    $verif = $inscription->pseudoExist();
+                    if ($verif == "success") { // si le pseudo n'existe pas, on continue
+                        $verif = $inscription->verifPass();
+                        if ($verif == "success") { //on continue
+                            $verif = $inscription->identiquePass();
+                            if ($verif == "success") { //on continue
+                                $verif = $inscription->verifEmail();
+                                if ($verif == "success") { //on continue
 
                                     // Hachage du mot de passe
-
                                     $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-
                                     // Insertion
                                     $db = $this->Dbconnect();
                                     $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES (:pseudo, :pass, :email, CURDATE())');
                                     $resultat = $req->execute(array(
-                                        'pseudo' => $pseudo,
+                                        'pseudo' => $_POST['pseudo'],
                                         'pass' => $pass_hache,
-                                        'email' => $email));
-
+                                        'email' => $_POST['email']));
                                     header('location: index.php?action=accesMembre&amp;' . '$success');
+
                                     exit();
-
-
                                 } else {
-                                    return 'Votre mot de passe doit être inférieur à 255 caractères';
+                                    $_SESSION['error'] = $verif;
                                 }
                             } else {
-                                return 'Votre mot de passe doit être supérieur à 6 caractères';
+                                $_SESSION['error'] = $verif;
                             }
-
                         } else {
-                            return 'Vos mots de passe sont différents';
+                            $_SESSION['error'] = $verif;
                         }
                     } else {
-                        return 'Votre pseudo doit faire plus de 3 caractères';
+                        $_SESSION['error'] = $verif;
                     }
                 } else {
-                    return 'Votre pseudo doit faire moins de 255 caractères';
+                    $_SESSION['error'] = $verif;
                 }
-            } else {
-                return 'Merci de remplir tous les champs';
             }
         }
-    }
 
 
-    public function deleteMembre ()
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare("DELETE FROM membres WHERE id = :id");
-        return $req->execute(array(':id' => $_GET['id']));
-
-    }
-
-    public function CountComments ($membre_id)
-    {
-        $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membre_id = ?');
-        $PDOStatement->execute(array($membre_id));
-        $data = $PDOStatement->fetch();
-        return $data['total'];
-    }
-
-    public function getMembre ($membreId) // affiche un membre
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM membres WHERE id = ?');
-        $req->execute(array($membreId));
-        while ($data = $req->fetch()) {
-            $membre = new Membres();
-            $membre->setId($data['id']);
-            $membre->setPseudo($data['pseudo']);
-            $membre->setDateInscription($data['date_inscription']);
-            $membre->setEmail($data['email']);
-            $membre->setNbcomms($data['nbcomms']);
+        public function deleteMembre ()
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare("DELETE FROM membres WHERE id = :id");
+            return $req->execute(array(':id' => $_GET['id']));
 
         }
-        return $membre;
-    }
+
+        public function CountComments ($membre_id)
+        {
+            $pdo = $this->dbConnect();
+            $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membre_id = ?');
+            $PDOStatement->execute(array($membre_id));
+            $data = $PDOStatement->fetch();
+            return $data['total'];
+        }
+
+        public function getMembre ($membreId) // affiche un membre
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare('SELECT * FROM membres WHERE id = ?');
+            $req->execute(array($membreId));
+            while ($data = $req->fetch()) {
+                $membre = new Membres();
+                $membre->setId($data['id']);
+                $membre->setPseudo($data['pseudo']);
+                $membre->setDateInscription($data['date_inscription']);
+                $membre->setEmail($data['email']);
+                $membre->setNbcomms($data['nbcomms']);
+
+            }
+            return $membre;
+        }
+
+        public function Autoris ()
+        {
+            if (!isset($_SESSION['id'])) {
+                echo "Merci de vous connecter";
+                header('Location : index.php?action=connectMembre');
+            }
+        }
+
 }
+

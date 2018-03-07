@@ -27,10 +27,11 @@ if (isset($_GET['success'])) {
 
     <br>
 <?php
+
 foreach ($comments as $comment)
 {
     ?>
-    <hr/>
+
     <h5><em><?= htmlspecialchars($comment->getAuthor()) ?></em></h5>
 
         <?= $comment->getCommentDate() ?><br/>
@@ -40,21 +41,16 @@ foreach ($comments as $comment)
     <a href="index.php?action=Comment&numComm=<?=$comment->getId()?>"><button type="button" class="btn btn-success btn-sm">Modifier</button></a>
 
     <?php
-}
-?>
+} ?>
 
     <div class="jumbotron">
         <h5>Laisser un commentaire</h5>
         <br>
+        <?php if (isset($_SESSION['id'])) {?>
     <form action="index.php?action=addComment&amp;id=<?= $post->getId() ?>" method="post">
         <div>
             <?php
-            if (isset($_SESSION['id'])) {
-                echo $_SESSION['pseudo'];
-            } else { ?>
-                <label for="author">Auteur</label><br />
-                <input type="text" id="author" name="author" />
-           <?php } ?>
+                echo $_SESSION['pseudo']; ?>
         </div>
         <div>
             <label for="comment">Commentaire</label><br />
@@ -65,6 +61,13 @@ foreach ($comments as $comment)
         </div>
     </form>
     </div>
+    <?php
+} else {?>
+    <h6><a href="index.php?action=inscripMembre" class="info"> Si vous n'avez pas de compte : Inscription ici </a><br/><br/>
+        <a href="index.php?action=connectMembre" class="info"> Si vous avez déjà un compte : Connexion ici</a></br></h6>
+
+
+<?php }?>
 
 <?php $content = ob_get_clean(); ?>
 

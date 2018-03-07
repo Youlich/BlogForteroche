@@ -1,6 +1,6 @@
 <?php
 
-$errors = array(); // on crée une vérif de champs
+$errors = []; // on crée une vérif de champs
 if(!array_key_exists('name', $_POST) || $_POST['name'] == '') {// on verifie l'existence du champ et d'un contenu
     $errors ['name'] = "vous n'avez pas renseigné votre nom";
 }
@@ -13,11 +13,12 @@ if(!array_key_exists('message', $_POST) || $_POST['message'] == '') {
 
 //On check les infos transmises lors de la validation
 if(!empty($errors)){ // si erreur on renvoie vers la page précédente
+    session_start();
     $_SESSION['errors'] = $errors;//on stocke les erreurs
     $_SESSION['inputs'] = $_POST;
     header('Location: index.php?action=accueil#contact');
 }else{
-    $_SESSION['success'] = 1;
+
     // utilisation de l'applicatif sendmail pour pouvoir envoyer les mails en local, modif php.ini et modif localhost sur wamp et sur phpstorm (deployment) pour prendre le bon php.ini
     $message = htmlspecialchars($_POST['message']);
 // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
