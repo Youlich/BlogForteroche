@@ -65,9 +65,10 @@ class MembreManager extends DbConnect
                                         'pseudo' => $_POST['pseudo'],
                                         'pass' => $pass_hache,
                                         'email' => $_POST['email']));
-                                    header('location: index.php?action=accesMembre&amp;' . '$success');
+                                    header('location: index.php?action=accesMembre');
+                                    $_SESSION['success'] = "Bravo ! Vous êtes bien inscrit, merci de vous connecter.";
+                                    return $_SESSION['success'];
 
-                                    exit();
                                 } else {
                                     $_SESSION['error'] = $verif;
                                 }

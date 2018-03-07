@@ -12,11 +12,6 @@
 </br>
 <body class="top">
 <div align="center">
-    <?php
-    if (isset($addMembre)) {
-        echo $addMembre;
-    }
-    ?>
 
 </br></br>
     <form action="index.php?action=addMembre" method="post">
@@ -66,8 +61,11 @@
                     <input class="btn btn-success btn-md" type="submit" name="submit" value="S'inscrire" />
                 </td>
                 <?php if (isset($_SESSION['error'])){
-                    echo $_SESSION['error'];
-                }?>
+                    echo $_SESSION['error'];}
+                    if (isset($_SESSION['success'])){
+                        echo $_SESSION['success'];
+                    }
+                ?>
             </tr>
         </table>
     </form>

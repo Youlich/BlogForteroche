@@ -2,8 +2,6 @@
 namespace controler;
 use entity\Membres;
 use model\AdminManager;
-use model\AuthAdminManagerOld;
-use model\Validator;
 use model\MembreManager;
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();

@@ -14,17 +14,7 @@
 <div align="center">
 
     <form action="" method="post">
-        <?php
-        if (isset($_GET['success'])) {
-            echo "Vous êtes bien inscrit, merci de vous connecter";
-        }
-        if (isset($_GET['supp'])) {
-            echo "Votre compte membre est supprimé";
-        }
-      //  if (isset($authMembre)) {
-      //      echo $authMembre;
-     //   }
-        ?>
+
         <table>
             <tr>
                 <td align="right">
@@ -57,8 +47,11 @@
                     <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
                 <?php if (isset($_SESSION['error'])){
-                    echo $_SESSION['error'];
-                }?>
+                    echo $_SESSION['error'];}
+                if (isset($_SESSION['success'])){
+                    echo $_SESSION['success'];
+                }
+                ?>
             </tr>
         </table>
         </br></br>
