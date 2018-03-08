@@ -164,6 +164,16 @@
             <hr class="star-dark mb-5">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
+                    <?php if(array_key_exists('success',$_SESSION)): ?>
+                        <div class="alert alert-success">
+                            Votre email à bien été transmis !
+                        </div>
+                    <?php endif; ?>
+                    <?php if(array_key_exists('errors',$_SESSION)): ?>
+                        <div class="alert alert-danger">
+                            <?= implode('<br>', $_SESSION['errors']); ?>
+                        </div>
+                    <?php endif; ?>
 
                     <form action="index.php?action=contact" method="post" name="contactform">
                         <div class="control-group">
@@ -192,16 +202,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Envoyer</button>
                         </div>
-                        <?php
-                        if(array_key_exists('errors',$_SESSION)){ ?>
-                            <div class="alert alert-danger">
-                                <?= implode('<br>', $_SESSION['errors']); ?>
-                            </div>
-                        <?php } else { ?>
-                            <div class="alert alert-success">
-                                Votre email à bien été transmis !
-                            </div>
-                            <?php unset($_SESSION['errors']); }?>
+
                     </form>
 
 
