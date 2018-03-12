@@ -21,7 +21,7 @@
                     <label for="pseudo">Pseudo</label>
                 </td>
                 <td>
-                    <input type="text" name="pseudo" id="pseudo" required="required" />
+                    <input type="text" name="pseudo" id="pseudo" />
                 </td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
                     <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" name="pass" id="pass" required="required" />
+                    <input type="password" name="pass" id="pass" />
                 </td>
             </tr>
             <tr>
@@ -46,13 +46,17 @@
                 <td>
                     <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
-                <?php if (isset($_SESSION['error'])){
-                    echo $_SESSION['error'];}
-                if (isset($_SESSION['success'])){
-                    echo $_SESSION['success'];
-                }
-                ?>
             </tr>
+                <div class="col-lg-4 mx-auto">
+                    <?php if (isset($_SESSION['error'])) : ?>
+                    <div class="alert alert-danger">
+                        <?php echo $_SESSION['error']; ?></div>
+                        <?php endif; ?>
+                    <?php if (isset($_SESSION['success'])) : ?>
+                    <div class="alert alert-success">
+                        <?php echo $_SESSION['success']; ?></div>
+                        <?php endif; ?>
+                </div>
         </table>
         </br></br>
 
@@ -72,3 +76,8 @@
 </div>
 </body>
 </html>
+
+
+<?php
+unset($_SESSION['error']);
+unset($_SESSION['success']);?>

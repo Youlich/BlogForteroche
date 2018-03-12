@@ -53,8 +53,7 @@
 
                                 <li><a class="dropdown-item" href="index.php?action=deconnectMembre">Se déconnecter</a></li>
                                 <li>
-                                    <a class="dropdown-item" href="index.php?action=accesSuppMembre">
-                                        Supprimer mon compte
+                                    <a class="dropdown-item" href="index.php?action=profilMembre">Gérer mon compte
                                     </a>
                                 </li>
 

@@ -57,8 +57,7 @@
 
                                 <li><a class="dropdown-item" href="index.php?action=deconnectMembre">Se déconnecter</a></li>
                                 <li>
-                                    <a class="dropdown-item" href="index.php?action=accesSuppMembre">
-                                        Supprimer mon compte
+                                    <a class="dropdown-item" href="index.php?action=profilMembre">Gérer mon compte
                                     </a>
                                 </li>
 
@@ -88,7 +87,6 @@
             }
             ?>
         </h2>
-
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">
@@ -179,21 +177,21 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nom</label>
-                                <input class="form-control" name='name' type="text" placeholder="Nom" required="required" data-validation-required-message="Rentrez votre nom.">
+                                <input class="form-control" name='name' type="text" placeholder="Nom" value="<?php isset($_SESSION['inputs']['name']) ? $_SESSION['inputs']['name'] : ''; ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Adresse mail</label>
-                                <input class="form-control" name='email' type="email" placeholder="Adresse mail" required="required" data-validation-required-message="Rentrez votre adresse mail.">
+                                <input class="form-control" name='email' type="text" placeholder="Adresse mail" value="<?php isset($_SESSION['inputs']['email']) ? $_SESSION['inputs']['email'] : ''; ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Message</label>
-                                <textarea class="form-control" name='message' rows="5" placeholder="Message" required="required" data-validation-required-message="Saisissez votre message."></textarea>
+                                <textarea class="form-control" name='message' rows="5" placeholder="Message" <?php isset($_SESSION['inputs']['message']) ? $_SESSION['inputs']['message'] : ''; ?>></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -296,4 +294,8 @@
 <script src="js/freelancer.min.js"></script>
 </html>
 
-
+<?php
+unset($_SESSION['inputs']);
+unset($_SESSION['errors']);
+unset($_SESSION['success']);
+?>

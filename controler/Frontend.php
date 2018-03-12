@@ -27,12 +27,12 @@ Class Frontend
         $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
         require('view/frontend/commentView.php');
     }
-    public function addComment($postId, $author, $comment) //ajout d'un commentaire dans un chapitre
+    public function addComment($postId, $author, $comment, $membre_id) //ajout d'un commentaire dans un chapitre
     {
         $CommentManager = new \model\CommentManager();
-        $addcomment = $CommentManager->PostComment($postId, $author, $comment);
+        $addcomment = $CommentManager->PostComment($postId, $author, $comment, $membre_id);
         if ($addcomment === false) {
-            throw new Exception('Impossible d\'ajouter le commentaire !');
+            throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
             header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
@@ -44,7 +44,7 @@ Class Frontend
         $ModifManager = new CommentManager();
         $modifLines = $ModifManager->ModifComment();
         if ($modifLines === false) {
-            throw new Exception('Impossible de modifier le commentaire !');
+            throw new \Exception('Impossible de modifier le commentaire !');
         }
         else {
             header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
@@ -56,13 +56,9 @@ Class Frontend
         require('view/frontend/InscriptionMembreView.php');
     }
 
-    public function accesMembre()
+    public function profilMembre()
     {
-        require('view/frontend/AuthMembreView.php');
-    }
-    public function suppressionMembre()
-    {
-        require('view/frontend/SuppressionMembre.php');
+        require('view/frontend/ProfilMembreView.php');
     }
     public function accueil()
     {
@@ -76,5 +72,6 @@ Class Frontend
     {
         require('view/frontend/charte.php');
     }
+
 
 }

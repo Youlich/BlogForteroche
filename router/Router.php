@@ -5,6 +5,8 @@
 namespace router;
 use controler\Backend;
 use controler\Frontend;
+use services\Mail;
+
 session_start();
 class Router
 {
@@ -21,7 +23,7 @@ class Router
                         $frontend = new \controler\Frontend();
                         $frontend->post(); // fonction post de frontend.php
                     } else {
-                        throw new Exception('Aucun identifiant de billet envoyé');
+                        throw new \Exception('Aucun identifiant de billet envoyé');
                     }
                 } elseif ($_GET['action'] == 'addComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -29,17 +31,17 @@ class Router
                             $frontend = new \controler\Frontend();
                             $frontend->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                         } else {
-                            throw new Exception('Tous les champs ne sont pas remplis !');
+                            throw new \Exception('Tous les champs ne sont pas remplis !');
                         }
                     } else {
-                        throw new Exception('Aucun identifiant de billet envoyé');
+                        throw new \Exception('Aucun identifiant de billet envoyé');
                     }
                 } elseif ($_GET['action'] == 'Comment') { // si on clique sur le lien modifier du commentaire
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
                         $frontend = new \controler\Frontend();
                         $frontend->comment(); // fonction comment utilisée
                     } else {
-                        throw new Exception('Aucun identifiant de commentaire envoyé');
+                        throw new \Exception('Aucun identifiant de commentaire envoyé');
                     }
                 } elseif ($_GET['action'] == 'ModifComment') {
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
@@ -47,10 +49,10 @@ class Router
                             $frontend = new \controler\Frontend();
                             $frontend->ModifComment();
                         } else {
-                            throw new Exception('Tous les champs ne sont pas remplis !');
+                            throw new \Exception('Tous les champs ne sont pas remplis !');
                         }
                     } else {
-                        throw new Exception('Aucun identifiant de billet envoyé');
+                        throw new \Exception('Aucun identifiant de billet envoyé');
                     }
                 } elseif ($_GET['action'] == 'accueil') {
                     $frontend = new \controler\Frontend();
@@ -72,18 +74,15 @@ class Router
                     $backend = new Backend();
                     $backend->addMembre();
                 }
-                elseif ($_GET['action'] == 'accesMembre') {
-                    $frontend = new Frontend();
-                    $frontend->accesMembre();
-                }
+
                 elseif ($_GET['action'] =='suppMembre'){
                     $backend = new Backend();
                     $backend->suppMembre();
                 }
-                elseif ($_GET['action']=='accesSuppMembre')
+                elseif ($_GET['action']=='profilMembre')
                 {
                     $frontend = new Frontend();
-                    $frontend->suppressionMembre();
+                    $frontend->profilMembre();
                 }
                 elseif ($_GET['action'] == 'inscripMembre') {
                     $frontend = new \controler\Frontend();
@@ -98,8 +97,16 @@ class Router
                     $frontend->charte();
                 }
                 elseif ($_GET['action'] == 'contact'){
-                    $backend = new Backend();
+                    $backend = new Mail();
                     $backend ->Contact();
+                }
+                elseif ($_GET['action'] == 'modifpseudo_mdp'){
+                    $backend = new Backend();
+                    $backend->modifPseudoMdp();
+                }
+                elseif ($_GET['action'] == 'modifemail'){
+                    $backend = new Backend();
+                    $backend->modifEmail();
                 }
 
             } else {
@@ -108,7 +115,7 @@ class Router
             }
         }
         catch
-        (Exception $e) {
+        (\Exception $e) {
             echo 'Erreur : ' . $e->getMessage();
         }
     }
