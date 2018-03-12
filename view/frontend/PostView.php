@@ -32,7 +32,7 @@ foreach ($comments as $comment)
 {
     ?>
 
-    <h5><em><?= htmlspecialchars($comment->getAuthor()) ?></em></h5>
+    <h5><em><?= htmlspecialchars($comment->getMembrePseudo()) ?></em></h5>
 
         <?= $comment->getCommentDate() ?><br/>
         <br>

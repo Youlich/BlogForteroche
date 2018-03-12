@@ -1,6 +1,7 @@
 <?php
 namespace controler;
 use model\CommentManager;
+use model\MembreManager;
 use model\PostManager;
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();
@@ -12,6 +13,7 @@ Class Frontend
         $posts = $postManager->getPosts(); // fonction qui affiche tous les chapitres
         require('view/frontend/listPostsView.php');
     }
+
     public function post() //affichage d'un chapitre
     {
         $postManager = new PostManager(); // lieu où se trouve la fonction getPost
@@ -21,16 +23,18 @@ Class Frontend
         $nbComms = $commentManager->CountComments($_GET['id']);// affiche le nb de commentaires par chapitre
         require('view/frontend/postView.php'); //page qui gère l'affichage associé
     }
+
     public function comment() // pour "modifier" un commentaire
     {
         $commentManager = new CommentManager();
         $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
         require('view/frontend/commentView.php');
     }
-    public function addComment($postId, $author, $comment, $membre_id) //ajout d'un commentaire dans un chapitre
+
+    public function addComment($postId, $pseudo, $comment, $membre_id) //ajout d'un commentaire dans un chapitre
     {
         $CommentManager = new \model\CommentManager();
-        $addcomment = $CommentManager->PostComment($postId, $author, $comment, $membre_id);
+        $addcomment = $CommentManager->PostComment($postId, $pseudo, $comment, $membre_id);
         if ($addcomment === false) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
@@ -39,6 +43,7 @@ Class Frontend
             exit();
         }
     }
+
     public function ModifComment()
     {
         $ModifManager = new CommentManager();
@@ -51,6 +56,7 @@ Class Frontend
             exit();
         }
     }
+
     public function inscripMembre()
     {
         require('view/frontend/InscriptionMembreView.php');
@@ -58,16 +64,21 @@ Class Frontend
 
     public function profilMembre()
     {
+        $membreManager = new MembreManager();
+        $nbComms = $membreManager->CountComments($_SESSION['id']);
         require('view/frontend/ProfilMembreView.php');
     }
+
     public function accueil()
     {
         require('view/frontend/accueil.php');
     }
+
     public function mentionslegales()
     {
         require('view/frontend/MentionsLegales.php');
     }
+
     public function charte()
     {
         require('view/frontend/charte.php');

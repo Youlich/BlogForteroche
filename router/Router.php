@@ -27,16 +27,16 @@ class Router
                     }
                 } elseif ($_GET['action'] == 'addComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                        if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
                             $frontend = new \controler\Frontend();
-                            $frontend->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                            $frontend->addComment($_GET['id'], $_SESSION['pseudo'], $_POST['comment'], $_SESSION['id']);
                         } else {
                             throw new \Exception('Tous les champs ne sont pas remplis !');
                         }
                     } else {
                         throw new \Exception('Aucun identifiant de billet envoyé');
                     }
-                } elseif ($_GET['action'] == 'Comment') { // si on clique sur le lien modifier du commentaire
+                } elseif ($_GET['action'] == 'Comment') {
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
                         $frontend = new \controler\Frontend();
                         $frontend->comment(); // fonction comment utilisée
@@ -45,7 +45,7 @@ class Router
                     }
                 } elseif ($_GET['action'] == 'ModifComment') {
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
-                        if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                        if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
                             $frontend = new \controler\Frontend();
                             $frontend->ModifComment();
                         } else {

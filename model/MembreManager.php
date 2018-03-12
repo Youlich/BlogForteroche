@@ -194,6 +194,7 @@ class MembreManager extends DbConnect
             return $data['total'];
         }
 
+
         public function Autoris ()
         {
             if (!isset($_SESSION['id'])) {

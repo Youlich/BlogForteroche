@@ -6,11 +6,27 @@ namespace entity;
 class Comment
 {
     private $id;
-    private $author;
     private $comment;
     private $comment_date;
     private $post_id;
     private $membre_id;
+    private $membre_pseudo;
+
+    /**
+     * @return mixed
+     */
+    public function getMembrePseudo ()
+    {
+        return $this->membre_pseudo;
+    }
+
+    /**
+     * @param mixed $membre_pseudo
+     */
+    public function setMembrePseudo ($membre_pseudo)
+    {
+        $this->membre_pseudo = $membre_pseudo;
+    }
 
     /**
      * @return mixed
@@ -28,7 +44,6 @@ class Comment
         $this->membre_id = $membre_id;
     }
 
-
        /**
      * @return mixed
      */
@@ -44,22 +59,6 @@ class Comment
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param mixed $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
     }
 
     /**

@@ -18,7 +18,7 @@ if (isset($_GET['success'])) {
     </div>
     <div>
         <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" value="<?php echo $comment->getAuthor()?>" />
+        <input type="text" id="author" name="author" value="<?php echo $comment->getMembreId()?>" />
     </div>
     <div>
         <label for="comment">Commentaire</label><br />
