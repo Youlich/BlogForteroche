@@ -39,7 +39,7 @@ Class Frontend
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
-            header('Location: index.php?action=post&id=' . $postId . '&success=ok' );
+            header('Location: index.php?action=post&id=' . $postId );
             exit();
         }
     }
@@ -52,7 +52,7 @@ Class Frontend
             throw new \Exception('Impossible de modifier le commentaire !');
         }
         else {
-            header('Location: index.php?action=Comment&numComm=' . $_POST['numComm'] . '&success=ok');
+            header('Location: index.php?action=Comment&numComm=' . $_POST['numComm']);
             exit();
         }
     }
@@ -82,6 +82,16 @@ Class Frontend
     public function charte()
     {
         require('view/frontend/charte.php');
+    }
+
+    public function connectAdmin()
+    {
+        require('view/frontend/AuthAdminView.php');
+    }
+
+    public function administration()
+    {
+        require('view/frontend/AdministrationView.php');
     }
 
 

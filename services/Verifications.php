@@ -9,6 +9,8 @@ class Verifications extends DbConnect
     private $pass;
     private $newpass;
     private $email;
+    private $login;
+    private $mdp;
 
 
     public function verifPseudo($pseudo) //ne plus toucher ok pour inscription et connexion
@@ -22,6 +24,17 @@ class Verifications extends DbConnect
         }
     }
 
+    public function verifLoginAdmin($login) //pour admin
+    {
+        $this->pseudo = htmlspecialchars($login);
+        if (strlen($this->login) > 3 AND strlen($this->login) < 255) {
+            return 'success';
+        } else {
+            $_SESSION['error'] = "Votre login doit être compris entre 3 et 255 caractères";
+            return $_SESSION['error'];
+        }
+    }
+
     /**
      * @return string
      */
@@ -29,6 +42,19 @@ class Verifications extends DbConnect
     {
         $this->pass = htmlspecialchars($pass);
         if (strlen($this->pass) > 6 AND strlen($this->pass) < 255) {
+
+            return 'success';
+        } else {
+
+            $_SESSION['error'] = "Votre mot de passe doit être compris entre 6 et 255 caractères";
+            return $_SESSION['error'];
+        }
+    }
+
+    public function verifadminPass($mdp)
+    {
+        $this->mdp = htmlspecialchars($mdp);
+        if (strlen($this->mdp) > 6 AND strlen($this->mdp) < 255) {
 
             return 'success';
         } else {
@@ -68,6 +94,25 @@ class Verifications extends DbConnect
         }
     }
 
+    public function verifadminHachPass()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
+        $req->execute(array('login' => $_POST['login']));
+        $authadmin = $req->fetch();
+        $_SESSION['id'] = $authadmin['id'];
+        $_SESSION['login'] = $authadmin['login'];
+        $_SESSION['mdp'] = $authadmin['mdp'];
+        $pass_hache_dans_bdd = $authadmin['mdp'];
+        $resultat = password_verify($_POST['mdp'], $pass_hache_dans_bdd);
+        if ($resultat) {
+            return 'success';
+        } else {
+            $_SESSION['error'] = "Erreur dans votre mot de passe";
+            return $_SESSION['error'];
+        }
+    }
+
     public function verifEmail ($email) //ne plus toucher ok pour inscription ne sert pas pour connexion
     {
         $this->email = htmlspecialchars($email);
@@ -94,6 +139,21 @@ class Verifications extends DbConnect
         }
     }
 
+    public function loginadminExist($login)
+    {
+        $this->login = $login;
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
+        $req->execute(array('login' => $_POST['login']));
+        $resultat = $req->fetch();
+        if ($resultat){
+            return 'success';
+        } else {
+            $_SESSION['error'] = "Votre login administrateur n'existe pas";
+            return $_SESSION['error'];
+        }
+    }
+
     public function session() //ne plus toucher ok pour connexion ne sert pas dans inscription
     {
         $db = $this->dbConnect();
@@ -105,6 +165,18 @@ class Verifications extends DbConnect
         $_SESSION['date_inscription'] = $req['date_inscription'];
         $_SESSION['email'] = $req['email'];
         $_SESSION['nbcomms'] = $req['nbcomms'];
+
+        return 'success';
+    }
+
+    public function sessionAdmin()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, login, mdp FROM admin WHERE login = :login');
+        $req->execute(array('login' => $this->login));
+        $req = $req->fetch();
+        $_SESSION['id'] = $req['id'];
+        $_SESSION['login'] = $this->login;
 
         return 'success';
     }

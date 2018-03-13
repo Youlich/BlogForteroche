@@ -16,7 +16,6 @@
 
 <div align="center">
 
-
     <h5>Mon nombre de commentaires : <em> <?php echo $nbComms ?></em></h5><br/>
     <h5>Ma date d'inscription : <em>le <?php echo $_SESSION['date_inscription']=date("d-m-Y")?></em></h5><br/>
 

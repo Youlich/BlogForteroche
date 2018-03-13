@@ -14,16 +14,7 @@
 
 <body class="top">
 <div align="center">
-    <form action="" method="post">
-
-        <?php
-
-        if (isset($connAdmin)) {
-            echo $connAdmin;
-        }
-
-        ?>
-
+    <form action="index.php?action=authentificationAdmin" method="post">
         <table>
             <tr>
                 <td align="right">
@@ -49,6 +40,16 @@
                     <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
             </tr>
+            <div class="col-lg-4 mx-auto">
+                <?php if (isset($_SESSION['error'])) : ?>
+                    <div class="alert alert-danger">
+                        <?php echo $_SESSION['error']; ?></div>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['success'])) : ?>
+                    <div class="alert alert-success">
+                        <?php echo $_SESSION['success']; ?></div>
+                <?php endif; ?>
+            </div>
         </table>
         <br/><br/>
 

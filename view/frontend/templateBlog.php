@@ -12,12 +12,14 @@
         <br><br><br>
     </div>
 </header>
+
 <div class="contain">
 
     <?= $content; ?>
 </div>
-
+</body>
 <?php require ('Footer.php'); ?>
 </html>
+
 
 

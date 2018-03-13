@@ -7,6 +7,9 @@ require_once('Autoload.php'); // Chargement des class
 \Autoload::register();
 Class Backend
 {
+
+    /*Partie Membre*/
+
     public function connectMembre()
     {
         $authMembreManager = new MembreManager();
@@ -19,12 +22,7 @@ Class Backend
         header('Location: index.php');
         exit();
     }
-    public function connectAdmin()
-    {
-        $authMembreManager = new AdminManager();
-        $connAdmin = $authMembreManager->connectAdmin();
-        require('view/frontend/AuthAdminView.php');
-    }
+
     public function addMembre()
     {
         $newMembre = new MembreManager();
@@ -52,9 +50,7 @@ Class Backend
         else {
             require('view/frontend/ProfilMembreView.php');
         }
-
     }
-
     public function modifEmail()
     {
         $newemail = new MembreManager();
@@ -67,5 +63,20 @@ Class Backend
         }
     }
 
+    /* Partie admin*/
+
+    public function connectAdmin()
+    {
+        $authMembreManager = new AdminManager();
+        $authMembreManager->authAdmin();
+        require('view/frontend/AuthAdminView.php');
+    }
+
+    public function deconnectAdmin()
+    {
+        session_destroy();
+        header('Location: index.php');
+        exit();
+    }
 
 }

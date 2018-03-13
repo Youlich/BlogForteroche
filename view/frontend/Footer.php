@@ -2,15 +2,9 @@
 <html lang="fr">
 <!-- Footer -->
 <footer class="footer text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Bibliographie</h4>
-                <p class="lead mb-0 text-center">Voir ma
-                    </br>
-                    <a href="http://startbootstrap.com">Bibliographie</a></p>
-            </div>
-            <div class="col-md-4 mb-5 mb-lg-0">
+
+<div>
+
                 <h4 class="text-uppercase mb-4">Me rejoindre sur</h4>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
@@ -39,14 +33,8 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-            <div class="col-md-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Newsletter</h4>
-                <p class="lead mb-0">S'inscrire à ma<br/>
-                    <a href="http://startbootstrap.com">Newsletter</a></p>
-            </div>
-        </div>
-    </div>
+</div>
+
 </footer>
 
 

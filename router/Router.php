@@ -66,7 +66,7 @@ class Router
                     $backend = new \controler\Backend();
                     $backend->deconnectMembre();
                 }
-                elseif ($_GET['action'] == 'connectAdmin') {
+                elseif ($_GET['action'] == 'authentificationAdmin') {
                     $backend = new \controler\Backend();
                     $backend->connectAdmin();
                 }
@@ -107,6 +107,18 @@ class Router
                 elseif ($_GET['action'] == 'modifemail'){
                     $backend = new Backend();
                     $backend->modifEmail();
+                }
+                elseif ($_GET['action'] == 'connectAdmin'){
+                    $frontend = new Frontend();
+                    $frontend->connectAdmin();
+                }
+                elseif ($_GET['action'] == 'administration'){
+                    $frontend = new Frontend();
+                    $frontend->administration();
+                }
+                elseif ($_GET['action'] == 'deconnectAdmin'){
+                    $backend = new Backend();
+                    $backend->deconnectAdmin();
                 }
 
             } else {
