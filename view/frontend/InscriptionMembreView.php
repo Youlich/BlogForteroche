@@ -16,9 +16,7 @@
     </br></br>
     <form action="index.php?action=addMembre" method="post">
 
-        <p>Bienvenue sur la page d'inscription de mon site !<br/>
-
-            Merci de remplir les champs (*) obligatoires et de prendre connaissance de <a href="index.php?action=charte"><strong>ma charte</strong></a> pour continuer.</p>
+        <p> Merci de remplir les champs (*) obligatoires et de prendre connaissance de <a href="index.php?action=charte"><strong>ma CHARTE</strong></a> avant de continuer.</p>
         <br>
 
         <table>

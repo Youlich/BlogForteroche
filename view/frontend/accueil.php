@@ -44,7 +44,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Blog</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#actualités">Mes Actualités</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#actualités">Bibliographie</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
@@ -81,9 +81,12 @@
 <header class="masthead bg-primary text-white text-justify" id="masthead">
     <div class="container">
         <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
-            if(isset($_SESSION['id']))
-            {
-                echo $_SESSION['pseudo'] . ' !';
+
+                if (isset($_SESSION['id'])){
+                    if(($_SESSION['id']) != '2')
+                    {
+                    echo $_SESSION['pseudo'] . ' !';
+                }
             }
             ?>
         </h2>
@@ -119,19 +122,48 @@
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=1" class="chapter"><img class="img-fluid" src="public/images/reve.jpg" alt="">Chapitre 1 : Quand le rêve devient réalité</a>
+                    <div style=" height:400px;">
+                        <div style="position:absolute;z-index:1">
+                            <a href="index.php?action=post&amp;id=1"><img src="public/images/reve.jpg" alt="rêve" class="img-fluid"></a>
+                        </div>
+                        <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
+                            <a href="index.php?action=post&amp;id=1"><p style="color:white;font-weight: bold;">Chapitre 1 :<br/>Quand le rêve devient réalité</p></a>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <a class="portfolio-item d-block mx-auto">
+                        <div style="height:400px;">
+                            <div style="position:absolute;z-index:1">
+                                <a href="index.php?action=post&amp;id=2"><img class="img-fluid" src="public/images/decouverte.jpg" alt="découverte"/></a>
+                            </div>
+                            <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
+                                <a href="index.php?action=post&amp;id=2"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 2 :<br/>Découverte de l'Alaska</p></a>
+                            </div>
+                        </div>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=2" class="chapter"><img class="img-fluid" src="public/images/decouverte.jpg" alt="">Chapitre 2 : découverte de l'Alaska</a>
+                        <div style="height:400px">
+                            <div style="position:absolute;z-index:1;">
+                                <a href="index.php?action=post&amp;id=3"><img class="img-fluid" src="public/images/etudes.jpg" alt="études"/></a>
+                            </div>
+                            <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
+                                <a href="index.php?action=post&amp;id=3"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 3 :<br/> Les études en Alaska</p></a>
+                            </div>
+                        </div>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=3" class="chapter"><img class="img-fluid" src="public/images/etudes.jpg" alt="">Chapitre 3 : les études en Alaska</a>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=4" class="chapter"><img class="img-fluid" src="public/images/glacier.jpg" alt="">Chapitre 4 : expérience unique</a>
+                    <div style="height:400px">
+                        <div style="position:absolute;z-index:1;">
+                            <a href="index.php?action=post&amp;id=4"><img class="img-fluid" src="public/images/glacier.jpg" alt="glacier"/></a>
+                        </div>
+                        <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
+                            <a href="index.php?action=post&amp;id=4"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 4 :<br/> Expérience unique</p></a>
+                        </div>
+                    </div>
             </div>
         </div>
     </section>
@@ -141,14 +173,20 @@
 
     <section class="bg-primary text-white mb-0" id="actualités">
         <div class="container">
-            <h2 class="text-center text-uppercase text-white">Mes actualités</h2>
+            <h2 class="text-center text-uppercase text-white">Bibliographie</h2>
             <hr class="star-light mb-5">
             <div class="row">
-                <div class="col-lg-4 ml-auto">
-                    <p class="lead">Actu1</p>
+                <div class="col-md-3 col-lg-3 ml-auto">
+                    <p class="lead">Billet simple pour l'Alaska</p>
                 </div>
-                <div class="col-lg-4 mr-auto">
-                    <p class="lead">Actu2</p>
+                <div class="col-md-3 col-lg-3 mr-auto">
+                    <p class="lead">A la poursuite du chat noir</p>
+                </div>
+                <div class="col-md-3 col-lg-3 mr-auto">
+                    <p class="lead">Vipère</p>
+                </div>
+                <div class="col-md-3 col-lg-3 mr-auto">
+                    <p class="lead">La chasse aux trésors</p>
                 </div>
             </div>
         </div>

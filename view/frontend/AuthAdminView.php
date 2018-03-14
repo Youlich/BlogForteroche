@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('Header.php'); ?>
+<?php require ('HeaderAdmin.php'); ?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -26,13 +26,16 @@
             </tr>
             <tr>
                 <td align="right">
-                    <label for="mdp">Mot de passe</label>
+                    <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" name="mdp" id="mdp" /><br/><br/>
+                    <input type="password" name="mdp" id="mdp" />
                 </td>
             </tr>
-
+            <tr>
+                <td><br/></td>
+                <td></td>
+            </tr>
             <tr>
                 <td align="right">
                 </td>

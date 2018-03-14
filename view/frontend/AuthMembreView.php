@@ -33,12 +33,8 @@
                 </td>
             </tr>
             <tr>
-                <td align="left">
-                    <label for="auto">Connexion automatique</label>
-                </td>
-                <td>
-                    <input type="checkbox" checked="true" id="case" />
-                </td>
+                <td><br/></td>
+                <td></td>
             </tr>
             <tr>
                 <td align="right">
@@ -59,11 +55,7 @@
                 </div>
         </table>
         </br></br>
-
-
     </form>
-
-    <h5><em><a href="index.php?action=inscripMembre">S'inscrire</a></em></h5>
 </div>
 <br/>
 <?php include('Footer.php');?>
