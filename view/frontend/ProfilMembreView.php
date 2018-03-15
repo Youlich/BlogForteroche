@@ -34,7 +34,7 @@
             <!-- bouton seul page de départ-->
     <div align="center" >
            <div> <a href="index.php?action=profilMembre&amp;afficher_infos_a_modifier=1">
-                 <input type="button" name= "button" value="Modifier mon pseudo ou mot de passe"</a> </div>
+                 <input type="button" style="width:20%" name= "button" value="Modifier mon pseudo ou mot de passe"</a> </div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_infos_a_modifier'])): ?>
                 <form action="index.php?action=modifpseudo_mdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
@@ -86,7 +86,7 @@
 
             <!--bouton seul page de départ-->
         <div> <a href="index.php?action=profilMembre&amp;afficher_email_a_modifier=1">
-                <input type="button" name= "button" value="Modifier mon email"></a></div>
+                <input type="button" style="width:20%" name= "button" value="Modifier mon email"></a></div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_email_a_modifier'])): ?>
                 <form action="index.php?action=modifemail&amp;idmembre=<?= $_SESSION['id']?>" method="post">
@@ -113,7 +113,7 @@
 
         <!--bouton seul page de départ-->
         <div> <a href="index.php?action=profilMembre&amp;supprimer_profil=1">
-                <input type="button" name= "button" value="Supprimer mon compte"</a></div>
+                <input type="button" style="width:20%" name= "button" value="Supprimer mon compte"</a></div>
         <!--informations de confirmation suppression après clic sur le bouton-->
                <?php if (!empty($_GET['supprimer_profil'])):?> <br/>
                    <p style="color: black;">Etes-vous sur de vouloir supprimer votre compte ?</p>
