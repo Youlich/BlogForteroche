@@ -15,7 +15,6 @@ class AdminManager extends DbConnect
         if (isset($_POST['submit'])) {
             if (!empty($_POST['login'] AND !empty($_POST['mdp']))) {
                 $verifadmin = new Verifications();
-
                     $verif = $verifadmin->loginadminExist($_POST['login']); //verif si le pseudo existe
                     if ($verif == "success") { // il existe, on continue
                         $verif = $verifadmin->verifadminPass($_POST['mdp']);

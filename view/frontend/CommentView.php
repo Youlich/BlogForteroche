@@ -24,7 +24,7 @@
     </div>
     <div>
         <p>
-            <a href="index.php?action=post&id=<?=$comment->getPostId(); ?>">Retour vers la liste des commentaires du billet</a>
+            <a href="index.php?action=chapter&id=<?=$comment->getChapterId(); ?>">Retour vers la liste des commentaires du chapitre</a>
         </p>
     </div>
     <?php

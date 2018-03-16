@@ -9,6 +9,19 @@ require("DbConnect.php");
 class MembreManager extends DbConnect
 {
 
+    public function getMembres() {
+
+        $membres = array();
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT * FROM membres ORDER BY pseudo');
+        while ($data = $req->fetch()) {
+            $membre = new Membres();
+            $membre->hydrate($data);
+            $membres[] = $membre;
+        }
+        return $membres;
+    }
+
     public function AuthMembre ()
     {
         // toutes les vérifications
@@ -52,8 +65,7 @@ class MembreManager extends DbConnect
         {
             if (isset($_POST['submit'])) {
                 // vérification que tous les champs sont remplis
-                if(!empty($_POST['pseudo'] AND !empty($_POST['pass'] AND !empty($_POST['newpass'] AND !empty($_POST['email'])))))
-                {
+                if (!empty($_POST['pseudo'] AND !empty($_POST['pass'] AND !empty($_POST['newpass'] AND !empty($_POST['email']))))) {
                     $verifmembre = new Verifications();
                     $verif = $verifmembre->verifPseudo($_POST['pseudo']); // verif pseudo compris entre 3 et 255 caractères
                     if ($verif == "success") {
@@ -70,7 +82,7 @@ class MembreManager extends DbConnect
                                         $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                                         // Insertion
                                         $db = $this->Dbconnect();
-                                        $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES (:pseudo, :pass, :email, CURDATE())');
+                                        $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription) VALUES (:pseudo, :pass, :email, CURDATE())');
                                         $req->execute(array(
                                             'pseudo' => $_POST['pseudo'],
                                             'pass' => $pass_hache,
@@ -139,8 +151,8 @@ class MembreManager extends DbConnect
                             $modif->execute();
                             while ($data = $modif->fetch(\PDO::FETCH_ASSOC)) {
                                 $newmodif = new Membres();
-                                $newmodif->setPseudo($data['pseudo']);
-                                $newmodif->setPass($data['pass']);
+                                $newmodif->hydrate($data);
+
                             }
                             header('location: index.php?action=connectMembre');
                             $_SESSION['success'] = "Bravo ! Vos informations de connexion sont modifiées, merci de vous connecter.";
@@ -171,7 +183,7 @@ class MembreManager extends DbConnect
                 $modif->execute();
                 while ($data = $modif->fetch(\PDO::FETCH_ASSOC)) {
                     $newmodif = new Membres();
-                    $newmodif->setEmail($data['email']);
+                    $newmodif->hydrate($data);
 
                 }
                header ('location:index.php?action=profilMembre');
@@ -185,23 +197,15 @@ class MembreManager extends DbConnect
     }
 
 
-        public function CountComments ($membre_id)
+        public function CountComments ($membreId)
         {
             $pdo = $this->dbConnect();
-            $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membre_id = ?');
-            $PDOStatement->execute(array($membre_id));
+            $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membreId = ?');
+            $PDOStatement->execute(array($membreId));
             $data = $PDOStatement->fetch();
             return $data['total'];
         }
 
-
-        public function Autoris ()
-        {
-            if (!isset($_SESSION['id'])) {
-                echo "Merci de vous connecter";
-                header('Location : index.php?action=connectMembre');
-            }
-        }
 
 }
 

@@ -62,7 +62,7 @@
                             <?php } else { ?>
 
                                 <li><a class="dropdown-item" href="index.php?action=connectMembre">Se connecter</a></li>
-                                <li><a class="dropdown-item" href="index.php?action=inscripMembre">S'inscrire</a></li>
+                                <li><a class="dropdown-item" href="index.php?action=charte">S'inscrire</a></li>
                             <?php } ?>
 
 

@@ -1,4 +1,10 @@
-/* Message d'accueil*/
+/*tous les gros titres fond vert des pages*/
+h1
+{
+    text-transform: uppercase;
+}
+
+/* accueil*/
 .photo {
     float : left;
     padding-right: 10%;
@@ -10,6 +16,30 @@ li {
 {
     padding-top: 2%;
     text-align : justify;
+}
+.portfolio
+{
+    padding-top: 0px;
+}
+.portfolio-image
+{
+    height:400px;
+
+}
+.portfolio-image-position
+{
+    position:absolute;
+    z-index:1;
+}
+.portfolio-text-image
+{
+    text-align:center;
+    position:absolute;
+    top:100px;
+    width:550px;
+    height:400px;
+    z-index:2;
+    font-size:150%;
 }
 
 /*listPostView.php*/
@@ -32,11 +62,6 @@ li {
     padding-right: 10%;
 }
 /*postView.php*/
-.btn btn-success
-{
-    color : #18bc9c;
-}
-
 .badge {
     padding: 1px 9px 2px;
     font-weight: bold;
@@ -44,24 +69,10 @@ li {
     color: #ffffff;
     background-color: #999999;
 }
-
 #comment
 {
     width : 100%;
 }
-
-
-/*blog*/
-.chapter
-{
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.portfolio
-{
-    padding-top: 0px;
-}
-
 
 /*mentions legales*/
 .ml{
@@ -73,12 +84,7 @@ li {
 {
     padding-top: 10%;
 }
-/*connexion.php*/
 
-h1
-{
-    text-transform: uppercase;
-}
 
 
 /*en responsive*/
@@ -88,9 +94,31 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     border : grey;
 }
 
-/* view*/
+/* bouton submit dans toutes les view*/
 .btn-success
 {
     background-color : #18bc9c;
     border-color : #18bc9c;
 }
+
+/*profilMembre*/
+.bouton
+{
+    width:20%;
+}
+.confirmation
+{
+    color: black;
+}
+.confirmation:hover
+{
+    text-decoration: none !important;
+}
+
+/*charte*/
+.btnacceptrefus
+{
+    width: 15%;
+}
+
+

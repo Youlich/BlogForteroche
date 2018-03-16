@@ -9,9 +9,23 @@ class Membres
     private $pseudo;
     private $pass;
     private $email;
-    private $date_inscription;
+    private $dateInscription;
     private $nbcomms;
 
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value)
+        {
+            // On récupère le nom du setter correspondant à l'attribut.
+            $method = 'set'.ucfirst($key);
+            // Si le setter correspondant existe.
+            if (method_exists($this, $method))
+            {
+                // On appelle le setter.
+                $this->$method($value);
+            }
+        }
+    }
     /**
      * @return mixed
      */
@@ -47,7 +61,7 @@ class Membres
     /**
      * @return mixed
      */
-    public function getPseudo ()
+    public function getPseudo()
     {
         return $this->pseudo;
     }
@@ -97,20 +111,18 @@ class Membres
      */
     public function getDateInscription ()
     {
-        return $this->date_inscription;
+        return $this->dateInscription;
     }
 
     /**
-     * @param mixed $date_inscription
+     * @param mixed $dateInscription
      */
-    public function setDateInscription ($date_inscription)
+    public function setDateInscription ($dateInscription)
     {
-        $this->date_inscription = $date_inscription;
+        $this->dateInscription = $dateInscription;
     }
 
-    /**
-     * @return mixed
-     */
+
 
 
 }

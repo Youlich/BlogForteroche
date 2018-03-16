@@ -65,7 +65,7 @@
                             <?php } else { ?>
 
                                 <li><a class="dropdown-item" href="index.php?action=connectMembre">Se connecter</a></li>
-                                <li><a class="dropdown-item" href="index.php?action=inscripMembre">S'inscrire</a></li>
+                                <li><a class="dropdown-item" href="index.php?action=charte">S'inscrire</a></li>
                             <?php } ?>
 
 
@@ -118,50 +118,50 @@
         <hr class="star-dark mb-5">
         <h3 class="titre roman text-center">Billet simple pour l'Alaska</h3>
         <br/>
-        <em><h5 class="link text-center"><a href="index.php?action=listPosts&amp">Voir tous les chapitres</h5></em>
+        <em><h5 class="link text-center"><a href="index.php?action=listChapters&amp">Voir tous les chapitres</h5></em>
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <div style=" height:400px;">
-                        <div style="position:absolute;z-index:1">
-                            <a href="index.php?action=post&amp;id=1"><img src="public/images/reve.jpg" alt="rêve" class="img-fluid"></a>
+                    <div class="portfolio-image">
+                        <div class="portfolio-image-position">
+                            <a href="index.php?action=chapter&amp;id=1"><img src="public/images/reve.jpg" alt="rêve" class="img-fluid"></a>
                         </div>
-                        <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
-                            <a href="index.php?action=post&amp;id=1"><p style="color:white;font-weight: bold;">Chapitre 1 :<br/>Quand le rêve devient réalité</p></a>
+                        <div class="portfolio-text-image">
+                            <a href="index.php?action=chapter&amp;id=1"><p style="color:white;font-weight: bold;">Chapitre 1 :<br/>Quand le rêve devient réalité</p></a>
                         </div>
                     </div>
             </div>
 
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                        <div style="height:400px;">
-                            <div style="position:absolute;z-index:1">
-                                <a href="index.php?action=post&amp;id=2"><img class="img-fluid" src="public/images/decouverte.jpg" alt="découverte"/></a>
+                     <div class="portfolio-image">
+                         <div class="portfolio-image-position">
+                                <a href="index.php?action=chapter&amp;id=2"><img class="img-fluid" src="public/images/decouverte.jpg" alt="découverte"/></a>
                             </div>
-                            <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
-                                <a href="index.php?action=post&amp;id=2"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 2 :<br/>Découverte de l'Alaska</p></a>
-                            </div>
-                        </div>
+                         <div class="portfolio-text-image">
+                                <a href="index.php?action=chapter&amp;id=2"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 2 :<br/>Découverte de l'Alaska</p></a>
+                          </div>
+                     </div>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                        <div style="height:400px">
-                            <div style="position:absolute;z-index:1;">
-                                <a href="index.php?action=post&amp;id=3"><img class="img-fluid" src="public/images/etudes.jpg" alt="études"/></a>
+                    <div class="portfolio-image">
+                        <div class="portfolio-image-position">
+                                <a href="index.php?action=chapter&amp;id=3"><img class="img-fluid" src="public/images/etudes.jpg" alt="études"/></a>
                             </div>
-                            <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
-                                <a href="index.php?action=post&amp;id=3"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 3 :<br/> Les études en Alaska</p></a>
-                            </div>
-                        </div>
+                        <div class="portfolio-text-image">
+                                <a href="index.php?action=chapter&amp;id=3"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 3 :<br/> Les études en Alaska</p></a>
+                         </div>
+                     </div>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <div style="height:400px">
-                        <div style="position:absolute;z-index:1;">
-                            <a href="index.php?action=post&amp;id=4"><img class="img-fluid" src="public/images/glacier.jpg" alt="glacier"/></a>
+                    <div class="portfolio-image">
+                        <div class="portfolio-image-position">
+                            <a href="index.php?action=chapter&amp;id=4"><img class="img-fluid" src="public/images/glacier.jpg" alt="glacier"/></a>
                         </div>
-                        <div style="text-align:center;position:absolute;top:100px; width:550px; height:400px; z-index:2;font-size:150%">
-                            <a href="index.php?action=post&amp;id=4"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 4 :<br/> Expérience unique</p></a>
+                        <div class="portfolio-text-image">
+                            <a href="index.php?action=chapter&amp;id=4"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 4 :<br/> Expérience unique</p></a>
                         </div>
                     </div>
             </div>

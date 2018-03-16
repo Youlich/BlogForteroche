@@ -157,12 +157,12 @@ class Verifications extends DbConnect
     public function session() //ne plus toucher ok pour connexion ne sert pas dans inscription
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, date_inscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
+        $req = $db->prepare('SELECT id, dateInscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $this->pseudo));
         $req = $req->fetch();
         $_SESSION['id'] = $req['id'];
         $_SESSION['pseudo'] = $this->pseudo;
-        $_SESSION['date_inscription'] = $req['date_inscription'];
+        $_SESSION['dateInscription'] = $req['dateInscription'];
         $_SESSION['email'] = $req['email'];
         $_SESSION['nbcomms'] = $req['nbcomms'];
 

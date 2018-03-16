@@ -1,6 +1,5 @@
 <?php
 namespace controler;
-use entity\Membres;
 use model\AdminManager;
 use model\MembreManager;
 require_once('Autoload.php'); // Chargement des class
@@ -25,23 +24,27 @@ Class Backend
 
     public function addMembre()
     {
-        $newMembre = new MembreManager();
-        $addMembre = $newMembre->InscrMembre();
-        if ($addMembre === false){
-            throw new \Exception('Impossible de supprimer le membre !');
-        }
-        else {
-            require('view/frontend/InscriptionMembreView.php');
-        }
+            $newMembre = new MembreManager();
+            $addMembre = $newMembre->InscrMembre();
+            if ($addMembre === false) {
+                throw new \Exception('Impossible d\'ajouter le membre !');
+            } else {
+                require('view/frontend/InscriptionMembreView.php');
+            }
+
     }
     public function suppMembre()
     {
         $suppMembre = new MembreManager();
         $suppMembre->deleteMembre();
+        $nbcomments = new MembreManager();
+        $nbComms = $nbcomments->CountComments($_SESSION['id']);
     }
 
     public function modifPseudoMdp()
     {
+        $nbcomments = new MembreManager();
+        $nbComms = $nbcomments->CountComments($_SESSION['id']);
         $newpseudo = new MembreManager();
         $modifmembre = $newpseudo->modifPseudoMDP();
         if ($modifmembre === false){
@@ -53,6 +56,8 @@ Class Backend
     }
     public function modifEmail()
     {
+        $nbcomments = new MembreManager();
+        $nbComms = $nbcomments->CountComments($_SESSION['id']);
         $newemail = new MembreManager();
         $modifmembre = $newemail->modifmail();
         if ($modifmembre === false){

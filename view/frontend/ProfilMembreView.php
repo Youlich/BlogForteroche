@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
 <?php require ('Header.php'); ?>
 <header class="bg-primary text-white">
 
@@ -31,10 +30,10 @@
                 <div class="alert alert-success">
                     <?php echo $_SESSION['success'];} ?></div>
             </div>
-            <!-- bouton seul page de départ-->
+            <!-- modifier pseudo et mdp, bouton seul page de départ-->
     <div align="center" >
            <div> <a href="index.php?action=profilMembre&amp;afficher_infos_a_modifier=1">
-                 <input type="button" style="width:20%" name= "button" value="Modifier mon pseudo ou mot de passe"</a> </div>
+                 <input type="button" class="bouton" name= "button" value="Modifier mon pseudo ou mot de passe"</a> </div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_infos_a_modifier'])): ?>
                 <form action="index.php?action=modifpseudo_mdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
@@ -84,9 +83,9 @@
             <?php endif;?>
             <br/>
 
-            <!--bouton seul page de départ-->
+            <!--modifier mail, bouton seul page de départ-->
         <div> <a href="index.php?action=profilMembre&amp;afficher_email_a_modifier=1">
-                <input type="button" style="width:20%" name= "button" value="Modifier mon email"></a></div>
+                <input type="button" class="bouton" name= "button" value="Modifier mon email"></a></div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_email_a_modifier'])): ?>
                 <form action="index.php?action=modifemail&amp;idmembre=<?= $_SESSION['id']?>" method="post">
@@ -111,12 +110,56 @@
                 <?php endif; ?>
                 <br/>
 
+        <!--Gérer les commentaires, bouton seul page de départ-->
+        <div> <a href="index.php?action=profilMembre&amp;afficher_commentaires=1">
+                <input type="button" class="bouton" name= "button" value="Gérer mes commentaires"></a></div>
+
+        <!--affichage du tableau après clic sur le lien-->
+        <?php if (!empty($_GET['afficher_commentaires'])): ?>
+            <form action="index.php?action=listcommentsmembre&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+                <table class="table table-bordered text-center">
+                    <thead class="thead table-active">
+                    <tr>
+                        <th>Livre</th>
+                        <th>Chapitre</th>
+                        <th>Date du commentaire</th>
+                        <th>Commentaire</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($commentsMembre as $comment)
+                    {
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php echo $comment->getCommentDate(); ?>
+                            </td>
+                            <td>
+                                <?php echo $comment->getComment(); ?>
+                            </td>
+                            <td>
+                                <input type="button" value="Valider">
+                                <input type="button" value="Supprimer">
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+        <?php endif; ?>
+        <br/>
+
         <!--bouton seul page de départ-->
         <div> <a href="index.php?action=profilMembre&amp;supprimer_profil=1">
-                <input type="button" style="width:20%" name= "button" value="Supprimer mon compte"</a></div>
+                <input type="button" class="bouton" name= "button" value="Supprimer mon compte"</a></div>
         <!--informations de confirmation suppression après clic sur le bouton-->
                <?php if (!empty($_GET['supprimer_profil'])):?> <br/>
-                   <p style="color: black;">Etes-vous sur de vouloir supprimer votre compte ?</p>
+                   <p class="confirmation">Etes-vous sur de vouloir supprimer votre compte ?</p>
                    <div>
                     <a href="index.php?action=suppMembre&amp;id=<?php echo $_SESSION['id']?>">OUI</a><br/>
                     <a href="index.php?action=profilMembre">NON</a>
@@ -124,7 +167,8 @@
                 <?php endif; ?>
                 <br/><br/>
                 <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>
-    </div>
+
+
 </div>
 <br/>
 <br/>

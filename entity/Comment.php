@@ -7,48 +7,30 @@ class Comment
 {
     private $id;
     private $comment;
-    private $comment_date;
-    private $post_id;
-    private $membre_id;
-    private $membre_pseudo;
+    private $commentDate;
+    private $chapterId;
+    private $membreId;
+    private $membrePseudo;
+
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value)
+        {
+            // On récupère le nom du setter correspondant à l'attribut.
+            $method = 'set'.ucfirst($key);
+            // Si le setter correspondant existe.
+            if (method_exists($this, $method))
+            {
+                // On appelle le setter.
+                $this->$method($value);
+            }
+        }
+    }
 
     /**
      * @return mixed
      */
-    public function getMembrePseudo ()
-    {
-        return $this->membre_pseudo;
-    }
-
-    /**
-     * @param mixed $membre_pseudo
-     */
-    public function setMembrePseudo ($membre_pseudo)
-    {
-        $this->membre_pseudo = $membre_pseudo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMembreId ()
-    {
-        return $this->membre_id;
-    }
-
-    /**
-     * @param mixed $membre_id
-     */
-    public function setMembreId ($membre_id)
-    {
-        $this->membre_id = $membre_id;
-    }
-
-       /**
-     * @return mixed
-     */
-
-    public function getId()
+    public function getId ()
     {
         return $this->id;
     }
@@ -56,7 +38,7 @@ class Comment
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId ($id)
     {
         $this->id = $id;
     }
@@ -64,7 +46,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getComment()
+    public function getComment ()
     {
         return $this->comment;
     }
@@ -72,7 +54,7 @@ class Comment
     /**
      * @param mixed $comment
      */
-    public function setComment($comment)
+    public function setComment ($comment)
     {
         $this->comment = $comment;
     }
@@ -80,33 +62,65 @@ class Comment
     /**
      * @return mixed
      */
-    public function getCommentDate()
+    public function getCommentDate ()
     {
-        return $this->comment_date;
+        return $this->commentDate;
     }
 
     /**
-     * @param mixed $comment_date
+     * @param mixed $commentDate
      */
-    public function setCommentDate($comment_date)
+    public function setCommentDate ($commentDate)
     {
-        $this->comment_date = $comment_date;
+        $this->commentDate = $commentDate;
     }
 
     /**
      * @return mixed
      */
-    public function getPostId()
+    public function getChapterId ()
     {
-        return $this->post_id;
+        return $this->chapterId;
     }
 
     /**
-     * @param mixed $post_id
+     * @param mixed $postId
      */
-    public function setPostId($post_id)
+    public function setPostId ($chapterId)
     {
-        $this->post_id = $post_id;
+        $this->chapterId = $chapterId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMembreId ()
+    {
+        return $this->membreId;
+    }
+
+    /**
+     * @param mixed $membreId
+     */
+    public function setMembreId ($membreId)
+    {
+        $this->membreId = $membreId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMembrePseudo()
+    {
+        return $this->membrePseudo;
+    }
+
+    /**
+     * @param mixed $membrePseudo
+     */
+    public function setMembrePseudo ($membrePseudo)
+    {
+        $this->membrePseudo = $membrePseudo;
     }
 
 

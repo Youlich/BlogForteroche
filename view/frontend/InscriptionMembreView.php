@@ -14,10 +14,9 @@
 <div align="center">
 
     </br></br>
+
     <form action="index.php?action=addMembre" method="post">
 
-        <p> Merci de remplir les champs (*) obligatoires et de prendre connaissance de <a href="index.php?action=charte"><strong>ma CHARTE</strong></a> avant de continuer.</p>
-        <br>
 
         <table>
             <tr>
@@ -70,6 +69,7 @@
             </tr>
         </table>
     </form>
+
 </div>
 <br>
 <?php include('Footer.php');?>

@@ -2,44 +2,71 @@
 namespace controler;
 use model\CommentManager;
 use model\MembreManager;
-use model\PostManager;
+use model\ChapterManager;
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();
 Class Frontend
 {
-    public function listPosts() // affiche l'ensemble des chapitres
+    public function chapter() //affichage d'un chapitre
     {
-        $postManager = new PostManager();
-        $posts = $postManager->getPosts(); // fonction qui affiche tous les chapitres
-        require('view/frontend/listPostsView.php');
-    }
-
-    public function post() //affichage d'un chapitre
-    {
-        $postManager = new PostManager(); // lieu où se trouve la fonction getPost
+        $postManager = new ChapterManager(); // lieu où se trouve la fonction getPost
         $commentManager = new CommentManager(); // lieu où se trouve la fonction getComments
-        $post = $postManager->getPost($_GET['id']); // affiche le post en question grâce à la fonction getPost se trouvant dans PostManager
-        $comments = $commentManager->getComments($_GET['id']); // affiche les commentaires qui lui sont associés
+        $chapter = $postManager->getChapter($_GET['id']); // affiche le post en question grâce à la fonction getPost se trouvant dans PostManager
+        $comments = $commentManager->getCommentsChapter ($_GET['id']); // affiche les commentaires qui lui sont associés
         $nbComms = $commentManager->CountComments($_GET['id']);// affiche le nb de commentaires par chapitre
-        require('view/frontend/postView.php'); //page qui gère l'affichage associé
+        require('view/frontend/chapterView.php'); //page qui gère l'affichage associé
     }
 
     public function comment() // pour "modifier" un commentaire
     {
         $commentManager = new CommentManager();
-        $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
+        $comment = $commentManager->getCommentsChapter($_GET['numComm']); // c'est l'id numComm qui est envoyé
         require('view/frontend/commentView.php');
     }
+    public function membres()
+    {
+        $membre = new MembreManager();
+        $profil = $membre->getMembres();
+        require ('view/frontend/ProfilMembresView.php');
+    }
 
-    public function addComment($postId, $pseudo, $comment, $membre_id) //ajout d'un commentaire dans un chapitre
+    public function listChapters() // affiche l'ensemble des chapitres
+    {
+        $chapterManager = new ChapterManager();
+        $chapters = $chapterManager->getChapters(); // fonction qui affiche tous les chapitres
+        require('view/frontend/listChaptersView.php');
+    }
+
+    public function listComments()
+    {
+        $commentManager = new CommentManager();
+        $commentsMembre = $commentManager->getComments();
+        require('view/frontend/listCommentsView.php');
+    }
+
+    public function listCommentsMembre()
+    {
+        $commentManager = new CommentManager();
+        $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
+        require('view/frontend/ProfilMembreView.php');
+    }
+
+    public function listMembres()
+    {
+        $membreManager = new MembreManager();
+        $membres = $membreManager->getMembres();
+        require ('view/frontend/listMembresView.php');
+    }
+
+    public function addComment($chapterId, $pseudo, $comment, $membreId) //ajout d'un commentaire dans un chapitre
     {
         $CommentManager = new \model\CommentManager();
-        $addcomment = $CommentManager->PostComment($postId, $pseudo, $comment, $membre_id);
+        $addcomment = $CommentManager->ChapterComment($chapterId, $pseudo, $comment, $membreId);
         if ($addcomment === false) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
         else {
-            header('Location: index.php?action=post&id=' . $postId );
+            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments" );
             exit();
         }
     }

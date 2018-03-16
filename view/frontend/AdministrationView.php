@@ -24,19 +24,19 @@
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=1" class="chapter"><img class="img-fluid" src="public/images/publications.jpg" alt=""></a>
+                    <a href="" class="chapter"><img class="img-fluid" src="public/images/publications.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=2" class="chapter"><img class="img-fluid" src="public/images/membres.jpg" alt=""></a>
+                    <a href="index.php?action=listmembres" class="chapter"><img class="img-fluid" src="public/images/membres.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=3" class="chapter"><img class="img-fluid" src="public/images/commentaires.jpg" alt=""></a>
+                    <a href="index.php?action=listComments" class="chapter"><img class="img-fluid" src="public/images/commentaires.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=post&amp;id=4" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
+                    <a href="" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
             </div>
         </div>
     </section>

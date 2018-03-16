@@ -1,14 +1,49 @@
 <?php
 namespace entity;
-class Post
+class Chapter
 {
     private $id;
-    private $post_date;
+    private $chapterDate;
     private $title;
     private $content;
     private $resum;
     private $image;
     private $nbcomms;
+    private $bookId;
+
+
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value)
+        {
+            // On récupère le nom du setter correspondant à l'attribut.
+            $method = 'set'.ucfirst($key);
+            // Si le setter correspondant existe.
+            if (method_exists($this, $method))
+            {
+                // On appelle le setter.
+                $this->$method($value);
+            }
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBookId ()
+    {
+        return $this->bookId;
+    }
+
+    /**
+     * @param mixed $bookId
+     */
+    public function setBookId ($bookId)
+    {
+        $this->bookId = $bookId;
+    }
+
+
 
     /**
      * @return mixed
@@ -41,20 +76,23 @@ class Post
     {
         $this->id = $id;
     }
+
     /**
      * @return mixed
      */
-    public function getPostDate()
+    public function getChapterDate ()
     {
-        return $this->post_date;
+        return $this->chapterDate;
     }
+
     /**
-     * @param mixed $post_date
+     * @param mixed $chapterDate
      */
-    public function setPostDate($post_date)
+    public function setPostDate ($chapterDate)
     {
-        $this->post_date = $post_date;
+        $this->chapterDate = $chapterDate;
     }
+
     /**
      * @return mixed
      */

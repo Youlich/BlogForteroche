@@ -11,19 +11,15 @@ require_once("DbConnect.php");
  */
 class CommentManager extends DbConnect
 {
-    public function getComments ($postId) // affiche tous les commentaires d'un post
+    public function getCommentsChapter ($chapterId) // affiche tous les commentaires d'un post
     {
         $comments = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, membre_pseudo, membre_id, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $req->execute(array($postId));
+        $req = $db->prepare('SELECT id, membrePseudo, membreId, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y / %HH%imin\') AS commentDatefr FROM comments WHERE chapterId = ? ORDER BY commentDate DESC');
+        $req->execute(array($chapterId));
         while ($data = $req->fetch()) {
             $comment = new Comment();
-            $comment->setId($data['id']);
-            $comment->setCommentDate($data['comment_date_fr']);
-            $comment->setComment($data['comment']);
-            $comment->setMembreId($data['membre_id']);
-            $comment->setMembrePseudo($data['membre_pseudo']);
+            $comment->hydrate($data);
 
             $comments[] = $comment;
 
@@ -31,35 +27,56 @@ class CommentManager extends DbConnect
         return $comments;
     }
 
+    public function getComments() // affiche tous les commentaires
+    {
+        $comments = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, membrePseudo, membreId, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y / %HH%imin\') AS commentDatefr FROM comments ORDER BY commentDate DESC');
+        $req->execute(array());
+        while ($data = $req->fetch()) {
+            $comment = new Comment();
+            $comment->hydrate($data);
+            $comments[] = $comment;
+        }
+        return $comments;
+    }
+
+    public function getCommentsMembre($membreId) // affiche tous les commentaires d'un membre
+    {
+        $commentsMembre = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, membrePseudo, membreId, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y / %HH%imin\') AS commentDatefr FROM comments WHERE membreId = ? ORDER BY commentDate DESC');
+        $req->execute(array($membreId));
+        while ($data = $req->fetch()) {
+            $comment = new Comment();
+            $comment->hydrate($data);
+            $commentsMembre[] = $comment;
+        }
+        return $commentsMembre;
+    }
+
+
     public function getComment ($numcomm) // affiche un commentaire pour pouvoir le modifier si besoin
     {
         $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT id, post_id, membre_pseudo, membre_id, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y / %HH%imin\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC');
+        $PDOStatement = $pdo->prepare('SELECT id, chapterId, membrePseudo, membreId, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y / %HH%imin\') AS commentDatefr FROM comments WHERE id = ? ORDER BY commentDate DESC');
         $PDOStatement->execute(array($numcomm));
         while ($data = $PDOStatement->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
-            $comment->setId($data['id']);
-            $comment->setCommentDate($data['comment_date_fr']);
-            $comment->setComment($data['comment']);
-            $comment->setPostId($data['post_id']);
-            $comment->setMembreId($data['membre_id']);
-            $comment->setMembrePseudo(($data['membre_pseudo']));
+            $comment->hydrate($data);
         }
         return $comment;
     }
 
-    public function PostComment ($postId, $membre_pseudo, $comment, $membre_id) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
+    public function ChapterComment ($chapterId, $membrePseudo, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(post_id, membre_pseudo, comment, comment_date, membre_id) VALUES (?, ?, ?, NOW(), ?)');
-        $req->execute(array($postId, $membre_pseudo, $comment, $membre_id));
+        $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, comment, commentDate, membreId) VALUES (?, ?, ?, NOW(), ?)');
+        $req->execute(array($chapterId, $membrePseudo, $comment, $membreId));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
-            $commentadd->setPostId($data['post_id']);
-            $commentadd->setComment($data['comment']);
-            $commentadd->setMembreId($data['membre_id']);
-            $commentadd->setMembrePseudo($data['membre_pseudo']);
+            $commentadd->hydrate($data);
 
             $addcomment[] = $commentadd;
         }
@@ -69,30 +86,25 @@ class CommentManager extends DbConnect
     public function ModifComment () // modifie le commentaire dans la BDD
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET membre_pseudo=:membre_pseudo, membre_id=:membre_id, comment=:comment WHERE id=:num LIMIT 1');
+        $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment WHERE id=:num LIMIT 1');
         $comments->bindValue(':num', $_POST['numComm'], \PDO::PARAM_INT);
-        $comments->bindValue(':membre_id', $_SESSION['id'], \PDO::PARAM_STR);
-        $comments->bindValue(':membre_pseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
+        $comments->bindValue(':membreId', $_SESSION['id'], \PDO::PARAM_STR);
+        $comments->bindValue(':membrePseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
         $comments->bindValue(':comment', $_POST['comment'], \PDO::PARAM_STR);
         $modifLines = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
-            $comment->setId($data['id']);
-            $comment->setCommentDate($data['comment_date_fr']);
-            $comment->setComment($data['comment']);
-            $comment->setPostId($data['post_id']);
-            $comment->setMembreId($data['membre_id']);
-            $comment->setMembreId($data['membre_pseudo']);
+            $comment->hydrate($data);
 
         }
         return $modifLines;
     }
     
-    public function CountComments($post_id)
+    public function CountComments($chapterId)
     {
         $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE post_id = ?');
-        $PDOStatement->execute(array($post_id));
+        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE chapterId = ?');
+        $PDOStatement->execute(array($chapterId));
         $data = $PDOStatement->fetch();
         return $data['total'];
     }

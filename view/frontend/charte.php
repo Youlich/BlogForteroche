@@ -6,7 +6,7 @@
 <header class="bg-primary text-white">
     <div class="container text-center">
         </br></br></br>
-        <h1>Charte des commentaires</h1>
+        <h1>Ma Charte</h1>
         </br></br>
     </div>
 </header>
@@ -17,7 +17,7 @@
 En vous inscrivant, vous reconnaissez avoir pris connaissance de cette charte et l'avoir acceptée.
 Si tel n'est pas le cas, vous ne pouvez vous inscrire.</p><br/>
 
-    <h3>Règlement général du site</h3><br/>
+    <h3>Réglement général du site</h3><br/>
 <p>Ce site et toutes ses pages sont soummis à la loi française, par conséquent, il est interdit
 d'y tenir des propos ou d'y publier du contenu illégal. Aux yeux de la loi, sont considérés illégaux entres
 autres les contenus suivants : contenu à caractère raciste, contenu diffamatoire, contenu incitant à la haine,
@@ -45,10 +45,17 @@ Vous êtes donc propriétaire de votre compte et responsable de celui-ci (ainsi 
 </p>
 
 
-    <form action="index.php?action=inscripMembre&amp;reponse=accept" method="post">
+    <form action="index.php?action=inscripMembre" method="post">
         <div>
             <div>
-                <input type="submit" name="accept" class="btn btn-success btn-sm" value="J'accepte le réglement"/>
+                <input type="submit" style="width: 10%;" name="accept" class="btn btn-success btn-sm" value="J'accepte le réglement"/>
+            </div><br>
+        </div>
+    </form>
+    <form action="index.php?action=accueil" method="post">
+        <div>
+            <div>
+                <input type="submit" style="width: 10%;" name="refuse" class="btn btn-success btn-sm" value="Je ne m'inscris pas"/>
             </div><br>
         </div>
     </form>
