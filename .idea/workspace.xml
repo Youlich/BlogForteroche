@@ -2,35 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="696cb52a-100e-49c5-b6cf-dd9fd7c6b1eb" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/model/ChapterManager.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/view/frontend/ChapterView.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/view/frontend/listCommentsView.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/view/frontend/listMembresView.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/controler/Backend.php" afterPath="$PROJECT_DIR$/controler/Backend.php" />
-      <change beforePath="$PROJECT_DIR$/controler/Frontend.php" afterPath="$PROJECT_DIR$/controler/Frontend.php" />
-      <change beforePath="$PROJECT_DIR$/entity/Admin.php" afterPath="$PROJECT_DIR$/entity/Admin.php" />
-      <change beforePath="$PROJECT_DIR$/entity/Comment.php" afterPath="$PROJECT_DIR$/entity/Comment.php" />
-      <change beforePath="$PROJECT_DIR$/entity/Membres.php" afterPath="$PROJECT_DIR$/entity/Membres.php" />
-      <change beforePath="$PROJECT_DIR$/entity/Post.php" afterPath="$PROJECT_DIR$/entity/Chapter.php" />
-      <change beforePath="$PROJECT_DIR$/model/AdminManager.php" afterPath="$PROJECT_DIR$/model/AdminManager.php" />
-      <change beforePath="$PROJECT_DIR$/model/CommentManager.php" afterPath="$PROJECT_DIR$/model/CommentManager.php" />
-      <change beforePath="$PROJECT_DIR$/model/MembreManager.php" afterPath="$PROJECT_DIR$/model/MembreManager.php" />
-      <change beforePath="$PROJECT_DIR$/model/PostManager.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change beforePath="$PROJECT_DIR$/router/Router.php" afterPath="$PROJECT_DIR$/router/Router.php" />
-      <change beforePath="$PROJECT_DIR$/services/Verifications.php" afterPath="$PROJECT_DIR$/services/Verifications.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/AdministrationView.php" afterPath="$PROJECT_DIR$/view/frontend/AdministrationView.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/CommentView.php" afterPath="$PROJECT_DIR$/view/frontend/CommentView.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/Header.php" afterPath="$PROJECT_DIR$/view/frontend/Header.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/InscriptionMembreView.php" afterPath="$PROJECT_DIR$/view/frontend/InscriptionMembreView.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/PostView.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/ProfilMembreView.php" afterPath="$PROJECT_DIR$/view/frontend/ProfilMembreView.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/accueil.php" afterPath="$PROJECT_DIR$/view/frontend/accueil.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/charte.php" afterPath="$PROJECT_DIR$/view/frontend/charte.php" />
-      <change beforePath="$PROJECT_DIR$/view/frontend/listPostsView.php" afterPath="$PROJECT_DIR$/view/frontend/listChaptersView.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -99,8 +71,8 @@
       <file leaf-file-name="ProfilMembreView.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/frontend/ProfilMembreView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="126" column="51" lean-forward="true" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
+            <state relative-caret-position="141">
+              <caret line="131" column="29" lean-forward="false" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -418,12 +390,12 @@
       <workItem from="1521019372108" duration="83000" />
       <workItem from="1521019479488" duration="1010000" />
       <workItem from="1521020526089" duration="1366000" />
-      <workItem from="1521021933854" duration="55797000" />
+      <workItem from="1521021933854" duration="56080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463332000" />
+    <option name="totallyTimeSpent" value="463615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -434,7 +406,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17852162" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17852162" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20565553" sideWeight="0.51743376" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -871,8 +843,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/view/frontend/ProfilMembreView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="126" column="51" lean-forward="true" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
+        <state relative-caret-position="141">
+          <caret line="131" column="29" lean-forward="false" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="44" />
           <folding />
         </state>
       </provider>
