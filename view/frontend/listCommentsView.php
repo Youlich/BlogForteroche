@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('Header.php');?>
+<?php require ('HeaderAdmin.php');?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
-        </br></br></br>
+        <br/><br/><br/>
         <h1>Commentaires</h1>
-        </br></br></br>
+        <br/><br/><br/>
     </div>
 </header>
 <body class="top">
@@ -20,6 +20,7 @@
         <th>Pseudo</th>
         <th>Date du commentaire</th>
         <th>Commentaire</th>
+        <th>Etat</th>
         <th colspan="2">Action</th>
     </tr>
     </thead>
@@ -35,14 +36,18 @@ foreach ($comments as $comment)
                    <?php echo $comment->getMembrePseudo();?>
                </td>
                 <td>
-                    <?php echo $comment->getCommentDate(); ?>
+                    <?php $date = $comment->getCommentDate();
+                          echo $date = date('d.m.Y'); ?>
                 </td>
                 <td>
                     <?php echo $comment->getComment(); ?>
                 </td>
                 <td>
-                    <input type="button" value="Valider">
-                    <input type="button" value="Supprimer">
+                    <?php echo $comment->getEtat(); ?>
+                </td>
+                <td>
+                    <a href="index.php?action=approved&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Accepter"></a>
+                    <a href="index.php?action=refused&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Refuser">
                 </td>
             </tr>
     <?php
@@ -50,6 +55,9 @@ foreach ($comments as $comment)
 ?>
 </tbody>
 </table>
-<?php require ('Footer.php'); ?>
+<div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
+<br/>
 </body>
+<?php require ('Footer.php'); ?>
+
 </html>

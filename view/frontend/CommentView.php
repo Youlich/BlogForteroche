@@ -22,15 +22,8 @@
     <div>
         <input type="submit" class="btn btn-success btn-sm"/>
     </div>
-    <div>
-        <p>
-            <a href="index.php?action=chapter&id=<?=$comment->getChapterId(); ?>">Retour vers la liste des commentaires du chapitre</a>
-        </p>
-    </div>
-    <?php
-    if (isset($_GET['success'])) {?>
-    <div class="alert alert-success">
-        <?php echo "Commentaire modifié avec succès";} ?></div>
+    <br/><br/>
+
 </form>
 
 

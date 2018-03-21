@@ -31,6 +31,7 @@ li {
     position:absolute;
     z-index:1;
 }
+
 .portfolio-text-image
 {
     text-align:center;
@@ -41,7 +42,6 @@ li {
     z-index:2;
     font-size:150%;
 }
-
 /*listPostView.php*/
 .info {
     padding-left: 1%;

@@ -29,3 +29,4 @@ foreach ($chapters as $chapter)
 
 
 <?php require('templateBlog.php'); ?>
+

@@ -109,7 +109,7 @@ class Membres
     /**
      * @return mixed
      */
-    public function getDateInscription ()
+    public function getDateInscription()
     {
         return $this->dateInscription;
     }

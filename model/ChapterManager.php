@@ -5,13 +5,13 @@ use entity\Chapter;
 require_once("DbConnect.php");
 
 /**
- * Class PostManager
+ * Class ChapterManager
  * @package model
- * Class qui permet la gestion des posts (des billets) : la modification, la lecture et l'écriture dans la table posts
+ * Class qui permet la gestion des chapitres : la modification, la lecture et l'écriture dans la table chapters
  */
 class ChapterManager extends DbConnect
 {
-    public function getChapters () // Affiche tous les billets (posts)
+    public function getChapters () // Affiche tous les chapitres
     {
         $chapters = array();
         $db = $this->dbConnect();
@@ -27,7 +27,7 @@ class ChapterManager extends DbConnect
     public function getChapter ($chapterId) // affiche un chapitre selon son Id
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, resum,bookId, content, image,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, resum, bookId, content, image,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
         $req->execute(array($chapterId));
         while ($data = $req->fetch()) {
             $chapter = new Chapter();
@@ -36,4 +36,23 @@ class ChapterManager extends DbConnect
         return $chapter;
     }
 
+    public function AddChapter($title, $content, $image)
+    {
+        $ChapterAdd = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO chapters (title, content, image) VALUES (NOW(),?,?,?)');
+        $Addchapter = $req->execute(array($title, $content, $image));
+        while ($data = $req->fetch()) {
+            $chapteradd= new Chapter();
+            $chapteradd->hydrate($data);
+            $ChapterAdd[] = $chapteradd;
+        }
+        if ($Addchapter == "success") {
+            $_SESSION['success'] = "Votre nouveau titre de livre est bien créé";
+            return $_SESSION['success'];
+        } else {
+            $_SESSION['error'] = "Votre nouveau titre de livre n'a pas pu être créé, retentez plus tard";
+            return $_SESSION['error'];
+        }
+    }
 }

@@ -197,7 +197,7 @@ class MembreManager extends DbConnect
     }
 
 
-        public function CountComments ($membreId)
+        public function CountCommentsMembre($membreId)
         {
             $pdo = $this->dbConnect();
             $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membreId = ?');

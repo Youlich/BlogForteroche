@@ -33,7 +33,7 @@
             <!-- modifier pseudo et mdp, bouton seul page de départ-->
     <div align="center" >
            <div> <a href="index.php?action=profilMembre&amp;afficher_infos_a_modifier=1">
-                 <input type="button" class="bouton" name= "button" value="Modifier mon pseudo ou mot de passe"</a> </div>
+                 <input type="button" class="bouton" name= "button" value="Modifier mon pseudo ou mot de passe"></a> </div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_infos_a_modifier'])): ?>
                 <form action="index.php?action=modifpseudo_mdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
@@ -116,6 +116,8 @@
 
         <!--affichage du tableau après clic sur le lien-->
         <?php if (!empty($_GET['afficher_commentaires'])): ?>
+        <br/>
+        <p>Vous pouvez modifier, supprimer un commentaire et également me le signaler pour que je puisse l'approuver plus rapidement.</p> <br/>
             <form action="index.php?action=listcommentsmembre&amp;idmembre=<?= $_SESSION['id']?>" method="post">
                 <table class="table table-bordered text-center">
                     <thead class="thead table-active">
@@ -124,6 +126,7 @@
                         <th>Chapitre</th>
                         <th>Date du commentaire</th>
                         <th>Commentaire</th>
+                        <th>Etat</th>
                         <th colspan="2">Action</th>
                     </tr>
                     </thead>
@@ -133,17 +136,28 @@
                     {
                         ?>
                         <tr>
-                            <td></td>
-                            <td></td>
                             <td>
-                                <?php echo $comment->getCommentDate(); ?>
+
+                            </td>
+                            <td>
+                                <?php echo $comment->getChapterId(); ?>
+                            </td>
+                            <td>
+                                <?php $date = $comment->getCommentDate();
+                                echo $date = date('d.m.Y'); ?>
                             </td>
                             <td>
                                 <?php echo $comment->getComment(); ?>
                             </td>
                             <td>
-                                <input type="button" value="Valider">
-                                <input type="button" value="Supprimer">
+                                <?php echo $comment->getEtat(); ?>
+                            </td>
+                            <td>
+                                <a href="index.php?action=signaled&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Signaler"></a>
+
+                                <a href="index.php?action=Comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
+
+                                <a href="index.php?action=deletecomment&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Supprimer"></a>
                             </td>
                         </tr>
                         <?php
@@ -183,3 +197,6 @@
 
 </body>
 </html>
+<?php
+unset($_SESSION['error']);
+unset($_SESSION['success']);?>

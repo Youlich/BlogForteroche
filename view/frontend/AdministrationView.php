@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="" class="chapter"><img class="img-fluid" src="public/images/publications.jpg" alt=""></a>
+                    <a href="index.php?action=publier" class="chapter"><img class="img-fluid" src="public/images/publications.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">

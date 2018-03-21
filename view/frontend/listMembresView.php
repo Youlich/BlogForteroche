@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('Header.php');?>
+<?php require ('HeaderAdmin.php');?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -20,7 +20,7 @@
         <th scope="col">Date d'inscription</th>
         <th scope="col">Email</th>
         <th width="15%" scope="col">Nombre de commentaires</th>
-        <th width="15%" colspan="2">Action</th>
+
     </tr>
     </thead>
     <tbody>
@@ -32,23 +32,21 @@ foreach ($membres as $membre)
     <tr>
             <td><?php echo $membre->getPseudo();?></td>
 
-            <td><?php echo $membre->getDateInscription(); ?></td>
+            <td><?php $date = $membre->getDateInscription();
+                echo $date = date('d.m.Y'); ?></td>
 
             <td><?php echo $membre->getEmail(); ?></td>
 
             <td> <?php echo $membre->getNbcomms(); ?></td>
-            <td>
-             <input type="button" value="Alerter">
-             <input type="button" value="Supprimer">
-             </td>
+
     </tr>
     <?php
     }
     ?>
     </tbody>
 </table>
-
-
+<div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
+<br/>
 
 <?php require ('Footer.php'); ?>
 </body>

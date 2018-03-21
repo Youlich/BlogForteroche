@@ -1,5 +1,6 @@
 <?php
 namespace controler;
+use model\BooksManager;
 use model\CommentManager;
 use model\MembreManager;
 use model\ChapterManager;
@@ -13,21 +14,21 @@ Class Frontend
         $commentManager = new CommentManager(); // lieu où se trouve la fonction getComments
         $chapter = $postManager->getChapter($_GET['id']); // affiche le post en question grâce à la fonction getPost se trouvant dans PostManager
         $comments = $commentManager->getCommentsChapter ($_GET['id']); // affiche les commentaires qui lui sont associés
-        $nbComms = $commentManager->CountComments($_GET['id']);// affiche le nb de commentaires par chapitre
-        require('view/frontend/chapterView.php'); //page qui gère l'affichage associé
+        $nbCommsApproved = $commentManager->CountCommentsChapterApproved($_GET['id']);// affiche le nb de commentaires par chapitre
+        require('view/frontend/ChapterView.php'); //page qui gère l'affichage associé
     }
 
     public function comment() // pour "modifier" un commentaire
     {
         $commentManager = new CommentManager();
-        $comment = $commentManager->getCommentsChapter($_GET['numComm']); // c'est l'id numComm qui est envoyé
-        require('view/frontend/commentView.php');
+        $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
+        require('view/frontend/CommentView.php');
     }
     public function membres()
     {
         $membre = new MembreManager();
         $profil = $membre->getMembres();
-        require ('view/frontend/ProfilMembresView.php');
+        require ('view/frontend/ProfilMembreView.php');
     }
 
     public function listChapters() // affiche l'ensemble des chapitres
@@ -37,10 +38,21 @@ Class Frontend
         require('view/frontend/listChaptersView.php');
     }
 
+    public function listBooks()
+    {
+        $bookManager = new BooksManager();
+        $books = $bookManager->getBooks();
+        require('view/frontend/Publications.php');
+    }
+
     public function listComments()
     {
         $commentManager = new CommentManager();
-        $commentsMembre = $commentManager->getComments();
+        $comments = $commentManager->getComments();
+        //$bookManager = new BooksManager();
+        //$book = $bookManager->getBook();
+        //$chapterManager = new ChapterManager();
+        //$chapter = $chapterManager->getChapter();
         require('view/frontend/listCommentsView.php');
     }
 
@@ -48,6 +60,7 @@ Class Frontend
     {
         $commentManager = new CommentManager();
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
+        $nbComms = $commentManager->CountCommentsChapter($_GET['id']);// affiche le nb de commentaires par chapitre
         require('view/frontend/ProfilMembreView.php');
     }
 
@@ -58,10 +71,36 @@ Class Frontend
         require ('view/frontend/listMembresView.php');
     }
 
-    public function addComment($chapterId, $pseudo, $comment, $membreId) //ajout d'un commentaire dans un chapitre
+    public function addBook($title)
+    {
+        $BookManager = new BooksManager();
+        $addbook = $BookManager->AddBook($title);
+        if ($addbook === false) {
+            throw new \Exception('Impossible d\'ajouter le livre !');
+        }
+        else {
+            header('Location: index.php?action=publier' . "#endpage" );
+            exit();
+        }
+    }
+
+    public function addChapter($title, $content, $image) {
+        $ChapterManager = new ChapterManager();
+        $addchapter = $ChapterManager->AddChapter($title, $content, $image);
+        if ($addchapter === false) {
+            throw new \Exception('Impossible d\'ajouter le chapitre !');
+        }
+        else {
+            header('Location: index.php?action=publier' . "#endpage" );
+            exit();
+        }
+    }
+
+
+    public function addComment($chapterId, $pseudo, $etat, $comment, $membreId) //ajout d'un commentaire dans un chapitre
     {
         $CommentManager = new \model\CommentManager();
-        $addcomment = $CommentManager->ChapterComment($chapterId, $pseudo, $comment, $membreId);
+        $addcomment = $CommentManager->AddComment($chapterId, $pseudo, $etat, $comment, $membreId);
         if ($addcomment === false) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         }
@@ -79,9 +118,39 @@ Class Frontend
             throw new \Exception('Impossible de modifier le commentaire !');
         }
         else {
-            header('Location: index.php?action=Comment&numComm=' . $_POST['numComm']);
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
             exit();
         }
+    }
+
+    public function deleteComment()
+    {
+        $deleteManager = new CommentManager();
+        $deleteComment = $deleteManager->DeleteComment();
+        $nbComms = $deleteManager->CountCommentsChapter($_GET['id']);
+        if ($deleteComment === false) {
+            throw new \Exception('Impossible de supprimer le commentaire !');
+        }
+        else {
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            exit();
+        }
+    }
+
+    public function SignaledComment()
+    {
+        $signaleManager = new CommentManager();
+        $signaledComment = $signaleManager->SignaledComment();
+        $signaleComment = new CommentManager();
+        $nbComms = $signaleComment->CountCommentsChapter($_GET['id']);
+        if ($signaleComment === false) {
+            throw new \Exception('Impossible de signaler votre commentaire à Jean Forteroche, merci de retenter plus tard!');
+        }
+        else {
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            exit();
+        }
+
     }
 
     public function inscripMembre()
@@ -92,7 +161,9 @@ Class Frontend
     public function profilMembre()
     {
         $membreManager = new MembreManager();
-        $nbComms = $membreManager->CountComments($_SESSION['id']);
+        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        $commentManager = new CommentManager();
+        $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
         require('view/frontend/ProfilMembreView.php');
     }
 
@@ -121,5 +192,9 @@ Class Frontend
         require('view/frontend/AdministrationView.php');
     }
 
+    public function Publier()
+    {
+        require('view/frontend/Publications.php');
+    }
 
 }

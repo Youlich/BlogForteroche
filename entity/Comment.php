@@ -11,6 +11,7 @@ class Comment
     private $chapterId;
     private $membreId;
     private $membrePseudo;
+    private $etat;
 
     public function hydrate(array $donnees)
     {
@@ -26,6 +27,23 @@ class Comment
             }
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat ()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat ($etat)
+    {
+        $this->etat = $etat;
+    }
+
 
     /**
      * @return mixed
@@ -62,7 +80,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getCommentDate ()
+    public function getCommentDate()
     {
         return $this->commentDate;
     }
@@ -78,7 +96,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getChapterId ()
+    public function getChapterId()
     {
         return $this->chapterId;
     }

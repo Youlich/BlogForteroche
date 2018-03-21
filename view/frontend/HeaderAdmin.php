@@ -22,7 +22,11 @@
     <!-- Custom styles for this template -->
     <link href="css/freelancer.min.css" rel="stylesheet">
 
-</head>
+    <script src="js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+
+
+
 
 
 <body id="top">

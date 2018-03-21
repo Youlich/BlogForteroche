@@ -1,6 +1,8 @@
 <?php
 namespace controler;
+use entity\Membres;
 use model\AdminManager;
+use model\CommentManager;
 use model\MembreManager;
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();
@@ -38,13 +40,14 @@ Class Backend
         $suppMembre = new MembreManager();
         $suppMembre->deleteMembre();
         $nbcomments = new MembreManager();
-        $nbComms = $nbcomments->CountComments($_SESSION['id']);
+        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
     }
+
 
     public function modifPseudoMdp()
     {
         $nbcomments = new MembreManager();
-        $nbComms = $nbcomments->CountComments($_SESSION['id']);
+        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newpseudo = new MembreManager();
         $modifmembre = $newpseudo->modifPseudoMDP();
         if ($modifmembre === false){
@@ -57,7 +60,7 @@ Class Backend
     public function modifEmail()
     {
         $nbcomments = new MembreManager();
-        $nbComms = $nbcomments->CountComments($_SESSION['id']);
+        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newemail = new MembreManager();
         $modifmembre = $newemail->modifmail();
         if ($modifmembre === false){
@@ -83,5 +86,22 @@ Class Backend
         header('Location: index.php');
         exit();
     }
+
+    public function approvedComments()
+    {
+        $approved = new CommentManager();
+        $approved->ApprovedComment($_GET['id']);
+        $comments = $approved->getComments();
+        require ('view/frontend/listCommentsView.php');
+    }
+
+    public function refusedComments()
+    {
+        $refused = new CommentManager();
+        $refused->RefusedComment($_GET['id']);
+        $comments = $refused->getComments();
+        require ('view/frontend/listCommentsView.php');
+    }
+
 
 }

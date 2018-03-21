@@ -15,23 +15,28 @@ class Router
     {
         try {
             if (isset($_GET['action'])) {
-                if ($_GET['action'] == 'listChapters') { // c'est l'action par défaut , la fonction qui affiche tous les posts et qui est détaillée dans le frontend.php
+
+                if ($_GET['action'] == 'listBooks') {
+                    $frontend = new Frontend();
+                    $frontend->listBooks();
+
+                }elseif ($_GET['action'] == 'listChapters') { // c'est l'action par défaut , la fonction qui affiche tous les chapitres et qui est détaillée dans le frontend.php
                     $frontend = new \controler\Frontend();
                     $frontend->listChapters();
 
                 } elseif ($_GET['action'] == 'chapter') { // action qui se réalise quand on clique sur le lien "lire la suite"
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $frontend = new \controler\Frontend();
-                        $frontend->chapter(); // fonction post de frontend.php
+                        $frontend->chapter();
                     } else {
-                        throw new \Exception('Aucun identifiant de billet envoyé');
+                        throw new \Exception('Aucun identifiant de chapitre envoyé');
                     }
 
                 } elseif ($_GET['action'] == 'addComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
                             $frontend = new \controler\Frontend();
-                            $frontend->addComment($_GET['id'], $_SESSION['pseudo'], $_POST['comment'], $_SESSION['id']);
+                            $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
                         } else {
                             throw new \Exception('Tous les champs ne sont pas remplis !');
                         }
@@ -39,10 +44,24 @@ class Router
                         throw new \Exception('Aucun identifiant de billet envoyé');
                     }
 
+                }elseif ($_GET['action'] == 'addbook') {
+                    if (!empty($_POST['titrelivre'])) {
+                        $frontend = new Frontend();
+                        $frontend->addBook($_POST['titrelivre']);
+                    }else {
+                        throw new \Exception('Tous les champs ne sont pas remplis !');}
+
+                }elseif ($_GET['action'] == 'addchapter') {
+                    if (!empty($_POST['titrechapitre'])) {
+                        $frontend = new Frontend();
+                        $frontend->addChapter($_POST['titrechapitre'], $_POST['contenu'], $_FILES['image']);
+                    }else {
+                        throw new \Exception('Tous les champs ne sont pas remplis !');}
+
                 } elseif ($_GET['action'] == 'Comment') {
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
                         $frontend = new \controler\Frontend();
-                        $frontend->comment(); // fonction comment utilisée
+                        $frontend->comment();
                     } else {
                         throw new \Exception('Aucun identifiant de commentaire envoyé');
                     }
@@ -53,25 +72,45 @@ class Router
 
                 } elseif ($_GET['action'] == 'listcommentsmembre') {
                     $frontend = new \controler\Frontend();
-                    $frontend->listCommentsMembre($_SESSION['id']);
-
+                    $frontend->listCommentsMembre();
 
 
                 } elseif ($_GET['action'] == 'ModifComment') {
-                if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
-                    if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
-                        $frontend = new \controler\Frontend();
-                        $frontend->ModifComment();
+                    if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
+                        if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
+                            $frontend = new \controler\Frontend();
+                            $frontend->ModifComment();
+                        } else {
+                            throw new \Exception('Tous les champs ne sont pas remplis !');
+                        }
                     } else {
-                        throw new \Exception('Tous les champs ne sont pas remplis !');
+                        throw new \Exception('Aucun identifiant de billet envoyé');
                     }
-                } else {
-                    throw new \Exception('Aucun identifiant de billet envoyé');}
+
+                }elseif ($_GET['action'] == 'approved') {
+                    $backend = new Backend();
+                    $backend->approvedComments();
+
+                }elseif ($_GET['action'] == 'refused') {
+                    $backend = new Backend();
+                    $backend->refusedComments();
+
+                }elseif ($_GET['action'] == 'deletecomment') {
+                    $frontend = new Frontend();
+                    $frontend->deleteComment();
+
+                }elseif ($_GET['action'] == 'signaled') {
+                    $frontend = new Frontend();
+                    $frontend->SignaledComment();
+
 
                 } elseif ($_GET['action'] == 'listmembres') {
                     $frontend = new \controler\Frontend();
                     $frontend->listMembres();
 
+                } elseif ($_GET['action'] == 'publier') {
+                    $frontend = new Frontend();
+                    $frontend->Publier();
 
                 } elseif ($_GET['action'] == 'accueil') {
                     $frontend = new \controler\Frontend();
