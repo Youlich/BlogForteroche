@@ -101,7 +101,7 @@ class Router
 
                 }elseif ($_GET['action'] == 'signaled') {
                     $frontend = new Frontend();
-                    $frontend->SignaledComment();
+                    $frontend->SignaledComment($_GET['id']);
 
 
                 } elseif ($_GET['action'] == 'listmembres') {

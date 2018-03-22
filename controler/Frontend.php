@@ -10,12 +10,12 @@ Class Frontend
 {
     public function chapter() //affichage d'un chapitre
     {
-        $postManager = new ChapterManager(); // lieu où se trouve la fonction getPost
-        $commentManager = new CommentManager(); // lieu où se trouve la fonction getComments
-        $chapter = $postManager->getChapter($_GET['id']); // affiche le post en question grâce à la fonction getPost se trouvant dans PostManager
-        $comments = $commentManager->getCommentsChapter ($_GET['id']); // affiche les commentaires qui lui sont associés
-        $nbCommsApproved = $commentManager->CountCommentsChapterApproved($_GET['id']);// affiche le nb de commentaires par chapitre
-        require('view/frontend/ChapterView.php'); //page qui gère l'affichage associé
+        $postManager = new ChapterManager();
+        $commentManager = new CommentManager();
+        $chapter = $postManager->getChapter($_GET['id']);
+        $comments = $commentManager->getCommentsChapter ($_GET['id']);
+        $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
+        require('view/frontend/ChapterView.php');
     }
 
     public function comment() // pour "modifier" un commentaire
@@ -84,9 +84,11 @@ Class Frontend
         }
     }
 
-    public function addChapter($title, $content, $image) {
+    public function addChapter($title, $content, $file) {
         $ChapterManager = new ChapterManager();
-        $addchapter = $ChapterManager->AddChapter($title, $content, $image);
+        $addchapter = $ChapterManager->AddChapter($title, $content, $file['name']);
+
+        //ajouter l'upload de l'image
         if ($addchapter === false) {
             throw new \Exception('Impossible d\'ajouter le chapitre !');
         }
@@ -137,17 +139,15 @@ Class Frontend
         }
     }
 
-    public function SignaledComment()
+    public function SignaledComment($commentId)
     {
         $signaleManager = new CommentManager();
         $signaledComment = $signaleManager->SignaledComment();
-        $signaleComment = new CommentManager();
-        $nbComms = $signaleComment->CountCommentsChapter($_GET['id']);
-        if ($signaleComment === false) {
+        if ($signaledComment === false) {
             throw new \Exception('Impossible de signaler votre commentaire à Jean Forteroche, merci de retenter plus tard!');
         }
         else {
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            header('Location: index.php?action=chapter&id=' . $commentId . "#nbcomments" );
             exit();
         }
 

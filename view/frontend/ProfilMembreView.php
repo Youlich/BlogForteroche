@@ -137,10 +137,10 @@
                         ?>
                         <tr>
                             <td>
-
+                                <?php echo $comment->getBook()->getTitle(); ?>
                             </td>
                             <td>
-                                <?php echo $comment->getChapterId(); ?>
+                                <?php echo $comment->getChapter()->getTitle(); ?>
                             </td>
                             <td>
                                 <?php $date = $comment->getCommentDate();
@@ -150,10 +150,9 @@
                                 <?php echo $comment->getComment(); ?>
                             </td>
                             <td>
-                                <?php echo $comment->getEtat(); ?>
+                                <?php echo $comment->getStatut(); ?>
                             </td>
                             <td>
-                                <a href="index.php?action=signaled&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Signaler"></a>
 
                                 <a href="index.php?action=Comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
 

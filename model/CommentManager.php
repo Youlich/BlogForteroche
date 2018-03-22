@@ -32,12 +32,21 @@ class CommentManager extends DbConnect
     {
         $comments = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM comments ORDER BY etat DESC');
+        $req = $db->prepare('SELECT * FROM comments ORDER BY statut DESC');
         $req->execute(array());
         while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->hydrate($data);
             $comments[] = $comment;
+
+            $chapterManager = new ChapterManager();
+            $chapter = $chapterManager->getChapter($comment->getChapterId());
+
+            $bookManager = new BooksManager();
+            $book = $bookManager->getBook($chapter->getBookId());
+
+            $comment->setChapter($chapter);
+            $comment->setBook($book);
         }
         return $comments;
     }
@@ -46,12 +55,22 @@ class CommentManager extends DbConnect
     {
         $commentsMembre = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM comments WHERE membreId = ? ORDER BY etat DESC');
+        $req = $db->prepare('SELECT * FROM comments WHERE membreId = ? ORDER BY statut DESC');
         $req->execute(array($membreId));
         while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->hydrate($data);
             $commentsMembre[] = $comment;
+
+            $chapterManager = new ChapterManager();
+            $chapter = $chapterManager->getChapter($comment->getChapterId());
+
+            $bookManager = new BooksManager();
+            $book = $bookManager->getBook($chapter->getBookId());
+
+            $comment->setChapter($chapter);
+            $comment->setBook($book);
+
         }
         return $commentsMembre;
     }
@@ -70,12 +89,12 @@ class CommentManager extends DbConnect
 
     }
 
-    public function AddComment ($chapterId, $membrePseudo, $etat, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
+    public function AddComment ($chapterId, $membrePseudo, $statut, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, etat, comment, commentDate, membreId) VALUES (?, ?, ?, ?, NOW(), ?)');
-        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $etat = 'En attente',  $comment, $membreId));
+        $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, statut, comment, commentDate, membreId) VALUES (?, ?, ?, ?, NOW(), ?)');
+        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  $comment, $membreId));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->hydrate($data);
@@ -93,12 +112,12 @@ class CommentManager extends DbConnect
     public function ModifComment () // modifie le commentaire dans la BDD
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment, etat=:etat WHERE id=:num LIMIT 1');
+        $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment, statut=:statut WHERE id=:num LIMIT 1');
         $comments->bindValue(':num', $_POST['numComm'], \PDO::PARAM_INT);
         $comments->bindValue(':membreId', $_SESSION['id'], \PDO::PARAM_STR);
         $comments->bindValue(':membrePseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
         $comments->bindValue(':comment', $_POST['comment'], \PDO::PARAM_STR);
-        $comments->bindValue(':etat', 'En attente', \PDO::PARAM_STR);
+        $comments->bindValue(':statut', 'En attente', \PDO::PARAM_STR);
         $modifLines = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -118,9 +137,9 @@ class CommentManager extends DbConnect
     public function ApprovedComment($id) // modifie l'état du commentaire après approbation de celui-ci
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET etat=:etat WHERE id=:num LIMIT 1');
+        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
         $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
-        $comments->bindValue(':etat', 'Validé', \PDO::PARAM_STR);
+        $comments->bindValue(':statut', 'Valide', \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -132,9 +151,9 @@ class CommentManager extends DbConnect
     public function RefusedComment($id)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET etat=:etat WHERE id=:num LIMIT 1');
+        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
         $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
-        $comments->bindValue(':etat', 'Refusé', \PDO::PARAM_STR);
+        $comments->bindValue(':statut', 'Refus', \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -162,21 +181,23 @@ class CommentManager extends DbConnect
     public function SignaledComment()
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET etat=:etat WHERE id=:num LIMIT 1');
+        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
         $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
-        $comments->bindValue(':etat', 'Signalé', \PDO::PARAM_STR);
+        $comments->bindValue(':statut', 'Alerte', \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
             $comment->hydrate($data);
+            var_dump($modifEtat);
+            die();
         }
         if ($modifEtat == "success") {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            $_SESSION['success'] = "Votre commentaire a bien été signalé à Jean Forteroche";
+            header('location: Location: index.php?action=chapter');
+            $_SESSION['success'] = "Ce commentaire a bien été signalé à Jean Forteroche";
             return $_SESSION['success'];
         }else {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            $_SESSION['error'] = "Votre commentaire n'a pas pu être signalé, veuillez retenter plus tard";
+            header('location: Location: index.php?action=chapter');
+            $_SESSION['error'] = "Ce commentaire n'a pas pu être signalé, veuillez retenter plus tard";
             return $_SESSION['error'];
         }
 
@@ -192,14 +213,6 @@ class CommentManager extends DbConnect
 
     }
 
-    public function CountCommentsChapterApproved($chapterId)
-    {
-        $pdo = $this->dbConnect();
-        $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE chapterId = ? AND etat = "Validé"');
-        $PDOStatement->execute(array($chapterId));
-        $data = $PDOStatement->fetch();
-        return $data['total'];
-    }
 
 
 }

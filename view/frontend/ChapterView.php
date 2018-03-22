@@ -16,13 +16,11 @@
 </div>
 <br><br>
 
-<h4 id="nbcomments" ><span class="badge"><?= $nbCommsApproved ?> Commentaires</span></h4>
+<h4 id="nbcomments" ><span class="badge"><?= $nbComms ?> Commentaires</span></h4>
 <br/>
 
 <?php foreach ($comments as $comment)
-{
-    if ($comment->getEtat() == 'Validé') { ?>
-
+{ ?>
 
         <h5><em><?= htmlspecialchars($comment->getMembrePseudo()) ?></em></h5>
 
@@ -31,11 +29,11 @@
         <p><h6>Votre commentaire : </h6><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 
         <br/>
+    <a href="index.php?action=signaled&amp;id=<?php echo $chapter->getId() ?>"><input type="button" value="Signaler"></a>
 
-        <?php
-    } ?>
     <?php
 } ?>
+
 <div class="jumbotron">
     <h5>Laisser un commentaire</h5>
     <br>

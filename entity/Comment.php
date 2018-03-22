@@ -11,7 +11,9 @@ class Comment
     private $chapterId;
     private $membreId;
     private $membrePseudo;
-    private $etat;
+    private $statut;
+    private $chapter;
+    private $book;
 
     public function hydrate(array $donnees)
     {
@@ -31,17 +33,17 @@ class Comment
     /**
      * @return mixed
      */
-    public function getEtat ()
+    public function getStatut ()
     {
-        return $this->etat;
+        return $this->statut;
     }
 
     /**
-     * @param mixed $etat
+     * @param mixed $statut
      */
-    public function setEtat ($etat)
+    public function setStatut ($statut)
     {
-        $this->etat = $etat;
+        $this->statut = $statut;
     }
 
 
@@ -102,6 +104,16 @@ class Comment
     }
 
     /**
+     * @param mixed $chapterId
+     */
+    public function setChapterId ($chapterId)
+    {
+        $this->chapterId = $chapterId;
+    }
+
+
+
+    /**
      * @param mixed $postId
      */
     public function setPostId ($chapterId)
@@ -139,6 +151,38 @@ class Comment
     public function setMembrePseudo ($membrePseudo)
     {
         $this->membrePseudo = $membrePseudo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChapter ()
+    {
+        return $this->chapter;
+    }
+
+    /**
+     * @param mixed $chapter
+     */
+    public function setChapter ($chapter)
+    {
+        $this->chapter = $chapter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBook ()
+    {
+        return $this->book;
+    }
+
+    /**
+     * @param mixed $book
+     */
+    public function setBook ($book)
+    {
+        $this->book = $book;
     }
 
 

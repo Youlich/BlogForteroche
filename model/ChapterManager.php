@@ -36,12 +36,12 @@ class ChapterManager extends DbConnect
         return $chapter;
     }
 
-    public function AddChapter($title, $content, $image)
+    public function AddChapter($title, $content, $file)
     {
         $ChapterAdd = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO chapters (title, content, image) VALUES (NOW(),?,?,?)');
-        $Addchapter = $req->execute(array($title, $content, $image));
+        $req = $db->prepare('INSERT INTO chapters (chapterDate, title, content, image) VALUES (NOW(),?,?,?)');
+        $Addchapter = $req->execute(array($title, $content, $file['name']));
         while ($data = $req->fetch()) {
             $chapteradd= new Chapter();
             $chapteradd->hydrate($data);

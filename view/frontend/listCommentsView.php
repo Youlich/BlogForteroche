@@ -30,8 +30,12 @@ foreach ($comments as $comment)
 {
     ?>
             <tr>
-                <td></td>
-                <td></td>
+                <td>
+                    <?php echo $comment->getBook()->getTitle(); ?>
+                    </td>
+                <td>
+                    <?php echo $comment->getChapter()->getTitle(); ?>
+                </td>
                <td>
                    <?php echo $comment->getMembrePseudo();?>
                </td>
@@ -42,9 +46,15 @@ foreach ($comments as $comment)
                 <td>
                     <?php echo $comment->getComment(); ?>
                 </td>
-                <td>
-                    <?php echo $comment->getEtat(); ?>
-                </td>
+                    <?php $statut = $comment->getStatut();
+                    if ($statut == 'Alerte') { ?>
+                     <td style="color :red;">
+                    <?php echo $comment->getStatut(); ?>
+                </td> <?php } else { ?>
+                        <td style="color :black;">
+                    <?php echo $comment->getStatut(); ?>
+                        </td> <?php
+                    } ?>
                 <td>
                     <a href="index.php?action=approved&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Accepter"></a>
                     <a href="index.php?action=refused&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Refuser">
