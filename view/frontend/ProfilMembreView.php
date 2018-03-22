@@ -149,9 +149,15 @@
                             <td>
                                 <?php echo $comment->getComment(); ?>
                             </td>
-                            <td>
-                                <?php echo $comment->getStatut(); ?>
-                            </td>
+                            <?php $statut = $comment->getStatut();
+                            if ($statut == 'Alerte') { ?>
+                                <td style="color :red;">
+                                    <?php echo $comment->getStatut(); ?>
+                                </td> <?php } else { ?>
+                                <td style="color :black;">
+                                    <?php echo $comment->getStatut(); ?>
+                                </td> <?php
+                            } ?>
                             <td>
 
                                 <a href="index.php?action=Comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>

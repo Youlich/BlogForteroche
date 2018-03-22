@@ -194,6 +194,10 @@ Class Frontend
 
     public function Publier()
     {
+        $bookManager = new BooksManager();
+        $books = $bookManager->getBooks();
+        $chapterManager = new ChapterManager();
+        $chapters = $chapterManager->getChapters();
         require('view/frontend/Publications.php');
     }
 
