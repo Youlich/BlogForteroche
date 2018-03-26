@@ -1,5 +1,6 @@
 <?php
 namespace controler;
+use entity\Chapter;
 use model\BooksManager;
 use model\CommentManager;
 use model\MembreManager;
@@ -15,6 +16,7 @@ Class Frontend
         $chapter = $postManager->getChapter($_GET['id']);
         $comments = $commentManager->getCommentsChapter ($_GET['id']);
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
+        $chapterSelect = $postManager->getChapter($_POST['chapterselect']);
         require('view/frontend/ChapterView.php');
     }
 
@@ -94,6 +96,32 @@ Class Frontend
         }
         else {
             header('Location: index.php?action=publier' . "#endpage" );
+            exit();
+        }
+    }
+
+    public function ModifChapter() {
+        $ModifManager = new ChapterManager();
+        $modifLines = $ModifManager->ModifChapter();
+        $chapterSelect= $ModifManager->getChapter($_POST['chapterselect']);
+        if ($modifLines === false) {
+            throw new \Exception('Impossible de modifier le chapitre !');
+        }
+        else {
+            header('Location: index.php?action=publier' . "#endpage" );
+            exit();
+        }
+    }
+
+    public function deleteChapter()
+    {
+        $deleteManager = new ChapterManager();
+        $deleteChapter = $deleteManager->DeleteChapter();
+        if ($deleteChapter === false) {
+            throw new \Exception('Impossible de supprimer le chapitre !');
+        }
+        else {
+            header('Location: index.php?action=publier' . "#endpage" );;
             exit();
         }
     }
@@ -198,6 +226,8 @@ Class Frontend
         $books = $bookManager->getBooks();
         $chapterManager = new ChapterManager();
         $chapters = $chapterManager->getChapters();
+        $chapterSelect = $chapterManager->getChapter($_POST['chapterselect']);
+
         require('view/frontend/Publications.php');
     }
 

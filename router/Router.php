@@ -54,9 +54,30 @@ class Router
                 }elseif ($_GET['action'] == 'addchapter') {
                     if (!empty($_POST['titrechapitre'])) {
                         $frontend = new Frontend();
-                        $frontend->addChapter($_POST['titrechapitre'], $_POST['contenu'], $_FILES['image']);
+                        $frontend->addChapter($_POST['titrechapitre'], $_POST['content'], $_FILES['image']);
                     }else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');}
+
+                }elseif ($_GET['action'] == 'deletechapter') {
+                    if (!empty($_POST['titrechapitre'])) {
+                        $frontend = new Frontend();
+                        $frontend->deleteChapter();
+                    } else {
+                        throw new \Exception('Tous les champs ne sont pas remplis !');
+                    }
+
+                }elseif ($_GET['action'] == 'modifchapter') {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                        if (!empty($_POST['titrechapter'] && $_POST['content'] && $_POST['image'] )) {
+                            $frontend = new \controler\Frontend();
+                            $frontend->ModifChapter();
+                        } else {
+                            throw new \Exception('Tous les champs ne sont pas remplis !');
+                        }
+                    } else {
+                        throw new \Exception('Aucun identifiant de chapitre envoyé');
+                    }
+
 
                 } elseif ($_GET['action'] == 'Comment') {
                     if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {

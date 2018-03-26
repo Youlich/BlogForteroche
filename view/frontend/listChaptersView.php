@@ -24,6 +24,18 @@ foreach ($chapters as $chapter)
     <?php
 }
 ?>
+<br/><br/>
+
+<nav aria-label="...">
+    <ul class="pagination pagination-lg justify-content-center">
+        <li class="active">
+            <a class="page-link" style="color: #18bc9c; border-color: #18bc9c;" href="#" tabindex="-1">1</a>
+        </li>
+        <li class="page-item"><a style="color: #18bc9c; border-color: #18bc9c;" class="page-link" href="#">2</a></li>
+        <li class="page-item"><a style="color: #18bc9c; border-color: #18bc9c;" class="page-link" href="#">3</a></li>
+    </ul>
+</nav>
+
 
 <?php $content = ob_get_clean(); ?>
 

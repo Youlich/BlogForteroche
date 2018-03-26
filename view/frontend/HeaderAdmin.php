@@ -23,8 +23,8 @@
     <link href="css/freelancer.min.css" rel="stylesheet">
 
     <script src="js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
-
+    <script>tinymce.init({ selector : 'textarea', plugins: 'link image code', elements : 'content', branding : false });
+    </script>
 
 
 

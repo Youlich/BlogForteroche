@@ -13,7 +13,8 @@
 <br/>
 <body class="top">
 
-<div align="center">
+
+    <div align="center">
 
             <h5>Mon nombre de commentaires : <em> <?php echo $nbComms ?></em></h5><br/>
             <h5>Ma date d'inscription : <em>le <?php echo $_SESSION['date_inscription']=date("d-m-Y")?></em></h5><br/>
@@ -30,94 +31,71 @@
                 <div class="alert alert-success">
                     <?php echo $_SESSION['success'];} ?></div>
             </div>
-            <!-- modifier pseudo et mdp, bouton seul page de départ-->
-    <div align="center" >
-           <div> <a href="index.php?action=profilMembre&amp;afficher_infos_a_modifier=1">
-                 <input type="button" class="bouton" name= "button" value="Modifier mon pseudo ou mot de passe"></a> </div>
+    </div>
+
+
+    <div class="container">
+
+            <!-- Partie modifier pseudo et mdp-->
+            <div>
+           <a href="index.php?action=profilMembre&amp;afficher_infos_a_modifier=1">
+               <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Modifier mon pseudo ou mot de passe"></a> </div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_infos_a_modifier'])): ?>
                 <form action="index.php?action=modifpseudo_mdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
-                    <table>
-                                <p>(*) informations obligatoires</p><br/>
-                        <tr>
-                            <td align="right">
-                                <label for="pseudo">Mon nouveau pseudo (ou actuel) : </label>
-                            </td>
-                            <td>
-                                <input type="hidden" name="idmembre" id="idmembre" value="<?php echo $_SESSION['id']?>" />
-                                <input type="text" name="pseudo" id="pseudo" value="<?php echo $_SESSION['pseudo']?>" />(*) <em>supérieur à 3 caractères</em><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                <label for="pass">Mon nouveau mot de passe (ou actuel) : </label>
-                            </td>
-                            <td>
-                                <input type="password" name="pass" id="pass"/>(*) <em>supérieur à 6 caractères</em><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                <label for="pass">Retapez votre nouveau mot de passe (ou actuel) : </label>
-                            </td>
-                            <td>
-                                <input type="password" placeholder="Confirmation mot de passe" name="newpass" id="newpass"  />(*) <em>supérieur à 6 caractères</em>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                            </td>
-                            <td>
-                                <a href="">J'ai oublié mon mot de passe</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input class="btn btn-success btn-md" type="submit" name="submit" value="Modifier" />
-                            </td>
-
-                        </tr>
-                    </table>
+                    <div class="form-group">
+                                <p>(*) informations obligatoires</p>
+                        <br/><br/>
+                                <label for="pseudo" class="col-sm-6 col-form-label">Mon nouveau pseudo (ou actuel) : (*) <em>supérieur à 3 caractères</em> </label>
+                                <div class="col-sm-15">
+                                    <input type="hidden" name="idmembre" id="idmembre" value="<?php echo $_SESSION['id']?>" />
+                                    <input type="text" class="form-control" name="pseudo" id="pseudo" value="<?php echo $_SESSION['pseudo']?>" /><br>
+                                </div>
+                                <label for="pass" class="col-sm-6 col-form-label">Mon nouveau mot de passe (ou actuel) : (*) <em>supérieur à 6 caractères</em><br></label>
+                                <div class="col-sm-15">
+                                    <input type="password" class="form-control"name="pass" id="pass"/>
+                                </div>
+                                <label for="pass" class="col-sm-6 col-form-label">Retapez votre nouveau mot de passe (ou actuel) : (*) <em>supérieur à 6 caractères</em><br></label>
+                                 <div class="col-sm-15">
+                                    <input type="password" class="form-control" placeholder="Confirmation mot de passe" name="newpass" id="newpass"  />
+                                 </div>
+                                <br/><br/>
+                                <div align="center">
+                                        <a href="" >J'ai oublié mon mot de passe</a>
+                                        <br/><br/>
+                                        <input class="btn btn-success btn-md" type="submit" name="submit" value="Modifier" />
+                                </div>
+                    </div>
                 </form>
             <?php endif;?>
             <br/>
 
-            <!--modifier mail, bouton seul page de départ-->
+            <!--Partie modifier mail-->
         <div> <a href="index.php?action=profilMembre&amp;afficher_email_a_modifier=1">
-                <input type="button" class="bouton" name= "button" value="Modifier mon email"></a></div>
+                <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Modifier mon email"></a></div>
             <!--affichage du formulaire après clic sur le lien-->
             <?php if (!empty($_GET['afficher_email_a_modifier'])): ?>
                 <form action="index.php?action=modifemail&amp;idmembre=<?= $_SESSION['id']?>" method="post">
-                    <table>
-                            <tr>
-                                <td align="right">
-                                    <label for="email">Modifier mon Email : </label>
-                                </td>
-                                <td>
+                    <div class="form-group">
+                        <br/>
+                                    <label for="email" class="col-sm-6 col-form-label">Nouvelle adresse mail : </label>
                                     <input type="hidden" name="idmembre" id="idmembre" value="<?php echo $_SESSION['id']?>" />
-                                    <input type="text" name="email" id="email" value="<?php echo $_SESSION['email']?>" /><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
+                                    <input type="text" class="form-control" name="email" id="email" value="<?php echo $_SESSION['email']?>" /><br>
+                                <div align="center">
                                     <input class="btn btn-success btn-md" type="submit" name="submit" value="Modifier" />
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                    </div>
                     </form>
                 <?php endif; ?>
                 <br/>
 
-        <!--Gérer les commentaires, bouton seul page de départ-->
+        <!--Partie Gérer les commentaires-->
         <div> <a href="index.php?action=profilMembre&amp;afficher_commentaires=1">
-                <input type="button" class="bouton" name= "button" value="Gérer mes commentaires"></a></div>
+                <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Gérer mes commentaires"></a></div>
 
         <!--affichage du tableau après clic sur le lien-->
         <?php if (!empty($_GET['afficher_commentaires'])): ?>
         <br/>
-        <p>Vous pouvez modifier, supprimer un commentaire et également me le signaler pour que je puisse l'approuver plus rapidement.</p> <br/>
             <form action="index.php?action=listcommentsmembre&amp;idmembre=<?= $_SESSION['id']?>" method="post">
                 <table class="table table-bordered text-center">
                     <thead class="thead table-active">
@@ -159,9 +137,7 @@
                                 </td> <?php
                             } ?>
                             <td>
-
                                 <a href="index.php?action=Comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
-
                                 <a href="index.php?action=deletecomment&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Supprimer"></a>
                             </td>
                         </tr>
@@ -173,33 +149,35 @@
         <?php endif; ?>
         <br/>
 
-        <!--bouton seul page de départ-->
-        <div> <a href="index.php?action=profilMembre&amp;supprimer_profil=1">
-                <input type="button" class="bouton" name= "button" value="Supprimer mon compte"</a></div>
+        <!--Partie suppression-->
+        <div><a href="index.php?action=profilMembre&amp;supprimer_profil=1">
+                <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Supprimer mon compte"</a></div>
         <!--informations de confirmation suppression après clic sur le bouton-->
                <?php if (!empty($_GET['supprimer_profil'])):?> <br/>
+                <div align="center">
                    <p class="confirmation">Etes-vous sur de vouloir supprimer votre compte ?</p>
-                   <div>
+
                     <a href="index.php?action=suppMembre&amp;id=<?php echo $_SESSION['id']?>">OUI</a><br/>
                     <a href="index.php?action=profilMembre">NON</a>
-                </div>
                 <?php endif; ?>
+                </div>
                 <br/><br/>
+                <div align="center">
                 <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>
-
+                </div>
 
 </div>
 <br/>
 <br/>
 <?php include('Footer.php');?>
 
-<!-- Scroll to Top Button -->
-<div class="scroll-to-top position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-        <i class="fa fa-chevron-up"></i>
-    </a>
+            <!-- Scroll to Top Button -->
+            <div class="scroll-to-top position-fixed ">
+                <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
 </div>
-
 </body>
 </html>
 <?php
