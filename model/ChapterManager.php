@@ -30,10 +30,10 @@ class ChapterManager extends DbConnect
         $req = $db->prepare('SELECT id, title, resum, bookId, content, image,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
         $req->execute(array($chapterId));
         while ($data = $req->fetch()) {
-            $chapterSelect = new Chapter();
-            $chapterSelect->hydrate($data);
+            $chapterselect = new Chapter();
+            $chapterselect->hydrate($data);
         }
-        return $chapterSelect;
+        return $chapterselect;
     }
 
     public function AddChapter($title, $content, $file)

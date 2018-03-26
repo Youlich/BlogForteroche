@@ -226,9 +226,14 @@ Class Frontend
         $books = $bookManager->getBooks();
         $chapterManager = new ChapterManager();
         $chapters = $chapterManager->getChapters();
-        $chapterSelect = $chapterManager->getChapter($_POST['chapterselect']);
-
+        if (isset($_POST['chapterselect'])) {
+        $chapterselect = $chapterManager->getChapter($_POST['chapterselect']);
         require('view/frontend/Publications.php');
+        }else {
+        $chapterselect = '';
+        require('view/frontend/Publications.php');
+        }
+
     }
 
 }

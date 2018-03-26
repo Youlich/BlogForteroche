@@ -5,7 +5,7 @@
 
 <header class="bg-primary text-white">
     <div class="container text-center">
-        <br/><br/>
+        <br/><br/><br/>
         <h1>Publications</h1>
         <br/><br/><br/>
     </div>
@@ -98,20 +98,20 @@
                             <input type="submit" class= "btn btn-outline-secondary" name="okchapter"  >
                         </div> <br/><br/>
                     </div>
+                   <?php if (isset($_POST['chapterselect'])) { ?>
                     <div class= "input-group" >
                         <label for="titrechapter">Nouveau titre de chapitre : </label>
-                        <input type="hidden" name="idchapter" id="idchapter" style="width: 200%;" value="<?php echo $_POST['chapterselect'] ?>">
-                        <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterSelect->getTitle(); ?>">
+                        <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle(); ?>">
                     </div>
                     <br/>
                     <div class= "input-group" >
                         <label for="content">Contenu : </label>
-                        <textarea class="content" id="content" name="content" rows="15"> <?php echo $chapterSelect->getContent(); ?> </textarea>
+                        <textarea class="content" id="content" name="content" rows="15"> <?php echo $chapterselect->getContent(); ?> </textarea>
                     </div> <br/><br/>
                     <div>
                     <h6>Mon image :</h6>
                     <br/>
-                    <img src="public/images/<?php echo $chapterSelect->getImage(); ?>" style="width: 15%;">
+                    <img src="public/images/<?php echo $chapterselect->getImage(); ?>" style="width: 15%;">
                     </div>
                     <br/>
                     <div class= "input-group" >
@@ -129,6 +129,7 @@
                         <input class="btn btn-success btn-md" type="submit" id="submit" name="modifier" value="Publier" />
                     </div>
                 </form>
+                 <?php } ?>
                 <?php } ?>
                 <br/>
 
