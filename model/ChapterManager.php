@@ -15,7 +15,7 @@ class ChapterManager extends DbConnect
     {
         $chapters = array();
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, resum, bookId, content, image, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 4');
+        $req = $db->query('SELECT id, title, resum, bookId, content, image, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
         while ($data = $req->fetch()) {
             $chapter = new Chapter();
             $chapter->hydrate($data);
@@ -78,7 +78,7 @@ class ChapterManager extends DbConnect
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, image=:image WHERE id=:id LIMIT 1');
         $chapters->bindValue(':titrechapter', $_POST['titrechapter'], \PDO::PARAM_STR);
         $chapters->bindValue(':content', $_POST['content'], \PDO::PARAM_STR);
-        $chapters->bindValue(':image', $_FILES['image'], \PDO::PARAM_STR);
+        $chapters->bindValue(':image', $_FILES['name'], \PDO::PARAM_STR);
         $modifLines = $chapters->execute();
         while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
             $chapter = new Chapter();

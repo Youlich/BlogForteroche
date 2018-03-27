@@ -103,5 +103,11 @@ Class Backend
         require ('view/frontend/listCommentsView.php');
     }
 
+    public function upload()
+    {
+
+
+    }
+
 
 }

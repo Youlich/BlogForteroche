@@ -28,7 +28,6 @@
 
 
 
-
 <body id="top">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">

@@ -5,6 +5,9 @@ use model\BooksManager;
 use model\CommentManager;
 use model\MembreManager;
 use model\ChapterManager;
+use services\Telechargement;
+use services\Telechargements;
+
 require_once('Autoload.php'); // Chargement des class
 \Autoload::register();
 Class Frontend
@@ -16,7 +19,6 @@ Class Frontend
         $chapter = $postManager->getChapter($_GET['id']);
         $comments = $commentManager->getCommentsChapter ($_GET['id']);
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
-        $chapterSelect = $postManager->getChapter($_POST['chapterselect']);
         require('view/frontend/ChapterView.php');
     }
 
@@ -103,14 +105,12 @@ Class Frontend
     public function ModifChapter() {
         $ModifManager = new ChapterManager();
         $modifLines = $ModifManager->ModifChapter();
-        $chapterSelect= $ModifManager->getChapter($_POST['chapterselect']);
-        if ($modifLines === false) {
-            throw new \Exception('Impossible de modifier le chapitre !');
-        }
-        else {
-            header('Location: index.php?action=publier' . "#endpage" );
-            exit();
-        }
+            if ($modifLines === false) {
+                throw new \Exception('Impossible de modifier le chapitre !');
+            } else {
+                header('Location: index.php?action=publier' . "#endpage");
+                exit();
+            }
     }
 
     public function deleteChapter()
@@ -234,6 +234,13 @@ Class Frontend
         require('view/frontend/Publications.php');
         }
 
+    }
+
+    public function upload()
+    {
+        $upload = new Telechargements();
+        $telechargimage = $upload->upload();
+        require('view/frontend/Publications.php');
     }
 
 }

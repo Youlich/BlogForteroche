@@ -42,42 +42,49 @@
                 <!-- Partie ajout chapitre -->
 
             <div><a href="index.php?action=publier&amp;publierchapitre=1 ">
-                    <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Publier un nouveau chapitre"></a><br/><br/></div>
+                    <input type="button" style="text-decoration: none;" class="btn btn-secondary btn-lg btn-block" name= "button" value="Publier un nouveau chapitre"></a><br/><br/></div>
                 <?php if (!empty($_GET['publierchapitre'])){ ?>
-                <form action="index.php?action=addchapter" method="post" enctype="multipart/form-data" >
+                    <!--choix du livre-->
                     <div class= "input-group" >
-                            <select name="bookSelect" class= "custom-select" id= "inputGroupSelect04" >
-                                <option selected > Choisissez votre livre </option>
-                                <?php foreach ($books as $book) { ?>
-                                    <option value="<?php echo $book->getId(); ?>"><?php echo $book->getTitle();  ?></option> <?php } ?>
-                            </select>
-                            <div class= "input-group-append" >
-                                <button class= "btn btn-outline-secondary" type= "button" > Valider </button>
-                            </div>
+                        <select name="bookSelect" class= "custom-select" id= "inputGroupSelect04" >
+                            <option selected > Choisissez votre livre </option>
+                            <?php foreach ($books as $book) { ?>
+                                <option value="<?php echo $book->getId(); ?>"><?php echo $book->getTitle();  ?></option> <?php } ?>
+                        </select>
+                        <div class= "input-group-append" >
+                            <button class= "btn btn-outline-secondary" type= "button" > Valider </button>
+                        </div>
+                    </div>
+                    <br/>
+                    <!--choix de l'image-->
+                    <div align="right">
+                        <form action="index.php?action=upload" method="post" enctype="multipart/form-data">
+
+                                <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                                <input type="file" name="image" id="image">
+                                <button class= "btn btn-outline-secondary" type= "submit" > Télécharger </button>
+                            <?php var_dump($_FILES) ?>
+                            <br/>
+                        </form>
+                    </div>
+
+                <form action="index.php?action=addchapter" method="post" enctype="multipart/form-data" >
+
                             <div class= "input-group">
-                                <label for="titre">Titre du chapitre : </label>
+                                <label for="titrechapitre">Titre du chapitre : </label>
                                 <input type="text" name="titrechapitre" id="titrechapitre" style="width: 200%;" placeholder="Chapitre x : titre"/>
                             </div>
                             <div class= "input-group">
                                 <label>Contenu</label>
-                                <textarea class="content" id="contenu" name="contenu" rows="15" placeholder="" ></textarea>
+                                <textarea class="content" id="content" name="content" rows="15" placeholder="" ></textarea>
                                 <br/><br/>
                             </div>
-                            <div class= "input-group" >
-                            <div class= "custom-file" >
-                                <input type= "file" name="image" class= "custom-file-input" id= "inputGroupFile04" >
-                                <label type="hidden" class= "custom-file-label" for= "inputGroupFile04" > Choisir votre image </label>
-                            </div>
-                            <div class= "input-group-append" >
-                                <button class= "btn btn-outline-secondary" type= "button" > Télécharger </button>
-                            </div>
-                            </div>
-                    </div>
-                    <br/>
+
                     <div align="center">
                         <input class="btn btn-success btn-md" type="submit" id="submit" name="modifier" value="Publier" />
-                    </div>
+                    </div> <br/>
                 </form>
+
                 <?php } ?>
 
                 <!-- Fin partie ajout chapitre-->
@@ -87,18 +94,20 @@
                  <a href="index.php?action=publier&amp;modifierchapitre=1">
                <input type="button" class="btn btn-secondary btn-lg btn-block" name="button" value="Modifier un chapitre"></a><br/><br/>
              <?php if (!empty($_GET['modifierchapitre'])){ ?>
-               <form action="" method="post">
+                 <form action="" method="post">
                  <div class= "input-group">
-                        <select name="chapterselect" class= "custom-select" id= "inputGroupSelect04" >
-                            <option selected > Choisissez votre chapitre</option>
-                            <?php foreach ($chapters as $chapter) { ?>
-                                <option value="<?php echo $chapter->getId(); ?>"><?php echo $chapter->getTitle(); ?></option> <?php } ?>
-                        </select>
-                        <div class= "input-group-append" >
-                            <input type="submit" class= "btn btn-outline-secondary" name="okchapter"  >
-                        </div> <br/><br/>
-                    </div>
-                   <?php if (isset($_POST['chapterselect'])) { ?>
+                     <select name="chapterselect" class= "custom-select" id= "inputGroupSelect04" >
+                         <option selected > Choisissez votre chapitre</option>
+                         <?php foreach ($chapters as $chapter) { ?>
+                             <option value="<?php echo $chapter->getId(); ?>"><?php echo $chapter->getTitle(); ?></option> <?php } ?>
+                     </select>
+                     <div class= "input-group-append" >
+                         <input type="submit" class= "btn btn-outline-secondary" name="okchapter"  >
+                     </div> <br/><br/>
+                 </div>
+                 </form>
+                 <?php if (isset($_POST['chapterselect'])) { ?>
+                <form action="index.php?action=modifchapter&amp;id=<?php echo $_POST['chapterselect']; ?>" method="post">
                     <div class= "input-group" >
                         <label for="titrechapter">Nouveau titre de chapitre : </label>
                         <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle(); ?>">
@@ -111,12 +120,12 @@
                     <div>
                     <h6>Mon image :</h6>
                     <br/>
-                    <img src="public/images/<?php echo $chapterselect->getImage(); ?>" style="width: 15%;">
+                    <img src="public/images/<?php echo $image=$chapterselect->getImage(); ?>" style="width: 15%;">
                     </div>
                     <br/>
                     <div class= "input-group" >
                         <div class= "custom-file" >
-                            <input type= "file" name="image" class= "custom-file-input" id= "inputGroupFile04" >
+                            <input type= "file" name="image" class= "custom-file-input" id="image" >
                             <label type="hidden" class= "custom-file-label" for= "inputGroupFile04" > Choisir une nouvelle image </label>
                         </div>
                         <div class= "input-group-append" >
