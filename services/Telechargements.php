@@ -12,35 +12,40 @@ class Telechargements extends DbConnect
     {
         $file = $_FILES ['image']['name'];
         $error = $_FILES ['image']['error'];
-        $destination = 'public/images/' . $file;
-        $extension = strtolower(strrchr($file, "."));
-        $extensions = array('.png', '.jpg', '.jpeg', '.gif', '.bmp');
+        $size = $_FILES['image']['size'];
+        $extension = strtolower(substr(strrchr($file, "."), 1));
+        $nouveaunom = time();
+        $destination = 'public/images/' . 'image' . $nouveaunom. '.'. $extension;
+        $extensions = array('png', 'jpg', 'jpeg', 'gif');
         $reptemp = $_FILES ['image']['tmp_name'];
+        $maxSize = 2097152;
 
-        if (in_array($extension, $extensions)) {
-            if (isset($_FILES) OR $error < 0) {
+        if( preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $file)){
+            echo "Nom de fichier non valide";
+        } else if ($size <= $maxSize) {
+            if (in_array($extension, $extensions)) {
                 if (move_uploaded_file($reptemp, $destination)) {
                     $db = $this->dbConnect();
                     $req = $db->prepare('INSERT INTO images (name,fileUrl) VALUES(?,?)');
                     $upload = $req->execute(array($file, $destination));
                     if ($upload == "success") {
-                        $_SESSION['success'] = "Votre image a été téléchargée avec succès";
-                        return $_SESSION['success'];
+                        echo "Votre image a été téléchargée avec succès";
+                        return $file;
                     } else {
-                        $_SESSION['error'] = "Un problème s'est produit pendant le téléchargement";
-                        return $_SESSION['error'];
+                        echo "Un problème s'est produit pendant le téléchargement";
                     }
+                }else {
+                    echo "Impossible d'enregistrer l'image dans le répertoire";
+                }
+                } else {
+                    echo "Votre image doit être au format png, jpg, jpeg ou gif";
                 }
             } else {
-                $_SESSION['error'] = "Une erreur s'est produite";
-                return $_SESSION['error'];
+                echo "Votre imagene doit pas dépasser 2Mo";
             }
-        } else {
-            $_SESSION['error'] = "Votre fichier n'est pas une image";
-            return $_SESSION['error'];
-        }
     }
 }
+
 
 
 
