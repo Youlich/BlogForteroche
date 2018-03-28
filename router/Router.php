@@ -59,7 +59,7 @@ class Router
                         throw new \Exception('Tous les champs ne sont pas remplis !');}
 
                 }elseif ($_GET['action'] == 'deletechapter') {
-                    if (!empty($_POST['titrechapitre'])) {
+                    if (!empty($_POST['titrechapter'])) {
                         $frontend = new Frontend();
                         $frontend->deleteChapter();
                     } else {
@@ -211,10 +211,7 @@ class Router
                     $backend = new Backend();
                     $backend->deconnectAdmin();
                 }
-                elseif ($_GET['action'] == 'upload') {
-                    $frontend = new Frontend();
-                    $frontend->upload();
-                }
+
             } else {
                 $frontend = new \controler\Frontend();
                 $frontend->accueil(); // fonction par défaut détaillée dans frontend.php
