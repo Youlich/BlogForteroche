@@ -60,7 +60,7 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM chapters WHERE id = :id");
-        $supp = $req->execute(array(':id' => $_POST['id']));
+        $supp = $req->execute(array(':id' => $_POST['ImageId']));
         if ($supp == "success") {
             header('location: Location: index.php?action=publier');
             $_SESSION['success'] = "Votre chapitre a bien été supprimé";

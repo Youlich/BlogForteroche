@@ -121,6 +121,8 @@ Class Frontend
           //      header('Location: index.php?action=publier' . "#endpage");
            //     exit();
           //  }
+        $imagemanager = new ImagesManager();
+        $image=$imagemanager->getImage($_POST['chapterselect']);
         $ModifManager = new ChapterManager();
         $modifLines = $ModifManager->ModifChapter();
         if ($modifLines === false) {
