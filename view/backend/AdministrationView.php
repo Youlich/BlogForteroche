@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('HeaderAdmin.php'); ?>
+<?php require('HeaderAdmin.php'); ?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -44,7 +44,7 @@
 </section>
 
 
-    <?php require ('Footer.php'); ?>
+    <?php require('Footer.php'); ?>
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('Header.php'); ?>
+<?php require('Header.php'); ?>
 <header class="bg-primary text-white">
 
     <div class="container text-center">

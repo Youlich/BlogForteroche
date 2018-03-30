@@ -17,8 +17,8 @@ class Router
             if (isset($_GET['action'])) {
 
                 if ($_GET['action'] == 'listBooks') {
-                    $frontend = new Frontend();
-                    $frontend->listBooks();
+                    $backend = new Backend();
+                    $backend->listBooks();
 
                 }elseif ($_GET['action'] == 'listChapters') { // c'est l'action par défaut , la fonction qui affiche tous les chapitres et qui est détaillée dans le frontend.php
                     $frontend = new \controler\Frontend();
@@ -46,30 +46,30 @@ class Router
 
                 }elseif ($_GET['action'] == 'addbook') {
                     if (!empty($_POST['titrelivre'])) {
-                        $frontend = new Frontend();
-                        $frontend->addBook($_POST['titrelivre']);
+                        $backend = new \controler\Backend();
+                        $backend->addBook($_POST['titrelivre']);
                     }else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');}
 
                 }elseif ($_GET['action'] == 'addchapter') {
                     if (!empty($_POST['titrechapitre'])) {
-                        $frontend = new Frontend();
-                        $frontend->addChapter($_POST['titrechapitre'], $_POST['content'], $_FILES['image']);
+                        $backend = new \controler\Backend();
+                        $backend->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $_FILES['image']);
                     }else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');}
 
                 }elseif ($_GET['action'] == 'deletechapter') {
                     if (!empty($_POST['titrechapter'])) {
-                        $frontend = new Frontend();
-                        $frontend->deleteChapter();
+                        $backend = new \controler\Backend();
+                        $backend->deleteChapter();
                     } else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');
                     }
 
                 }elseif ($_GET['action'] == 'modifchapter') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
-                            $frontend = new \controler\Frontend();
-                            $frontend->ModifChapter();
+                        $backend = new \controler\Backend();
+                        $backend->ModifChapter();
 
                     } else {
                         throw new \Exception('Aucun identifiant de chapitre envoyé');
@@ -85,8 +85,8 @@ class Router
                     }
 
                 } elseif ($_GET['action'] == 'listComments') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->listComments();
+                    $backend = new \controler\Backend();
+                    $backend->listComments();
 
                 } elseif ($_GET['action'] == 'listcommentsmembre') {
                     $frontend = new \controler\Frontend();
@@ -123,12 +123,16 @@ class Router
 
 
                 } elseif ($_GET['action'] == 'listmembres') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->listMembres();
+                    $backend = new \controler\Backend();
+                    $backend->listMembres();
 
                 } elseif ($_GET['action'] == 'publier') {
-                    $frontend = new Frontend();
-                    $frontend->Publier();
+                    $backend = new Backend();
+                    $backend->Publier();
+
+                }elseif ($_GET['action'] == 'selectbook') {
+                    $backend = new Backend();
+                    $backend->selectbook();
 
                 } elseif ($_GET['action'] == 'accueil') {
                     $frontend = new \controler\Frontend();
@@ -136,13 +140,13 @@ class Router
 
 
                 }   elseif ($_GET['action'] == 'connectMembre') {
-                    $backend = new \controler\Backend();
-                    $backend->connectMembre();
+                    $frontend = new \controler\Frontend();
+                    $frontend->connectMembre();
                 }
 
                 elseif ($_GET['action'] == 'deconnectMembre') {
-                    $backend = new \controler\Backend();
-                    $backend->deconnectMembre();
+                    $frontend = new \controler\Frontend();
+                    $frontend->deconnectMembre();
                 }
 
                 elseif ($_GET['action'] == 'authentificationAdmin') {
@@ -151,8 +155,8 @@ class Router
                 }
 
                 elseif ($_GET['action'] == 'addMembre') {
-                    $backend = new Backend();
-                    $backend->addMembre();
+                    $frontend = new \controler\Frontend();
+                    $frontend->addMembre();
                 }
 
                 elseif ($_GET['action'] =='suppMembre'){
@@ -188,23 +192,23 @@ class Router
                 }
 
                 elseif ($_GET['action'] == 'modifpseudo_mdp'){
-                    $backend = new Backend();
-                    $backend->modifPseudoMdp();
+                    $frontend = new \controler\Frontend();
+                    $frontend->modifPseudoMdp();
                 }
 
                 elseif ($_GET['action'] == 'modifemail'){
-                    $backend = new Backend();
-                    $backend->modifEmail();
+                    $frontend = new \controler\Frontend();
+                    $frontend->modifEmail();
                 }
 
                 elseif ($_GET['action'] == 'connectAdmin'){
-                    $frontend = new Frontend();
-                    $frontend->connectAdmin();
+                    $backend = new Backend();
+                    $backend->connectAdmin();
                 }
 
                 elseif ($_GET['action'] == 'administration'){
-                    $frontend = new Frontend();
-                    $frontend->administration();
+                    $backend = new Backend();
+                    $backend->administration();
                 }
 
                 elseif ($_GET['action'] == 'deconnectAdmin'){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('HeaderAdmin.php');?>
+<?php require('HeaderAdmin.php');?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -68,6 +68,6 @@ foreach ($comments as $comment)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 </body>
-<?php require ('Footer.php'); ?>
+<?php require('Footer.php'); ?>
 
 </html>
