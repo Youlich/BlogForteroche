@@ -36,12 +36,12 @@ class ChapterManager extends DbConnect
         return $chapterselect;
     }
 
-    public function AddChapter($title, $content, $file)
+    public function AddChapter($bookId, $title, $content, $file)
     {
         $ChapterAdd = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO chapters (chapterDate, title, content, image) VALUES (NOW(),?,?,?)');
-        $Addchapter = $req->execute(array($title, $content, $file));
+        $req = $db->prepare('INSERT INTO chapters (bookId, chapterDate, title, content, image) VALUES (NOW(),?,?,?)');
+        $Addchapter = $req->execute(array($bookId, $title, $content, $file));
         while ($data = $req->fetch()) {
             $chapteradd= new Chapter();
             $chapteradd->hydrate($data);
@@ -60,7 +60,7 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM chapters WHERE id = :id");
-        $supp = $req->execute(array(':id' => $_POST['ImageId']));
+        $supp = $req->execute(array(':id' => $_POST['ChapterId']));
         if ($supp == "success") {
             header('location: Location: index.php?action=publier');
             $_SESSION['success'] = "Votre chapitre a bien été supprimé";
@@ -75,10 +75,11 @@ class ChapterManager extends DbConnect
     public function ModifChapter()
     {
             $db = $this->dbConnect();
-            $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, imageId=:imageId WHERE id=:id LIMIT 1');
+            $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, image=:image WHERE id=:id LIMIT 1');
             $chapters->bindValue(':titrechapter', $_POST['titrechapter'], \PDO::PARAM_STR);
             $chapters->bindValue(':content', $_POST['content'], \PDO::PARAM_STR);
-            $chapters->bindValue(':imageId', $_POST['ImageId'], \PDO::PARAM_STR);
+            $chapters->bindValue(':image', $_POST['image'], \PDO::PARAM_STR);
+            $chapters->bindValue(':id', $_POST['ChapterId'], \PDO::PARAM_INT);
             $modifLines = $chapters->execute();
             while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
                 $chapter = new Chapter();

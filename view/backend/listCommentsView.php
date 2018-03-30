@@ -68,6 +68,6 @@ foreach ($comments as $comment)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 </body>
-<?php require('Footer.php'); ?>
+<?php include('view\frontend\Footer.php');?>
 
 </html>

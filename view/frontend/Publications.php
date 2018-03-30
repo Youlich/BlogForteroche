@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require ('HeaderAdmin.php');?>
+<?php require('HeaderAdmin.php');?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -43,23 +43,33 @@
             <input type="button" style="text-decoration: none;" class="btn btn-secondary btn-lg btn-block" name= "button" value="Publier un nouveau chapitre"></a><br/><br/></div>
     <?php if (!empty($_GET['publierchapitre'])){ ?>
         <!--choix du livre-->
-        <div class= "input-group" >
+        <form action="" method="post">
+            <div class= "input-group" >
             <select name="bookSelect" class= "custom-select" id= "inputGroupSelect04" >
                 <option selected > Choisissez votre livre </option>
                 <?php foreach ($books as $book) { ?>
                     <option value="<?php echo $book->getId(); ?>"><?php echo $book->getTitle();  ?></option> <?php } ?>
             </select>
             <div class= "input-group-append">
-                <button class= "btn btn-outline-secondary" type= "button" > Valider </button>
+                <input type="submit" class= "btn btn-outline-secondary" name="okbook">
             </div>
-        </div>
+            </div>
         <br/>
+        </form>
+        <?php if (isset($_POST['bookSelect'])) { ?>
         <!-- Saisie des nouvelles informations : titre, contenu-->
         <form action="index.php?action=addchapter" method="post" enctype="multipart/form-data" >
+            <div class= "input-group">
+                <input type="hidden" name="bookSelect" value="<?php echo $_POST['bookSelect'] ?>"
+                <label for="titrelivre">Titre du livre : </label>
+                <input type="text" name="titrelivre" id="titrelivre"  style="width: 200%;" value="<?php echo $bookSelect->getTitle(); ?>"/>
+            </div>
+            <br/><br/>
             <div class= "input-group">
                 <label for="titrechapitre">Titre du chapitre : </label>
                 <input type="text" name="titrechapitre" id="titrechapitre"  style="width: 200%;" placeholder="Chapitre x : titre"/>
             </div>
+            <br/><br/>
             <div class= "input-group">
                 <label>Contenu</label>
                 <textarea class="content" id="content" name="content" rows="15" placeholder="" ></textarea>
@@ -71,18 +81,11 @@
                 <input type="file" name="image" id="image">
                 <br/><br/>
             </div>
-            <div class= "input-group">
-                <label>Renommez votre image (sans l'extension) :&nbsp; </label>
-                <input type="text" name="newname">
-                <br/><br/>
-            </div>
             <div align="center">
                 <input class="btn btn-success btn-md" type="submit" id="submit" name="ajout" value="Publier" />
             </div> <br/>
         </form>
-
-
-
+        <?php } ?>
     <?php } ?>
     <br/>
     <!-- Fin partie ajout chapitre-->
@@ -107,6 +110,7 @@
         <?php if (isset($_POST['chapterselect'])) { ?>
             <form action="index.php?action=modifchapter&amp;id=<?php echo $_POST['chapterselect']; ?>" method="post" enctype="multipart/form-data">
                 <div class= "input-group" >
+                    <input type="hidden" name="ChapterId" value="<?php echo $_POST['chapterselect']; ?>">
                     <label for="titrechapter">Nouveau titre de chapitre : </label>
                     <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle(); ?>">
                 </div>
@@ -118,21 +122,13 @@
                 <div>
                     <h6>Mon image :</h6>
                     <br/>
-                    <input type="text" name="ImageId" value="<?php echo $chapterselect->getImageId(); ?>"> <!--Ne s'affiche pas-->
                     <img src="public/images/<?php echo $chapterselect->getImage(); ?>" style="width: 15%;">
-
                 </div>
                 <br/>
                  <!--téléchargement de l'image-->
                     <div class= "input-group">
                         <label >Choisissez votre nouvelle image :&nbsp; </label>
                         <input type="file" name="image" id="image"></div>
-                        <br/>
-                    <div class= "input-group">
-                        <label>Renommez votre image (sans l'extension) :&nbsp; </label>
-                        <input type="text" name="newname">
-                        <br/><br/>
-                    </div>
                 <br/><br/>
                 <div class="text-center">
                     <input class="btn btn-success btn-md" type="submit" id="submit" name="modifier" value="Publier" />
@@ -165,6 +161,7 @@
         <?php if (isset($_POST['chapterselect'])) { ?>
         <form action="index.php?action=deletechapter&amp;id=<?php echo $_POST['chapterselect']; ?>" method="post" enctype="multipart/form-data" >
             <div class= "input-group" >
+                <input type="hidden" name="ChapterId" value="<?php echo $_POST['chapterselect']; ?>">
                 <label for="titrechapter">Titre du chapitre : </label>
                 <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle(); ?>">
                 <input type="hidden" name="id" value="<?php echo $chapterselect->getId(); ?>">
@@ -177,7 +174,6 @@
             <div>
                 <h6>Mon image :</h6>
                 <br/>
-                <input type="text" name="ImageId" value="<?php echo $image->getImageId(); ?>"> <!--Ne s'affiche pas-->
                 <img src="public/images/<?php echo $chapterselect->getImage(); ?>" style="width: 15%;">
 
             </div>

@@ -44,7 +44,7 @@
 </section>
 
 
-    <?php require('Footer.php'); ?>
+<?php include('view\frontend\Footer.php');?>
 </body>
 </html>
 

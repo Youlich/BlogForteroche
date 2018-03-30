@@ -6,7 +6,6 @@ use model\CommentManager;
 use model\ImagesManager;
 use model\MembreManager;
 use model\ChapterManager;
-use services\Telechargement;
 use services\Telechargements;
 
 require_once('Autoload.php'); // Chargement des class
@@ -44,24 +43,6 @@ Class Frontend
         require('view/frontend/listChaptersView.php');
     }
 
-    public function listBooks ()
-    {
-        $bookManager = new BooksManager();
-        $books = $bookManager->getBooks();
-        require('view/frontend/Publications.php');
-    }
-
-    public function listComments ()
-    {
-        $commentManager = new CommentManager();
-        $comments = $commentManager->getComments();
-        //$bookManager = new BooksManager();
-        //$book = $bookManager->getBook();
-        //$chapterManager = new ChapterManager();
-        //$chapter = $chapterManager->getChapter();
-        require('view/frontend/listCommentsView.php');
-    }
-
     public function listCommentsMembre ()
     {
         $commentManager = new CommentManager();
@@ -70,88 +51,6 @@ Class Frontend
         require('view/frontend/ProfilMembreView.php');
     }
 
-    public function listMembres ()
-    {
-        $membreManager = new MembreManager();
-        $membres = $membreManager->getMembres();
-        require('view/frontend/listMembresView.php');
-    }
-
-    public function addBook ($title)
-    {
-        $BookManager = new BooksManager();
-        $addbook = $BookManager->AddBook($title);
-        if ($addbook === false) {
-            throw new \Exception('Impossible d\'ajouter le livre !');
-        } else {
-            header('Location: index.php?action=publier' . "#endpage");
-            exit();
-        }
-    }
-
-    public function addChapter ($title, $content, $file)
-    {
-            if (isset($_FILES['image']) AND (!empty($_FILES['image']['name']))){
-                $upload = new Telechargements();
-                $file = $upload->upload();
-            $ChapterManager = new ChapterManager();
-            $addchapter = $ChapterManager->AddChapter($title, $content, $file);
-            if ($addchapter === false) {
-                throw new \Exception('Impossible d\'ajouter le chapitre !');
-            } else {
-                header('Location: index.php?action=publier' . "#endpage");
-                exit();
-            }
-            } else {
-                echo "aucun fichier téléchargé";
-            }
-    }
-
-    public function ModifChapter ()
-    {
-           // $ModifManager = new ChapterManager();
-           // $modifLines = $ModifManager->ModifChapter();
-           // if (isset($_FILES['image']) AND (!empty($_FILES['image']['name']))){
-          //  $upload = new Telechargements();
-          //  $file = $upload->upload();
-         //   }
-         //   if ($modifLines === false) {
-         //       throw new \Exception('Impossible de modifier le chapitre !');
-          // } else {
-          //      header('Location: index.php?action=publier' . "#endpage");
-           //     exit();
-          //  }
-        $imagemanager = new ImagesManager();
-        $image=$imagemanager->getImage($_POST['chapterselect']);
-        $ModifManager = new ChapterManager();
-        $modifLines = $ModifManager->ModifChapter();
-        if ($modifLines === false) {
-            throw new \Exception('Impossible de modifier le chapitre !');
-        } else {
-            header('Location: index.php?action=publier' . "#endpage");
-            exit();
-        }
-    }
-
-    public function deleteChapter ()
-    {
-        $chapterManager = new ChapterManager();
-        $chapters = $chapterManager->getChapters();
-        if (isset($_POST['chapterselect'])) {
-            $chapterselect = $chapterManager->getChapter($_POST['chapterselect']);
-            $deleteManager = new ChapterManager();
-            $deleteChapter = $deleteManager->DeleteChapter();
-            if ($deleteChapter === false) {
-                throw new \Exception('Impossible de supprimer le chapitre !');
-            } else {
-                header('Location: index.php?action=publier' . "#endpage");;
-                exit();
-            }
-        } else {
-            $chapterselect = '';
-            require('view/frontend/Publications.php');
-        }
-    }
 
 
     public function addComment ($chapterId, $pseudo, $etat, $comment, $membreId) //ajout d'un commentaire dans un chapitre
@@ -204,6 +103,60 @@ Class Frontend
 
     }
 
+    /*Partie Membre*/
+
+    public function connectMembre()
+    {
+        $authMembreManager = new MembreManager();
+        $authMembre = $authMembreManager->AuthMembre();
+        require('view/frontend/AuthMembreView.php');
+    }
+    public function deconnectMembre()
+    {
+        session_destroy();
+        header('Location: index.php');
+        exit();
+    }
+
+    public function addMembre()
+    {
+        $newMembre = new MembreManager();
+        $addMembre = $newMembre->InscrMembre();
+        if ($addMembre === false) {
+            throw new \Exception('Impossible d\'ajouter le membre !');
+        } else {
+            require('view/frontend/InscriptionMembreView.php');
+        }
+
+    }
+
+    public function modifPseudoMdp()
+    {
+        $nbcomments = new MembreManager();
+        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
+        $newpseudo = new MembreManager();
+        $modifmembre = $newpseudo->modifPseudoMDP();
+        if ($modifmembre === false){
+            throw new \Exception('Impossible de modifier vos informations pseudo ou mot de passe !');
+        }
+        else {
+            require('view/frontend/ProfilMembreView.php');
+        }
+    }
+    public function modifEmail()
+    {
+        $nbcomments = new MembreManager();
+        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
+        $newemail = new MembreManager();
+        $modifmembre = $newemail->modifmail();
+        if ($modifmembre === false){
+            throw new \Exception('Impossible de modifier votre email !');
+        }
+        else {
+            require('view/frontend/ProfilMembreView.php');
+        }
+    }
+
     public function inscripMembre ()
     {
         require('view/frontend/InscriptionMembreView.php');
@@ -231,37 +184,6 @@ Class Frontend
     public function charte ()
     {
         require('view/frontend/charte.php');
-    }
-
-    public function connectAdmin ()
-    {
-        require('view/frontend/AuthAdminView.php');
-    }
-
-    public function administration ()
-    {
-        require('view/frontend/AdministrationView.php');
-    }
-
-    public function Publier ()
-    {
-        $bookManager = new BooksManager();
-        $books = $bookManager->getBooks();
-        $ImageManager = new ImagesManager();
-        if (isset($_POST['image'])) {
-            $image = $ImageManager->getImage($_POST['id']);
-        } else {
-            $image = '';
-        }
-        $chapterManager = new ChapterManager();
-        $chapters = $chapterManager->getChapters();
-        if (isset($_POST['chapterselect'])) {
-            $chapterselect = $chapterManager->getChapter($_POST['chapterselect']);
-            require('view/frontend/Publications.php');
-        } else {
-            $chapterselect = '';
-            require('view/frontend/Publications.php');
-        }
     }
 
 }

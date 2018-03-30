@@ -3,7 +3,7 @@
 
 <body>
 
-<form action="" method="post">
+<form action="index.php?action=BookSelect" method="post">
     <div class= "input-group" >
         <select name="bookSelect" class= "custom-select" id= "inputGroupSelect04" >
             <option selected > Choisissez votre livre </option>

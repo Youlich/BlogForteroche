@@ -7,11 +7,11 @@ use controler\Backend;
 use controler\Frontend;
 use services\Mail;
 
-session_start();
-class Router
+
+class RouterBackend
 {
-    private $routes;
-    public function diriger ()
+
+    public function dirigerBackend()
     {
         try {
             if (isset($_GET['action'])) {
@@ -20,47 +20,28 @@ class Router
                     $backend = new Backend();
                     $backend->listBooks();
 
-                }elseif ($_GET['action'] == 'listChapters') { // c'est l'action par défaut , la fonction qui affiche tous les chapitres et qui est détaillée dans le frontend.php
-                    $frontend = new \controler\Frontend();
-                    $frontend->listChapters();
-
-                } elseif ($_GET['action'] == 'chapter') { // action qui se réalise quand on clique sur le lien "lire la suite"
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        $frontend = new \controler\Frontend();
-                        $frontend->chapter();
-                    } else {
-                        throw new \Exception('Aucun identifiant de chapitre envoyé');
-                    }
-
-                } elseif ($_GET['action'] == 'addComment') {
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
-                            $frontend = new \controler\Frontend();
-                            $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
-                        } else {
-                            throw new \Exception('Tous les champs ne sont pas remplis !');
-                        }
-                    } else {
-                        throw new \Exception('Aucun identifiant de billet envoyé');
-                    }
+                }elseif ($_GET['action'] == 'bookSelect') {
+                    $backend = new Backend();
+                    $backend->bookSelect();
 
                 }elseif ($_GET['action'] == 'addbook') {
                     if (!empty($_POST['titrelivre'])) {
-                        $backend = new \controler\Backend();
+                        $backend = new Backend();
                         $backend->addBook($_POST['titrelivre']);
-                    }else {
-                        throw new \Exception('Tous les champs ne sont pas remplis !');}
+                    } else {
+                        throw new \Exception('Tous les champs ne sont pas remplis !');
+                    }
 
                 }elseif ($_GET['action'] == 'addchapter') {
                     if (!empty($_POST['titrechapitre'])) {
-                        $backend = new \controler\Backend();
+                        $backend = new Backend();
                         $backend->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $_FILES['image']);
                     }else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');}
 
                 }elseif ($_GET['action'] == 'deletechapter') {
                     if (!empty($_POST['titrechapter'])) {
-                        $backend = new \controler\Backend();
+                        $backend = new Backend();
                         $backend->deleteChapter();
                     } else {
                         throw new \Exception('Tous les champs ne sont pas remplis !');
@@ -68,42 +49,17 @@ class Router
 
                 }elseif ($_GET['action'] == 'modifchapter') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        $backend = new \controler\Backend();
+                        $backend = new Backend();
                         $backend->ModifChapter();
 
                     } else {
                         throw new \Exception('Aucun identifiant de chapitre envoyé');
                     }
 
-
-                } elseif ($_GET['action'] == 'Comment') {
-                    if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
-                        $frontend = new \controler\Frontend();
-                        $frontend->comment();
-                    } else {
-                        throw new \Exception('Aucun identifiant de commentaire envoyé');
-                    }
-
                 } elseif ($_GET['action'] == 'listComments') {
-                    $backend = new \controler\Backend();
+                    $backend = new Backend();
                     $backend->listComments();
 
-                } elseif ($_GET['action'] == 'listcommentsmembre') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->listCommentsMembre();
-
-
-                } elseif ($_GET['action'] == 'ModifComment') {
-                    if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
-                        if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
-                            $frontend = new \controler\Frontend();
-                            $frontend->ModifComment();
-                        } else {
-                            throw new \Exception('Tous les champs ne sont pas remplis !');
-                        }
-                    } else {
-                        throw new \Exception('Aucun identifiant de billet envoyé');
-                    }
 
                 }elseif ($_GET['action'] == 'approved') {
                     $backend = new Backend();
@@ -113,50 +69,17 @@ class Router
                     $backend = new Backend();
                     $backend->refusedComments();
 
-                }elseif ($_GET['action'] == 'deletecomment') {
-                    $frontend = new Frontend();
-                    $frontend->deleteComment();
-
-                }elseif ($_GET['action'] == 'signaled') {
-                    $frontend = new Frontend();
-                    $frontend->SignaledComment($_GET['id']);
-
-
                 } elseif ($_GET['action'] == 'listmembres') {
-                    $backend = new \controler\Backend();
+                    $backend = new Backend();
                     $backend->listMembres();
 
                 } elseif ($_GET['action'] == 'publier') {
                     $backend = new Backend();
                     $backend->Publier();
 
-                }elseif ($_GET['action'] == 'selectbook') {
+                } elseif ($_GET['action'] == 'authentificationAdmin') {
                     $backend = new Backend();
-                    $backend->selectbook();
-
-                } elseif ($_GET['action'] == 'accueil') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->accueil();
-
-
-                }   elseif ($_GET['action'] == 'connectMembre') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->connectMembre();
-                }
-
-                elseif ($_GET['action'] == 'deconnectMembre') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->deconnectMembre();
-                }
-
-                elseif ($_GET['action'] == 'authentificationAdmin') {
-                    $backend = new \controler\Backend();
                     $backend->connectAdmin();
-                }
-
-                elseif ($_GET['action'] == 'addMembre') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->addMembre();
                 }
 
                 elseif ($_GET['action'] =='suppMembre'){
@@ -164,41 +87,9 @@ class Router
                     $backend->suppMembre();
                 }
 
-                elseif ($_GET['action']=='profilMembre')
-                {
-                    $frontend = new Frontend();
-                    $frontend->profilMembre();
-                }
-
-                elseif ($_GET['action'] == 'inscripMembre')
-                {
-                        $frontend = new \controler\Frontend();
-                        $frontend->inscripMembre();
-                }
-
-                elseif ($_GET['action'] == 'mentionslegales') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->mentionslegales();
-                }
-
-                elseif ($_GET['action'] == 'charte') {
-                    $frontend = new \controler\Frontend();
-                    $frontend->charte();
-                }
-
                 elseif ($_GET['action'] == 'contact'){
                     $backend = new Mail();
                     $backend ->Contact();
-                }
-
-                elseif ($_GET['action'] == 'modifpseudo_mdp'){
-                    $frontend = new \controler\Frontend();
-                    $frontend->modifPseudoMdp();
-                }
-
-                elseif ($_GET['action'] == 'modifemail'){
-                    $frontend = new \controler\Frontend();
-                    $frontend->modifEmail();
                 }
 
                 elseif ($_GET['action'] == 'connectAdmin'){
@@ -217,7 +108,7 @@ class Router
                 }
 
             } else {
-                $frontend = new \controler\Frontend();
+                $frontend = new Frontend();
                 $frontend->accueil(); // fonction par défaut détaillée dans frontend.php
             }
         }

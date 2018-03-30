@@ -14,8 +14,7 @@ class Telechargements extends DbConnect
         $error = $_FILES ['image']['error'];
         $size = $_FILES['image']['size'];
         $extension = strtolower(substr(strrchr($file, "."), 1));
-        $newname = $_POST['newname'];
-        $destination = 'public/images/' . 'image' . $newname. '.'. $extension;
+        $destination = 'public/images/' . 'image' . $file. '.'. $extension;
         $extensions = array('png', 'jpg', 'jpeg', 'gif');
         $reptemp = $_FILES ['image']['tmp_name'];
         $maxSize = 2097152;
@@ -26,8 +25,8 @@ class Telechargements extends DbConnect
             if (in_array($extension, $extensions)) {
                 if (move_uploaded_file($reptemp, $destination)) {
                     $db = $this->dbConnect();
-                    $req = $db->prepare('INSERT INTO images (name,fileUrl,chapterId) VALUES(?,?,?)');
-                    $upload = $req->execute(array($file, $destination,$_POST['chapterselect']));
+                    $req = $db->prepare('INSERT INTO images (name,fileUrl) VALUES(?,?)');
+                    $upload = $req->execute(array($file, $destination));
                     if ($upload == "success") {
                         echo "Votre image a été téléchargée avec succès";
                         return $file;
