@@ -23,8 +23,68 @@ class ImagesManager extends DbConnect
             $image->hydrate($data);
         }
         return $image;
-
     }
 
+    function upload ()
+
+    {
+        $file = $_FILES ['image']['name'];
+        $error = $_FILES ['image']['error'];
+        $size = $_FILES['image']['size'];
+        $extension = strtolower(substr(strrchr($file, "."), 1));
+        $destination = 'public/images/' . 'image' . $file;
+        $extensions = array('png', 'jpg', 'jpeg', 'gif');
+        $reptemp = $_FILES ['image']['tmp_name'];
+        $maxSize = 2097152;
+        if( preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $file)){
+            echo "Nom de fichier non valide";
+        } else if ($size <= $maxSize) {
+            if (in_array($extension, $extensions)) {
+                if (move_uploaded_file($reptemp, $destination)) {
+                    $db = $this->dbConnect();
+                    $req = $db->prepare('INSERT INTO images (name,fileUrl,chapterId) VALUES(?,?,?)');
+                    $upload = $req->execute(array($file, $destination, $_POST['chapterselect']));
+                    if ($upload == "success") {
+                        echo "Votre image a été téléchargée avec succès";
+                        return $file;
+                    } else {
+                        echo "Un problème s'est produit pendant le téléchargement";
+                    }
+                }else {
+                    echo "Impossible d'enregistrer l'image dans le répertoire";
+                }
+            } else {
+                echo "Votre image doit être au format png, jpg, jpeg ou gif";
+            }
+        } else {
+            echo "Votre imagene doit pas dépasser 2Mo";
+        }
+    }
+
+
+    public function ModifImage($chapterId) // modifie l'image associée au chapitre dans la BDD
+    {
+        $file = $_FILES ['image']['name'];
+        $destination = 'public/images/' . 'image' . $file;
+        $db = $this->dbConnect();
+        $modifimage = $db->prepare('UPDATE images SET name=:name, fileUrl=:fileUrl WHERE chapterId=:chapterId LIMIT 1');
+        $modifimage->bindValue(':name', $file, \PDO::PARAM_INT);
+        $modifimage->bindValue(':fileUrl', $destination, \PDO::PARAM_STR);
+        $modifimage->bindValue(':chapterId', $chapterId, \PDO::PARAM_STR);
+        $modifLines = $modifimage->execute();
+        while ($data = $modifimage->fetch(\PDO::FETCH_ASSOC)) {
+            $image = new Images();
+            $image->hydrate($data);
+        }
+        if ($modifLines == "success") {
+            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            $_SESSION['success'] = "Votre commentaire a bien été modifié";
+            return $_SESSION['success'];
+        }else {
+            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            $_SESSION['error'] = "Votre commentaire n'a pas pu être modifié";
+            return $_SESSION['error'];
+        }
+    }
 }
 

@@ -1,9 +1,7 @@
 <?php
 namespace model;
 use entity\Chapter;
-
 require_once("DbConnect.php");
-
 /**
  * Class ChapterManager
  * @package model
@@ -23,7 +21,6 @@ class ChapterManager extends DbConnect
         }
         return $chapters;
     }
-
     public function getChapter ($chapterId) // affiche un chapitre selon son Id
     {
         $db = $this->dbConnect();
@@ -35,7 +32,6 @@ class ChapterManager extends DbConnect
         }
         return $chapterselect;
     }
-
     public function AddChapter($bookId, $title, $content, $file)
     {
         $ChapterAdd = array();
@@ -55,45 +51,32 @@ class ChapterManager extends DbConnect
             return $_SESSION['error'];
         }
     }
-
-    public function DeleteChapter()
+    public function DeleteChapter($chapter_id)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM chapters WHERE id = :id");
-        $supp = $req->execute(array(':id' => $_POST['ChapterId']));
-        if ($supp == "success") {
+        return $req->execute(array(':id' => $chapter_id));
+    }
+    public function ModifChapter()
+    {
+        $db = $this->dbConnect();
+        $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content WHERE id=:id LIMIT 1');
+        $chapters->bindValue(':titrechapter', $_POST['titrechapter'], \PDO::PARAM_STR);
+        $chapters->bindValue(':content', $_POST['content'], \PDO::PARAM_STR);
+        $chapters->bindValue(':id', $_POST['chapterselect'], \PDO::PARAM_INT);
+        $modifLines = $chapters->execute();
+        while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
+            $chapter = new Chapter();
+            $chapter->hydrate($data);
+        }
+        if ($modifLines == "success") {
             header('location: Location: index.php?action=publier');
-            $_SESSION['success'] = "Votre chapitre a bien été supprimé";
+            $_SESSION['success'] = "Votre chapitre a bien été modifié";
             return $_SESSION['success'];
         }else {
             header('location: Location: index.php?action=publier');
-            $_SESSION['error'] = "Votre chapitre n'a pas pu être supprimé";
+            $_SESSION['error'] = "Votre chapitre n'a pas pu être modifié";
             return $_SESSION['error'];
         }
-    }
-
-    public function ModifChapter()
-    {
-            $db = $this->dbConnect();
-            $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, image=:image WHERE id=:id LIMIT 1');
-            $chapters->bindValue(':titrechapter', $_POST['titrechapter'], \PDO::PARAM_STR);
-            $chapters->bindValue(':content', $_POST['content'], \PDO::PARAM_STR);
-            $chapters->bindValue(':image', $_POST['image'], \PDO::PARAM_STR);
-            $chapters->bindValue(':id', $_POST['ChapterId'], \PDO::PARAM_INT);
-            $modifLines = $chapters->execute();
-            while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
-                $chapter = new Chapter();
-                $chapter->hydrate($data);
-            }
-            if ($modifLines == "success") {
-                header('location: Location: index.php?action=publier');
-                $_SESSION['success'] = "Votre chapitre a bien été modifié";
-                return $_SESSION['success'];
-            }else {
-                header('location: Location: index.php?action=publier');
-                $_SESSION['error'] = "Votre chapitre n'a pas pu être modifié";
-                return $_SESSION['error'];
-            }
-
     }
 }

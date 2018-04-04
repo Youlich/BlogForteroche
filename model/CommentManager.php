@@ -101,8 +101,13 @@ class CommentManager extends DbConnect
             $addcomment[] = $commentadd;
         }
           if ($Addcomment == "success") {
+              $db = $this->dbConnect();
+              $newreq = $db->prepare('UPDATE membres SET nbcomms=:nbcomms WHERE id=$membreId');
+              $newreq->bindValue(':nbcomms',+1,\PDO::PARAM_INT);
+              $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a été bien reçu et apparaitra dans les plus brefs délais";
             return $_SESSION['success'];
+
           } else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté, retentez plus tard";
             return $_SESSION['error'];
@@ -169,6 +174,10 @@ class CommentManager extends DbConnect
         $supp = $req->execute(array(':id' => $_GET['id']));
         if ($supp == "success") {
             header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            $db = $this->dbConnect();
+            $newreq = $db->prepare('UPDATE membres SET nbcomms=:nbcomms WHERE id=$membreId');
+            $newreq->bindValue(':nbcomms',-1,\PDO::PARAM_INT);
+            $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
             return $_SESSION['success'];
         }else {

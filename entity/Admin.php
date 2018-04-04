@@ -8,6 +8,8 @@ class Admin
     private $id;
     private $pseudo;
     private $pass;
+    private $photo;
+    private $message;
 
 
     public function hydrate(array $donnees)
@@ -55,6 +57,39 @@ class Admin
     {
         $this->pseudo = $pseudo;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param mixed $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
+
 
     /**
      * @return mixed

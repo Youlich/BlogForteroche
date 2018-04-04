@@ -44,7 +44,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Blog</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#actualités">Bibliographie</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#bibliographie">Bibliographie</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
@@ -78,8 +78,8 @@
 
 
 <!-- Header -->
-<header class="masthead bg-primary text-white text-justify" id="masthead">
-    <div class="container">
+<section class="bg-primary text-white mb-0" id="masthead">
+        <section class="container">
         <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
 
                 if (isset($_SESSION['id'])){
@@ -93,21 +93,15 @@
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">
-            <img class="img-fluid mb-5 d-block mx-auto" src="public/images/forteroche.jpg" alt="Jean Forteroche" >
+            <img class="img-fluid mb-5 d-block mx-auto" src="<?php echo $admin->getPhoto(); ?>" alt="Jean Forteroche" >
         </p>
         <p class="message">
-            Je m'appelle Jean Forteroche, auteur de Roman mon métier, ma passion.<br/>
-            Je vis en Bretagne, dont je suis originaire.<br/>
-            Vous trouverez sur ce site :
-        <ol>
-            <li>- mon Blog avec les chapitres de mon nouveau roman. N'hésitez pas à donner votre avis.</li>
-            <li>- mes actualités : sur mes projets, scéances de dédicaces...</li>
-            <li>- une page contact si vous souhaitez me poser des questions complémentaires.</li><br/><br/>
-            <li><strong>  Bonne visite </strong></li>
-        </ol>
+            <?php echo $admin->getMessage(); ?>
         </p>
-    </div>
-</header>
+
+    </section>
+    <br/><br/>
+</section>
 
 
 <!-- Chapters Section -->
@@ -169,24 +163,21 @@
     </section>
 
 
-    <!-- Mes actualités Section -->
+    <!-- Bibliographie Section -->
 
-    <section class="bg-primary text-white mb-0" id="actualités">
+    <section class="bg-primary text-white mb-0" id="bibliographie">
         <div class="container">
             <h2 class="text-center text-uppercase text-white">Bibliographie</h2>
-            <hr class="star-light mb-5">
+            <hr class="star-light mb-8">
             <div class="row">
-                <div class="col-md-3 col-lg-3 ml-auto">
-                    <p class="lead">Billet simple pour l'Alaska</p>
+                <div class="col-md-4 col-lg-4 mr-auto">
+                    <img src="public/images/ChatNoir.png"/>
                 </div>
-                <div class="col-md-3 col-lg-3 mr-auto">
-                    <p class="lead">A la poursuite du chat noir</p>
+                <div class="col-md-4 col-lg-4 mr-auto">
+                    <img src="public/images/LongueMarche.png"/>
                 </div>
-                <div class="col-md-3 col-lg-3 mr-auto">
-                    <p class="lead">Vipère</p>
-                </div>
-                <div class="col-md-3 col-lg-3 mr-auto">
-                    <p class="lead">La chasse aux trésors</p>
+                <div class="col-md-4 col-lg-4 mr-auto">
+                    <img src="public/images/Indes.png"/>
                 </div>
             </div>
         </div>

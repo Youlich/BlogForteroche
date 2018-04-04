@@ -60,7 +60,7 @@
 
 
 </div>
-<?php include('view\frontend\Footer.php');?>
+<?php include('view/frontend/Footer.php');?>
 
 <!-- Scroll to Top Button -->
 <div class="scroll-to-top position-fixed ">

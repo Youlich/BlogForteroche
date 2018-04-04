@@ -22,6 +22,20 @@ class MembreManager extends DbConnect
         return $membres;
     }
 
+    public function getMembre($id) {
+
+
+        $db = $this->dbConnect();
+        $PDOStatement = $db->prepare('SELECT * FROM membres WHERE id= ? ');
+        $PDOStatement->execute(array($id));
+        while ($data = $PDOStatement->fetch(\PDO::FETCH_ASSOC)) {
+            $membre = new Membres();
+            $membre->hydrate($data);
+        }
+        return $membre;
+    }
+
+
     public function AuthMembre ()
     {
         // toutes les vérifications
@@ -195,7 +209,6 @@ class MembreManager extends DbConnect
             }
             }
     }
-
 
         public function CountCommentsMembre($membreId)
         {

@@ -3,6 +3,7 @@ namespace model;
 
 
 use services\Verifications;
+use entity\Admin;
 
 require_once("DbConnect.php");
 
@@ -39,5 +40,36 @@ class AdminManager extends DbConnect
                 return 'Merci de remplir tous les champs';
             }
         }
+    }
+
+    public function getAdmin($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT * FROM admin WHERE id=2');
+        while ($data = $req->fetch()) {
+            $admin = new Admin();
+            $admin->hydrate($data);
+        }
+        return $admin;
+    }
+
+    public function modifAdmin()
+    {
+        $db = $this->dbConnect();
+        $modif = $db->prepare('UPDATE admin SET photo=:image, message=:message WHERE id=:id');
+        $modif->bindValue(':image', $_POST['image']['name'], \PDO::PARAM_STR);
+        $modif->bindValue(':message', $_POST['message'], \PDO::PARAM_STR);
+        $modif->bindValue(':id', $_SESSION['id'], \PDO::PARAM_INT);
+        $res= $modif->execute();
+        while ($data = $modif->fetch(\PDO::FETCH_ASSOC)) {
+            $newmodif = new Admin();
+            $newmodif->hydrate($data);
+        } if ('$res == true') {
+        $_SESSION['success'] = "Bravo ! Votre profil a bien été modifié";
+        return $_SESSION['success'];
+        }else{
+            $_SESSSION['error'] = "Désolé ! votre profil n'a pas pu être modifié";
+            return $_SESSION['error'];
+            }
     }
 }

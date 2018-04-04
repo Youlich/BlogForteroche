@@ -32,8 +32,8 @@ foreach ($membres as $membre)
     <tr>
             <td><?php echo $membre->getPseudo();?></td>
 
-            <td><?php $date = $membre->getDateInscription();
-                echo $date = date('d.m.Y'); ?></td>
+            <td><?php $date = date_create($membre->getDateInscription());
+                echo date_format($date,'d.m.Y'); ?></td>
 
             <td><?php echo $membre->getEmail(); ?></td>
 
@@ -48,7 +48,7 @@ foreach ($membres as $membre)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 
-<?php include('view\frontend\Footer.php');?>
+<?php include('view/frontend/Footer.php');?>
 </body>
 </html>
 

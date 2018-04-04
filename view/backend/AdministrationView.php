@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
+                    <a href="index.php?action=profilAdmin" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
             </div>
         </div>
     </section>
@@ -44,7 +44,7 @@
 </section>
 
 
-<?php include('view\frontend\Footer.php');?>
+<?php include('view/frontend/Footer.php');?>
 </body>
 </html>
 

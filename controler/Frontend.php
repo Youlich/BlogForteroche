@@ -1,6 +1,7 @@
 <?php
 namespace controler;
 use entity\Chapter;
+use model\AdminManager;
 use model\BooksManager;
 use model\CommentManager;
 use model\ImagesManager;
@@ -33,7 +34,7 @@ Class Frontend
     {
         $membre = new MembreManager();
         $profil = $membre->getMembres();
-        require('view/frontend/ProfilMembreView.php');
+        require('view/frontend/ProfilMembre.php');
     }
 
     public function listChapters () // affiche l'ensemble des chapitres
@@ -48,7 +49,7 @@ Class Frontend
         $commentManager = new CommentManager();
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);// affiche le nb de commentaires par chapitre
-        require('view/frontend/ProfilMembreView.php');
+        require('view/frontend/ProfilMembre.php');
     }
 
 
@@ -129,6 +130,39 @@ Class Frontend
         }
 
     }
+    public function boutonmodifpseudomdp()
+    {
+        $membreManager = new MembreManager();
+        $membre = $membreManager->getMembre($_SESSION['id']);
+        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        require ('view/frontend/boutonmodifpseudomdp.php');
+    }
+
+    public function boutonmodifiermail()
+    {
+        $membreManager = new MembreManager();
+        $membre = $membreManager->getMembre($_SESSION['id']);
+        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        require ('view/frontend/boutonmodifiermail.php');
+    }
+    public function boutonafficherlescommentaires()
+    {
+        $membreManager = new MembreManager();
+        $membre = $membreManager->getMembre($_SESSION['id']);
+        $commentManager = new CommentManager();
+        $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
+        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        require ('view/frontend/boutonafficherlescommentaires.php');
+    }
+    public function boutonsupprimerprofil()
+    {
+        $membreManager = new MembreManager();
+        $membre = $membreManager->getMembre($_SESSION['id']);
+        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        require ('view/frontend/boutonsupprimerprofil.php');
+    }
+
+
 
     public function modifPseudoMdp()
     {
@@ -140,7 +174,7 @@ Class Frontend
             throw new \Exception('Impossible de modifier vos informations pseudo ou mot de passe !');
         }
         else {
-            require('view/frontend/ProfilMembreView.php');
+            require('view/frontend/ProfilMembre.php');
         }
     }
     public function modifEmail()
@@ -153,7 +187,7 @@ Class Frontend
             throw new \Exception('Impossible de modifier votre email !');
         }
         else {
-            require('view/frontend/ProfilMembreView.php');
+            require('view/frontend/ProfilMembre.php');
         }
     }
 
@@ -166,13 +200,16 @@ Class Frontend
     {
         $membreManager = new MembreManager();
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+        $membre=$membreManager->getMembre($_SESSION['id']);
         $commentManager = new CommentManager();
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
-        require('view/frontend/ProfilMembreView.php');
+        require('view/frontend/ProfilMembre.php');
     }
 
-    public function accueil ()
+    public function accueil()
     {
+        $adminmanager = new AdminManager();
+        $admin = $adminmanager->getAdmin('2');
         require('view/frontend/accueil.php');
     }
 

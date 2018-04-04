@@ -40,8 +40,8 @@ foreach ($comments as $comment)
                    <?php echo $comment->getMembrePseudo();?>
                </td>
                 <td>
-                    <?php $date = $comment->getCommentDate();
-                          echo $date = date('d.m.Y'); ?>
+                    <?php $date = date_create($comment->getCommentDate());
+                          echo date_format($date,'d.m.Y'); ?>
                 </td>
                 <td>
                     <?php echo $comment->getComment(); ?>
@@ -68,6 +68,6 @@ foreach ($comments as $comment)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 </body>
-<?php include('view\frontend\Footer.php');?>
+<?php include('view/frontend/Footer.php');?>
 
 </html>
