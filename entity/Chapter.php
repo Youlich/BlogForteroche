@@ -7,7 +7,6 @@ class Chapter
     private $title;
     private $content;
     private $resum;
-    private $image;
     private $nbcomms;
     private $bookId;
     private $imageId;
@@ -151,18 +150,5 @@ class Chapter
     {
         $this->resum = $resum;
     }
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-    /**
-     * @param mixed $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
+
 }
