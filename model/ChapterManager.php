@@ -13,7 +13,7 @@ class ChapterManager extends DbConnect
     {
         $chapters = array();
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, resum, bookId, content, image, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
+        $req = $db->query('SELECT id, title, resum, bookId, content, imageId, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
         while ($data = $req->fetch()) {
             $chapter = new Chapter();
             $chapter->hydrate($data);
@@ -24,7 +24,7 @@ class ChapterManager extends DbConnect
     public function getChapter ($chapterId) // affiche un chapitre selon son Id
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, resum, bookId, content, image,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
         $req->execute(array($chapterId));
         while ($data = $req->fetch()) {
             $chapterselect = new Chapter();
@@ -36,7 +36,7 @@ class ChapterManager extends DbConnect
     {
         $ChapterAdd = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO chapters (bookId, chapterDate, title, content, image) VALUES (NOW(),?,?,?)');
+        $req = $db->prepare('INSERT INTO chapters (bookId, chapterDate, title, content, imageId) VALUES (NOW(),?,?,?)');
         $Addchapter = $req->execute(array($bookId, $title, $content, $file));
         while ($data = $req->fetch()) {
             $chapteradd= new Chapter();
