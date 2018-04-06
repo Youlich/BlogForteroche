@@ -34,7 +34,7 @@
     <!-- Bouton suppression chapitre -->
     <a href="index.php?action=boutondeletechapter">
         <input type="button" class="btn btn-secondary btn-lg btn-block" name="button" value="Supprimer un chapitre"></a>
-    <br/><br/><br/>
+    <br/><br/>
 </div>
 
 

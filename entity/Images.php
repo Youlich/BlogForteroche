@@ -8,6 +8,7 @@ class Images
     private $id;
     private $name;
     private $fileUrl;
+    private $chapterId;
 
     public function hydrate(array $donnees)
     {
@@ -70,6 +71,22 @@ class Images
     public function setFileUrl ($fileUrl)
     {
         $this->fileUrl = $fileUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChapterId()
+    {
+        return $this->chapterId;
+    }
+
+    /**
+     * @param mixed $chapterId
+     */
+    public function setChapterId($chapterId)
+    {
+        $this->chapterId = $chapterId;
     }
 
 

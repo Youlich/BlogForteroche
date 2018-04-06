@@ -30,57 +30,64 @@
 
     <a href="index.php?action=boutonmodifchapter">
         <input type="button" class="btn btn-secondary btn-lg btn-block" name="button" value="Modifier un chapitre"></a>
-    <br/><br/>
-
-    <!--Choix du chapitre à modifier -->
-    <form action="" method="post">
-        <div class= "input-group">
-            <select name="chapterselect" class= "custom-select" id= "inputGroupSelect04" >
-                <option selected > <?php echo $selectedchapter ?></option>
-                <?php foreach ($chapters as $chapter) { ?>
-                    <option value="<?php echo $chapter->getId(); ?>"><?php echo $chapter->getTitle(); ?></option> <?php } ?>
-            </select>
-            <div class= "input-group-append" >
-                <input type="submit" class= "btn btn-outline-secondary" name="okchapter"  >
-            </div> <br/><br/>
-        </div>
-    </form>
-
-    <?php if (isset($_POST['chapterselect'])): ?>
-        <form action="index.php?action=modifchapter&amp;id=<?php echo $_POST['chapterselect']; ?>" method="post" enctype="multipart/form-data">
-            <div class= "input-group" >
-                <input type="hidden" name="chapterselect" value="<?php echo $_POST['chapterselect']; ?>">
-                <label for="titrechapter">Nouveau titre de chapitre : </label>
-                <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle();?>">
-            </div>
-            <br/>
-            <div class= "input-group" >
-                <label for="content">Contenu : </label>
-                <textarea class="content" id="content" name="content" rows="15"> <?php echo $chapterselect->getContent(); ?> </textarea>
-            </div> <br/><br/>
-            <div>
-                <h6>Mon image :</h6>
-                <br/>
-                <img src="<?php echo $image ?>" style="width: 15%;">
-                <?php echo $message ?>
-            </div>
-            <br/>
-            <!--téléchargement de l'image-->
-            <div class= "input-group">
-                <label >Choisissez votre nouvelle image :&nbsp; </label>
-                <input type="file" name="image" id="image"></div>
-            <br/><br/>
-            <div class="text-center">
-                <input class="btn btn-success btn-md" type="submit" id="submit" name="modifier" value="Publier" />
-            </div>
-        </form>
-    <?php endif; ?>
-    <br/>
+    <br/><br/><br/>
 
     <!-- Bouton suppression chapitre -->
     <a href="index.php?action=boutondeletechapter">
         <input type="button" class="btn btn-secondary btn-lg btn-block" name="button" value="Supprimer un chapitre"></a>
+    <br/><br/><br/>
+
+    <!--Bouton téléchargement de l'image-->
+    <a href="index.php?action=boutonaddimage">
+        <input type="button" style="text-decoration: none;" class="btn btn-secondary btn-lg btn-block" name= "button" value="Ajouter ou modifier une image"></a>
     <br/><br/>
+    <!--Sélection du livre et du chapitre-->
+
+    <form action="" method="post">
+        <div class= "input-group" >
+            <select name="bookSelect" class= "custom-select" id= "inputGroupSelect04" >
+                <option name="bookSelect" selected > <?php echo $selectedbook ?></option>
+                <?php foreach ($books as $book) { ?>
+                    <option value="<?php echo $book->getId(); ?>"><?php echo $book->getTitle();  ?></option> <?php } ?>
+            </select>
+        </div>
+        <br/>
+        <div class= "input-group" >
+            <select name="chapterselect" class= "custom-select" id= "inputGroupSelect04" >
+                <option name="chapterselect" selected > <?php echo $selectedchapter ?></option>
+                <?php foreach ($chapters as $chapter) { ?>
+                    <option value="<?php echo $chapter->getId(); ?>"><?php echo $chapter->getTitle(); ?></option> <?php } ?>
+            </select>
+        </div>
+        <br/>
+            <div align="center" >
+                <input type="submit" class= "btn btn-outline-secondary" name="ok">
+            </div>
+
+    </form>
+    <br/>
+
+    <?php if (isset($_POST['bookSelect']) AND ($_POST['chapterselect'])) { ?>
+
+        <!--Affichage de l'image existante-->
+
+        <img class="img-fluid mb-5 d-block mx-auto" src="<?php echo $image ?>" >
+
+        <!--téléchargement de l'image-->
+        <form action="index.php?action=upload" method="post" enctype="multipart/form-data" >
+            <input type="text" value="<?php echo $selectedbook ?>">
+            <input type="text" value="<?php echo $selectedchapter ?>">
+        <div class="input-group">
+            <label >Télécharger une image :&nbsp; </label>
+            <input type="file" name="image" id="image">
+            <br/><br/>
+        </div>
+            <div align="center">
+                <input class="btn btn-success btn-md" type="submit" id="submit" name="ajout" value="Publier" />
+            </div> <br/>
+        </form>
+            <br/>
+    <?php } ?>
 
 </div>
 
@@ -112,3 +119,4 @@
 <?php
 unset($_SESSION['error']);
 unset($_SESSION['success']);?>
+

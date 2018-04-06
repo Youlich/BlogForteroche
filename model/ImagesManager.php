@@ -13,6 +13,7 @@ require_once("DbConnect.php");
 
 class ImagesManager extends DbConnect
 {
+
     public function getImage($chapterId) // affiche l'image associé à un chapitre
     {
         $pdo = $this->dbConnect();
@@ -25,41 +26,71 @@ class ImagesManager extends DbConnect
         return $image;
     }
 
-    function upload ()
-
+    public function addImage()
     {
         $file = $_FILES ['image']['name'];
-        $error = $_FILES ['image']['error'];
+        $destination = 'public/images/'. $file;
+        if (isset($_POST['chapterselect'])){
+            $chapterId = $_POST['chapterselect'];
+        }
+        else{
+        $chapterId = $_POST['newchapterId'];}
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO images (name,fileUrl,chapterId) VALUES(?,?,?)');
+        $upload = $req->execute(array($file, $destination, $chapterId));
+        if ($upload == "success") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private function moveFile()
+    {
+        $file = $_FILES ['image']['name'];
         $size = $_FILES['image']['size'];
         $extension = strtolower(substr(strrchr($file, "."), 1));
-        $destination = 'public/images/' . 'image' . $file;
+        $destination = 'public/images/'. $file;
         $extensions = array('png', 'jpg', 'jpeg', 'gif');
         $reptemp = $_FILES ['image']['tmp_name'];
         $maxSize = 2097152;
         if( preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $file)){
-            echo "Nom de fichier non valide";
+            $string = "Nom de fichier non valide";
         } else if ($size <= $maxSize) {
             if (in_array($extension, $extensions)) {
                 if (move_uploaded_file($reptemp, $destination)) {
-                    $db = $this->dbConnect();
-                    $req = $db->prepare('INSERT INTO images (name,fileUrl,chapterId) VALUES(?,?,?)');
-                    $upload = $req->execute(array($file, $destination, $_POST['chapterselect']));
-                    if ($upload == "success") {
-                        echo "Votre image a été téléchargée avec succès";
-                        return $file;
-                    } else {
-                        echo "Un problème s'est produit pendant le téléchargement";
-                    }
+                    $upload = true;
                 }else {
-                    echo "Impossible d'enregistrer l'image dans le répertoire";
+                    $upload = false;
+                    $string = "Impossible d'enregistrer l'image dans le répertoire";
                 }
             } else {
-                echo "Votre image doit être au format png, jpg, jpeg ou gif";
+                $string = "Votre image doit être au format png, jpg, jpeg ou gif";
             }
         } else {
-            echo "Votre imagene doit pas dépasser 2Mo";
+            $string = "Votre image ne doit pas dépasser 2Mo";
         }
+        return [
+            'error' => $string,
+            'upload' => $upload,
+        ];
     }
+
+    public function upload($file)
+    {
+        $moveFile = $this->moveFile();
+        $addImage = false;
+        if ($moveFile['upload']) {
+            $addImage = $this->addImage();
+            $imageadd = new Images();
+            $imageId = $addImage->$imageadd->getId();
+        }
+        return [
+            'result' => $moveFile['upload'], // boolean
+            'error' => $moveFile['error'],
+            'imageId' => $imageId,
+        ];
+    }
+
 
 
     public function ModifImage($chapterId) // modifie l'image associée au chapitre dans la BDD

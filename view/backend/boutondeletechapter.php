@@ -41,7 +41,7 @@
     <form action="" method="post">
         <div class= "input-group">
             <select name="chapterselect" class= "custom-select" id= "inputGroupSelect04" >
-                <option selected > Choisissez votre chapitre</option>
+                <option selected > <?php echo $selectedchapter ?></option>
                 <?php foreach ($chapters as $chapter) { ?>
                     <option value="<?php echo $chapter->getId(); ?>"><?php echo $chapter->getTitle(); ?></option> <?php } ?>
             </select>
@@ -55,12 +55,7 @@
 
     <!--Formulaire de suppression-->
     <form action="index.php?action=deletechapter&id=<?php echo $chapterselect->getId(); ?>" method="post" enctype="multipart/form-data" >
-        <div class= "input-group" >
             <input type="hidden" name="ChapterId" value="<?php echo $chapterselect->getId(); ?>">
-            <label for="titrechapter">Titre du chapitre : </label>
-            <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle(); ?>">
-            <input type="hidden" name="id" value="<?php echo $chapterselect->getId(); ?>">
-        </div>
         <br/>
         <div class="input-group" >
             <label for="content">Contenu : </label>
@@ -77,11 +72,10 @@
         <div class="text-center">
             <input class="btn btn-success btn-md" type="submit" id="submit" name="modifier" value="Supprimer" />
         </div>
-</div>
-</form>
+    </form>
 
 <?php endif; ?>
-
+    <br/><br/>
 
 
 </div>

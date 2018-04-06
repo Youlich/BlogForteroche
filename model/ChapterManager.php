@@ -32,12 +32,12 @@ class ChapterManager extends DbConnect
         }
         return $chapterselect;
     }
-    public function AddChapter($bookId, $title, $content, $file)
+    public function AddChapter($bookId, $title, $content, $imageId)
     {
         $ChapterAdd = array();
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO chapters (bookId, chapterDate, title, content, imageId) VALUES (NOW(),?,?,?)');
-        $Addchapter = $req->execute(array($bookId, $title, $content, $file));
+        $req = $db->prepare('INSERT INTO chapters (bookId, chapterDate, title, content, imageId) VALUES (?,NOW(),?,?,?)');
+        $Addchapter = $req->execute(array($bookId, $title, $content, $imageId));
         while ($data = $req->fetch()) {
             $chapteradd= new Chapter();
             $chapteradd->hydrate($data);
@@ -46,6 +46,7 @@ class ChapterManager extends DbConnect
         if ($Addchapter == "success") {
             $_SESSION['success'] = "Votre nouveau chapitre a bien été créé";
             return $_SESSION['success'];
+
         } else {
             $_SESSION['error'] = "Votre nouveau chapitre n'a pas pu être créé, retentez plus tard";
             return $_SESSION['error'];
