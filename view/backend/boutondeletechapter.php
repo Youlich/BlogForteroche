@@ -54,8 +54,8 @@
     <?php if (isset($chapterselect)): ?>
 
     <!--Formulaire de suppression-->
-    <form action="index.php?action=deletechapter&id=<?php echo $chapterselect->getId(); ?>" method="post" enctype="multipart/form-data" >
-            <input type="hidden" name="ChapterId" value="<?php echo $chapterselect->getId(); ?>">
+    <form action="index.php?action=deletechapter" method="post" enctype="multipart/form-data" >
+            <input type="hidden" name="chapterselect" value="<?php echo $chapterselect->getId(); ?>">
         <br/>
         <div class="input-group" >
             <label for="content">Contenu : </label>
@@ -64,8 +64,8 @@
         <div>
             <h6>Mon image :</h6>
             <br/>
-            <img src="public/images/<?php echo $chapterselect->getImage(); ?>" style="width: 15%;">
-
+            <img src="<?php echo $image ?>" style="width: 15%;">
+            <?php echo $message ?>
         </div>
         <br/>
         <br/><br/>

@@ -1,19 +1,14 @@
 <?php
-
 namespace model;
 use entity\Images;
-
 require_once("DbConnect.php");
-
 /**
  * Class ImagesManager
  * @package model
  * Class qui permet la gestion des images : l'affichage des images et la suppression d'image dans la table Images
  */
-
 class ImagesManager extends DbConnect
 {
-
     public function getImage($chapterId) // affiche l'image associé à un chapitre
     {
         $pdo = $this->dbConnect();
@@ -25,7 +20,6 @@ class ImagesManager extends DbConnect
         }
         return $image;
     }
-
     public function addImage()
     {
         $file = $_FILES ['image']['name'];
@@ -34,12 +28,12 @@ class ImagesManager extends DbConnect
             $chapterId = $_POST['chapterselect'];
         }
         else{
-        $chapterId = $_POST['newchapterId'];}
+        $chapterId = '0' ;}
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO images (name,fileUrl,chapterId) VALUES(?,?,?)');
         $upload = $req->execute(array($file, $destination, $chapterId));
-        if ($upload == "success") {
-            return true;
+        if ($upload) {
+            return $db->lastInsertId();
         } else {
             return false;
         }
@@ -75,47 +69,53 @@ class ImagesManager extends DbConnect
         ];
     }
 
-    public function upload($file)
+        public function upload()
     {
+        $file = $_FILES['image'];
+        $imageId = null;
+        $moveFile['upload'] = true;
+        $moveFile['error'] = null;
         $moveFile = $this->moveFile();
-        $addImage = false;
         if ($moveFile['upload']) {
             $addImage = $this->addImage();
-            $imageadd = new Images();
-            $imageId = $addImage->$imageadd->getId();
+            $imageId = $addImage;
+            return [
+                'result' => $moveFile['upload'], // boolean
+                'error' => $moveFile['error'],
+                'imageId' => $imageId,
+            ];
         }
-        return [
-            'result' => $moveFile['upload'], // boolean
-            'error' => $moveFile['error'],
-            'imageId' => $imageId,
-        ];
     }
 
-
-
-    public function ModifImage($chapterId) // modifie l'image associée au chapitre dans la BDD
+    public function ModifchapterImage($chapterId)
     {
-        $file = $_FILES ['image']['name'];
-        $destination = 'public/images/' . 'image' . $file;
+        $file = $_FILES['image']['name'];
+        $destination = 'public/images/'. $file;
         $db = $this->dbConnect();
-        $modifimage = $db->prepare('UPDATE images SET name=:name, fileUrl=:fileUrl WHERE chapterId=:chapterId LIMIT 1');
-        $modifimage->bindValue(':name', $file, \PDO::PARAM_INT);
-        $modifimage->bindValue(':fileUrl', $destination, \PDO::PARAM_STR);
-        $modifimage->bindValue(':chapterId', $chapterId, \PDO::PARAM_STR);
+        $modifimage = $db->prepare('UPDATE images SET chapterId=:chapterId WHERE name=:name ');
+        $modifimage->bindValue(':name', $file, \PDO::PARAM_STR);
+        $modifimage->bindValue(':chapterId', $chapterId, \PDO::PARAM_INT);
         $modifLines = $modifimage->execute();
         while ($data = $modifimage->fetch(\PDO::FETCH_ASSOC)) {
             $image = new Images();
             $image->hydrate($data);
         }
-        if ($modifLines == "success") {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            $_SESSION['success'] = "Votre commentaire a bien été modifié";
-            return $_SESSION['success'];
+        if ($modifLines) {
+            return true;
         }else {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            $_SESSION['error'] = "Votre commentaire n'a pas pu être modifié";
-            return $_SESSION['error'];
+            return false;
+        }
+    }
+
+    public function DeleteImage($chapterId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM images WHERE chapterId = :id');
+        $deleteimage= $req->execute(array(':id' => $chapterId));
+        if ($deleteimage) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
-

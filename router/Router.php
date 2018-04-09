@@ -18,7 +18,7 @@ class Router
 
                 } elseif ($_GET['action'] == 'addchapter') {
                     $backend = new Backend();
-                    $backend->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $_FILES['image']);
+                    $backend->addChapter();
 
                 } elseif ($_GET['action'] == 'deletechapter') {
                     $backend = new Backend();
@@ -26,7 +26,7 @@ class Router
 
                 } elseif ($_GET['action'] == 'modifchapter') {
                     $backend = new Backend();
-                    $backend->ModifChapter();
+                    $backend->modifChapter();
 
                 } elseif ($_GET['action'] == 'listComments') {
                     $backend = new Backend();

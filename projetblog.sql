@@ -161,7 +161,7 @@ INSERT INTO `images` (`id`, `name`, `fileUrl`, `chapterId`) VALUES
 (46, 'blogging-3094920_1280.jpg', 'public/images/imageblogging-3094920_1280.jpg.jpg', NULL),
 (47, 'blogging-3094920_1280.jpg', 'public/images/imageblogging-3094920_1280.jpg.jpg', NULL),
 (48, 'blogging-3094923_1280.jpg', 'public/images/imageblogging-3094923_1280.jpg.jpg', NULL),
-(49, 'JulieTatibouet(1).jpg', 'public/images/imageJulieTatibouet(1).jpg.jpg', NULL),
+(49, 'JulieTatibouet(1).png', 'public/images/imageJulieTatibouet(1).jpg.jpg', NULL),
 (50, 'reve.jpg', 'public/images/imagereve.jpg', NULL);
 
 -- --------------------------------------------------------

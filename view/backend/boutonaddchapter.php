@@ -46,10 +46,10 @@
         <form action="index.php?action=addchapter" method="post" enctype="multipart/form-data" >
 
             <div class= "input-group">
-                <input type="hidden" name="bookSelect" value="<?php echo $selectedbook ?>">
+                <input type="hidden" name="bookSelect" value="<?php echo $bookId ?>">
                 <label for="titrechapitre">Titre du chapitre : </label>
                 <input type="text" name="titrechapitre" id="titrechapitre"  style="width: 200%;" placeholder="Chapitre x : titre"/>
-                <input type="hidden" name="newchapterId" value="<?php echo $newchapterId ?>">
+
             </div>
             <br/><br/>
             <div class= "input-group">

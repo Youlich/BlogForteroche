@@ -46,6 +46,17 @@
                 <i class="fa fa-chevron-up"></i>
             </a>
         </div>
+
+<div class="col-lg-4 mx-auto" align="center">
+    <?php if (isset($_SESSION['error'])){ ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error'];} ?></div>
+    <?php unset($_SESSION['error']);?></div>
+<div class="col-lg-4 mx-auto" align="center">
+    <?php if (isset($_SESSION['success'])){?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success'];} ?></div>
+</div>
 </body>
 <?php include('view/frontend/Footer.php');?>
 

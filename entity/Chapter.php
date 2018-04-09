@@ -30,35 +30,82 @@ class Chapter
     /**
      * @return mixed
      */
-    public function getBookId ()
+    public function getId()
     {
-        return $this->bookId;
+        return $this->id;
     }
 
     /**
-     * @param mixed $bookId
+     * @param mixed $id
      */
-    public function setBookId ($bookId)
+    public function setId($id)
     {
-        $this->bookId = $bookId;
+        $this->id = $id;
     }
 
     /**
      * @return mixed
      */
-    public function getImageId()
+    public function getChapterDate()
     {
-        return $this->imageId;
+        return $this->chapterDate;
     }
 
     /**
-     * @param mixed $imageId
+     * @param mixed $chapterDate
      */
-    public function setImageId ($imageId)
+    public function setChapterDate($chapterDate)
     {
-        $this->imageId = $imageId;
+        $this->chapterDate = $chapterDate;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResum()
+    {
+        return $this->resum;
+    }
+
+    /**
+     * @param mixed $resum
+     */
+    public function setResum($resum)
+    {
+        $this->resum = $resum;
+    }
 
     /**
      * @return mixed
@@ -79,76 +126,33 @@ class Chapter
     /**
      * @return mixed
      */
-
-    public function getId()
+    public function getBookId()
     {
-        return $this->id;
-    }
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+        return $this->bookId;
     }
 
     /**
-     * @return mixed
+     * @param mixed $bookId
      */
-    public function getChapterDate ()
+    public function setBookId($bookId)
     {
-        return $this->chapterDate;
-    }
-
-    /**
-     * @param mixed $chapterDate
-     */
-    public function setPostDate ($chapterDate)
-    {
-        $this->chapterDate = $chapterDate;
+        $this->bookId = $bookId;
     }
 
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getImageId()
     {
-        return $this->title;
+        return $this->imageId;
     }
+
     /**
-     * @param mixed $title
+     * @param mixed $imageId
      */
-    public function setTitle($title)
+    public function setImageId($imageId)
     {
-        $this->title = $title;
-    }
-    /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-    /**
-     * @param mixed $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-    /**
-     * @return mixed
-     */
-    public function getResum()
-    {
-        return $this->resum;
-    }
-    /**
-     * @param mixed $resum
-     */
-    public function setResum($resum)
-    {
-        $this->resum = $resum;
+        $this->imageId = $imageId;
     }
 
 }

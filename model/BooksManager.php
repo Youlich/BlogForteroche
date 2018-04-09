@@ -46,11 +46,9 @@ class BooksManager extends DbConnect
             $bookadd->setTitle($title);
         }
         if ($Addbook == "success") {
-            $_SESSION['success'] = "Votre nouveau titre de livre est bien créé";
-            return $_SESSION['success'];
+            return true;
         } else {
-            $_SESSION['error'] = "Votre nouveau titre de livre n'a pas pu être créé, retentez plus tard";
-            return $_SESSION['error'];
+            return false;
         }
     }
 
