@@ -81,4 +81,24 @@ class ChapterManager extends DbConnect
             return false;
         }
     }
+
+    public function ModifChaptersansUpload($id, $title, $content)
+    {
+        $db = $this->dbConnect();
+        $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content WHERE id=:id LIMIT 1');
+        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
+        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
+        $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $modifLines = $chapters->execute();
+        while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
+            $chapter = new Chapter();
+            $chapter->hydrate($data);
+        }
+        if ($modifLines) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
