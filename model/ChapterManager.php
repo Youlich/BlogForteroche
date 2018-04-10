@@ -50,7 +50,7 @@ class ChapterManager extends DbConnect
         $ChapterAdd = array();
         $db = $this->dbConnect();
         $req = $db->prepare("INSERT INTO chapters (bookId, chapterDate, title, content, imageId) VALUES (?,NOW(),?,?,?)");
-        $Addchapter = $req->execute(array($bookId, $title, $content, $imageId));
+        $Addchapter = $req->execute(array($bookId, nl2br(htmlspecialchars($title)), nl2br(htmlspecialchars($content)), $imageId));
         while ($data = $req->fetch()) {
             $chapteradd = new Chapter();
             $chapteradd->hydrate($data);
@@ -79,8 +79,8 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, imageId=:imageId WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
-        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
+        $chapters->bindValue(':titrechapter', nl2br(htmlspecialchars($title)), \PDO::PARAM_STR);
+        $chapters->bindValue(':content', nl2br(htmlspecialchars($content)), \PDO::PARAM_STR);
         $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
         $chapters->bindValue(':imageId', $imageId, \PDO::PARAM_INT);
         $modifLines = $chapters->execute();
@@ -99,8 +99,8 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
-        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
+        $chapters->bindValue(':titrechapter', nl2br(htmlspecialchars($title)), \PDO::PARAM_STR);
+        $chapters->bindValue(':content', nl2br(htmlspecialchars($content)), \PDO::PARAM_STR);
         $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
 
         $modifLines = $chapters->execute();

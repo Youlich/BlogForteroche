@@ -13,7 +13,7 @@ class Verifications extends DbConnect
     private $mdp;
 
 
-    public function verifPseudo($pseudo) //ne plus toucher ok pour inscription et connexion
+    public function verifPseudo($pseudo)
     {
         $this->pseudo = htmlspecialchars($pseudo);
         if (strlen($this->pseudo) > 3 AND strlen($this->pseudo) < 255) {
@@ -24,7 +24,7 @@ class Verifications extends DbConnect
         }
     }
 
-    public function verifLoginAdmin($login) //pour admin
+    public function verifLoginAdmin($login)
     {
         $this->pseudo = htmlspecialchars($login);
         if (strlen($this->login) > 3 AND strlen($this->login) < 255) {
@@ -38,14 +38,12 @@ class Verifications extends DbConnect
     /**
      * @return string
      */
-    public function verifPass ($pass) //ne plus toucher ok pour inscription et connexion
+    public function verifPass ($pass)
     {
         $this->pass = htmlspecialchars($pass);
         if (strlen($this->pass) > 6 AND strlen($this->pass) < 255) {
-
             return 'success';
         } else {
-
             $_SESSION['error'] = "Votre mot de passe doit être compris entre 6 et 255 caractères";
             return $_SESSION['error'];
         }
@@ -55,16 +53,14 @@ class Verifications extends DbConnect
     {
         $this->mdp = htmlspecialchars($mdp);
         if (strlen($this->mdp) > 6 AND strlen($this->mdp) < 255) {
-
             return 'success';
         } else {
-
             $_SESSION['error'] = "Votre mot de passe doit être compris entre 6 et 255 caractères";
             return $_SESSION['error'];
         }
     }
 
-    public function identiquePass ($newpass) //ne plus toucher ok pour inscription ne sert pas dans connexion
+    public function identiquePass ($newpass)
     {
         $this->newpass = htmlspecialchars($newpass);
         if ($this->pass == $this->newpass) {
@@ -75,7 +71,7 @@ class Verifications extends DbConnect
         }
     }
 
-    public function verifHachPass() //ne plus toucher ok pour connexion ne sert pas dans inscription
+    public function verifHachPass()
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
@@ -113,7 +109,7 @@ class Verifications extends DbConnect
         }
     }
 
-    public function verifEmail ($email) //ne plus toucher ok pour inscription ne sert pas pour connexion
+    public function verifEmail ($email)
     {
         $this->email = htmlspecialchars($email);
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -124,7 +120,7 @@ class Verifications extends DbConnect
         }
     }
 
-    public function pseudoExist($pseudo) //ne plus toucher ok pour inscription et connexion
+    public function pseudoExist($pseudo)
     {
         $this->pseudo = $pseudo;
         $db = $this->dbConnect();
@@ -154,7 +150,7 @@ class Verifications extends DbConnect
         }
     }
 
-    public function session() //ne plus toucher ok pour connexion ne sert pas dans inscription
+    public function session()
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, dateInscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
@@ -180,4 +176,6 @@ class Verifications extends DbConnect
 
         return 'success';
     }
+
+
 }

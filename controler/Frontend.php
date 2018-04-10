@@ -149,7 +149,8 @@ Class Frontend
         $newMembre = new MembreManager();
         $addMembre = $newMembre->InscrMembre();
         if ($addMembre === false) {
-            throw new \Exception('Impossible d\'ajouter le membre !');
+            $_SESSION['error'] = "Impossible d'ajouter le membre";
+            return $_SESSION['error'];
         } else {
             require('view/frontend/InscriptionMembreView.php');
         }

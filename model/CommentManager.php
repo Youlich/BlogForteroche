@@ -61,13 +61,10 @@ class CommentManager extends DbConnect
             $comment = new Comment();
             $comment->hydrate($data);
             $commentsMembre[] = $comment;
-
             $chapterManager = new ChapterManager();
             $chapter = $chapterManager->getChapter($comment->getChapterId());
-
             $bookManager = new BooksManager();
             $book = $bookManager->getBook($chapter->getBookId());
-
             $comment->setChapter($chapter);
             $comment->setBook($book);
 
@@ -94,7 +91,7 @@ class CommentManager extends DbConnect
         $addcomment = array();
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, statut, comment, commentDate, membreId) VALUES (?, ?, ?, ?, NOW(), ?)');
-        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  $comment, $membreId));
+        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  nl2br(htmlspecialchars($comment)), $membreId));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->hydrate($data);
@@ -122,7 +119,7 @@ class CommentManager extends DbConnect
         $comments->bindValue(':num', $_POST['numComm'], \PDO::PARAM_INT);
         $comments->bindValue(':membreId', $_SESSION['id'], \PDO::PARAM_STR);
         $comments->bindValue(':membrePseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
-        $comments->bindValue(':comment', $_POST['comment'], \PDO::PARAM_STR);
+        $comments->bindValue(':comment', nl2br(htmlspecialchars($_POST['comment'])), \PDO::PARAM_STR);
         $comments->bindValue(':statut', 'En attente', \PDO::PARAM_STR);
         $modifLines = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
