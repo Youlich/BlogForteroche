@@ -1,21 +1,21 @@
 <?php
 namespace controler;
-use entity\Chapter;
-use entity\Images;
+
 use model\AdminManager;
-use model\BooksManager;
 use model\CommentManager;
 use model\ImagesManager;
 use model\MembreManager;
 use model\ChapterManager;
-use services\Telechargements;
 
-require_once('Autoload.php'); // Chargement des class
+
+require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
+
 Class Frontend
 {
-    public function chapter () //affichage d'un chapitre
+    public function chapter () //affichage d'un chapitre : ChapterView.php
     {
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
         $chapterManager = new ChapterManager();
         $commentManager = new CommentManager();
         $imageManager = new ImagesManager();
@@ -25,30 +25,30 @@ Class Frontend
         $image = $imagechapter->getFileUrl();
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
         require('view/frontend/ChapterView.php');
+        } else {
+            $_SESSION['error'] = 'Aucun identifiant de chapitre envoyé';
+        }
     }
 
-    public function comment () // pour "modifier" un commentaire
+    public function comment () // pour "modifier" un commentaire : CommentView.php
     {
+        if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
         $commentManager = new CommentManager();
         $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
         require('view/frontend/CommentView.php');
-    }
-
-    public function membres ()
-    {
-        $membre = new MembreManager();
-        $profil = $membre->getMembres();
-        require('view/frontend/ProfilMembre.php');
+        } else {
+            $_SESSION['error'] = 'Aucun identifiant de commentaire envoyé';
+        }
     }
 
     public function listChapters () // affiche l'ensemble des chapitres
     {
         $chapterManager = new ChapterManager();
-        $chapters = $chapterManager->getChapters();// fonction qui affiche tous les chapitres
+        $chapters = $chapterManager->getChapters();
         require('view/frontend/listChaptersView.php');
     }
 
-    public function lastChapter()
+    public function lastChapter() //affiche le dernier chapitre créé par l'auteur
     {
         $chapterManager = new ChapterManager();
         $lastchapter = $chapterManager->getLastChapter();
@@ -62,7 +62,7 @@ Class Frontend
         require ('view/frontend/lastChapter.php');
     }
 
-    public function listCommentsMembre ()
+    public function listCommentsMembre () // tableau des commentaires dans le profil du membre
     {
         $commentManager = new CommentManager();
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
@@ -70,59 +70,63 @@ Class Frontend
         require('view/frontend/ProfilMembre.php');
     }
 
-
-
     public function addComment ($chapterId, $pseudo, $etat, $comment, $membreId) //ajout d'un commentaire dans un chapitre
     {
-        $CommentManager = new \model\CommentManager();
-        $addcomment = $CommentManager->AddComment($chapterId, $pseudo, $etat, $comment, $membreId);
-        if ($addcomment === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire !');
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
+        $CommentManager = new CommentManager();
+        $CommentManager->AddComment($chapterId, $pseudo, $etat, $comment, $membreId);
+            } else {
+                $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
+                header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+                exit();
+            }
         } else {
+            $_SESSION['error'] = 'Aucun identifiant de billet envoyé';
             header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
             exit();
         }
     }
 
-    public function ModifComment ()
+    public function ModifComment () // modification d'un commentaire dans le tableau des commentaires du profil du membre
     {
+        if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
+            if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
         $ModifManager = new CommentManager();
-        $modifLines = $ModifManager->ModifComment();
-        if ($modifLines) {
-            $_SESSION['success'] = 'Votre commentaire a bien été modifié';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+        $ModifManager->ModifComment();
+            } else {
+                $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
+                header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+                exit();
+            }
         } else {
-            $_SESSION['error'] = 'Impossible de modifier votre commentaire !';
+            $_SESSION['error'] = 'Aucun identifiant de billet envoyé';
             header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+            exit();
         }
     }
 
-    public function deleteComment ()
+    public function deleteComment ($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
     {
         $deleteManager = new CommentManager();
-        $deleteComment = $deleteManager->DeleteComment();
+        $deleteComment = $deleteManager->DeleteComment($membreId);
         $nbComms = $deleteManager->CountCommentsChapter($_GET['id']);
-        if ($deleteComment) {
-            $_SESSION['success'] = 'Votre commentaire a bien été supprimé';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
-        } else {
-            $_SESSION['error'] = 'Impossible de supprimer votre commentaire !';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
-        }
+
     }
 
-    public function SignaledComment ($commentId)
+    public function SignaledComment() //signaler un commentaire abusif
     {
         $signaleManager = new CommentManager();
-        $signaledComment = $signaleManager->SignaledComment();
-        if ($signaledComment) {
-            $_SESSION['success'] = 'Votre commentaire a bien été signalé à Jean Forteroche';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#nbcomments");
-        } else {
-            $_SESSION['error'] = 'Impossible de signaler ce commentaire !';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#nbcomments");
-        }
-
+        $signaledComment = $signaleManager->SignaledComment($_GET['id']);
+        $chapterManager = new ChapterManager();
+        $commentManager = new CommentManager();
+        $imageManager = new ImagesManager();
+        $chapter = $chapterManager->getChapter($_GET['id']);
+        $comments = $commentManager->getCommentsChapter($_GET['id']);
+        $imagechapter = $imageManager->getImage($_GET['id']);
+        $image = $imagechapter->getFileUrl();
+        $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
+        require ('view/frontend/ChapterView.php');
     }
 
     /*Partie Membre*/

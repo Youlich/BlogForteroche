@@ -40,7 +40,7 @@ class ImagesManager extends DbConnect
             return false;
         }
     }
-    private function moveFile()
+    public function moveFile()
     {
         $file = $_FILES ['image']['name'];
         $size = $_FILES['image']['size'];

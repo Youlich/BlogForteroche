@@ -101,16 +101,17 @@ class CommentManager extends DbConnect
             $addcomment[] = $commentadd;
         }
           if ($Addcomment == "success") {
-              $db = $this->dbConnect();
-              $newreq = $db->prepare('UPDATE membres SET nbcomms=:nbcomms WHERE id=$membreId');
-              $newreq->bindValue(':nbcomms',+1,\PDO::PARAM_INT);
-              $newreq->execute();
-            $_SESSION['success'] = "Votre commentaire a été bien reçu et apparaitra dans les plus brefs délais";
-            return $_SESSION['success'];
-
+             $db = $this->dbConnect();
+            $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms+1 WHERE id=:idmembre');
+              $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
+            $newreq->execute();
+            $_SESSION['success'] = "Votre commentaire a bien été ajouté";
+              header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+              exit();
           } else {
-            $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté, retentez plus tard";
-            return $_SESSION['error'];
+            $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté";
+              header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+              exit();
           }
     }
 
@@ -128,14 +129,14 @@ class CommentManager extends DbConnect
             $comment = new Comment();
             $comment->hydrate($data);
         }
-        if ($modifLines == "success") {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+        if ($modifLines) {
             $_SESSION['success'] = "Votre commentaire a bien été modifié";
-            return $_SESSION['success'];
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires'. "#endpage");
+            exit();
         }else {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            $_SESSION['error'] = "Votre commentaire n'a pas pu être modifié";
-            return $_SESSION['error'];
+            $_SESSION['error'] = "votre commentaire n'a pas pu être modifié";
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires'. "#endpage");
+            exit();
         }
     }
 
@@ -167,49 +168,41 @@ class CommentManager extends DbConnect
         return $modifEtat;
     }
 
-    public function DeleteComment()
+    public function DeleteComment($membreId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM comments WHERE id = :id");
         $supp = $req->execute(array(':id' => $_GET['id']));
         if ($supp == "success") {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
             $db = $this->dbConnect();
-            $newreq = $db->prepare('UPDATE membres SET nbcomms=:nbcomms WHERE id=$membreId');
-            $newreq->bindValue(':nbcomms',-1,\PDO::PARAM_INT);
+            $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms-1 WHERE id=:idmembre');
+            $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
-            return $_SESSION['success'];
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires');
         }else {
-            header('location: Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
+            header('Location: index.php?action=profilMembre&amp;afficher_commentaires');
             $_SESSION['error'] = "Votre commentaire n'a pas pu être supprimé";
-            return $_SESSION['error'];
+
         }
     }
 
-    public function SignaledComment()
+    public function SignaledComment($chapterid)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
-        $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
+        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE chapterId=:num LIMIT 1');
+        $comments->bindValue(':num', $chapterid, \PDO::PARAM_INT);
         $comments->bindValue(':statut', 'Alerte', \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
             $comment->hydrate($data);
-            var_dump($modifEtat);
-            die();
         }
-        if ($modifEtat == "success") {
-            header('location: Location: index.php?action=chapter');
+        if ($modifEtat) {
             $_SESSION['success'] = "Ce commentaire a bien été signalé à Jean Forteroche";
-            return $_SESSION['success'];
         }else {
-            header('location: Location: index.php?action=chapter');
-            $_SESSION['error'] = "Ce commentaire n'a pas pu être signalé, veuillez retenter plus tard";
-            return $_SESSION['error'];
+            $_SESSION['error'] = "Impossible de signaler ce commentaire";
         }
-
     }
     
     public function CountCommentsChapter($chapterId)

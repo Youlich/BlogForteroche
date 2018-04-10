@@ -53,23 +53,25 @@ class AdminManager extends DbConnect
         return $admin;
     }
 
-    public function modifAdmin()
+
+    public function modifmessageAdmin()
     {
         $db = $this->dbConnect();
-        $modif = $db->prepare('UPDATE admin SET photo=:image, message=:message WHERE id=:id');
-        $modif->bindValue(':image', $_POST['image']['name'], \PDO::PARAM_STR);
+        $modif = $db->prepare('UPDATE admin SET message=:message WHERE id=:id');
         $modif->bindValue(':message', $_POST['message'], \PDO::PARAM_STR);
         $modif->bindValue(':id', $_SESSION['id'], \PDO::PARAM_INT);
-        $res= $modif->execute();
+        $res = $modif->execute();
         while ($data = $modif->fetch(\PDO::FETCH_ASSOC)) {
             $newmodif = new Admin();
             $newmodif->hydrate($data);
-        } if ('$res == true') {
-        $_SESSION['success'] = "Bravo ! Votre profil a bien été modifié";
-        return $_SESSION['success'];
-        }else{
-            $_SESSSION['error'] = "Désolé ! votre profil n'a pas pu être modifié";
+        }
+        if ('$res == true') {
+            $_SESSION['success'] = "Bravo ! Votre message a bien été modifié";
+            return $_SESSION['success'];
+        } else {
+            $_SESSSION['error'] = "Désolé ! votre message n'a pas pu être modifié";
             return $_SESSION['error'];
-            }
+        }
     }
+
 }

@@ -46,6 +46,17 @@
                 <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Supprimer mon compte"</a>
         <br/><br/><br/>
 
+        <div id="endpage" class="col-lg-4 mx-auto" align="center">
+            <?php if (isset($_SESSION['error'])){ ?>
+            <div class="alert alert-danger">
+                <?php echo $_SESSION['error'];} ?></div>
+            <?php unset($_SESSION['error']);?></div>
+        <div class="col-lg-4 mx-auto" align="center">
+            <?php if (isset($_SESSION['success'])){?>
+            <div class="alert alert-success">
+                <?php echo $_SESSION['success'];} ?></div>
+        </div>
+
                 <div align="center">
                 <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>
                 </div>

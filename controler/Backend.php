@@ -1,16 +1,15 @@
 <?php
 namespace controler;
-use entity\Images;
-use entity\Membres;
 use model\AdminManager;
 use model\BooksManager;
 use model\ChapterManager;
 use model\CommentManager;
 use model\ImagesManager;
 use model\MembreManager;
-use services\Telechargements;
-require_once('Autoload.php'); // Chargement des class
+
+require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
+
 Class Backend
 {
     public function suppMembre()
@@ -38,17 +37,15 @@ Class Backend
         $admin = $adminmanager->getAdmin($_SESSION['id']);
         require('view/backend/profilAdmin.php');
     }
-    public function modifAdmin()
+    public function modifmessageAdmin()
     {
         $adminmanager = new AdminManager();
-        $admin = $adminmanager->modifAdmin();
-        if ($_POST['image']) {
-            $image = $_POST['image'];
-        } else {
-            $image = '';
-        }
+        $admin = $adminmanager->getAdmin($_SESSION['id']);
+        $adminmessage = $adminmanager->modifmessageAdmin();
         require('view/backend/profilAdmin.php');
     }
+
+
     public function approvedComments()
     {
         $approved = new CommentManager();
