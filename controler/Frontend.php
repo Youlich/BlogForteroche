@@ -1,6 +1,7 @@
 <?php
 namespace controler;
 use entity\Chapter;
+use entity\Images;
 use model\AdminManager;
 use model\BooksManager;
 use model\CommentManager;
@@ -15,10 +16,13 @@ Class Frontend
 {
     public function chapter () //affichage d'un chapitre
     {
-        $postManager = new ChapterManager();
+        $chapterManager = new ChapterManager();
         $commentManager = new CommentManager();
-        $chapter = $postManager->getChapter($_GET['id']);
+        $imageManager = new ImagesManager();
+        $chapter = $chapterManager->getChapter($_GET['id']);
         $comments = $commentManager->getCommentsChapter($_GET['id']);
+        $imagechapter = $imageManager->getImage($_GET['id']);
+        $image = $imagechapter->getFileUrl();
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
         require('view/frontend/ChapterView.php');
     }
@@ -40,8 +44,22 @@ Class Frontend
     public function listChapters () // affiche l'ensemble des chapitres
     {
         $chapterManager = new ChapterManager();
-        $chapters = $chapterManager->getChapters(); // fonction qui affiche tous les chapitres
+        $chapters = $chapterManager->getChapters();// fonction qui affiche tous les chapitres
         require('view/frontend/listChaptersView.php');
+    }
+
+    public function lastChapter()
+    {
+        $chapterManager = new ChapterManager();
+        $lastchapter = $chapterManager->getLastChapter();
+        $idlastchapter = $lastchapter->getId();
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getCommentsChapter($idlastchapter);
+        $imageManager = new ImagesManager();
+        $imagechapter = $imageManager->getImage($idlastchapter);
+        $image = $imagechapter->getFileUrl();
+        $nbComms = $commentManager->CountCommentsChapter($idlastchapter);
+        require ('view/frontend/lastChapter.php');
     }
 
     public function listCommentsMembre ()

@@ -89,10 +89,12 @@ class Router
                 } elseif ($_GET['action'] == 'deconnectAdmin') {
                     $backend = new Backend();
                     $backend->deconnectAdmin();
-                } elseif ($_GET['action'] == 'listChapters') { // c'est l'action par défaut , la fonction qui affiche tous les chapitres et qui est détaillée dans le frontend.php
+                } elseif ($_GET['action'] == 'listChapters') {
                     $frontend = new Frontend();
                     $frontend->listChapters();
-
+                }elseif ($_GET['action'] == 'lastchapter') {
+                    $frontend = new Frontend();
+                    $frontend->lastChapter();
                 } elseif ($_GET['action'] == 'chapter') { // action qui se réalise quand on clique sur le lien "lire la suite"
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $frontend = new Frontend();
@@ -100,7 +102,6 @@ class Router
                     } else {
                         throw new \Exception('Aucun identifiant de chapitre envoyé');
                     }
-
                 } elseif ($_GET['action'] == 'addComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {

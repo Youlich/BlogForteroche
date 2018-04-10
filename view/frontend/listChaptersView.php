@@ -1,16 +1,12 @@
 <?php ob_start(); ?>
 
-    <h5><em><a href="lastChapter.php" class= "info" >Voir mon dernier chapitre</a></em> </h5>
+    <h5><em><a href="index.php?action=lastchapter" class= "info" >Voir mon dernier chapitre</a></em> </h5>
 
 <?php
 foreach ($chapters as $chapter)
 {
     ?>
     <div class="post">
-        <p>
-        <div class="image">
-            <img src="public/images/<?php echo $chapter->getImage();?>" HSPACE="15"  />
-        </div>
 
         <h3>
             <?= htmlspecialchars($chapter->getTitle()) ?>

@@ -32,6 +32,19 @@ class ChapterManager extends DbConnect
         }
         return $chapterselect;
     }
+
+    public function getLastChapter()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY chapterDate DESC LIMIT 1');
+        $req->execute(array());
+        while ($data = $req->fetch()) {
+            $lastchapter = new Chapter();
+            $lastchapter->hydrate($data);
+        }
+        return $lastchapter;
+    }
+
     public function AddChapter($bookId, $title, $content, $imageId)
     {
         $ChapterAdd = array();

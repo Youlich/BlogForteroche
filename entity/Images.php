@@ -60,7 +60,7 @@ class Images
     /**
      * @return mixed
      */
-    public function getFileUrl ()
+    public function getFileUrl()
     {
         return $this->fileUrl;
     }

@@ -5,7 +5,7 @@
 
 <div class="post">
     <p>
-        <img src="public/images/<?php echo $chapter->getImage();?>" />
+        <img src="<?php echo $image?>" />
     </p>
     <h3><br>
         <?= htmlspecialchars($chapter->getTitle()) ?>

@@ -20,6 +20,8 @@ class ImagesManager extends DbConnect
         }
         return $image;
     }
+
+
     public function addImage()
     {
         $file = $_FILES ['image']['name'];
@@ -90,7 +92,6 @@ class ImagesManager extends DbConnect
     public function ModifchapterImage($chapterId)
     {
         $file = $_FILES['image']['name'];
-        $destination = 'public/images/'. $file;
         $db = $this->dbConnect();
         $modifimage = $db->prepare('UPDATE images SET chapterId=:chapterId WHERE name=:name ');
         $modifimage->bindValue(':name', $file, \PDO::PARAM_STR);
