@@ -80,7 +80,7 @@
 <!-- Header -->
 <section class="bg-primary text-white mb-0" id="masthead">
         <section class="container">
-        <h2 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
+        <h1 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
 
                 if (isset($_SESSION['id'])){
                     if(($_SESSION['id']) != '2')
@@ -89,7 +89,7 @@
                 }
             }
             ?>
-        </h2>
+        </h1>
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">
@@ -113,6 +113,8 @@
         <h3 class="titre roman text-center">Billet simple pour l'Alaska</h3>
         <br/>
         <em><h5 class="link text-center"><a href="index.php?action=listChapters&amp">Voir tous les chapitres</h5></em>
+        <br/>
+        <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">

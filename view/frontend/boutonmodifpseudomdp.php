@@ -22,16 +22,6 @@
 
     <h5> Mon email : <em><?php echo $_SESSION['email']?></em></h5><br/>
 
-    <div class="col-lg-4 mx-auto" align="center">
-        <?php if (isset($_SESSION['error'])){ ?>
-        <div class="alert alert-danger">
-            <?php echo $_SESSION['error'];} ?></div>
-        <?php unset($_SESSION['error']);?></div>
-        <div class="col-lg-4 mx-auto" align="center">
-        <?php if (isset($_SESSION['success'])){?>
-        <div class="alert alert-success">
-            <?php echo $_SESSION['success'];} ?></div>
-    </div>
 </div>
 <br/><br/>
 
@@ -60,8 +50,6 @@
                     </div>
                     <br/><br/>
                     <div align="center">
-                        <a href="" >J'ai oublié mon mot de passe</a>
-                        <br/><br/>
                         <input class="btn btn-success btn-md" type="submit" name="submit" value="Modifier" />
                     </div>
                 </div>
@@ -83,6 +71,7 @@
         <a href="index.php?action=boutonsupprimerprofil">
                 <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Supprimer mon compte"</a>
     <br/><br/><br/>
+
 
     <div align="center">
         <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>

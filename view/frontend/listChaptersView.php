@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-    <h5><em><a href="index.php?action=lastchapter" class= "info" >Voir mon dernier chapitre</a></em> </h5>
+<em><h5 class="link text-center"><a href="index.php?action=lastchapter" class= "info" >Voir mon dernier chapitre</a></em> </h5>
 
 <?php
 foreach ($chapters as $chapter)

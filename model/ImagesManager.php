@@ -9,7 +9,7 @@ require_once("DbConnect.php");
  */
 class ImagesManager extends DbConnect
 {
-    public function getImage($chapterId) // affiche l'image associé à un chapitre
+    public function getImage($chapterId) // affiche l'image associée à un chapitre
     {
         $pdo = $this->dbConnect();
         $PDOStatement = $pdo->prepare('SELECT * FROM images WHERE chapterId = ?');

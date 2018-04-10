@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<h4><em><a href="index.php?action=listChapters">Retour à la liste des chapitres</a></em></h4>
+<em><h5 class="link text-center"><a href="index.php?action=listChapters">Retour à la liste des chapitres</a></em> </h5>
 
 <div class="post">
     <p>
@@ -20,7 +20,7 @@
 
 <?php foreach ($comments as $comment)
 { ?>
-
+<div>
     <h5><em><?= htmlspecialchars($comment->getMembrePseudo()) ?></em></h5>
 
     <?php echo $comment->getCommentDate() ?>
@@ -29,7 +29,8 @@
 
     <br/>
     <a href="index.php?action=signaled&amp;id=<?php echo $lastchapter->getId() ?>"><input type="button" value="Signaler"></a>
-
+    </div>
+    <br/>
     <?php
 } ?>
 

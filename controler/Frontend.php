@@ -88,11 +88,12 @@ Class Frontend
     {
         $ModifManager = new CommentManager();
         $modifLines = $ModifManager->ModifComment();
-        if ($modifLines === false) {
-            throw new \Exception('Impossible de modifier le commentaire !');
+        if ($modifLines) {
+            $_SESSION['success'] = 'Votre commentaire a bien été modifié';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         } else {
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            exit();
+            $_SESSION['error'] = 'Impossible de modifier votre commentaire !';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         }
     }
 
@@ -101,11 +102,12 @@ Class Frontend
         $deleteManager = new CommentManager();
         $deleteComment = $deleteManager->DeleteComment();
         $nbComms = $deleteManager->CountCommentsChapter($_GET['id']);
-        if ($deleteComment === false) {
-            throw new \Exception('Impossible de supprimer le commentaire !');
+        if ($deleteComment) {
+            $_SESSION['success'] = 'Votre commentaire a bien été supprimé';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         } else {
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires=1');
-            exit();
+            $_SESSION['error'] = 'Impossible de supprimer votre commentaire !';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         }
     }
 
@@ -113,11 +115,12 @@ Class Frontend
     {
         $signaleManager = new CommentManager();
         $signaledComment = $signaleManager->SignaledComment();
-        if ($signaledComment === false) {
-            throw new \Exception('Impossible de signaler votre commentaire à Jean Forteroche, merci de retenter plus tard!');
+        if ($signaledComment) {
+            $_SESSION['success'] = 'Votre commentaire a bien été signalé à Jean Forteroche';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#nbcomments");
         } else {
-            header('Location: index.php?action=chapter&id=' . $commentId . "#nbcomments");
-            exit();
+            $_SESSION['error'] = 'Impossible de signaler ce commentaire !';
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#nbcomments");
         }
 
     }
@@ -180,18 +183,16 @@ Class Frontend
         require ('view/frontend/boutonsupprimerprofil.php');
     }
 
-
-
     public function modifPseudoMdp()
     {
         $nbcomments = new MembreManager();
         $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newpseudo = new MembreManager();
         $modifmembre = $newpseudo->modifPseudoMDP();
-        if ($modifmembre === false){
-            throw new \Exception('Impossible de modifier vos informations pseudo ou mot de passe !');
-        }
-        else {
+        if ($modifmembre === false) {
+            $_SESSION['error'] = 'Impossible de supprimer votre commentaire !';
+            header('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
+        } else {
             require('view/frontend/ProfilMembre.php');
         }
     }
@@ -201,11 +202,12 @@ Class Frontend
         $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newemail = new MembreManager();
         $modifmembre = $newemail->modifmail();
-        if ($modifmembre === false){
-            throw new \Exception('Impossible de modifier votre email !');
-        }
-        else {
-            require('view/frontend/ProfilMembre.php');
+        if ($modifmembre){
+            $_SESSION['success'] = 'Votre email a bien été modifiée';
+            header('Location: index.php?action=boutonmodifiermail' . "#endpage");
+        } else {
+            $_SESSION['error'] = 'Impossible de modifier votre mail !';
+            header('Location: index.php?action=boutonmodifiermail' . "#endpage");
         }
     }
 
