@@ -202,7 +202,7 @@ Class Backend
     {
         if($_FILES['image']['name']=='') {
             $ModifManager = new ChapterManager();
-            $modifLines = $ModifManager->ModifChapter($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], '0');
+            $modifLines = $ModifManager->ModifChaptersansUpload($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content']);
             if ($modifLines === false) {
                 $_SESSION['error'] = 'Impossible de modifier le chapitre !';
                 header('Location: index.php?action=boutonmodifchapter' . "#endpage");
@@ -238,15 +238,17 @@ Class Backend
             }
         }
     }
-  #  public function deleteChapter()
-   # {
-    #    $chapterManager = new ChapterManager();
-    #    $supp = $chapterManager->DeleteChapter($_POST['chapterselect']);
-     #   if ($supp === true) {
-      #      $_SESSION['success'] = "Votre chapitre a bien été supprimé";
-      #  }else {
-      #      $_SESSION['error'] = "Votre chapitre n'a pas pu être supprimé";
-      #  }
-     #   header('Location: index.php?action=boutondeletechapter' . "#endpage");
- #   }
+  public function deleteChapter()
+    {
+        $chapterManager = new ChapterManager();
+        $supp = $chapterManager->DeleteChapter($_POST['chapterselect']);
+        if ($supp === true) {
+            $imageManager = new ImagesManager();
+            $deleteImageassoc=$imageManager->DeleteImage($_POST['chapterselect']);
+            $_SESSION['success'] = "Votre chapitre a bien été supprimé";
+        }else {
+            $_SESSION['error'] = "Votre chapitre n'a pas pu être supprimé";
+        }
+        header('Location: index.php?action=boutondeletechapter' . "#endpage");
+   }
 }

@@ -111,7 +111,7 @@ class ImagesManager extends DbConnect
     {
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM images WHERE chapterId = :id');
-        $deleteimage= $req->execute(array(':id' => $chapterId));
+        $deleteimage = $req->execute(array(':id' => $chapterId));
         if ($deleteimage) {
             return true;
         } else {
