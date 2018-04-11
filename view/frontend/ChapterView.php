@@ -10,7 +10,7 @@
             <?= htmlspecialchars($chapter->getTitle()) ?>
         </h3><br>
         <p>
-            <?= nl2br(htmlspecialchars($chapter->getContent())) ?>
+            <?= htmlspecialchars($chapter->getContent()) ?>
         </p>
     </div>
     <br><br>
@@ -25,7 +25,7 @@
 
         <?php echo $comment->getCommentDate() ?>
         <br>
-        <p><h6>Votre commentaire : </h6><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+        <p><h6>Votre commentaire : </h6><?= htmlspecialchars($comment->getComment()) ?></p>
         <br/>
         <a href="index.php?action=signaled&amp;id=<?php echo $chapter->getId() ?>"><input type="button" value="Signaler"></a>
     </div>

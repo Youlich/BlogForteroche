@@ -97,19 +97,19 @@ class CommentManager extends DbConnect
             $commentadd->hydrate($data);
             $addcomment[] = $commentadd;
         }
-          if ($Addcomment == "success") {
-             $db = $this->dbConnect();
+        if ($Addcomment == "success") {
+            $db = $this->dbConnect();
             $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms+1 WHERE id=:idmembre');
-              $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
+            $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été ajouté";
-              header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
-              exit();
-          } else {
+            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+            exit();
+        } else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté";
-              header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
-              exit();
-          }
+            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+            exit();
+        }
     }
 
     public function ModifComment () // modifie le commentaire dans la BDD
@@ -119,7 +119,7 @@ class CommentManager extends DbConnect
         $comments->bindValue(':num', $_POST['numComm'], \PDO::PARAM_INT);
         $comments->bindValue(':membreId', $_SESSION['id'], \PDO::PARAM_STR);
         $comments->bindValue(':membrePseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
-        $comments->bindValue(':comment', nl2br(htmlspecialchars($_POST['comment'])), \PDO::PARAM_STR);
+        $comments->bindValue(':comment', htmlspecialchars($_POST['comment']), \PDO::PARAM_STR);
         $comments->bindValue(':statut', 'En attente', \PDO::PARAM_STR);
         $modifLines = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {

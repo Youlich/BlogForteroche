@@ -115,6 +115,7 @@
         <em><h5 class="link text-center"><a href="index.php?action=listChapters&amp">Voir tous les chapitres</h5></em>
         <br/>
         <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
+
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
@@ -170,7 +171,7 @@
     <section class="bg-primary text-white mb-0" id="bibliographie">
         <div class="container">
             <h2 class="text-center text-uppercase text-white">Bibliographie</h2>
-            <hr class="star-light mb-8">
+            <hr class="star-light mb-8"> <br/>
             <div class="row">
                 <div class="col-md-4 col-lg-4 mr-auto">
                     <img src="public/images/ChatNoir.png"/>

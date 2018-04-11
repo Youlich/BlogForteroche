@@ -43,7 +43,7 @@ class BooksManager extends DbConnect
         $Addbook = $req->execute(array($title));
         while ($data = $req->fetch()) {
             $bookadd= new Books();
-            $bookadd->setTitle(nl2br(htmlspecialchars($title)));
+            $bookadd->setTitle(htmlspecialchars($title));
         }
         if ($Addbook == "success") {
             return true;

@@ -96,7 +96,7 @@ class MembreManager extends DbConnect
                                         $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                                         // Insertion
                                         $db = $this->Dbconnect();
-                                        $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription) VALUES (:pseudo, :pass, :email, CURDATE())');
+                                        $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription, nbcomms) VALUES (:pseudo, :pass, :email, CURDATE(),0)');
                                         $req->execute(array(
                                             'pseudo' => $_POST['pseudo'],
                                             'pass' => $pass_hache,

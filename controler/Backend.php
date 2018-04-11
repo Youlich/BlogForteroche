@@ -158,9 +158,11 @@ Class Backend
 
     public function addChapter()
     {
+        $chaptermanager = new ChapterManager();
+        $resum = $chaptermanager->resumContent($_POST['content']);
         if($_FILES['image']['name']=='') {
             $Chaptersansimage = new ChapterManager();
-            $addchaptersansimage = $Chaptersansimage->AddChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], '0');
+            $addchaptersansimage = $Chaptersansimage->AddChapter($_POST['bookSelect'], htmlspecialchars($_POST['titrechapitre']), htmlspecialchars($_POST['content']), $resum, '0');
             if ($addchaptersansimage === false) {
                 $_SESSION['error'] = 'Impossible d\'ajouter votre chapitre !';
                 header('Location: index.php?action=boutonaddchapter' . "#endpage");
@@ -173,7 +175,7 @@ Class Backend
                 $uploadResult = $imagemanager->upload();
                 if ($uploadResult['result']) {
                     $ChapterManager = new ChapterManager();
-                    $Addchapter = $ChapterManager->AddChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $uploadResult['imageId']);
+                    $Addchapter = $ChapterManager->AddChapter($_POST['bookSelect'], htmlspecialchars($_POST['titrechapitre']), htmlspecialchars($_POST['content']), $resum, $uploadResult['imageId']);
                     if ($Addchapter === false) {
                         $_SESSION['error'] = 'Votre chapitre n\'a pas pu être ajouté';
                         header('Location: index.php?action=boutonaddchapter' . "#endpage");
@@ -197,9 +199,11 @@ Class Backend
 
     public function modifChapter()
     {
+        $chaptermanager = new ChapterManager();
+        $resum = $chaptermanager->resumContent($_POST['content']);
         if($_FILES['image']['name']=='') {
             $ModifManager = new ChapterManager();
-            $modifLines = $ModifManager->ModifChaptersansUpload($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content']);
+            $modifLines = $ModifManager->ModifChaptersansUpload($_POST['chapterselect'], htmlspecialchars($_POST['titrechapter']), htmlspecialchars($_POST['content']), $resum);
             if ($modifLines === false) {
                 $_SESSION['error'] = 'Impossible de modifier le chapitre !';
                 header('Location: index.php?action=boutonmodifchapter' . "#endpage");
@@ -212,7 +216,7 @@ Class Backend
             $uploadResult = $imagemanager->upload();
             if ($uploadResult['result']) {
                 $ModifManager = new ChapterManager();
-                $modifLines = $ModifManager->ModifChapter($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], $uploadResult['imageId']);
+                $modifLines = $ModifManager->ModifChapter($_POST['chapterselect'], htmlspecialchars($_POST['titrechapter']), htmlspecialchars($_POST['content']), $resum, $uploadResult['imageId']);
                 $_SESSION['success'] = 'Votre chapitre a bien été modifié';
                 header('Location: index.php?action=boutonmodifchapter' . "#endpage");
                 if ($modifLines === false) {

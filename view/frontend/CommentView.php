@@ -17,7 +17,7 @@
     </div>
     <div>
         <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"><?php echo $comment->getComment()?></textarea>
+        <textarea id="comment" name="comment"><?php echo htmlspecialchars($comment->getComment())?></textarea>
     </div>
     <div>
         <input type="submit" class="btn btn-success btn-sm"/>

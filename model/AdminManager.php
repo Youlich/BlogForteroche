@@ -1,7 +1,6 @@
 <?php
 namespace model;
 
-
 use services\Verifications;
 use entity\Admin;
 
@@ -58,7 +57,7 @@ class AdminManager extends DbConnect
     {
         $db = $this->dbConnect();
         $modif = $db->prepare('UPDATE admin SET message=:message WHERE id=:id');
-        $modif->bindValue(':message', $_POST['message'], \PDO::PARAM_STR);
+        $modif->bindValue(':message', htmlspecialchars($_POST['message']), \PDO::PARAM_STR);
         $modif->bindValue(':id', $_SESSION['id'], \PDO::PARAM_INT);
         $res = $modif->execute();
         while ($data = $modif->fetch(\PDO::FETCH_ASSOC)) {

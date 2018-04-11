@@ -1,6 +1,7 @@
 <?php
 namespace controler;
 
+use entity\Chapter;
 use model\AdminManager;
 use model\CommentManager;
 use model\ImagesManager;
@@ -18,11 +19,16 @@ Class Frontend
         if (isset($_GET['id']) && $_GET['id'] > 0) {
         $chapterManager = new ChapterManager();
         $commentManager = new CommentManager();
-        $imageManager = new ImagesManager();
+
         $chapter = $chapterManager->getChapter($_GET['id']);
+        $imageexist = $chapter->getImageId();
+            if ($imageexist != '0') {
+                $imageManager = new ImagesManager();
+                $imagechapter = $imageManager->getImage($_GET['id']);
+                $image = $imagechapter->getFileUrl();
+            } else {
+                $image = ''; }
         $comments = $commentManager->getCommentsChapter($_GET['id']);
-        $imagechapter = $imageManager->getImage($_GET['id']);
-        $image = $imagechapter->getFileUrl();
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);
         require('view/frontend/ChapterView.php');
         } else {

@@ -10,7 +10,7 @@
         <?= htmlspecialchars($lastchapter->getTitle()) ?>
     </h3><br>
     <p>
-        <?= nl2br(htmlspecialchars($lastchapter->getContent())) ?>
+        <?= htmlspecialchars($lastchapter->getContent()) ?>
     </p>
 </div>
 <br><br>
@@ -23,9 +23,9 @@
 <div>
     <h5><em><?= htmlspecialchars($comment->getMembrePseudo()) ?></em></h5>
 
-    <?php echo $comment->getCommentDate() ?>
+    <?php echo htmlspecialchars($comment->getCommentDate()) ?>
     <br>
-    <p><h6>Votre commentaire : </h6><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+    <p><h6>Votre commentaire : </h6><?= htmlspecialchars($comment->getComment()) ?></p>
 
     <br/>
     <a href="index.php?action=signaled&amp;id=<?php echo $lastchapter->getId() ?>"><input type="button" value="Signaler"></a>
