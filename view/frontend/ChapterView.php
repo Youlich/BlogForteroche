@@ -7,10 +7,10 @@
             <img src="<?php echo $image?>" />
         </p>
         <h3><br>
-            <?= htmlspecialchars($chapter->getTitle()) ?>
+            <?= $chapter->getTitle() ?>
         </h3><br>
         <p>
-            <?= htmlspecialchars($chapter->getContent()) ?>
+            <?= $chapter->getContent() ?>
         </p>
     </div>
     <br><br>

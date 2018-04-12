@@ -10,6 +10,7 @@ class Chapter
     private $nbcomms;
     private $bookId;
     private $imageId;
+    private $image;
 
 
     public function hydrate(array $donnees)
@@ -154,5 +155,27 @@ class Chapter
     {
         $this->imageId = $imageId;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage() {
+        return $this->image;
+    }
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image) {
+        $this->image = $image;
+    }
+    public function getImageFileUrl()
+    {
+        $image = $this->getImage();
+        if($image) {
+            return $image->getFileUrl();
+        }
+        return false;
+    }
+
 
 }

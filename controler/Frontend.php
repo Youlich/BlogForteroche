@@ -3,6 +3,7 @@ namespace controler;
 
 use entity\Chapter;
 use model\AdminManager;
+use model\BooksManager;
 use model\CommentManager;
 use model\ImagesManager;
 use model\MembreManager;
@@ -14,16 +15,35 @@ require_once('Autoload.php'); // Chargement des classes
 
 Class Frontend
 {
+
+    private $membreManager;
+    private $adminManager;
+    private $commentManager;
+    private $chapterManager;
+    private $booksManager;
+    private $imagesManager;
+
+
+    public function __construct($membreManager, $adminManager, $commentManager, $chapterManager, $booksManager, $imagesManager) {
+        $this->membreManager = $membreManager;
+        $this->adminManager = $adminManager;
+        $this->commentManager = $commentManager;
+        $this->chapterManager = $chapterManager;
+        $this->booksManager = $booksManager;
+        $this->imagesManager = $imagesManager;
+    }
+
+
     public function chapter () //affichage d'un chapitre : ChapterView.php
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-        $chapterManager = new ChapterManager();
-        $commentManager = new CommentManager();
+        $chapterManager = $this->chapterManager;
+        $commentManager = $this->commentManager;
 
         $chapter = $chapterManager->getChapter($_GET['id']);
         $imageexist = $chapter->getImageId();
             if ($imageexist != '0') {
-                $imageManager = new ImagesManager();
+                $imageManager = $this->imagesManager;
                 $imagechapter = $imageManager->getImage($_GET['id']);
                 $image = $imagechapter->getFileUrl();
             } else {
@@ -39,7 +59,7 @@ Class Frontend
     public function comment () // pour "modifier" un commentaire : CommentView.php
     {
         if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
-        $commentManager = new CommentManager();
+        $commentManager = $this->commentManager;
         $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
         require('view/frontend/CommentView.php');
         } else {
@@ -49,19 +69,19 @@ Class Frontend
 
     public function listChapters () // affiche l'ensemble des chapitres
     {
-        $chapterManager = new ChapterManager();
+        $chapterManager = $this->chapterManager;
         $chapters = $chapterManager->getChapters();
         require('view/frontend/listChaptersView.php');
     }
 
     public function lastChapter() //affiche le dernier chapitre créé par l'auteur
     {
-        $chapterManager = new ChapterManager();
+        $chapterManager = $this->chapterManager;
         $lastchapter = $chapterManager->getLastChapter();
         $idlastchapter = $lastchapter->getId();
-        $commentManager = new CommentManager();
+        $commentManager = $this->commentManager;
         $comments = $commentManager->getCommentsChapter($idlastchapter);
-        $imageManager = new ImagesManager();
+        $imageManager = $this->imagesManager;
         $imagechapter = $imageManager->getImage($idlastchapter);
         $image = $imagechapter->getFileUrl();
         $nbComms = $commentManager->CountCommentsChapter($idlastchapter);
@@ -70,7 +90,7 @@ Class Frontend
 
     public function listCommentsMembre () // tableau des commentaires dans le profil du membre
     {
-        $commentManager = new CommentManager();
+        $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
         $nbComms = $commentManager->CountCommentsChapter($_GET['id']);// affiche le nb de commentaires par chapitre
         require('view/frontend/ProfilMembre.php');
@@ -80,7 +100,7 @@ Class Frontend
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
-        $CommentManager = new CommentManager();
+        $CommentManager = $this->commentManager;
         $CommentManager->AddComment($chapterId, $pseudo, $etat, $comment, $membreId);
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
@@ -98,7 +118,7 @@ Class Frontend
     {
         if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
             if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
-        $ModifManager = new CommentManager();
+        $ModifManager = $this->commentManager;
         $ModifManager->ModifComment();
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
@@ -114,19 +134,19 @@ Class Frontend
 
     public function deleteComment ($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
     {
-        $deleteManager = new CommentManager();
+        $deleteManager = $this->commentManager;
         $deleteComment = $deleteManager->DeleteComment($membreId);
         $nbComms = $deleteManager->CountCommentsChapter($_GET['id']);
 
     }
 
-    public function SignaledComment() //signaler un commentaire abusif
+    public function SignaledComment($commentid) //signaler un commentaire abusif
     {
-        $signaleManager = new CommentManager();
+        $signaleManager = $this->commentManager;
         $signaledComment = $signaleManager->SignaledComment($_GET['id']);
-        $chapterManager = new ChapterManager();
-        $commentManager = new CommentManager();
-        $imageManager = new ImagesManager();
+        $chapterManager = $this->chapterManager;
+        $commentManager = $this->commentManager;
+        $imageManager = $this->imagesManager;
         $chapter = $chapterManager->getChapter($_GET['id']);
         $comments = $commentManager->getCommentsChapter($_GET['id']);
         $imagechapter = $imageManager->getImage($_GET['id']);
@@ -139,7 +159,7 @@ Class Frontend
 
     public function connectMembre()
     {
-        $authMembreManager = new MembreManager();
+        $authMembreManager = $this->membreManager;
         $authMembre = $authMembreManager->AuthMembre();
         require('view/frontend/AuthMembreView.php');
     }
@@ -152,7 +172,7 @@ Class Frontend
 
     public function addMembre()
     {
-        $newMembre = new MembreManager();
+        $newMembre = $this->membreManager;
         $addMembre = $newMembre->InscrMembre();
         if ($addMembre === false) {
             $_SESSION['error'] = "Impossible d'ajouter le membre";
@@ -164,7 +184,7 @@ Class Frontend
     }
     public function boutonmodifpseudomdp()
     {
-        $membreManager = new MembreManager();
+        $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonmodifpseudomdp.php');
@@ -172,23 +192,23 @@ Class Frontend
 
     public function boutonmodifiermail()
     {
-        $membreManager = new MembreManager();
+        $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonmodifiermail.php');
     }
     public function boutonafficherlescommentaires()
     {
-        $membreManager = new MembreManager();
+        $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
-        $commentManager = new CommentManager();
+        $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonafficherlescommentaires.php');
     }
     public function boutonsupprimerprofil()
     {
-        $membreManager = new MembreManager();
+        $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonsupprimerprofil.php');
@@ -196,9 +216,9 @@ Class Frontend
 
     public function modifPseudoMdp()
     {
-        $nbcomments = new MembreManager();
+        $nbcomments = $this->membreManager;
         $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
-        $newpseudo = new MembreManager();
+        $newpseudo = $this->membreManager;
         $modifmembre = $newpseudo->modifPseudoMDP();
         if ($modifmembre === false) {
             $_SESSION['error'] = 'Impossible de supprimer votre commentaire !';
@@ -209,9 +229,9 @@ Class Frontend
     }
     public function modifEmail()
     {
-        $nbcomments = new MembreManager();
+        $nbcomments = $this->membreManager;
         $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
-        $newemail = new MembreManager();
+        $newemail = $this->membreManager;
         $modifmembre = $newemail->modifmail();
         if ($modifmembre){
             $_SESSION['success'] = 'Votre email a bien été modifiée';
@@ -229,18 +249,22 @@ Class Frontend
 
     public function profilMembre ()
     {
-        $membreManager = new MembreManager();
+        $membreManager = $this->membreManager;
         $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         $membre=$membreManager->getMembre($_SESSION['id']);
-        $commentManager = new CommentManager();
+        $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
         require('view/frontend/ProfilMembre.php');
     }
 
     public function accueil()
     {
-        $adminmanager = new AdminManager();
+        $adminmanager = $this->adminManager;
         $admin = $adminmanager->getAdmin('2');
+        $chapterManager = $this->chapterManager;
+        $chapters = $chapterManager->getChapters();
+        $bookManager = $this->booksManager;
+        $books = $bookManager->getBooks();
         require('view/frontend/accueil.php');
     }
 

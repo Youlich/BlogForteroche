@@ -23,7 +23,7 @@
     <link href="css/freelancer.min.css" rel="stylesheet">
 
     <script src="js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({ selector : 'textarea',elements : 'content', branding : false, valid_elements : "em/i,strike,u,strong/b,div[align],br,#p[align],-ol[type|compact],-ul[type|compact],-li"});
+    <script>tinymce.init({ selector : 'textarea',elements : 'content',entity_encoding: "raw", forced_root_block : false, force_br_newlines : true, falsebranding : false, valid_elements : "em/i,strike,u,strong/b,div[align],br,#p[align],-ol[type|compact],-ul[type|compact],-li"});
     </script>
 
 

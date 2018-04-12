@@ -12,6 +12,15 @@ require_once("DbConnect.php");
  */
 class CommentManager extends DbConnect
 {
+
+    private $chapterManager;
+    private $booksManager;
+
+    public function __construct($chapterManager, $booksManager) {
+        $this->chapterManager = $chapterManager;
+        $this->booksManager = $booksManager;
+    }
+
     public function getCommentsChapter ($chapterId) // affiche tous les commentaires d'un chapitre
     {
         $comments = array();
@@ -39,10 +48,10 @@ class CommentManager extends DbConnect
             $comment->hydrate($data);
             $comments[] = $comment;
 
-            $chapterManager = new ChapterManager();
+            $chapterManager = $this->chapterManager;
             $chapter = $chapterManager->getChapter($comment->getChapterId());
 
-            $bookManager = new BooksManager();
+            $bookManager = $this->booksManager;
             $book = $bookManager->getBook($chapter->getBookId());
 
             $comment->setChapter($chapter);
@@ -61,9 +70,9 @@ class CommentManager extends DbConnect
             $comment = new Comment();
             $comment->hydrate($data);
             $commentsMembre[] = $comment;
-            $chapterManager = new ChapterManager();
+            $chapterManager = $this->chapterManager;
             $chapter = $chapterManager->getChapter($comment->getChapterId());
-            $bookManager = new BooksManager();
+            $bookManager = $this->booksManager;
             $book = $bookManager->getBook($chapter->getBookId());
             $comment->setChapter($chapter);
             $comment->setBook($book);
@@ -91,7 +100,7 @@ class CommentManager extends DbConnect
         $addcomment = array();
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, statut, comment, commentDate, membreId) VALUES (?, ?, ?, ?, NOW(), ?)');
-        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  nl2br(htmlspecialchars($comment)), $membreId));
+        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  htmlspecialchars($comment), $membreId));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->hydrate($data);

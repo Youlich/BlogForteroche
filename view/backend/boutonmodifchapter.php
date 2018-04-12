@@ -51,12 +51,12 @@
             <div class= "input-group" >
                 <input type="hidden" name="chapterselect" value="<?php echo $_POST['chapterselect']; ?>">
                 <label for="titrechapter">Nouveau titre de chapitre : </label>
-                <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo nl2br(htmlspecialchars($chapterselect->getTitle()));?>">
+                <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle();?>">
             </div>
             <br/>
             <div class= "input-group" >
                 <label for="content">Contenu : </label>
-                <textarea class="content" id="content" name="content" rows="15"> <?php echo nl2br(htmlspecialchars($chapterselect->getContent())); ?> </textarea>
+                <textarea class="content" id="content" name="content" rows="15"> <?php echo $chapterselect->getContent(); ?> </textarea>
             </div> <br/><br/>
             <div>
                 <h6>Mon image :</h6>

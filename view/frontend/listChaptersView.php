@@ -7,12 +7,17 @@ foreach ($chapters as $chapter)
 {
     ?>
     <div class="post">
-
+        <div class="image">
+        <?php if ($chapter->getImageId()): ?>
+            <img src="<?php echo $chapter->getImageFileUrl(); ?>" HSPACE="15" />
+        <?php endif; ?>
+        </div>
+        <br/>
         <h3>
-            <?= htmlspecialchars($chapter->getTitle()) ?>
+            <?= $chapter->getTitle() ?>
         </h3>
 
-        <?= htmlspecialchars($chapter->getResum()) ?>
+        <?= $chapter->getResum() ?>
         <br/><br/>
         <strong><a href="index.php?action=chapter&amp;id=<?= $chapter->getId() ?>" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Lire la suite</a></strong>
         <br/><br/>

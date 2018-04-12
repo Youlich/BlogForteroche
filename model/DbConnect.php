@@ -18,7 +18,7 @@ class DbConnect
             {
                 self::$instance = new \PDO('mysql:host=localhost;dbname=projetblog;charset=utf8', 'root', '');
             }
-            catch (PDOException $e)
+            catch (\PDOException $e)
             {
                 die('Erreur de connexion : ' . $e->getMessage() );
             }

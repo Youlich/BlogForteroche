@@ -117,51 +117,25 @@
         <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
 
         <div class="row">
+            <?php
+            foreach ($chapters as $chapter)
+            {
+                ?>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
                     <div class="portfolio-image">
                         <div class="portfolio-image-position">
-                            <a href="index.php?action=chapter&amp;id=1"><img src="public/images/reve.jpg" alt="rêve" class="img-fluid"></a>
+                            <a href="index.php?action=chapter&amp;id=1"><img src="<?php echo $chapter->getImageFileUrl(); ?>" class="img-fluid"></a>
                         </div>
                         <div class="portfolio-text-image">
-                            <a href="index.php?action=chapter&amp;id=1"><p style="color:white;font-weight: bold;">Chapitre 1 :<br/>Quand le rêve devient réalité</p></a>
+                            <a href="index.php?action=chapter&amp;id=1"><p style="color:white;font-weight: bold;"><?php echo $chapter->getTitle(); ?></p></a>
                         </div>
                     </div>
             </div>
+                <?php
+            }
+            ?>
 
-            <div class="col-md-6 col-lg-6">
-                <a class="portfolio-item d-block mx-auto">
-                     <div class="portfolio-image">
-                         <div class="portfolio-image-position">
-                                <a href="index.php?action=chapter&amp;id=2"><img class="img-fluid" src="public/images/decouverte.jpg" alt="découverte"/></a>
-                            </div>
-                         <div class="portfolio-text-image">
-                                <a href="index.php?action=chapter&amp;id=2"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 2 :<br/>Découverte de l'Alaska</p></a>
-                          </div>
-                     </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <a class="portfolio-item d-block mx-auto">
-                    <div class="portfolio-image">
-                        <div class="portfolio-image-position">
-                                <a href="index.php?action=chapter&amp;id=3"><img class="img-fluid" src="public/images/etudes.jpg" alt="études"/></a>
-                            </div>
-                        <div class="portfolio-text-image">
-                                <a href="index.php?action=chapter&amp;id=3"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 3 :<br/> Les études en Alaska</p></a>
-                         </div>
-                     </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <a class="portfolio-item d-block mx-auto">
-                    <div class="portfolio-image">
-                        <div class="portfolio-image-position">
-                            <a href="index.php?action=chapter&amp;id=4"><img class="img-fluid" src="public/images/glacier.jpg" alt="glacier"/></a>
-                        </div>
-                        <div class="portfolio-text-image">
-                            <a href="index.php?action=chapter&amp;id=4"><p style="text-align:center;color:white;font-weight: bold;">Chapitre 4 :<br/> Expérience unique</p></a>
-                        </div>
-                    </div>
-            </div>
         </div>
     </section>
 
@@ -173,15 +147,15 @@
             <h2 class="text-center text-uppercase text-white">Bibliographie</h2>
             <hr class="star-light mb-8"> <br/>
             <div class="row">
-                <div class="col-md-4 col-lg-4 mr-auto">
-                    <img src="public/images/ChatNoir.png"/>
-                </div>
-                <div class="col-md-4 col-lg-4 mr-auto">
-                    <img src="public/images/LongueMarche.png"/>
-                </div>
-                <div class="col-md-4 col-lg-4 mr-auto">
-                    <img src="public/images/Indes.png"/>
-                </div>
+                <?php
+                foreach ($books as $book)
+                {
+                    ?>
+                    <div><img src="<?php echo $book->getImage(); ?>" HSPACE="10"/></div>
+
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </section>

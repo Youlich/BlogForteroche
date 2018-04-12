@@ -9,18 +9,29 @@ require_once("DbConnect.php");
  */
 class ChapterManager extends DbConnect
 {
+
+    private $imagesManager;
+
+    public function __construct($imagesManager) {
+        $this->imagesManager = $imagesManager;
+    }
+
     public function getChapters () // Affiche tous les chapitres
     {
+        $imageManager = $this->imagesManager;
         $chapters = array();
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, resum, bookId, content, imageId, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
         while ($data = $req->fetch()) {
             $chapter = new Chapter();
             $chapter->hydrate($data);
+            $image = $imageManager->getImageById($chapter->getImageId());
+            $chapter->setImage($image);
             $chapters[] = $chapter;
         }
         return $chapters;
     }
+
     public function getChapter ($chapterId) // affiche un chapitre selon son Id
     {
         $db = $this->dbConnect();
@@ -48,8 +59,6 @@ class ChapterManager extends DbConnect
         }
     }
 
-
-
     public function getLastChapter()
     {
         $db = $this->dbConnect();
@@ -67,7 +76,7 @@ class ChapterManager extends DbConnect
         $ChapterAdd = array();
         $db = $this->dbConnect();
         $req = $db->prepare("INSERT INTO chapters (bookId, chapterDate, title, content, resum, imageId) VALUES (?,NOW(),?,?,?,?)");
-        $Addchapter = $req->execute(array($bookId, htmlspecialchars($title), htmlspecialchars($content),$resum, $imageId));
+        $Addchapter = $req->execute(array($bookId, $title, $content,$resum, $imageId));
         while ($data = $req->fetch()) {
             $chapteradd = new Chapter();
             $chapteradd->hydrate($data);
@@ -96,8 +105,8 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum, imageId=:imageId WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', htmlspecialchars($title), \PDO::PARAM_STR);
-        $chapters->bindValue(':content', htmlspecialchars($content), \PDO::PARAM_STR);
+        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
+        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
         $chapters->bindValue(':resum', $resum, \PDO::PARAM_STR);
         $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
         $chapters->bindValue(':imageId', $imageId, \PDO::PARAM_INT);
@@ -117,8 +126,8 @@ class ChapterManager extends DbConnect
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', htmlspecialchars($title), \PDO::PARAM_STR);
-        $chapters->bindValue(':content', htmlspecialchars($content), \PDO::PARAM_STR);
+        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
+        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
         $chapters->bindValue(':resum', $resum, \PDO::PARAM_STR);
         $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
 
