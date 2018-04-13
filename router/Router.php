@@ -21,8 +21,8 @@ class Router
                 if ($_GET['action'] == 'addbook') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->addBook($_POST['titrelivre']);
@@ -30,8 +30,8 @@ class Router
                 } elseif ($_GET['action'] == 'addchapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->addChapter();
@@ -39,8 +39,8 @@ class Router
                 } elseif ($_GET['action'] == 'deletechapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->deleteChapter();
@@ -48,8 +48,8 @@ class Router
                 } elseif ($_GET['action'] == 'modifchapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->modifChapter();
@@ -57,8 +57,8 @@ class Router
                 } elseif ($_GET['action'] == 'listComments') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->listComments();
@@ -66,8 +66,8 @@ class Router
                 } elseif ($_GET['action'] == 'approved') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->approvedComments();
@@ -75,8 +75,8 @@ class Router
                 } elseif ($_GET['action'] == 'refused') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->refusedComments();
@@ -84,8 +84,8 @@ class Router
                 } elseif ($_GET['action'] == 'listmembres') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->listMembres();
@@ -93,8 +93,8 @@ class Router
                 } elseif ($_GET['action'] == 'publier') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->Publier();
@@ -102,8 +102,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonaddbook') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->boutonaddbook();
@@ -111,8 +111,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonmodifchapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->boutonmodifchapter();
@@ -120,8 +120,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonaddchapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->boutonaddchapter();
@@ -129,8 +129,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutondeletechapter') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->boutondeletechapter();
@@ -138,8 +138,8 @@ class Router
                 } elseif ($_GET['action'] == 'authentificationAdmin') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->connectAdmin();
@@ -147,8 +147,8 @@ class Router
                 } elseif ($_GET['action'] == 'profilAdmin') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->profilAdmin();
@@ -156,8 +156,8 @@ class Router
                 } elseif ($_GET['action'] == 'modifmessageAdmin') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->modifmessageAdmin();
@@ -165,8 +165,8 @@ class Router
                 } elseif ($_GET['action'] == 'suppMembre') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->suppMembre();
@@ -174,8 +174,8 @@ class Router
                 } elseif ($_GET['action'] == 'connectAdmin') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->connectAdmin();
@@ -183,16 +183,16 @@ class Router
                 } elseif ($_GET['action'] == 'administration') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->administration();
                 } elseif ($_GET['action'] == 'deconnectAdmin') {
                     $backend = new Backend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $backend->deconnectAdmin();
@@ -207,8 +207,8 @@ class Router
                 } elseif ($_GET['action'] == 'listChapters') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->listChapters();
@@ -216,8 +216,8 @@ class Router
                 }elseif ($_GET['action'] == 'lastchapter') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->lastChapter();
@@ -225,8 +225,8 @@ class Router
                 } elseif ($_GET['action'] == 'chapter') { // action qui se réalise quand on clique sur le lien "lire la suite"
                      $frontend = new Frontend(new MembreManager(),
                          new AdminManager(),
-                         new ChapterManager(new ImagesManager()),
                          new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                         new ChapterManager(new ImagesManager()),
                          new BooksManager(),
                          new ImagesManager());
                      $frontend->chapter();
@@ -234,8 +234,8 @@ class Router
                 } elseif ($_GET['action'] == 'addComment') {
                      $frontend = new Frontend(new MembreManager(),
                          new AdminManager(),
-                         new ChapterManager(new ImagesManager()),
                          new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                         new ChapterManager(new ImagesManager()),
                          new BooksManager(),
                          new ImagesManager());
                      $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
@@ -243,8 +243,8 @@ class Router
                 } elseif ($_GET['action'] == 'Comment') {
                    $frontend = new Frontend(new MembreManager(),
                        new AdminManager(),
-                       new ChapterManager(new ImagesManager()),
                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                       new ChapterManager(new ImagesManager()),
                        new BooksManager(),
                        new ImagesManager());
                    $frontend->comment();
@@ -252,8 +252,8 @@ class Router
                 } elseif ($_GET['action'] == 'listcommentsmembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->listCommentsMembre();
@@ -261,8 +261,8 @@ class Router
                 } elseif ($_GET['action'] == 'ModifComment') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->ModifComment();
@@ -270,8 +270,8 @@ class Router
                 } elseif ($_GET['action'] == 'deletecomment') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->deleteComment($_SESSION['id']);
@@ -279,8 +279,8 @@ class Router
                 } elseif ($_GET['action'] == 'signaled') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->SignaledComment($_GET['id']);
@@ -288,8 +288,8 @@ class Router
                 } elseif ($_GET['action'] == 'accueil') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->accueil();
@@ -297,8 +297,8 @@ class Router
                 } elseif ($_GET['action'] == 'connectMembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->connectMembre();
@@ -306,8 +306,8 @@ class Router
                 } elseif ($_GET['action'] == 'deconnectMembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->deconnectMembre();
@@ -315,8 +315,8 @@ class Router
                 } elseif ($_GET['action'] == 'addMembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->addMembre();
@@ -324,8 +324,8 @@ class Router
                 } elseif ($_GET['action'] == 'profilMembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->profilMembre();
@@ -333,8 +333,8 @@ class Router
                 } elseif ($_GET['action'] == 'inscripMembre') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->inscripMembre();
@@ -342,8 +342,8 @@ class Router
                 } elseif ($_GET['action'] == 'mentionslegales') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->mentionslegales();
@@ -351,8 +351,8 @@ class Router
                 } elseif ($_GET['action'] == 'charte') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->charte();
@@ -360,8 +360,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonmodifpseudomdp') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->boutonmodifpseudomdp();
@@ -369,8 +369,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonmodifiermail') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->boutonmodifiermail();
@@ -378,8 +378,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonafficherlescommentaires') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->boutonafficherlescommentaires();
@@ -387,8 +387,8 @@ class Router
                 } elseif ($_GET['action'] == 'boutonsupprimerprofil') {
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->boutonsupprimerprofil();
@@ -396,8 +396,8 @@ class Router
                 } elseif ($_GET['action'] == 'modifpseudo_mdp'){
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->modifPseudoMdp();
@@ -405,8 +405,8 @@ class Router
                 } elseif ($_GET['action'] == 'modifemail'){
                     $frontend = new Frontend(new MembreManager(),
                         new AdminManager(),
-                        new ChapterManager(new ImagesManager()),
                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->modifEmail();
@@ -415,8 +415,8 @@ class Router
                 } else {
                 $frontend = new Frontend(new MembreManager(),
                     new AdminManager(),
-                    new ChapterManager(new ImagesManager()),
                     new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                    new ChapterManager(new ImagesManager()),
                     new BooksManager(),
                     new ImagesManager());
                 $frontend->accueil();
