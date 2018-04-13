@@ -21,7 +21,7 @@ class CommentManager extends DbConnect
         $this->booksManager = $booksManager;
     }
 
-    public function getCommentsChapter ($chapterId) // affiche tous les commentaires d'un chapitre
+    public function getCommentsChapter($chapterId) // affiche tous les commentaires d'un chapitre
     {
         $comments = array();
         $db = $this->dbConnect();

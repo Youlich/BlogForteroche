@@ -125,10 +125,10 @@
                 <a class="portfolio-item d-block mx-auto">
                     <div class="portfolio-image">
                         <div class="portfolio-image-position">
-                            <a href="index.php?action=chapter&amp;id=1"><img src="<?php echo $chapter->getImageFileUrl(); ?>" class="img-fluid"></a>
+                            <a href="index.php?action=chapter&amp;id=<?php echo $chapter->getId(); ?>"><img src="<?php echo $chapter->getImageFileUrl(); ?>" class="img-fluid"></a>
                         </div>
                         <div class="portfolio-text-image">
-                            <a href="index.php?action=chapter&amp;id=1"><p style="color:white;font-weight: bold;"><?php echo $chapter->getTitle(); ?></p></a>
+                            <a href="index.php?action=chapter&amp;id=<?php echo $chapter->getId(); ?>"><p style="color:white;font-weight: bold;"><?php echo $chapter->getTitle(); ?></p></a>
                         </div>
                     </div>
             </div>

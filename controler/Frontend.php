@@ -261,8 +261,8 @@ Class Frontend
     {
         $adminmanager = $this->adminManager;
         $admin = $adminmanager->getAdmin('2');
-        $chapterManager = $this->chapterManager;
-        $chapters = $chapterManager->getChapters();
+        $chaptermanager = $this->chapterManager;
+        $chapters = $chaptermanager->getChapters();
         $bookManager = $this->booksManager;
         $books = $bookManager->getBooks();
         require('view/frontend/accueil.php');
