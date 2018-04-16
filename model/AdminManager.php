@@ -6,9 +6,17 @@ use entity\Admin;
 
 require_once("DbConnect.php");
 
+/**
+ * Class AdminManager
+ * @package model
+ */
+
 class AdminManager extends DbConnect
 {
 
+    /**
+     * @return string
+     */
     public function authAdmin()
     {
         // toutes les vérifications
@@ -41,6 +49,11 @@ class AdminManager extends DbConnect
         }
     }
 
+    /**
+     * @param $id : identifiant de l'admin
+     * @return Admin
+     */
+
     public function getAdmin($id)
     {
         $db = $this->dbConnect();
@@ -52,6 +65,9 @@ class AdminManager extends DbConnect
         return $admin;
     }
 
+    /**
+     * @return string
+     */
 
     public function modifmessageAdmin()
     {

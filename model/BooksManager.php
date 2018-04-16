@@ -11,7 +11,11 @@ require_once("DbConnect.php");
  */
 class BooksManager extends DbConnect
 {
-    public function getBooks() // Affiche tous les livres
+    /**
+     * @return array : tableau de tous les livres
+     */
+
+    public function getBooks()
     {
         $books = array();
         $db = $this->dbConnect();
@@ -24,7 +28,12 @@ class BooksManager extends DbConnect
         return $books;
     }
 
-    public function getBook($Id) // affiche un livre selon son Id
+    /**
+     * @param $Id : affiche un livre selon son id indiqué en paramètre
+     * @return Books
+     */
+
+    public function getBook($Id)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM books WHERE id = ?');
@@ -36,6 +45,10 @@ class BooksManager extends DbConnect
         return $book;
     }
 
+    /**
+     * @param $title : permet d'ajouter un nouveau livre avec son titre obligatoire
+     * @return bool
+     */
     public function AddBook($title)
     {
         $db = $this->dbConnect();

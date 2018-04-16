@@ -2,13 +2,24 @@
 
 namespace entity;
 
+/**
+ * Class Images
+ * @package entity
+ */
 
 class Images
 {
+    /**
+     * @var : colonnes de la table Images
+     */
     private $id;
     private $name;
     private $fileUrl;
     private $chapterId;
+
+    /**
+     * @param array $donnees : setters
+     */
 
     public function hydrate(array $donnees)
     {
@@ -74,7 +85,7 @@ class Images
     }
 
     /**
-     * @return mixed
+     * @return mixed : chapitre associé au commentaire
      */
     public function getChapterId()
     {

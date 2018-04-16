@@ -9,7 +9,12 @@ require_once("DbConnect.php");
  */
 class ImagesManager extends DbConnect
 {
-    public function getImage($chapterId) // affiche l'image associée à un chapitre
+    /**
+     * @param $chapterId
+     * @return Images
+     * fonction qui permet d'afficher l'image du chapitre entré en paramètre
+     */
+    public function getImage($chapterId)
     {
         $pdo = $this->dbConnect();
         $PDOStatement = $pdo->prepare('SELECT * FROM images WHERE chapterId = ?');
@@ -25,6 +30,7 @@ class ImagesManager extends DbConnect
      * @param $id
      *
      * @return bool|Images
+     * retourne l'image si elle existe
      */
     public function getImageById($id)
     {
@@ -42,6 +48,11 @@ class ImagesManager extends DbConnect
         }
     }
 
+    /**
+     * @return bool|string
+     * permet d'ajouter une image dans la table image en lui associant un chapitre s'il a été sélectionné.
+     * On retourne l'id de cette image ajoutée ou false si celà s'est mal passé.
+     */
 
     public function addImage()
     {
@@ -61,6 +72,11 @@ class ImagesManager extends DbConnect
             return false;
         }
     }
+
+    /**
+     * @return array
+     * permet d'enregistrer l'image sur le serveur
+     */
     public function moveFile()
     {
         $file = $_FILES ['image']['name'];
@@ -92,6 +108,11 @@ class ImagesManager extends DbConnect
         ];
     }
 
+    /**
+     * @return array : tableau contenant le résultat de l'enregistrement sur le serveur, le résultat de cet upload et l'id de l'image
+     * si l'enregistrement sur le serveur retourne true, on utilise la fonction addImage pour ajouter l'image dans la BDD.
+     *
+     */
         public function upload()
     {
         $file = $_FILES['image'];
@@ -109,6 +130,12 @@ class ImagesManager extends DbConnect
             ];
         }
     }
+
+    /**
+     * @param $chapterId
+     * @return bool
+     * permet de donner une valeur à la colonne chapterId de la table images
+     */
 
     public function ModifchapterImage($chapterId)
     {
@@ -129,6 +156,11 @@ class ImagesManager extends DbConnect
         }
     }
 
+    /**
+     * @param $chapterId
+     * @return bool
+     * permet la suppression de l'image associée au chapitre
+     */
     public function DeleteImage($chapterId)
     {
         $db = $this->dbConnect();

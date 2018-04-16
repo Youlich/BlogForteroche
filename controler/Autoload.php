@@ -1,14 +1,24 @@
 <?php
 
-/** Permet l'auto-chargement des classes */
+/**
+ * Class Autoload
+ * Permet l'auto-chargement des classes
+ */
 
 class Autoload
 {
+    /**
+     *  fonction d'autoload qui utilise la fonction chargerclasse
+     */
 
     static function register()
     {
         spl_autoload_register(Array('Autoload','chargerClass'));
     }
+
+    /**
+     * @param $class
+     */
 
     static function chargerClass($class)
     {

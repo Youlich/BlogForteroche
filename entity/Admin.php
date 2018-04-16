@@ -2,15 +2,25 @@
 
 namespace entity;
 
+/**
+ * Class Admin
+ * @package entity
+ */
 
 class Admin
 {
+    /**
+     * @var : colonnes de la table admin
+     */
     private $id;
     private $pseudo;
     private $pass;
     private $photo;
     private $message;
 
+    /**
+     * @param array $donnees : appel des setters
+     */
 
     public function hydrate(array $donnees)
     {

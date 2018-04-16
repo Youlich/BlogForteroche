@@ -6,9 +6,16 @@ use services\Verifications;
 
 require("DbConnect.php");
 
+/**
+ * Class MembreManager
+ * @package model
+ */
+
 class MembreManager extends DbConnect
 {
-
+    /**
+     * @return array : tableau listant les membres inscrits
+     */
     public function getMembres() {
 
         $membres = array();
@@ -22,6 +29,11 @@ class MembreManager extends DbConnect
         return $membres;
     }
 
+    /**
+     * @param $id
+     * @return Membres
+     * permet d'obtenir un membre selon son id
+     */
     public function getMembre($id) {
 
 
@@ -35,6 +47,9 @@ class MembreManager extends DbConnect
         return $membre;
     }
 
+    /**
+     * @return string
+     */
 
     public function AuthMembre ()
     {
@@ -74,8 +89,11 @@ class MembreManager extends DbConnect
             }
      }
 
+    /**
+     * @return string
+     */
 
-        public function InscrMembre () //ne plus toucher
+        public function InscrMembre ()
         {
             if (isset($_POST['submit'])) {
                 // vérification que tous les champs sont remplis
@@ -128,8 +146,11 @@ class MembreManager extends DbConnect
             }
         }
 
+    /**
+     * @return string
+     */
 
-        public function deleteMembre () // ne pas toucher
+        public function deleteMembre ()
         {
             $db = $this->dbConnect();
             $req = $db->prepare("DELETE FROM membres WHERE id = :id");
@@ -144,6 +165,9 @@ class MembreManager extends DbConnect
             }
          }
 
+    /**
+     * @return string
+     */
 
     public function modifPseudoMDP()
     {
@@ -184,7 +208,10 @@ class MembreManager extends DbConnect
         }
     }
 
-    public function modifmail() //ne plus toucher
+    /**
+     * @return string
+     */
+    public function modifmail()
     {
         if (isset($_POST['submit'])) {
             $verification = new Verifications();
@@ -209,16 +236,5 @@ class MembreManager extends DbConnect
             }
             }
     }
-
-        public function CountCommentsMembre($membreId)
-        {
-            $pdo = $this->dbConnect();
-            $PDOStatement = $pdo->prepare('SELECT COUNT(*) AS total FROM comments WHERE membreId = ?');
-            $PDOStatement->execute(array($membreId));
-            $data = $PDOStatement->fetch();
-            return $data['total'];
-        }
-
-
 }
 

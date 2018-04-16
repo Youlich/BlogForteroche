@@ -1,7 +1,15 @@
 <?php
 namespace entity;
+/**
+ * Class Chapter
+ * @package entity
+ */
 class Chapter
 {
+
+    /**
+     * @var : représentent les colonnes de la table chapters
+     */
     private $id;
     private $chapterDate;
     private $title;
@@ -10,8 +18,15 @@ class Chapter
     private $nbcomms;
     private $bookId;
     private $imageId;
+    /**
+     * @var : variable qui contient l'image associée au chapitre
+     */
     private $image;
 
+
+    /**
+     * @param array $donnees : permet de générer les setters afin de les utiliser plus rapidemment
+     */
 
     public function hydrate(array $donnees)
     {
@@ -168,6 +183,10 @@ class Chapter
     public function setImage($image) {
         $this->image = $image;
     }
+
+    /**
+     * @return bool
+     */
     public function getImageFileUrl()
     {
         $image = $this->getImage();

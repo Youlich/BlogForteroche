@@ -1,17 +1,13 @@
 <?php
 namespace controler;
 
-use entity\Chapter;
-use model\AdminManager;
-use model\BooksManager;
-use model\CommentManager;
-use model\ImagesManager;
-use model\MembreManager;
-use model\ChapterManager;
-
-
 require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
+
+/**
+ * Class Frontend
+ * @package controler Frontend
+ */
 
 Class Frontend
 {
@@ -23,7 +19,17 @@ Class Frontend
     private $booksManager;
     private $imagesManager;
 
-
+    /**
+     * Frontend constructor.
+     * les modèles appelés :
+     * @param $membreManager
+     * @param $adminManager
+     * @param $commentManager
+     * @param $chapterManager
+     * @param $booksManager
+     * @param $imagesManager
+     *
+     */
     public function __construct($membreManager, $adminManager, $commentManager, $chapterManager, $booksManager, $imagesManager) {
         $this->membreManager = $membreManager;
         $this->adminManager = $adminManager;
@@ -180,13 +186,19 @@ Class Frontend
         } else {
             require('view/frontend/InscriptionMembreView.php');
         }
-
     }
+
+    public function suppMembre()
+    {
+        $suppMembre = $this->membreManager;
+        $suppMembre->deleteMembre();
+        $nbcomments = $this->membreManager;
+    }
+
     public function boutonmodifpseudomdp()
     {
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
-        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonmodifpseudomdp.php');
     }
 
@@ -194,7 +206,6 @@ Class Frontend
     {
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
-        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonmodifiermail.php');
     }
     public function boutonafficherlescommentaires()
@@ -203,21 +214,18 @@ Class Frontend
         $membre = $membreManager->getMembre($_SESSION['id']);
         $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);
-        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonafficherlescommentaires.php');
     }
     public function boutonsupprimerprofil()
     {
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
-        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
         require ('view/frontend/boutonsupprimerprofil.php');
     }
 
     public function modifPseudoMdp()
     {
         $nbcomments = $this->membreManager;
-        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newpseudo = $this->membreManager;
         $modifmembre = $newpseudo->modifPseudoMDP();
         if ($modifmembre === false) {
@@ -230,7 +238,6 @@ Class Frontend
     public function modifEmail()
     {
         $nbcomments = $this->membreManager;
-        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
         $newemail = $this->membreManager;
         $modifmembre = $newemail->modifmail();
         if ($modifmembre){
@@ -250,7 +257,7 @@ Class Frontend
     public function profilMembre ()
     {
         $membreManager = $this->membreManager;
-        $nbComms = $membreManager->CountCommentsMembre($_SESSION['id']);
+
         $membre=$membreManager->getMembre($_SESSION['id']);
         $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->getCommentsMembre($_SESSION['id']);

@@ -1,24 +1,27 @@
 <?php
 namespace controler;
-use model\AdminManager;
-use model\BooksManager;
-use model\ChapterManager;
-use model\CommentManager;
-use model\ImagesManager;
-use model\MembreManager;
 
 require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
 
+/**
+ * Class Backend
+ * @package controler Backend
+ */
+
 Class Backend
 {
-
+    /**
+     * @var models
+     */
     private $membreManager;
     private $adminManager;
     private $commentManager;
     private $chapterManager;
     private $booksManager;
     private $imagesManager;
+
+    /** injection de dépendances : appelle de tous les modèles */
 
     public function __construct($membreManager, $adminManager, $commentManager, $chapterManager, $booksManager, $imagesManager) {
         $this->membreManager = $membreManager;
@@ -29,13 +32,6 @@ Class Backend
         $this->imagesManager = $imagesManager;
     }
 
-    public function suppMembre()
-    {
-        $suppMembre = $this->membreManager;
-        $suppMembre->deleteMembre();
-        $nbcomments = $this->membreManager;
-        $nbComms = $nbcomments->CountCommentsMembre($_SESSION['id']);
-    }
     public function connectAdmin()
     {
         $authMembreManager = $this->adminManager;
@@ -61,7 +57,6 @@ Class Backend
         $adminmessage = $adminmanager->modifmessageAdmin();
         require('view/backend/profilAdmin.php');
     }
-
 
     public function approvedComments()
     {

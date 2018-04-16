@@ -8,12 +8,23 @@
 
 namespace entity;
 
+/**
+ * Class Books
+ * @package entity
+ */
 
 class Books
 {
+    /**
+     * @var : colonnes de la table Books
+     */
  private $id;
  private $title;
  private $image;
+
+    /**
+     * @param array $donnees appel des setters
+     */
 
     public function hydrate(array $donnees)
     {

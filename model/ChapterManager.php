@@ -9,14 +9,23 @@ require_once("DbConnect.php");
  */
 class ChapterManager extends DbConnect
 {
-
+    /**
+     * @var : variable utilisée pour l'injection de dépendance entre cette classe ChapterManager et ImageManager
+     */
     private $imagesManager;
 
+    /**
+     * ChapterManager constructor.
+     * @param $imagesManager : injection de dépendance avec cette classe ImageManager
+     */
     public function __construct($imagesManager) {
         $this->imagesManager = $imagesManager;
     }
 
-    public function getChapters () // Affiche tous les chapitres
+    /**
+     * @return array : tableau qui affiche tous les chapitres
+     */
+    public function getChapters ()
     {
         $imageManager = $this->imagesManager;
         $chapters = array();
@@ -32,7 +41,11 @@ class ChapterManager extends DbConnect
         return $chapters;
     }
 
-    public function getChapter ($chapterId) // affiche un chapitre selon son Id
+    /**
+     * @param $chapterId
+     * @return Chapter : donne le chapitre selon l'id entré en paramètre
+     */
+    public function getChapter ($chapterId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
@@ -44,7 +57,10 @@ class ChapterManager extends DbConnect
         return $chapterselect;
     }
 
-
+    /**
+     * @param $content
+     * @return bool|string : retourne le résumé du chapitre
+     */
     public function resumContent($content)
     {
         $nbr_caracteres_max = 200;
@@ -59,6 +75,9 @@ class ChapterManager extends DbConnect
         }
     }
 
+    /**
+     * @return Chapter : donne le dernier chapitre saisi par l'éditeur
+     */
     public function getLastChapter()
     {
         $db = $this->dbConnect();
@@ -71,6 +90,14 @@ class ChapterManager extends DbConnect
         return $lastchapter;
     }
 
+    /**
+     * @param $bookId
+     * @param $title
+     * @param $content
+     * @param $resum
+     * @param $imageId
+     * @return bool|string : ajoute un chapitre dans la table chapitre. Si c'est un succès on obtient son id créé, sinon on retourne false
+     */
     public function AddChapter($bookId, $title, $content, $resum, $imageId)
     {
         $ChapterAdd = array();
@@ -89,6 +116,11 @@ class ChapterManager extends DbConnect
         }
     }
 
+    /**
+     * @param $chapter_id
+     * @return bool : suppression d'un chapitre. Si c'est un succès on retourne true sinon false
+     */
+
     public function DeleteChapter($chapter_id)
     {
         $db = $this->dbConnect();
@@ -101,6 +133,14 @@ class ChapterManager extends DbConnect
         }
     }
 
+    /**
+     * @param $id
+     * @param $title
+     * @param $content
+     * @param $resum
+     * @param $imageId
+     * @return bool : modification du chapitre.Si c'est un succès on retourne true sinon false
+     */
     public function ModifChapter($id, $title, $content, $resum, $imageId)
     {
         $db = $this->dbConnect();
@@ -121,6 +161,14 @@ class ChapterManager extends DbConnect
             return false;
         }
     }
+
+    /**
+     * @param $id
+     * @param $title
+     * @param $content
+     * @param $resum
+     * @return bool : modification du chapitre dans le cas où il n'y a pas d'image. Si c'est un succès on retourne true sinon false
+     */
 
     public function ModifChaptersansUpload($id, $title, $content,$resum)
     {

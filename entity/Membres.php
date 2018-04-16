@@ -2,9 +2,16 @@
 
 namespace entity;
 
+/**
+ * Class Membres
+ * @package entity
+ */
 
 class Membres
 {
+    /**
+     * @var : colonnes de la table membres
+     */
     private $id;
     private $pseudo;
     private $pass;
@@ -12,6 +19,9 @@ class Membres
     private $dateInscription;
     private $nbcomms;
 
+    /**
+     * @param array $donnees setters regroupés
+     */
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value)
@@ -27,7 +37,7 @@ class Membres
         }
     }
     /**
-     * @return mixed
+     * @return mixed : donne le nombre de commentaires
      */
     public function getNbcomms()
     {

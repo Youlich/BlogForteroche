@@ -162,14 +162,6 @@ class Router
                         new ImagesManager());
                     $backend->modifmessageAdmin();
 
-                } elseif ($_GET['action'] == 'suppMembre') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
-                    $backend->suppMembre();
 
                 } elseif ($_GET['action'] == 'connectAdmin') {
                     $backend = new Backend(new MembreManager(),
@@ -320,6 +312,15 @@ class Router
                         new BooksManager(),
                         new ImagesManager());
                     $frontend->addMembre();
+
+                } elseif ($_GET['action'] == 'suppMembre') {
+                    $frontend = new Frontend(new MembreManager(),
+                        new AdminManager(),
+                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
+                        new ChapterManager(new ImagesManager()),
+                        new BooksManager(),
+                        new ImagesManager());
+                    $frontend->suppMembre();
 
                 } elseif ($_GET['action'] == 'profilMembre') {
                     $frontend = new Frontend(new MembreManager(),

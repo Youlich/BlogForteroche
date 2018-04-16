@@ -12,16 +12,28 @@ require_once("DbConnect.php");
  */
 class CommentManager extends DbConnect
 {
-
+    /**
+     * @var : variable utilisée pour l'injection de dépendance entre cette classe  CommentManager et entre ChapterManager et BooksManager
+     */
     private $chapterManager;
     private $booksManager;
+
+    /**
+     * CommentManager constructor : avec injection de dépendance
+     * @param $chapterManager
+     * @param $booksManager
+     */
 
     public function __construct($chapterManager, $booksManager) {
         $this->chapterManager = $chapterManager;
         $this->booksManager = $booksManager;
     }
 
-    public function getCommentsChapter($chapterId) // affiche tous les commentaires d'un chapitre
+    /**
+     * @param $chapterId
+     * @return array : permet d'obtenir tous les commentaires d'un chapitre spécifié en paramètre
+     */
+    public function getCommentsChapter($chapterId)
     {
         $comments = array();
         $db = $this->dbConnect();
@@ -37,7 +49,11 @@ class CommentManager extends DbConnect
         return $comments;
     }
 
-    public function getComments() // affiche tous les commentaires
+    /**
+     * @return array : permet d'obtenir tous les commentaires de la table commentaires selon le chapitre et le livre sélectionné
+     */
+
+    public function getComments()
     {
         $comments = array();
         $db = $this->dbConnect();
@@ -60,7 +76,11 @@ class CommentManager extends DbConnect
         return $comments;
     }
 
-    public function getCommentsMembre($membreId) // affiche tous les commentaires d'un membre
+    /**
+     * @param $membreId
+     * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
+     */
+    public function getCommentsMembre($membreId)
     {
         $commentsMembre = array();
         $db = $this->dbConnect();
@@ -81,8 +101,11 @@ class CommentManager extends DbConnect
         return $commentsMembre;
     }
 
-
-    public function getComment ($numcomm) // affiche un commentaire pour pouvoir le modifier si besoin
+    /**
+     * @param $numcomm
+     * @return Comment: retourne le commentaire pour pouvoir le modifier
+     */
+    public function getComment ($numcomm)
     {
         $pdo = $this->dbConnect();
         $PDOStatement = $pdo->prepare('SELECT * FROM comments WHERE id = ? ORDER BY commentDate DESC');
@@ -95,6 +118,14 @@ class CommentManager extends DbConnect
 
     }
 
+    /**
+     * @param $chapterId
+     * @param $membrePseudo
+     * @param $statut
+     * @param $comment
+     * @param $membreId
+     * ajout d'un commentaire dans la table commentaire avec le statut "en attante" puis si c'est un succès, on rajoute +1 dans nbcomms de la table membre
+     */
     public function AddComment ($chapterId, $membrePseudo, $statut, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
@@ -121,7 +152,11 @@ class CommentManager extends DbConnect
         }
     }
 
-    public function ModifComment () // modifie le commentaire dans la BDD
+    /**
+     * fonction qui permet la modification du commentaire dans la table commentaire
+     */
+
+    public function ModifComment ()
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment, statut=:statut WHERE id=:num LIMIT 1');
@@ -146,7 +181,12 @@ class CommentManager extends DbConnect
         }
     }
 
-    public function ApprovedComment($id) // modifie l'état du commentaire après approbation de celui-ci
+    /**
+     * @param $id
+     * @return bool
+     * fonction qui modifie l'état du commentaire après approbation de celui-ci par l'administrateur en statut "valide"
+     */
+    public function ApprovedComment($id)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
@@ -159,6 +199,12 @@ class CommentManager extends DbConnect
         }
         return $modifEtat;
     }
+
+    /**
+     * @param $id
+     * @return bool
+     * fonction qui modifie l'état du commentaire après refus de celui-ci par l'administrateur en statut "Refus"
+     */
 
     public function RefusedComment($id)
     {
@@ -174,6 +220,10 @@ class CommentManager extends DbConnect
         return $modifEtat;
     }
 
+    /**
+     * @param $membreId
+     * fonction qui supprime le commentaire du membre par le membre
+     */
     public function DeleteComment($membreId)
     {
         $db = $this->dbConnect();
@@ -193,6 +243,10 @@ class CommentManager extends DbConnect
         }
     }
 
+    /**
+     * @param $chapterid
+     * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
+     */
     public function SignaledComment($chapterid)
     {
         $db = $this->dbConnect();
@@ -210,6 +264,11 @@ class CommentManager extends DbConnect
             $_SESSION['error'] = "Impossible de signaler ce commentaire";
         }
     }
+
+    /**
+     * @param $chapterId
+     * @return mixed : le nombre de commentaires par chapitre
+     */
     
     public function CountCommentsChapter($chapterId)
     {
@@ -220,7 +279,5 @@ class CommentManager extends DbConnect
         return $count = $data['total'];
 
     }
-
-
 
 }

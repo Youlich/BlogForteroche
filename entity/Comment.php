@@ -2,9 +2,16 @@
 
 namespace entity;
 
+/**
+ * Class Comment
+ * @package entity
+ */
 
 class Comment
 {
+    /**
+     * @var colonnes de la table des commentaires
+     */
     private $id;
     private $comment;
     private $commentDate;
@@ -12,9 +19,15 @@ class Comment
     private $membreId;
     private $membrePseudo;
     private $statut;
+    /**
+     * @var : variables contenant le livre et le chapitre associé aux commentaires
+     */
     private $chapter;
     private $book;
 
+    /**
+     * @param array $donnees : permet d'appeler les setters
+     */
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value)
