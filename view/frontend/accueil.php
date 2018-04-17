@@ -12,18 +12,18 @@
     <title>Site de Jean Forteroche</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/style.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?> . bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?> . style.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo FONT; ?> . css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo MP; ?> . magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?> . freelancer.min.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +32,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-        <a href="#masthead"><img src="public/images/LOGO.png" width="200px"/>
+        <a href="#masthead"><img src="<?php echo IMAGES; ?>\LOGO.png" width="200px"/>
             <a class="navbar-brand js-scroll-trigger" href="#top"></a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu

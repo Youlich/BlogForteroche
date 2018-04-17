@@ -9,20 +9,20 @@
     <title>Site de Jean Forteroche</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/style.css" rel="stylesheet">
+    <link href="<?php CSS; ?> ./bootstrap.min.css" rel="stylesheet">
+    <link href="<?php CSS; ?> .style.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php ASSET; ?> .font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="<?php ASSET; ?> .magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="<?php CSS; ?> .freelancer.min.css" rel="stylesheet">
 
-    <script src="js/tinymce/tinymce.min.js"></script>
+    <script src="<?php ASSET; ?> .js/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector : 'textarea',elements : 'content',entity_encoding: "raw", forced_root_block : false, force_br_newlines : true, falsebranding : false, valid_elements : "em/i,strike,u,strong/b,div[align],br,#p[align],-ol[type|compact],-ul[type|compact],-li"});
     </script>
 

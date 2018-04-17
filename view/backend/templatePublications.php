@@ -58,6 +58,6 @@
         <?php echo $_SESSION['success'];} ?></div>
 </div>
 </body>
-<?php include('view/frontend/Footer.php');?>
+<?php include(VIEWFRONT. 'Footer.php');?>
 
 </html>

@@ -48,20 +48,20 @@
 </div>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo JS; ?>jquery.min.js"></script>
+<script src="<?php echo JS; ?>bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo JQ; ?>jquery.easing.min.js"></script>
+<script src="<?php echo MP; ?>magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
+<script src="<?php echo JS; ?>jqBootstrapValidation.js"></script>
+<script src="<?php echo JS; ?>contact_me.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/freelancer.min.js"></script>
-<script src="public/js/main.js"></script>
+<script src="<?php echo JS; ?>freelancer.min.js"></script>
+<script src="<?php echo JS; ?>main.js"></script>
 
 <!-- Scroll to Top Button -->
 <div class="scroll-to-top position-fixed ">
