@@ -1,12 +1,12 @@
 <?php
-namespace controler;
+namespace controller;
 
 require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
 
 /**
  * Class Frontend
- * @package controler Frontend
+ * @package controller Frontend
  */
 
 Class Frontend

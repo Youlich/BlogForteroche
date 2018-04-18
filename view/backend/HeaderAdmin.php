@@ -9,20 +9,20 @@
     <title>Site de Jean Forteroche</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php CSS; ?> ./bootstrap.min.css" rel="stylesheet">
-    <link href="<?php CSS; ?> .style.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>style.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="<?php ASSET; ?> .font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo CSS; ?>font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="<?php ASSET; ?> .magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo MP; ?>magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="<?php CSS; ?> .freelancer.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>freelancer.min.css" rel="stylesheet">
 
-    <script src="<?php ASSET; ?> .js/tinymce/tinymce.min.js"></script>
+    <script src="<?php echo TINYMCE; ?>tinymce.min.js"></script>
     <script>tinymce.init({ selector : 'textarea',elements : 'content',entity_encoding: "raw", forced_root_block : false, force_br_newlines : true, falsebranding : false, valid_elements : "em/i,strike,u,strong/b,div[align],br,#p[align],-ol[type|compact],-ul[type|compact],-li"});
     </script>
 
@@ -32,7 +32,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-        <img src="public/images/LOGO.png" width="200px"/>
+        <img src="<?php echo IMAGES; ?>\LOGO.png" width="200px"/>
             <a class="navbar-brand js-scroll-trigger" href="#top"></a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu

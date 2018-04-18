@@ -3,6 +3,7 @@
 /**
  * Class Autoload
  * Permet l'auto-chargement des classes
+ cette classe sera à supprimer quand le routeur.php sera prêt
  */
 
 class Autoload

@@ -1,12 +1,12 @@
 <?php
-namespace controler;
+namespace controller;
 
 require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
 
 /**
  * Class Backend
- * @package controler Backend
+ * @package controller Backend
  */
 
 Class Backend

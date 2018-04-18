@@ -1,7 +1,7 @@
 <?php
 namespace router;
-use controler\Backend;
-use controler\Frontend;
+use controller\Backend;
+use controller\Frontend;
 use model\AdminManager;
 use model\BooksManager;
 use model\ChapterManager;
