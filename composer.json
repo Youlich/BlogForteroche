@@ -1,0 +1,44 @@
+{
+  "name": "BlogForteroche",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://localhost:63342/BlogForteroche/index.php",
+  "license": "proprietary",
+  "config": {
+    "vendor-dir": "vendor",
+    "bin-dir": "bin/vendor",
+    "component-dir": "web/component/vendor",
+    "optimize-autoloader": true,
+    "preferred-install": "source"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "~5.5",
+    "ext-xml": "*",
+    "ext-dom": "*",
+    "ext-SimpleXML": "*",
+    "ext-date": "*",
+    "ext-json": "*",
+    "ext-PDO": "*",
+    "ext-pdo_mysql": "*",
+    "ext-Reflection": "*",
+    "ext-SPL": "*",
+    "ext-zip": "*",
+    "ext-ftp": "*",
+    "ext-soap": "*",
+    "lib-curl": "*",
+    "psr/log": "1.*",
+    "psr/http-message": "1.*"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+    }
+  }
+}
