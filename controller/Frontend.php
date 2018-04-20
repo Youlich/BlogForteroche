@@ -1,7 +1,6 @@
 <?php
 namespace controller;
 
-require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
 
 /**

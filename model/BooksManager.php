@@ -2,14 +2,12 @@
 namespace model;
 use entity\Books;
 
-require_once("DbConnect.php");
-
 /**
  * Class BooksManager
  * @package model
  * Class qui permet la gestion des livres dans la table books
  */
-class BooksManager extends DbConnect
+class BooksManager extends Manager
 {
     /**
      * @return array : tableau de tous les livres

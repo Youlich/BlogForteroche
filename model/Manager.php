@@ -1,29 +1,22 @@
 <?php
+
 namespace model;
 /**
- * Class DbConnect
+ * Class Manager
  * Permet de se connecter à la base de données
  */
 
-class DbConnect
+class Manager
 
 {
-    private static $instance;
+    private $pdo;
 
-    public static function dbConnect()
+    public function __construct($pdo)
     {
-        if(null === self::$instance)
-        {
-            try
-            {
-                self::$instance = new \PDO('mysql:host=localhost;dbname=projetblog;charset=utf8', 'root', '');
-            }
-            catch (\PDOException $e)
-            {
-                die('Erreur de connexion : ' . $e->getMessage() );
-            }
-        }
-        return self::$instance;
+        $this->pdo = $pdo;
     }
-
+    public function dbConnect()
+    {
+        return $this->pdo;
+    }
 }

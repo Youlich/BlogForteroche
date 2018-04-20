@@ -3,14 +3,13 @@ namespace model;
 use entity\Chapter;
 use entity\Comment;
 
-require_once("DbConnect.php");
 
 /**
  * Class CommentManager
  * @package model
  * Class qui permet la gestion des commentaires : la modification, la lecture et l'écriture dans la table comments
  */
-class CommentManager extends DbConnect
+class CommentManager extends Manager
 {
     /**
      * @var : variable utilisée pour l'injection de dépendance entre cette classe  CommentManager et entre ChapterManager et BooksManager
@@ -19,13 +18,19 @@ class CommentManager extends DbConnect
     private $booksManager;
 
     /**
-     * CommentManager constructor : avec injection de dépendance
+     * CommentManager setter : avec injection de dépendance
      * @param $chapterManager
+     */
+    public function setChapterManager($chapterManager)
+    {
+        $this->chapterManager = $chapterManager;
+    }
+    /**
+     * CommentManager setter : avec injection de dépendance
      * @param $booksManager
      */
-
-    public function __construct($chapterManager, $booksManager) {
-        $this->chapterManager = $chapterManager;
+    public function setBooksManager($booksManager)
+    {
         $this->booksManager = $booksManager;
     }
 

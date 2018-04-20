@@ -20,7 +20,7 @@ class View
         ob_start();
         include(VIEWFRONT.$template.'.php');
         $contentPage = ob_get_clean();
-        include_once (VIEWFRONT.'_gabaritFront.php');
+        include_once(VIEWFRONT . '_gabaritFront.php');
     }
 
     public function getViewBack($params = array())
@@ -30,6 +30,6 @@ class View
         ob_start();
         include(VIEWBACK.$template.'.php');
         $contentPage = ob_get_clean();
-        include_once (VIEWBACK.'_gabaritBack.php');
+        include_once(VIEWBACK . '_gabaritBack.php');
     }
 }

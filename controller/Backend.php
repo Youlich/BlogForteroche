@@ -1,7 +1,6 @@
 <?php
 namespace controller;
 
-require_once('Autoload.php'); // Chargement des classes
 \Autoload::register();
 
 /**
@@ -12,7 +11,7 @@ require_once('Autoload.php'); // Chargement des classes
 Class Backend
 {
     /**
-     * @var models
+     * @var
      */
     private $membreManager;
     private $adminManager;

@@ -4,14 +4,13 @@ namespace model;
 use services\Verifications;
 use entity\Admin;
 
-require_once("DbConnect.php");
 
 /**
  * Class AdminManager
  * @package model
  */
 
-class AdminManager extends DbConnect
+class AdminManager extends Manager
 {
 
     /**

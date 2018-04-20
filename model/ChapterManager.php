@@ -1,13 +1,13 @@
 <?php
 namespace model;
 use entity\Chapter;
-require_once("DbConnect.php");
+
 /**
  * Class ChapterManager
  * @package model
  * Class qui permet la gestion des chapitres : la modification, la lecture et l'écriture dans la table chapters
  */
-class ChapterManager extends DbConnect
+class ChapterManager extends Manager
 {
     /**
      * @var : variable utilisée pour l'injection de dépendance entre cette classe ChapterManager et ImageManager
@@ -15,12 +15,14 @@ class ChapterManager extends DbConnect
     private $imagesManager;
 
     /**
-     * ChapterManager constructor.
-     * @param $imagesManager : injection de dépendance avec cette classe ImageManager
+     * @param $imagesManager: injection de dépendance avec cette classe ImageManager
      */
-    public function __construct($imagesManager) {
+
+    public function setImagesManager($imagesManager)
+    {
         $this->imagesManager = $imagesManager;
     }
+
 
     /**
      * @return array : tableau qui affiche tous les chapitres

@@ -1,13 +1,13 @@
 <?php
 namespace model;
 use entity\Images;
-require_once("DbConnect.php");
+
 /**
  * Class ImagesManager
  * @package model
  * Class qui permet la gestion des images : l'affichage des images et la suppression d'image dans la table Images
  */
-class ImagesManager extends DbConnect
+class ImagesManager extends Manager
 {
     /**
      * @param $chapterId

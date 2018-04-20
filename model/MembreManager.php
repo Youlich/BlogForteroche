@@ -4,14 +4,12 @@ namespace model;
 use entity\Membres;
 use services\Verifications;
 
-require("DbConnect.php");
-
 /**
  * Class MembreManager
  * @package model
  */
 
-class MembreManager extends DbConnect
+class MembreManager extends Manager
 {
     /**
      * @return array : tableau listant les membres inscrits
