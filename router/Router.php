@@ -1,428 +1,162 @@
 <?php
 namespace router;
-use controller\Backend;
-use controller\Frontend;
-use model\AdminManager;
-use model\BooksManager;
-use model\ChapterManager;
-use model\CommentManager;
-use model\ImagesManager;
-use model\MembreManager;
+
 use services\Mail;
+
 
 class Router
 {
+    private $container;
+
+    public function __construct($container) {
+        $this->container = $container;
+    }
+
     public function diriger()
     {
         try {
-
-/* Backend */
+            /* Backend */
             if (isset($_GET['action'])) {
                 if ($_GET['action'] == 'addbook') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->addBook($_POST['titrelivre']);
-
                 } elseif ($_GET['action'] == 'addchapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->addChapter();
-
                 } elseif ($_GET['action'] == 'deletechapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->deleteChapter();
-
                 } elseif ($_GET['action'] == 'modifchapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->modifChapter();
-
                 } elseif ($_GET['action'] == 'listComments') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->listComments();
-
                 } elseif ($_GET['action'] == 'approved') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->approvedComments();
-
                 } elseif ($_GET['action'] == 'refused') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->refusedComments();
-
                 } elseif ($_GET['action'] == 'listmembres') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->listMembres();
-
                 } elseif ($_GET['action'] == 'publier') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->Publier();
-
                 } elseif ($_GET['action'] == 'boutonaddbook') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->boutonaddbook();
-
                 } elseif ($_GET['action'] == 'boutonmodifchapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->boutonmodifchapter();
-
                 } elseif ($_GET['action'] == 'boutonaddchapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->boutonaddchapter();
-
                 } elseif ($_GET['action'] == 'boutondeletechapter') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->boutondeletechapter();
-
                 } elseif ($_GET['action'] == 'authentificationAdmin') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->connectAdmin();
-
                 } elseif ($_GET['action'] == 'profilAdmin') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->profilAdmin();
-
                 } elseif ($_GET['action'] == 'modifmessageAdmin') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->modifmessageAdmin();
-
-
                 } elseif ($_GET['action'] == 'connectAdmin') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->connectAdmin();
-
                 } elseif ($_GET['action'] == 'administration') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->administration();
                 } elseif ($_GET['action'] == 'deconnectAdmin') {
-                    $backend = new Backend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $backend = $this->container->getControllerBackend();
                     $backend->deconnectAdmin();
-
- /* services */
+                    /* services */
                 } elseif ($_GET['action'] == 'contact') {
                     $backend = new Mail();
                     $backend->Contact();
-
-/* Frontend */
-
+                    /* Frontend */
                 } elseif ($_GET['action'] == 'listChapters') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->listChapters();
-
                 }elseif ($_GET['action'] == 'lastchapter') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->lastChapter();
-
                 } elseif ($_GET['action'] == 'chapter') { // action qui se réalise quand on clique sur le lien "lire la suite"
-                     $frontend = new Frontend(new MembreManager(),
-                         new AdminManager(),
-                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                         new ChapterManager(new ImagesManager()),
-                         new BooksManager(),
-                         new ImagesManager());
-                     $frontend->chapter();
-
+                    $frontend = $this->container->getControllerFrontend();
+                    $frontend->chapter();
                 } elseif ($_GET['action'] == 'addComment') {
-                     $frontend = new Frontend(new MembreManager(),
-                         new AdminManager(),
-                         new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                         new ChapterManager(new ImagesManager()),
-                         new BooksManager(),
-                         new ImagesManager());
-                     $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
-
+                    $frontend = $this->container->getControllerFrontend();
+                    $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
                 } elseif ($_GET['action'] == 'Comment') {
-                   $frontend = new Frontend(new MembreManager(),
-                       new AdminManager(),
-                       new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                       new ChapterManager(new ImagesManager()),
-                       new BooksManager(),
-                       new ImagesManager());
-                   $frontend->comment();
-
+                    $frontend = $this->container->getControllerFrontend();
+                    $frontend->comment();
                 } elseif ($_GET['action'] == 'listcommentsmembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->listCommentsMembre();
-
                 } elseif ($_GET['action'] == 'ModifComment') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->ModifComment();
-
                 } elseif ($_GET['action'] == 'deletecomment') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->deleteComment($_SESSION['id']);
-
                 } elseif ($_GET['action'] == 'signaled') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->SignaledComment($_GET['id']);
-
                 } elseif ($_GET['action'] == 'accueil') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->accueil();
-
                 } elseif ($_GET['action'] == 'connectMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->connectMembre();
-
                 } elseif ($_GET['action'] == 'deconnectMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->deconnectMembre();
-
                 } elseif ($_GET['action'] == 'addMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->addMembre();
-
                 } elseif ($_GET['action'] == 'suppMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->suppMembre();
-
                 } elseif ($_GET['action'] == 'profilMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->profilMembre();
-
                 } elseif ($_GET['action'] == 'inscripMembre') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->inscripMembre();
-
                 } elseif ($_GET['action'] == 'mentionslegales') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->mentionslegales();
-
                 } elseif ($_GET['action'] == 'charte') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->charte();
-
                 } elseif ($_GET['action'] == 'boutonmodifpseudomdp') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->boutonmodifpseudomdp();
-
                 } elseif ($_GET['action'] == 'boutonmodifiermail') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->boutonmodifiermail();
-
                 } elseif ($_GET['action'] == 'boutonafficherlescommentaires') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->boutonafficherlescommentaires();
-
                 } elseif ($_GET['action'] == 'boutonsupprimerprofil') {
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->boutonsupprimerprofil();
-
                 } elseif ($_GET['action'] == 'modifpseudo_mdp'){
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->modifPseudoMdp();
-
                 } elseif ($_GET['action'] == 'modifemail'){
-                    $frontend = new Frontend(new MembreManager(),
-                        new AdminManager(),
-                        new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                        new ChapterManager(new ImagesManager()),
-                        new BooksManager(),
-                        new ImagesManager());
+                    $frontend = $this->container->getControllerFrontend();
                     $frontend->modifEmail();
                 }
-
-                } else {
-                $frontend = new Frontend(new MembreManager(),
-                    new AdminManager(),
-                    new CommentManager(new ChapterManager(new ImagesManager()), new BooksManager()),
-                    new ChapterManager(new ImagesManager()),
-                    new BooksManager(),
-                    new ImagesManager());
+            } else {
+                $frontend = $this->container->getControllerFrontend();
                 $frontend->accueil();
             }
-            
+
         }
         catch
         (\Exception $e) {
