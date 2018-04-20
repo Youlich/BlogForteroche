@@ -52,8 +52,8 @@
 <script src="<?php echo JS; ?>bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="<?php echo JQ; ?>jquery.easing.min.js"></script>
-<script src="<?php echo MP; ?>magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo JS; ?>jquery.easing.min.js"></script>
+<script src="<?php echo MP; ?>jquery.magnific-popup.min.js"></script>
 
 <!-- Contact Form JavaScript -->
 <script src="<?php echo JS; ?>jqBootstrapValidation.js"></script>

@@ -12,18 +12,18 @@
     <title>Site de Jean Forteroche</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo CSS; ?> . bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo CSS; ?> . style.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>style.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="<?php echo FONT; ?> . css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo CSS; ?>font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="<?php echo MP; ?> . magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo MP; ?>magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo CSS; ?> . freelancer.min.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>freelancer.min.css" rel="stylesheet">
 
 </head>
 
