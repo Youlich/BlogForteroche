@@ -10,6 +10,8 @@ use model\ChapterManager;
 use model\CommentManager;
 use model\ImagesManager;
 use model\MembreManager;
+
+
 class Container
 {
     protected $parameters;
@@ -19,6 +21,15 @@ class Container
     {
         $this->parameters = $parameters;
     }
+
+    public function getPDO()
+    {
+        if ($this->pdo == null) {
+            $this->pdo = new \PDO('mysql:host=localhost;dbname=projetblog;charset=utf8', 'root', '');
+        }
+        return $this->pdo;
+    }
+
     public function getMembreManager()
     {
         return new MembreManager($this->getPDO());
@@ -70,11 +81,11 @@ class Container
             $this->getImagesManager()
         );
     }
-    public function getPDO()
+
+    public function getControllerServices()
     {
-        if ($this->pdo == null) {
-            $this->pdo = new \PDO('mysql:host=localhost;dbname=projetblog;charset=utf8', 'root', '');
-        }
-        return $this->pdo;
+        return new Mail();
     }
+
+
 }

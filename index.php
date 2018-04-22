@@ -15,6 +15,6 @@ session_start();
 
 $container = new \services\Container([]);
 $router = new \router\Router($container);
-$router->diriger();
+$router->resolve();
 
 
