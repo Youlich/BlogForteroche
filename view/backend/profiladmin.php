@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require('HeaderAdmin.php'); ?>
+<?php require('headerAdmin.php'); ?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -21,7 +21,7 @@
             <br/><br/>
 
 <br/><br/>
-<form method="post" action="index.php?action=modifmessageAdmin"">
+<form method="post" action="index.php?action=modifmessage"">
             <div class= "input-group" >
                 <label for="content">Votre message : </label>
                 <textarea class="content" id="message" name="message" rows="15"> <?php echo $admin->getMessage(); ?> </textarea>
@@ -47,7 +47,7 @@
 </div>
 
 </body>
-<?php include('view/frontend/Footer.php');?>
+<?php include('view/frontend/footer.php');?>
 </html>
 
 <?php

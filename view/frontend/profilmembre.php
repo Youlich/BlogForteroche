@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require('Header.php'); ?>
+<?php require('header.php'); ?>
 <header class="bg-primary text-white">
 
     <div class="container text-center">
@@ -71,5 +71,5 @@
             </div>
 
 </body>
-<?php include('Footer.php');?>
+<?php include('footer.php');?>
 </html>

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require('Header.php'); ?>
+<?php require('headerAdmin.php'); ?>
+
 <header class="bg-primary text-white">
     <div class="container text-center">
         </br></br></br>
-        <h1>Connexion Membre</h1>
+        <h1>Connexion Administrateur</h1>
         </br></br>
     </div>
 </header>
 </br></br>
+
 <body class="top">
 <div align="center">
-
-    <form action="" method="post">
-
+    <form action="index.php?action=login" method="post">
         <table>
             <tr>
                 <td align="right">
-                    <label for="pseudo">Pseudo</label>
+                    <label for="login">Login</label>
                 </td>
                 <td>
-                    <input type="text" name="pseudo" id="pseudo" />
+                    <input type="text" name="login" id="login" />
                 </td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
                     <label for="pass">Mot de passe</label>
                 </td>
                 <td>
-                    <input type="password" name="pass" id="pass" />
+                    <input type="password" name="mdp" id="mdp" />
                 </td>
             </tr>
             <tr>
@@ -43,22 +43,24 @@
                     <input type="submit" name= "submit" value="Se connecter" class="btn btn-success btn-md" />
                 </td>
             </tr>
-                <div class="col-lg-4 mx-auto">
-                    <?php if (isset($_SESSION['error'])) : ?>
+            <div class="col-lg-4 mx-auto">
+                <?php if (isset($_SESSION['error'])) : ?>
                     <div class="alert alert-danger">
                         <?php echo $_SESSION['error']; ?></div>
-                        <?php endif; ?>
-                    <?php if (isset($_SESSION['success'])) : ?>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['success'])) : ?>
                     <div class="alert alert-success">
                         <?php echo $_SESSION['success']; ?></div>
-                        <?php endif; ?>
-                </div>
+                <?php endif; ?>
+            </div>
         </table>
-        </br></br>
+        <br/><br/>
+
     </form>
+
+
 </div>
-<br/>
-<?php include('Footer.php');?>
+<?php include('view/frontend/footer.php');?>
 
 <!-- Scroll to Top Button -->
 <div class="scroll-to-top position-fixed ">
@@ -68,8 +70,3 @@
 </div>
 </body>
 </html>
-
-
-<?php
-unset($_SESSION['error']);
-unset($_SESSION['success']);?>

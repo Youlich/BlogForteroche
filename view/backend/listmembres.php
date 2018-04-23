@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php require('HeaderAdmin.php');?>
+<?php require('headerAdmin.php');?>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -48,7 +48,7 @@ foreach ($membres as $membre)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 
-<?php include('view/frontend/Footer.php');?>
+<?php include('view/frontend/footer.php');?>
 </body>
 </html>
 
