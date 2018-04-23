@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php require('HeaderAdmin.php');?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         <br/><br/><br/>
         <h1>Publications</h1>
         <br/><br/><br/>
-    </div>
 </header>
 
 <body class="top">
@@ -86,30 +79,11 @@
 
 </div>
 
-<div class="col-lg-4 mx-auto" align="center">
-    <?php if (isset($_SESSION['error'])){ ?>
-    <div class="alert alert-danger">
-        <?php echo $_SESSION['error'];} ?></div>
-    <?php unset($_SESSION['error']);?></div>
-<div class="col-lg-4 mx-auto" align="center">
-    <?php if (isset($_SESSION['success'])){?>
-    <div class="alert alert-success">
-        <?php echo $_SESSION['success'];} ?></div>
-</div>
 <br/>
 <div align="center" id="endpage"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 <br/>
-<!-- Scroll to Top Button -->
-<div class="scroll-to-top position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-        <i class="fa fa-chevron-up"></i>
-    </a>
-</div>
 </body>
-<?php include('view/frontend/Footer.php');?>
-
-</html>
 
 <?php
 unset($_SESSION['error']);

@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<?php require('Header.php'); ?>
-<header class="bg-primary text-white">
-
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         <br/><br/><br/>
         <h1>Votre profil <?php echo $_SESSION['pseudo']?></h1>
         <br/><br/><br/>
-    </div>
 </header>
 <br/>
+
 <body class="top">
 
 
@@ -31,7 +26,7 @@
     <a href="index.php?action=boutonmodifpseudomdp">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Modifier mon pseudo ou mon mot de passe"></a>
 
-            <form action="index.php?action=modifpseudo_mdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+            <form action="index.php?action=modifpseudomdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
                 <div class="form-group">
                     <p>(*) informations obligatoires</p>
                     <br/><br/>
@@ -77,21 +72,12 @@
         <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>
     </div>
 
-
-</div>
 <br/>
 <br/>
-<?php include('Footer.php');?>
 
-        <!-- Scroll to Top Button -->
-        <div class="scroll-to-top position-fixed ">
-            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-                <i class="fa fa-chevron-up"></i>
-            </a>
-        </div>
-
-</body>
-</html>
 <?php
 unset($_SESSION['error']);
 unset($_SESSION['success']);?>
+
+</div>
+</body>

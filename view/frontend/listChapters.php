@@ -1,7 +1,13 @@
-<?php ob_start(); ?>
+<header class="bg-primary text-white text-center">
+    <br><br><br>
+    <h1>Billet simple pour l'Alaska</h1>
+    <br><br><br>
+</header>
 
+<body>
+<br><br>
 <em><h5 class="link text-center"><a href="index.php?action=lastchapter" class= "info" >Voir mon dernier chapitre</a></em> </h5>
-
+<div class="contain">
 <?php
 foreach ($chapters as $chapter)
 {
@@ -26,11 +32,5 @@ foreach ($chapters as $chapter)
 }
 ?>
 <br/><br/>
-
-
-
-<?php $content = ob_get_clean(); ?>
-
-
-<?php require('templateBlog.php'); ?>
-
+</div>
+</body>

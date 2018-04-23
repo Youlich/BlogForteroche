@@ -1,7 +1,13 @@
-<?php ob_start(); ?>
+<header class="bg-primary text-white text-center">
+            <br><br><br>
+            <h1>Billet simple pour l'Alaska</h1>
+            <br><br><br>
+</header>
 
+<body>
+    <br><br>
     <em><h5 class="link text-center"><a href="index.php?action=listChapters">Retour à la liste des chapitres</a></em> </h5>
-
+<div class="contain">
     <div class="post">
         <p>
             <img src="<?php echo $image?>" />
@@ -52,28 +58,15 @@
                 </div>
             </form>
     </div>
-    <div id="endpage" class="col-lg-4 mx-auto" align="center">
-        <?php if (isset($_SESSION['error'])){ ?>
-        <div class="alert alert-danger">
-            <?php echo $_SESSION['error'];} ?></div>
-        <?php unset($_SESSION['error']);?></div>
-    <div class="col-lg-4 mx-auto" align="center">
-        <?php if (isset($_SESSION['success'])){?>
-        <div class="alert alert-success">
-            <?php echo $_SESSION['success'];} ?></div>
-    </div>
+
 
 <?php } else {?>
-    <h6><a href="index.php?action=inscripMembre" class="info"> Si vous n'avez pas de compte : Inscription ici </a><br/><br/>
-        <a href="index.php?action=connectMembre" class="info"> Si vous avez déjà un compte : Connexion ici</a></br></h6>
+    <h6><a href="index.php?action=inscription" class="info"> Si vous n'avez pas de compte : Inscription ici </a><br/><br/>
+        <a href="index.php?action=loginmembre" class="info"> Si vous avez déjà un compte : Connexion ici</a></br></h6>
 
-<?php }?>
+<?php }
 
-<?php $content = ob_get_clean(); ?>
-
-
-<?php require('templateBlog.php'); ?>
-
-
-<?php unset($_SESSION['success']);
+unset($_SESSION['success']);
 unset($_SESSION['error']);?>
+</div>
+</body>

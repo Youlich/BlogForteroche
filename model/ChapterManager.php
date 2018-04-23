@@ -27,7 +27,7 @@ class ChapterManager extends Manager
     /**
      * @return array : tableau qui affiche tous les chapitres
      */
-    public function getChapters ()
+    public function listChapters()
     {
         $imageManager = $this->imagesManager;
         $chapters = array();
@@ -100,7 +100,7 @@ class ChapterManager extends Manager
      * @param $imageId
      * @return bool|string : ajoute un chapitre dans la table chapitre. Si c'est un succès on obtient son id créé, sinon on retourne false
      */
-    public function AddChapter($bookId, $title, $content, $resum, $imageId)
+    public function addChapter($bookId, $title, $content, $resum, $imageId)
     {
         $ChapterAdd = array();
         $db = $this->dbConnect();
@@ -123,7 +123,7 @@ class ChapterManager extends Manager
      * @return bool : suppression d'un chapitre. Si c'est un succès on retourne true sinon false
      */
 
-    public function DeleteChapter($chapter_id)
+    public function deleteChapter($chapter_id)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM chapters WHERE id = :id");
@@ -143,7 +143,7 @@ class ChapterManager extends Manager
      * @param $imageId
      * @return bool : modification du chapitre.Si c'est un succès on retourne true sinon false
      */
-    public function ModifChapter($id, $title, $content, $resum, $imageId)
+    public function modifChapter($id, $title, $content, $resum, $imageId)
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum, imageId=:imageId WHERE id=:id LIMIT 1');
@@ -172,7 +172,7 @@ class ChapterManager extends Manager
      * @return bool : modification du chapitre dans le cas où il n'y a pas d'image. Si c'est un succès on retourne true sinon false
      */
 
-    public function ModifChaptersansUpload($id, $title, $content,$resum)
+    public function modifChaptersansUpload($id, $title, $content,$resum)
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum WHERE id=:id LIMIT 1');

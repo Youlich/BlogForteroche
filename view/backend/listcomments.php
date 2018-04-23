@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php require('headerAdmin.php');?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         <br/><br/><br/>
         <h1>Commentaires</h1>
         <br/><br/><br/>
-    </div>
 </header>
+
 <body class="top">
 <br/>
 <table class="table table-bordered text-center">
@@ -68,6 +62,4 @@ foreach ($comments as $comment)
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 </body>
-<?php include('view/frontend/footer.php');?>
 
-</html>

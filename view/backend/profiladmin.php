@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php require('headerAdmin.php'); ?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
-        <br/><br/><br/>
+<header class="bg-primary text-white text-center">
+        </br></br></br>
         <h1>Mon profil</h1>
         <br/><br/><br/>
-    </div>
 </header>
 
 <body class="top">
@@ -31,25 +24,14 @@
             </div>
 </form>
     <br/><br/>
-    <div class="col-lg-4 mx-auto">
-        <?php if (isset($_SESSION['error'])) : ?>
-            <div class="alert alert-danger">
-                <?php echo $_SESSION['error']; ?></div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="alert alert-success">
-                <?php echo $_SESSION['success']; ?></div>
-        <?php endif; ?>
-    </div>
-<br/>
+
 <div align="center" id="endpage"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 </div>
 
 </body>
-<?php include('view/frontend/footer.php');?>
-</html>
 
 <?php
+
 unset($_SESSION['error']);
 unset($_SESSION['success']);?>

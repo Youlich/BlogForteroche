@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php require('HeaderAdmin.php');?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         <br/><br/><br/>
         <h1>Publications</h1>
         <br/><br/><br/>
-    </div>
 </header>
 
 <body class="top">
@@ -47,17 +40,5 @@
             </a>
         </div>
 
-<div class="col-lg-4 mx-auto" align="center">
-    <?php if (isset($_SESSION['error'])){ ?>
-    <div class="alert alert-danger">
-        <?php echo $_SESSION['error'];} ?></div>
-    <?php unset($_SESSION['error']);?></div>
-<div class="col-lg-4 mx-auto" align="center">
-    <?php if (isset($_SESSION['success'])){?>
-    <div class="alert alert-success">
-        <?php echo $_SESSION['success'];} ?></div>
-</div>
-</body>
-<?php include(VIEWFRONT. 'Footer.php');?>
 
-</html>
+</body>

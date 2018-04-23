@@ -1,33 +1,34 @@
-<?php ob_start(); ?>
+    <header class="bg-primary text-white text-center">
+        </br></br></br>
+        <h1>Commentaire</h1>
+        </br></br>
+    </header>
+    </br></br>
 
-<h2>Commentaire</h2>
+<body>
+<div class="container" >
 
+<form action="index.php?action=modifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
 
-<br><br>
-
-
-<form action="index.php?action=ModifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
-
-    <div>
+        <div class="form-group">
+        <label for="nummComm"></label>
         <input type="hidden" id="numComm" name="numComm" value="<?php echo $comment->getId()?>" />
-    </div>
-    <div>
-        <label for="author">Auteur</label><br />
+        </div>
+        <div class="form-group">
+        <label for="author">Auteur</label>
         <input type="text" id="author" name="author" value="<?php echo $comment->getMembrePseudo()?>" />
-    </div>
-    <div>
+        </div>
+        <div class="form-group">
         <label for="comment">Commentaire</label><br />
         <textarea id="comment" name="comment"><?php echo htmlspecialchars($comment->getComment())?></textarea>
-    </div>
-    <div>
+        </div>
+        <div align="center">
         <input type="submit" class="btn btn-success btn-sm"/>
-    </div>
+        </div>
+
     <br/><br/>
 
 </form>
 
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('templateBlog.php'); ?>
-
+</div>
+</body>

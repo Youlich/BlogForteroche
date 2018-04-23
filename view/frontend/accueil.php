@@ -1,83 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Site de Jean Forteroche</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo CSS; ?>bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo CSS; ?>style.css" rel="stylesheet">
-    <!-- Custom fonts for this template -->
-    <link href="<?php echo CSS; ?>font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link href="<?php echo MP; ?>magnific-popup.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
-    <link href="<?php echo CSS; ?>freelancer.min.css" rel="stylesheet">
-
-</head>
-
-<body id="top">
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-    <div class="container">
-        <a href="#masthead"><img src="<?php echo IMAGES; ?>\LOGO.png" width="200px"/>
-            <a class="navbar-brand js-scroll-trigger" href="#top"></a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Blog</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#bibliographie">Bibliographie</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
-                    </li>
-
-                    <li class="nav-item dropdown mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
-                        <ul class="dropdown-menu">
-                            <?php if (isset($_SESSION['id'])) { ?>
-
-                                <li><a class="dropdown-item" href="index.php?action=deconnectMembre">Se déconnecter</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="index.php?action=profilMembre">Gérer mon compte
-                                    </a>
-                                </li>
-
-
-                            <?php } else { ?>
-
-                                <li><a class="dropdown-item" href="index.php?action=connectMembre">Se connecter</a></li>
-                                <li><a class="dropdown-item" href="index.php?action=charte">S'inscrire</a></li>
-                            <?php } ?>
-
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-    </div>
-</nav>
-
-
-<!-- Header -->
 <section class="bg-primary text-white mb-0" id="masthead">
         <section class="container">
         <h1 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
@@ -114,7 +35,7 @@
         <br/>
         <em><h5 class="link text-center"><a href="index.php?action=listChapters&amp">Voir tous les chapitres</h5></em>
         <br/>
-        <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
+        <em><h5 class="link text-center"><a href="index.php?action=lastChapter">Voir mon dernier chapitre</h5></em>
 
         <div class="row">
             <?php
@@ -217,9 +138,6 @@
 </section>
 
 <?php
-
-include ('view/frontend/footer.php');
-
 unset($_SESSION['inputs']);
 unset($_SESSION['errors']);
 unset($_SESSION['success']);

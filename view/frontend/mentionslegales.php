@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<?php require ('Header.php'); ?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         </br></br></br>
         <h1>Mentions légales</h1>
         </br></br></br>
-    </div>
 </header>
+
 <body class="top">
 <div class="ml">
     <h3>1. Présentation du site.</h3>
@@ -66,13 +61,8 @@
     <h3>11. Lexique.</h3>
     <p>Utilisateur : Internaute se connectant, utilisant le site susnommé.</p>
     <p>Informations personnelles : « les informations qui permettent, sous quelque forme que ce soit, directement ou non, l'identification des personnes physiques auxquelles elles s'appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).</p>
+
+
+
 </div>
-
-
-
-<!-- Footer -->
-<?php require('Footer.php'); ?>
-
-
 </body>
-</html>

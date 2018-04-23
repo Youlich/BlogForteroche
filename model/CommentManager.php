@@ -85,7 +85,7 @@ class CommentManager extends Manager
      * @param $membreId
      * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
      */
-    public function getCommentsMembre($membreId)
+    public function listcomments($membreId)
     {
         $commentsMembre = array();
         $db = $this->dbConnect();
@@ -131,7 +131,7 @@ class CommentManager extends Manager
      * @param $membreId
      * ajout d'un commentaire dans la table commentaire avec le statut "en attante" puis si c'est un succès, on rajoute +1 dans nbcomms de la table membre
      */
-    public function AddComment ($chapterId, $membrePseudo, $statut, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
+    public function addComment ($chapterId, $membrePseudo, $statut, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
         $db = $this->dbConnect();
@@ -161,7 +161,7 @@ class CommentManager extends Manager
      * fonction qui permet la modification du commentaire dans la table commentaire
      */
 
-    public function ModifComment ()
+    public function modifComment ()
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment, statut=:statut WHERE id=:num LIMIT 1');
@@ -177,11 +177,11 @@ class CommentManager extends Manager
         }
         if ($modifLines) {
             $_SESSION['success'] = "Votre commentaire a bien été modifié";
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires'. "#endpage");
+            header('Location: index.php?action=profilmembre&amp;afficher_commentaires'. "#endpage");
             exit();
         }else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être modifié";
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires'. "#endpage");
+            header('Location: index.php?action=profilmembre&amp;afficher_commentaires'. "#endpage");
             exit();
         }
     }
@@ -191,7 +191,7 @@ class CommentManager extends Manager
      * @return bool
      * fonction qui modifie l'état du commentaire après approbation de celui-ci par l'administrateur en statut "valide"
      */
-    public function ApprovedComment($id)
+    public function approvedComment($id)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
@@ -211,7 +211,7 @@ class CommentManager extends Manager
      * fonction qui modifie l'état du commentaire après refus de celui-ci par l'administrateur en statut "Refus"
      */
 
-    public function RefusedComment($id)
+    public function refusedComment($id)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
@@ -229,7 +229,7 @@ class CommentManager extends Manager
      * @param $membreId
      * fonction qui supprime le commentaire du membre par le membre
      */
-    public function DeleteComment($membreId)
+    public function deleteComment($membreId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM comments WHERE id = :id");
@@ -240,9 +240,9 @@ class CommentManager extends Manager
             $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires');
+            header('Location: index.php?action=profilmembre&amp;afficher_commentaires');
         }else {
-            header('Location: index.php?action=profilMembre&amp;afficher_commentaires');
+            header('Location: index.php?action=profilmembre&amp;afficher_commentaires');
             $_SESSION['error'] = "Votre commentaire n'a pas pu être supprimé";
 
         }
@@ -252,7 +252,7 @@ class CommentManager extends Manager
      * @param $chapterid
      * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
      */
-    public function SignaledComment($chapterid)
+    public function signaledComment($chapterid)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE chapterId=:num LIMIT 1');
@@ -275,7 +275,7 @@ class CommentManager extends Manager
      * @return mixed : le nombre de commentaires par chapitre
      */
     
-    public function CountCommentsChapter($chapterId)
+    public function countCommentsChapter($chapterId)
     {
         $pdo = $this->dbConnect();
         $PDOStatement = $pdo->prepare('SELECT COUNT(*) as total FROM comments WHERE chapterId = ?');

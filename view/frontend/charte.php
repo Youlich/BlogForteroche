@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/html">
 
-<?php require ('Header.php'); ?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         </br></br></br>
         <h1>Ma Charte</h1>
         </br></br>
-    </div>
 </header>
+
 <body class="top">
 <div class = "charte" align="center">
     </br></br>
@@ -45,7 +40,7 @@ Vous êtes donc propriétaire de votre compte et responsable de celui-ci (ainsi 
 </p>
 
 
-    <form action="index.php?action=inscripMembre" method="post">
+    <form action="index.php?action=inscription" method="post">
         <div>
             <div>
                 <input type="submit" style="width: 10%;" name="accept" class="btn btn-success btn-sm" value="J'accepte le réglement"/>
@@ -60,11 +55,7 @@ Vous êtes donc propriétaire de votre compte et responsable de celui-ci (ainsi 
         </div>
     </form>
 </br></br>
+
+
 </div>
-
-<!-- Footer -->
-<?php require('Footer.php'); ?>
-
-
 </body>
-</html>

@@ -47,7 +47,7 @@ class BooksManager extends Manager
      * @param $title : permet d'ajouter un nouveau livre avec son titre obligatoire
      * @return bool
      */
-    public function AddBook($title)
+    public function addBook($title)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO books (title) VALUES (?)');

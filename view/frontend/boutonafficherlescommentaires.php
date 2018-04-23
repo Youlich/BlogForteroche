@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<?php require('Header.php'); ?>
-<header class="bg-primary text-white">
-
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         <br/><br/><br/>
         <h1>Votre profil <?php echo $_SESSION['pseudo']?></h1>
         <br/><br/><br/>
-    </div>
 </header>
+
 <br/>
+
 <body class="top">
 
 
@@ -40,7 +36,7 @@
     <a href="index.php?action=boutonafficherlescommentaires">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Gérer mes commentaires"></a>
     <br/>
-    <form action="index.php?action=listcommentsmembre&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+    <form action="index.php?action=listcomments&amp;idmembre=<?= $_SESSION['id']?>" method="post">
         <table class="table table-bordered text-center">
             <thead class="thead table-active">
             <tr>
@@ -82,7 +78,7 @@
                         </td> <?php
                     } ?>
                     <td>
-                        <a href="index.php?action=Comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
+                        <a href="index.php?action=comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
                         <a href="index.php?action=deletecomment&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Supprimer"></a>
                     </td>
                 </tr>
@@ -96,32 +92,12 @@
                 <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Supprimer mon compte"</a>
         <br/><br/><br/>
 
-        <div id="endpage" class="col-lg-4 mx-auto" align="center">
-            <?php if (isset($_SESSION['error'])){ ?>
-            <div class="alert alert-danger">
-                <?php echo $_SESSION['error'];} ?></div>
-            <?php unset($_SESSION['error']);?></div>
-        <div class="col-lg-4 mx-auto" align="center">
-            <?php if (isset($_SESSION['success'])){?>
-            <div class="alert alert-success">
-                <?php echo $_SESSION['success'];} ?></div>
-        </div>
-
         <div align="center">
             <h5><em><a href="index.php?action=accueil">Retour à l'accueil</em></h5>
         </div>
 
+<br/>
+<br/>
+
 </div>
-<br/>
-<br/>
-<?php include('Footer.php');?>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-to-top position-fixed ">
-        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
-
 </body>
-</html>

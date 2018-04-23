@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
+<header class="bg-primary text-white text-center">
 
-<?php require('HeaderAdmin.php'); ?>
-
-<header class="bg-primary text-white">
-    <div class="container text-center">
         </br></br></br>
         <h1>Administration du site</h1>
         </br></br></br>
-    </div>
+
 </header>
-<body class="top">
+
 
 
 <!-- Actions Section -->
@@ -36,15 +31,10 @@
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=profilAdmin" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
+                    <a href="index.php?action=profiladmin" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
             </div>
         </div>
     </section>
 
 </section>
-
-
-<?php include('view/frontend/Footer.php');?>
-</body>
-</html>
 

@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<?php require('Header.php'); ?>
-<header class="bg-primary text-white">
-    <div class="container text-center">
+<header class="bg-primary text-white text-center">
         </br></br></br>
         <h1>Inscription Membre</h1>
         </br></br>
-    </div>
 </header>
+
 </br>
 <body class="top">
+
 <div align="center">
 
     </br></br>
 
-    <form action="index.php?action=addMembre" method="post">
+    <form action="index.php?action=inscription" method="post">
 
 
         <table>
@@ -57,31 +54,15 @@
                     <br><br>
                     <input class="btn btn-success btn-md" type="submit" name="submit" value="S'inscrire" />
                 </td>
-
-                <div class="col-lg-4 mx-auto">
-                <?php if (isset($_SESSION['error'])){ ?>
-                    <div class="alert alert-danger">
-                    <?php echo $_SESSION['error'];} ?></div>
-                <?php if (isset($_SESSION['success'])){?>
-                    <div class="alert alert-success">
-                    <?php echo $_SESSION['success'];} ?></div>
-                    </div>
             </tr>
         </table>
     </form>
 
-</div>
 <br>
-<?php include('Footer.php');?>
 
-
-<!-- Scroll to Top Button -->
-<div class="scroll-to-top position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#top">
-        <i class="fa fa-chevron-up"></i>
-    </a>
-</div>
-</body>
-</html>
 <?php
 unset($_SESSION['error']);?>
+
+</div>
+</body>
+

@@ -11,10 +11,11 @@ use services\Verifications;
 
 class MembreManager extends Manager
 {
+
     /**
      * @return array : tableau listant les membres inscrits
      */
-    public function getMembres() {
+    public function listMembres() {
 
         $membres = array();
         $db = $this->dbConnect();
@@ -49,7 +50,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-    public function AuthMembre ()
+    public function loginmembre()
     {
         // toutes les vérifications
         if (isset($_POST['submit'])) {
@@ -91,7 +92,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-        public function InscrMembre ()
+        public function inscription ()
         {
             if (isset($_POST['submit'])) {
                 // vérification que tous les champs sont remplis
@@ -117,7 +118,7 @@ class MembreManager extends Manager
                                             'pseudo' => $_POST['pseudo'],
                                             'pass' => $pass_hache,
                                             'email' => $_POST['email']));
-                                        header('location: index.php?action=connectMembre');
+                                        header('location: index.php?action=loginmembre');
                                         $_SESSION['success'] = "Bravo ! Vous êtes bien inscrit, merci de vous connecter.";
                                         return $_SESSION['success'];
 
@@ -148,7 +149,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-        public function deleteMembre ()
+        public function deleteaccount()
         {
             $db = $this->dbConnect();
             $req = $db->prepare("DELETE FROM membres WHERE id = :id");
@@ -157,7 +158,7 @@ class MembreManager extends Manager
                 header('location: index.php?action=accueil');
                 session_destroy();
             }else {
-                header('location: index.php?action=profilMembre');
+                header('location: index.php?action=profilmembre');
                 $_SESSION['error'] = "Votre compte n'a pas pu être supprimé";
                 return $_SESSION['error'];
             }
@@ -167,7 +168,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-    public function modifPseudoMDP()
+    public function modifPseudoMdp()
     {
         if (isset($_POST['submit'])) {
             $verification = new Verifications();
@@ -190,7 +191,7 @@ class MembreManager extends Manager
                                 $newmodif->hydrate($data);
 
                             }
-                            header('location: index.php?action=connectMembre');
+                            header('location: index.php?action=loginmembre');
                             $_SESSION['success'] = "Bravo ! Vos informations de connexion sont modifiées, merci de vous connecter.";
                             return $_SESSION['success'];
 
@@ -209,7 +210,7 @@ class MembreManager extends Manager
     /**
      * @return string
      */
-    public function modifmail()
+    public function modifEmail()
     {
         if (isset($_POST['submit'])) {
             $verification = new Verifications();
@@ -225,7 +226,7 @@ class MembreManager extends Manager
                     $newmodif->hydrate($data);
 
                 }
-               header ('location:index.php?action=profilMembre');
+               header ('location:index.php?action=profilmembre');
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['success'] = "Bravo ! Votre email est modifié";
                 return $_SESSION['success'];
