@@ -88,15 +88,16 @@
 <?= $content; ?>
 
 <!-- Errors -->
+<div class="container">
 <div class="col-lg-4 mx-auto">
-    <?php if (isset($_SESSION['error'])){ ?>
+    <?php if (isset($error)){ ?>
     <div align="center" class="alert alert-danger">
-        <?php echo $_SESSION['error'];} ?></div>
-    <?php if (isset($_SESSION['success'])){?>
+        <?php echo $error;} ?></div>
+    <?php if (isset($success)){?>
     <div align="center" class="alert alert-success">
-        <?php echo $_SESSION['success'];} ?></div>
+        <?php echo $success;} ?></div>
 </div>
-
+</div>
 <!-- Footer -->
 <footer class="footer text-center">
 

@@ -66,16 +66,16 @@
 
     <?= $content; ?>
 
-<!--Errors-->
-<div class="col-lg-4 mx-auto">
-    <?php if (isset($_SESSION['error'])){ ?>
-    <div align="center" class="alert alert-danger">
-        <?php echo $_SESSION['error'];} ?></div>
-    <?php unset($_SESSION['error']);?></div>
-<div align="center" class="col-lg-4 mx-auto">
-    <?php if (isset($_SESSION['success'])){?>
-    <div align="center" class="alert alert-success">
-        <?php echo $_SESSION['success'];} ?></div>
+<<!-- Errors -->
+<div class="container">
+    <div class="col-lg-4 mx-auto">
+        <?php if (isset($error)){ ?>
+        <div align="center" class="alert alert-danger">
+            <?php echo $error;} ?></div>
+        <?php if (isset($success)){?>
+        <div align="center" class="alert alert-success">
+            <?php echo $success;} ?></div>
+    </div>
 </div>
 
 <!-- Footer -->

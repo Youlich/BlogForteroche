@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use services\Container;
 use services\View;
 
 \Autoload::register();
@@ -19,6 +20,7 @@ Class Frontend
     private $chapterManager;
     private $booksManager;
     private $imagesManager;
+
 
     /**
      * Frontend constructor.
@@ -58,7 +60,7 @@ Class Frontend
         $comments = $commentManager->getCommentsChapter($_GET['id']);
         $nbComms = $commentManager->countCommentsChapter($_GET['id']);
         $myView = new View('chapter');
-        $myView->renderViewFront(array('chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image));
+        $myView->renderViewFront(array('chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
         } else {
             $_SESSION['error'] = 'Aucun identifiant de chapitre envoyé';
         }
@@ -70,7 +72,7 @@ Class Frontend
         $commentManager = $this->commentManager;
         $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
             $myView = new View('comment');
-            $myView->renderViewFront(array('comment' => $comment));
+            $myView->renderViewFront(array('comment' => $comment, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
         } else {
             $_SESSION['error'] = 'Aucun identifiant de commentaire envoyé';
         }
@@ -81,7 +83,7 @@ Class Frontend
         $chapterManager = $this->chapterManager;
         $chapters = $chapterManager->listChapters();
         $myView = new View('listchapters');
-        $myView->renderViewFront(array('chapters' => $chapters));
+        $myView->renderViewFront(array('chapters' => $chapters, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function lastChapter() //affiche le dernier chapitre créé par l'auteur
@@ -98,7 +100,7 @@ Class Frontend
         $myView = new View('lastchapter');
         $myView->renderViewFront(array('lastchapter' => $lastchapter,
             'idlastchapter' => $idlastchapter, 'comments'=>$comments,'imagechapter' => $imagechapter,
-            'image' => $image, 'nbComms' => $nbComms));
+            'image' => $image, 'nbComms' => $nbComms, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function listComments () // tableau des commentaires dans le profil du membre
@@ -107,7 +109,7 @@ Class Frontend
         $commentsMembre = $commentManager->listcomments($_SESSION['id']);
         $nbComms = $commentManager->countCommentsChapter($_GET['id']);// affiche le nb de commentaires par chapitre
         $myView = new View('profilmembre');
-        $myView->renderViewFront(array('nbComms' => $nbComms, 'commentsMembre' => $commentsMembre));
+        $myView->renderViewFront(array('nbComms' => $nbComms, 'commentsMembre' => $commentsMembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function addComment ($chapterId, $pseudo, $etat, $comment, $membreId) //ajout d'un commentaire dans un chapitre
@@ -167,7 +169,8 @@ Class Frontend
         $image = $imagechapter->getFileUrl();
         $nbComms = $commentManager->countCommentsChapter($_GET['id']);
         $myView = new View('chapter');
-        $myView->renderViewFront(array('signaledComment' => $signaledComment,'imagechapter' => $imagechapter, 'chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image));
+        $myView->renderViewFront(array('signaledComment' => $signaledComment,'imagechapter' => $imagechapter, 'chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image,
+            'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     /*Partie Membre*/
@@ -177,7 +180,7 @@ Class Frontend
         $authMembreManager = $this->membreManager;
         $authMembre = $authMembreManager->loginmembre();
         $myView = new View('loginmembre');
-        $myView->renderViewFront(array('authMembre' => $authMembre));
+        $myView->renderViewFront(array('authMembre' => $authMembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function logoutmembre()
     {
@@ -195,7 +198,7 @@ Class Frontend
             return $_SESSION['error'];
         } else {
             $myView = new View('inscription');
-            $myView->renderViewFront(array('addMembre' => $addMembre));
+            $myView->renderViewFront(array('addMembre' => $addMembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
         }
     }
 
@@ -211,7 +214,7 @@ Class Frontend
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $myView = new View('boutonmodifpseudomdp');
-        $myView->renderViewFront(array('membre' => $membre));
+        $myView->renderViewFront(array('membre' => $membre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function boutonmodifiermail()
@@ -219,8 +222,9 @@ Class Frontend
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $myView = new View('boutonmodifiermail');
-        $myView->renderViewFront(array('membre' => $membre));
+        $myView->renderViewFront(array('membre' => $membre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
+
     public function boutonafficherlescommentaires()
     {
         $membreManager = $this->membreManager;
@@ -228,14 +232,14 @@ Class Frontend
         $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->listcomments($_SESSION['id']);
         $myView = new View('boutonafficherlescommentaires');
-        $myView->renderViewFront(array('membre' => $membre, 'commentsMembre' => $commentsMembre));
+        $myView->renderViewFront(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function boutonsupprimerprofil()
     {
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $myView = new View('boutonsupprimerprofil');
-        $myView->renderViewFront(array('membre' => $membre));
+        $myView->renderViewFront(array('membre' => $membre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function modifPseudoMdp()
@@ -248,7 +252,7 @@ Class Frontend
             header('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
         } else {
             $myView = new View('profilmembre');
-            $myView->renderViewFront(array('modifmembre' => $modifmembre));
+            $myView->renderViewFront(array('modifmembre' => $modifmembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
         }
     }
     public function modifEmail()
@@ -278,7 +282,7 @@ Class Frontend
         $commentManager = $this->commentManager;
         $commentsMembre = $commentManager->listcomments($_SESSION['id']);
         $myView = new View('profilmembre');
-        $myView->renderViewFront(array('membre' => $membre, 'commentsMembre' => $commentsMembre));
+        $myView->renderViewFront(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function accueil()
@@ -290,7 +294,7 @@ Class Frontend
         $bookManager = $this->booksManager;
         $books = $bookManager->getBooks();
         $myView = new View('accueil');
-        $myView->renderViewFront(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books));
+        $myView->renderViewFront(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
 
     public function mentionslegales ()

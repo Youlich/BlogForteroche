@@ -32,7 +32,7 @@ Class Backend
         $authMembreManager = $this->adminManager;
         $authMembreManager->loginadmin();
         $myView = new View('loginadmin');
-        $myView->renderViewBack(array());
+        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function logoutadmin()
     {
@@ -45,7 +45,7 @@ Class Backend
         $adminmanager = $this->adminManager;
         $admin = $adminmanager->profiladmin($_SESSION['id']);
         $myView = new View('profiladmin');
-        $myView->renderViewBack(array('admin' => $admin));
+        $myView->renderViewBack(array('admin' => $admin, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function modifmessage()
     {
@@ -53,7 +53,7 @@ Class Backend
         $admin = $adminmanager->profiladmin($_SESSION['id']);
         $adminmessage = $adminmanager->modifmessage();
         $myView = new View('profiladmin');
-        $myView->renderViewBack(array('admin' => $admin, 'adminmessage' => $adminmessage));
+        $myView->renderViewBack(array('admin' => $admin, 'adminmessage' => $adminmessage, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function approvedComment()
     {
@@ -61,7 +61,7 @@ Class Backend
         $approved->approvedComment($_GET['id']);
         $comments = $approved->getComments();
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments));
+        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function refusedComment()
     {
@@ -69,21 +69,21 @@ Class Backend
         $refused->refusedComment($_GET['id']);
         $comments = $refused->getComments();
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments));
+        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function listComments()
     {
         $commentManager = $this->commentManager;
         $comments = $commentManager->getComments();
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments));
+        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function listMembres()
     {
         $membreManager = $this->membreManager;
         $membres = $membreManager->listMembres();
         $myView = new View('listmembres');
-        $myView->renderViewBack(array('membres' => $membres));
+        $myView->renderViewBack(array('membres' => $membres, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function boutonaddbook()
     {
@@ -111,8 +111,8 @@ Class Backend
             $selectedchapter = "Choisissez votre chapitre";
         }
         $myView = new View('boutonmodifchapter');
-        $myView->renderViewBack(array('chapters' => $chapters, 'chapterselect' => $chapterselect, 'selectedchapter' => $selectedchapter,
-            'imageexist' => $imageexist, 'imageselect' => $imageselect));
+        $myView->renderViewBack(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect, 'message' => $message,
+            'image' =>$image, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function boutonaddchapter()
     {
@@ -126,7 +126,8 @@ Class Backend
             $selectedbook = "Choisissez votre livre";
         }
         $myView = new View('boutonaddchapter');
-        $myView->renderViewBack(array('books' => $books, 'bookSelect' => $bookSelect, 'bookId' => $bookId, 'selectedbook' => $selectedbook));
+        $myView->renderViewBack(array('books' => $books, 'bookSelect' => $bookSelect, 'bookId' => $bookId, 'selectedbook' => $selectedbook,
+            'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function boutondeletechapter()
     {
@@ -149,13 +150,13 @@ Class Backend
             $selectedchapter = "Choisissez votre chapitre";
         }
         $myView = new View('boutondeletechapter');
-        $myView->renderViewBack(array('chapters' => $chapters, 'chapterselect' => $chapterselect, 'selectedchapter' => $selectedchapter,
-            'imageexist' => $imageexist,'imageselect' => $imageselect));
+        $myView->renderViewBack(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect,
+            'message' => $message, 'image' =>$image, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function publier()
     {
         $myView = new View('publier');
-        $myView->renderViewBack(array());
+        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function addBook($title)
     {
@@ -172,7 +173,7 @@ Class Backend
     public function administration()
     {
         $myView = new View('administration');
-        $myView->renderViewBack(array());
+        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
     }
     public function addChapter()
     {
