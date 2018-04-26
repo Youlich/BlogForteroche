@@ -25,6 +25,7 @@ class Config
         define ('IMAGES', HOST . 'public/images');
     }
 
+
 }
 
 
