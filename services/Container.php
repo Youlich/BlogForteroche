@@ -53,6 +53,11 @@ class Container
             $this->getImagesManager()
         );
     }
+    public function getControllerMail()
+    {
+        $service = new Mail();
+        $service->contact();
+    }
 
 
     public function getMembreManager()
