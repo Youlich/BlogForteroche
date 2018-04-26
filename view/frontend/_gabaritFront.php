@@ -37,7 +37,7 @@
 
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-        <a href="index.php?action=accueil&amp"><img src="<?php echo IMAGES; ?>\LOGO.png" width="200px"/>
+        <a href="index.php?action=accueil"><img src="<?php echo IMAGES; ?>\LOGO.png" width="200px"/>
             <a class="navbar-brand js-scroll-trigger" href="#top"></a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -46,13 +46,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#portfolio">Blog</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#portfolio">Blog</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#bibliographie">Bibliographie</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#bibliographie">Bibliographie</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil&amp#contact">Contact</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#contact">Contact</a>
                     </li>
                     <li class="nav-item dropdown mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
@@ -89,14 +89,14 @@
 
 <!-- Errors -->
 <div class="container">
-<div class="col-lg-4 mx-auto">
-    <?php if (isset($error)){ ?>
-    <div align="center" class="alert alert-danger">
-        <?php echo $error;} ?></div>
-    <?php if (isset($success)){?>
-    <div align="center" class="alert alert-success">
-        <?php echo $success;} ?></div>
-</div>
+    <div class="col-lg-4 mx-auto">
+        <?php if (isset($error)){ ?>
+        <div align="center" class="alert alert-danger">
+            <?php echo $error;} ?></div>
+        <?php if (isset($success)){?>
+        <div align="center" class="alert alert-success">
+            <?php echo $success;} ?></div>
+    </div>
 </div>
 <!-- Footer -->
 <footer class="footer text-center">
@@ -169,5 +169,4 @@
 </div>
 
 </html>
-
 

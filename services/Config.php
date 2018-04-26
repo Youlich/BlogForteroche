@@ -1,5 +1,6 @@
 <?php
 namespace services;
+
 class Config
 {
     public static function start() //static car appelée qu'une seule fois
@@ -25,184 +26,184 @@ class Config
     {
         return [
             /*Backend*/
-            'addbook' => [
+            '#^addbook$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'addBook',
             ],
-            'addchapter' => [
+            '#^addchapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'addChapter',
             ],
-            'deletechapter' => [
+            '#^deletechapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'deleteChapter',
             ],
-            'modifchapter' => [
+            '#^modifchapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'modifChapter',
             ],
-            'listComments' => [
+            '#^listComments$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'listComments',
             ],
-            'approved' => [
+            '#^approved$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'approvedComment',
             ],
-            'refused' => [
+            '#^refused$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'refusedComment',
             ],
-            'listmembres' => [
+            '#^listmembres$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'listMembres',
             ],
-            'publier' => [
+            '#^publier$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'publier',
             ],
-            'boutonaddbook' => [
+            '#^boutonaddbook$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'boutonaddbook',
             ],
-            'boutonmodifchapter' => [
+            '#^boutonmodifchapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'boutonmodifchapter',
             ],
-            'boutonaddchapter' => [
+            '#^boutonaddchapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'boutonaddchapter',
             ],
-            'boutondeletechapter' => [
+            '#^boutondeletechapter$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'boutondeletechapter',
             ],
-            'loginadmin' => [
+            '#^loginadmin$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'loginadmin',
             ],
-            'profiladmin' => [
+            '#^profiladmin$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'profiladmin',
             ],
-            'modifmessage' => [
+            '#^modifmessage$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'modifmessage',
             ],
-            'administration' => [
+            '#^administration$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'administration',
             ],
-            'logoutadmin' => [
+            '#^logoutadmin$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'logoutadmin',
             ],
             /* Frontend*/
-            'listChapters' => [
+            '#^listChapters$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'listChapters',
             ],
-            'lastchapter' => [
+            '#^lastchapter$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'lastChapter',
             ],
-            'chapter' => [
+            '#^chapter&id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'chapter',
             ],
-            'addComment' => [
+            '#^addComment$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'addComment',
-                'params' => $_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']
             ],
-            'comment' => [
+            '#^comment$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'comment',
             ],
-            'listcomments' => [
+            '#^listcomments$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'listcomments',
             ],
-            'modifComment' => [
+            '#^modifComment$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifComment',
             ],
-            'deletecomment' => [
+            '#^deletecomment$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'deleteComment',
-            ],$params = [$_SESSION['id']],
-
-            'signaled' => [
+            ],
+            '#^signaled$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'signaledComment',
-            ],$params = [$_GET['id']],
-
-            'accueil' => [
+            ],
+            '#^accueil$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'accueil',
             ],
-            'loginmembre' => [
+
+            '#^index.php$#' => [
+                'controller' => 'getControllerFrontend',
+                'action' => 'accueil',
+            ],
+            '#^loginmembre$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'loginmembre',
             ],
-            'logoutmembre' => [
+            '#^logoutmembre$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'logoutmembre',
             ],
-            'inscription' => [
+            '#^inscription$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'inscription',
             ],
-            'deleteaccount' => [
+            '#^deleteaccount$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'deleteaccount',
             ],
-            'profilmembre' => [
+            '#^profilmembre$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'profilmembre',
             ],
-            'versinscription' => [
+            '#^versinscription$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'versInscription',
             ],
-            'mentionslegales' => [
+            '#^mentionslegales$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'mentionslegales',
             ],
-            'charte' => [
+            '#^charte$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'charte',
             ],
-            'boutonmodifpseudomdp' => [
+            '#^boutonmodifpseudomdp$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'boutonmodifpseudomdp',
             ],
-            'boutonmodifiermail' => [
+            '#^boutonmodifiermail$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'boutonmodifiermail',
             ],
-            'boutonafficherlescommentaires' => [
+            '#^boutonafficherlescommentaires$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'boutonafficherlescommentaires',
             ],
-            'boutonsupprimerprofil' => [
+            '#^boutonsupprimerprofil$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'boutonsupprimerprofil',
             ],
-            'modifpseudomdp' => [
+            '#^modifpseudomdp$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifPseudoMdp',
             ],
-            'modifemail' => [
+            '#^modifemail$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifEmail',
             ],
-            'contact' => [
+            '#^contact$#' => [
                 'controller' => 'getControllerMail',
                 'action' => 'contact',
             ]
         ];
     }
 }
-
-

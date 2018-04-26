@@ -191,10 +191,10 @@ Class Backend
         $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
 
-    public function addBook($titre_livre)
+    public function addBook()
     {
         $BookManager = $this->booksManager;
-        $addbook = $BookManager->addBook($titre_livre);
+        $addbook = $BookManager->addBook($_POST['titrelivre']);
         if ($addbook === false) {
             $_SESSION['error'] = 'Impossible d\'ajouter le livre !';
             header('Location: index.php?action=boutonaddbook' . "#endpage");

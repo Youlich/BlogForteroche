@@ -1,11 +1,14 @@
 <?php
+
+
 require_once('services/Autoload.php');
+
 Autoload::register();
 \services\Config::start();
 $routes = \services\Config::getRoutes();
 session_start();
 $container = new \services\Container([]);
-$router = new \router\Router($container, $routes);
+$router = new \router\Router($container, $routes, $_SERVER['REQUEST_URI']);
 $resolve = $router->resolve();
 $caller = $resolve['controller'];
 $controller = $container->$caller();

@@ -1,26 +1,42 @@
 <?php
 namespace router;
-use services\Mail;
+
 class Router
 {
     private $container;
+    private $request_uri;
     private $routes = [];
-    public function __construct($container, $routes) {
+
+    public function __construct($container, $routes, $request_uri) {
         $this->container = $container;
         $this->routes = $routes;
+        $this->request_uri = substr($request_uri, strpos($request_uri, "=") + 1);
     }
     public function resolve()
     {
         try {
             /* Backend */
-            if (isset($_GET['action'])) {
-                $controller = $this->routes[$_GET['action']]['controller'];
-                $action = $this->routes[$_GET['action']]['action'];
+            $params = [];
+
+            if (isset($this->request_uri)) {
+                foreach ($this->routes as $pattern => $controllerAction) {
+                    if (preg_match($pattern, $this->request_uri, $matches)) {
+                        $controller = $this->routes[$pattern]['controller'];
+                        $action = $this->routes[$pattern]['action'];
+                        // params GET
+                        foreach ($matches as $key => $value) {
+                            if ($key > 0) {
+                                $params[] = $value;
+                            }
+                        }
+                    }
+                }
             } else {
                 $controller = 'getControllerFrontend';
                 $action = 'accueil';
             }
-            $params = [];
+
+            // params POST
             if($_POST) {
                 foreach ($_POST as $value) {
                     $params[] = $value;
