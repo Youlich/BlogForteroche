@@ -35,7 +35,7 @@
         <br/>
         <em><h5 class="link text-center"><a href="index.php?action=listChapters&amp">Voir tous les chapitres</h5></em>
         <br/>
-        <em><h5 class="link text-center"><a href="index.php?action=lastChapter">Voir mon dernier chapitre</h5></em>
+        <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
 
         <div class="row">
             <?php

@@ -60,9 +60,8 @@
 
 <br>
 
-<?php
-unset($_SESSION['error']);?>
-
 </div>
 </body>
 
+<?php
+unset($_SESSION['error']);?>

@@ -1,9 +1,10 @@
 <?php
 namespace services;
 
-use model\DbConnect;
 
-class Verifications extends DbConnect
+use model\Manager;
+
+class Verifications
 {
     private $pseudo;
     private $pass;
@@ -11,6 +12,16 @@ class Verifications extends DbConnect
     private $email;
     private $login;
     private $mdp;
+
+
+    public function connectDb()
+    {
+        $container = new Container([]);
+        $pdo = $container->getPDO();
+        $manager = new Manager($pdo);
+        $db = $manager->dbConnect();
+        return $db;
+    }
 
 
     public function verifPseudo($pseudo)
@@ -73,7 +84,7 @@ class Verifications extends DbConnect
 
     public function verifHachPass()
     {
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $_POST['pseudo']));
         $authMembre = $req->fetch();
@@ -92,7 +103,7 @@ class Verifications extends DbConnect
 
     public function verifadminHachPass()
     {
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
         $req->execute(array('login' => $_POST['login']));
         $authadmin = $req->fetch();
@@ -123,7 +134,7 @@ class Verifications extends DbConnect
     public function pseudoExist($pseudo)
     {
         $this->pseudo = $pseudo;
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $_POST['pseudo']));
         $resultat = $req->fetch();
@@ -138,7 +149,7 @@ class Verifications extends DbConnect
     public function loginadminExist($login)
     {
         $this->login = $login;
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
         $req->execute(array('login' => $_POST['login']));
         $resultat = $req->fetch();
@@ -152,7 +163,7 @@ class Verifications extends DbConnect
 
     public function session()
     {
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT id, dateInscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $this->pseudo));
         $req = $req->fetch();
@@ -167,7 +178,7 @@ class Verifications extends DbConnect
 
     public function sessionAdmin()
     {
-        $db = $this->dbConnect();
+        $db = $this->connectDb();
         $req = $db->prepare('SELECT id, login, mdp FROM admin WHERE login = :login');
         $req->execute(array('login' => $this->login));
         $req = $req->fetch();

@@ -2,6 +2,8 @@
 namespace router;
 
 
+use services\Mail;
+
 class Router
 {
     private $container;
@@ -15,7 +17,6 @@ class Router
 
         $backend = $this->container->getControllerBackend();
         $frontend = $this->container->getControllerFrontend();
-        $services = $this->container->getControllerServices();
 
         try {
     /* Backend */
@@ -31,13 +32,13 @@ class Router
                 } elseif ($_GET['action'] == 'listComments') {
                     $backend = $backend->listComments();
                 } elseif ($_GET['action'] == 'approved') {
-                    $backend = $backend->approvedComments();
+                    $backend = $backend->approvedComment();
                 } elseif ($_GET['action'] == 'refused') {
-                    $backend = $backend->refusedComments();
+                    $backend = $backend->refusedComment();
                 } elseif ($_GET['action'] == 'listmembres') {
                     $backend = $backend->listMembres();
                 } elseif ($_GET['action'] == 'publier') {
-                    $backend = $backend->Publier();
+                    $backend = $backend->publier();
                 } elseif ($_GET['action'] == 'boutonaddbook') {
                     $backend = $backend->boutonaddbook();
                 } elseif ($_GET['action'] == 'boutonmodifchapter') {
@@ -46,21 +47,22 @@ class Router
                     $backend = $backend->boutonaddchapter();
                 } elseif ($_GET['action'] == 'boutondeletechapter') {
                     $backend = $backend->boutondeletechapter();
-                } elseif ($_GET['action'] == 'authentificationAdmin') {
-                    $backend = $backend->connectAdmin();
-                } elseif ($_GET['action'] == 'profilAdmin') {
-                    $backend = $backend->profilAdmin();
-                } elseif ($_GET['action'] == 'modifmessageAdmin') {
-                    $backend = $backend->modifmessageAdmin();
-                } elseif ($_GET['action'] == 'connectAdmin') {
-                    $backend = $backend->connectAdmin();
+                } elseif ($_GET['action'] == 'authentification') {
+                    $backend = $backend->authentification();
+                } elseif ($_GET['action'] == 'profiladmin') {
+                    $backend = $backend->profiladmin();
+                } elseif ($_GET['action'] == 'modifmessage') {
+                    $backend = $backend->modifmessage();
+                } elseif ($_GET['action'] == 'loginadmin') {
+                    $backend = $backend->loginadmin();
                 } elseif ($_GET['action'] == 'administration') {
                     $backend = $backend->administration();
-                } elseif ($_GET['action'] == 'deconnectAdmin') {
-                    $backend = $backend->deconnectAdmin();
+                } elseif ($_GET['action'] == 'logoutadmin') {
+                    $backend = $backend->logoutadmin();
     /* services */
                 } elseif ($_GET['action'] == 'contact') {
-                    $services = $services->Contact();
+                    $service = new Mail();
+                    $service->contact();
      /* Frontend */
                 } elseif ($_GET['action'] == 'listChapters') {
                     $frontend = $frontend->listChapters();
@@ -70,30 +72,30 @@ class Router
                     $frontend = $frontend->chapter();
                 } elseif ($_GET['action'] == 'addComment') {
                     $frontend = $frontend->addComment($_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']);
-                } elseif ($_GET['action'] == 'Comment') {
+                } elseif ($_GET['action'] == 'comment') {
                     $frontend = $frontend->comment();
-                } elseif ($_GET['action'] == 'listcommentsmembre') {
-                    $frontend = $frontend->listCommentsMembre();
-                } elseif ($_GET['action'] == 'ModifComment') {
-                    $frontend =  $frontend->ModifComment();
+                } elseif ($_GET['action'] == 'listcomments') {
+                    $frontend = $frontend->listcomments();
+                } elseif ($_GET['action'] == 'modifComment') {
+                    $frontend =  $frontend->modifComment();
                 } elseif ($_GET['action'] == 'deletecomment') {
                     $frontend = $frontend->deleteComment($_SESSION['id']);
                 } elseif ($_GET['action'] == 'signaled') {
-                    $frontend = $frontend->SignaledComment($_GET['id']);
+                    $frontend = $frontend->signaledComment($_GET['id']);
                 } elseif ($_GET['action'] == 'accueil') {
                     $frontend = $frontend->accueil();
-                } elseif ($_GET['action'] == 'connectMembre') {
-                    $frontend = $frontend->connectMembre();
-                } elseif ($_GET['action'] == 'deconnectMembre') {
-                    $frontend = $frontend->deconnectMembre();
-                } elseif ($_GET['action'] == 'addMembre') {
-                    $frontend = $frontend->addMembre();
-                } elseif ($_GET['action'] == 'suppMembre') {
-                    $frontend = $frontend->suppMembre();
-                } elseif ($_GET['action'] == 'profilMembre') {
-                    $frontend = $frontend->profilMembre();
-                } elseif ($_GET['action'] == 'inscripMembre') {
-                    $frontend = $frontend->inscripMembre();
+                } elseif ($_GET['action'] == 'loginmembre') {
+                    $frontend = $frontend->loginmembre();
+                } elseif ($_GET['action'] == 'logoutmembre') {
+                    $frontend = $frontend->logoutmembre();
+                } elseif ($_GET['action'] == 'inscription') {
+                    $frontend = $frontend->inscription();
+                } elseif ($_GET['action'] == 'deleteaccount') {
+                    $frontend = $frontend->deleteaccount();
+                } elseif ($_GET['action'] == 'profilmembre') {
+                    $frontend = $frontend->profilmembre();
+                } elseif ($_GET['action'] == 'versinscription') {
+                    $frontend = $frontend->versInscription();
                 } elseif ($_GET['action'] == 'mentionslegales') {
                     $frontend = $frontend->mentionslegales();
                 } elseif ($_GET['action'] == 'charte') {
@@ -106,7 +108,7 @@ class Router
                     $frontend = $frontend->boutonafficherlescommentaires();
                 } elseif ($_GET['action'] == 'boutonsupprimerprofil') {
                     $frontend = $frontend->boutonsupprimerprofil();
-                } elseif ($_GET['action'] == 'modifpseudo_mdp'){
+                } elseif ($_GET['action'] == 'modifpseudomdp'){
                     $frontend = $frontend->modifPseudoMdp();
                 } elseif ($_GET['action'] == 'modifemail'){
                     $frontend = $frontend->modifEmail();

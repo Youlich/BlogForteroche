@@ -114,14 +114,13 @@ class MembreManager extends Manager
                                         // Insertion
                                         $db = $this->Dbconnect();
                                         $req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription, nbcomms) VALUES (:pseudo, :pass, :email, CURDATE(),0)');
-                                        $req->execute(array(
+                                        $insert = $req->execute(array(
                                             'pseudo' => $_POST['pseudo'],
                                             'pass' => $pass_hache,
                                             'email' => $_POST['email']));
-                                        header('location: index.php?action=loginmembre');
-                                        $_SESSION['success'] = "Bravo ! Vous êtes bien inscrit, merci de vous connecter.";
-                                        return $_SESSION['success'];
-
+                                            header('location: index.php?action=loginmembre');
+                                            $_SESSION['success'] = "Bravo ! Votre compte est créé, merci de vous connecter.";
+                                            return $_SESSION['success'];
                                     } else {
                                         $_SESSION['error'] = $verif;
                                     }

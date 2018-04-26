@@ -58,9 +58,7 @@
 <br/>
 <br/>
 
-<?php $content = ob_get_clean();
-require('_gabaritFront.php');
-
+<?php
 unset($_SESSION['error']);
 unset($_SESSION['success']);?>
 

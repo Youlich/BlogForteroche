@@ -31,9 +31,12 @@ Class Backend
     {
         $authMembreManager = $this->adminManager;
         $authMembreManager->loginadmin();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('loginadmin');
-        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
+
     public function logoutadmin()
     {
         session_destroy();
@@ -44,51 +47,65 @@ Class Backend
     {
         $adminmanager = $this->adminManager;
         $admin = $adminmanager->profiladmin($_SESSION['id']);
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profiladmin');
-        $myView->renderViewBack(array('admin' => $admin, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('admin' => $admin, 'success'=> $success, 'error'=> $error));
     }
     public function modifmessage()
     {
         $adminmanager = $this->adminManager;
         $admin = $adminmanager->profiladmin($_SESSION['id']);
         $adminmessage = $adminmanager->modifmessage();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profiladmin');
-        $myView->renderViewBack(array('admin' => $admin, 'adminmessage' => $adminmessage, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('admin' => $admin, 'adminmessage' => $adminmessage, 'success'=> $success, 'error'=> $error));
     }
     public function approvedComment()
     {
         $approved = $this->commentManager;
         $approved->approvedComment($_GET['id']);
         $comments = $approved->getComments();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('comments' => $comments, 'success'=> $success, 'error'=> $error));
     }
     public function refusedComment()
     {
         $refused = $this->commentManager;
         $refused->refusedComment($_GET['id']);
         $comments = $refused->getComments();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('comments' => $comments, 'success'=> $success, 'error'=> $error));
     }
     public function listComments()
     {
         $commentManager = $this->commentManager;
         $comments = $commentManager->getComments();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
-        $myView->renderViewBack(array('comments' => $comments, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('comments' => $comments, 'success'=> $success, 'error'=> $error));
     }
     public function listMembres()
     {
         $membreManager = $this->membreManager;
         $membres = $membreManager->listMembres();
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listmembres');
-        $myView->renderViewBack(array('membres' => $membres, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('membres' => $membres, 'success'=> $success, 'error'=> $error));
     }
     public function boutonaddbook()
     {
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonaddbook');
-        $myView->renderViewBack(array());
+        $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
     public function boutonmodifchapter()
     {
@@ -110,9 +127,14 @@ Class Backend
         }else {
             $selectedchapter = "Choisissez votre chapitre";
         }
+        $chapterselect = (isset($chapterselect)?$chapterselect:null);
+        $image = (isset($image)?$image:null);
+        $message = (isset($message)?$message:null);
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonmodifchapter');
-        $myView->renderViewBack(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect, 'message' => $message,
-            'image' =>$image, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect, 'message' => $message,
+            'image' =>$image, 'success'=> $success, 'error'=> $error));
     }
     public function boutonaddchapter()
     {
@@ -125,9 +147,12 @@ Class Backend
         }else {
             $selectedbook = "Choisissez votre livre";
         }
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+        $bookId = (isset($bookId)?$bookId:null);
         $myView = new View('boutonaddchapter');
-        $myView->renderViewBack(array('books' => $books, 'bookSelect' => $bookSelect, 'bookId' => $bookId, 'selectedbook' => $selectedbook,
-            'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('books' => $books, 'bookId' => $bookId, 'selectedbook' => $selectedbook,
+            'success'=> $success, 'error'=> $error));
     }
     public function boutondeletechapter()
     {
@@ -149,19 +174,26 @@ Class Backend
         }else {
             $selectedchapter = "Choisissez votre chapitre";
         }
+        $chapterselect = (isset($chapterselect)?$chapterselect:null);
+        $image = (isset($image )?$image :null);
+        $message = (isset($message)?$message:null);
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutondeletechapter');
-        $myView->renderViewBack(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect,
-            'message' => $message, 'image' =>$image, 'success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('chapters' => $chapters, 'selectedchapter' => $selectedchapter, 'chapterselect' => $chapterselect,
+            'message' => $message, 'image' =>$image, 'success'=> $success, 'error'=> $error));
     }
     public function publier()
     {
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('publier');
-        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
-    public function addBook($title)
+    public function addBook()
     {
         $BookManager = $this->booksManager;
-        $addbook = $BookManager->addBook($title);
+        $addbook = $BookManager->addBook($_POST['titrelivre']);
         if ($addbook === false) {
             $_SESSION['error'] = 'Impossible d\'ajouter le livre !';
             header('Location: index.php?action=boutonaddbook' . "#endpage");
@@ -172,8 +204,10 @@ Class Backend
     }
     public function administration()
     {
+        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('administration');
-        $myView->renderViewBack(array('success'=> $_SESSION['success'], 'error'=> $_SESSION['error']));
+        $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
     public function addChapter()
     {
@@ -270,4 +304,5 @@ Class Backend
         }
         header('Location: index.php?action=boutondeletechapter' . "#endpage");
     }
+
 }

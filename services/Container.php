@@ -30,6 +30,31 @@ class Container
         return $this->pdo;
     }
 
+    public function getControllerBackend()
+    {
+        return new Backend(
+            $this->getMembreManager(),
+            $this->getAdminManager(),
+            $this->getCommentManager(),
+            $this->getChapterManager(),
+            $this->getBooksManager(),
+            $this->getImagesManager()
+
+        );
+    }
+    public function getControllerFrontend()
+    {
+        return new Frontend(
+            $this->getMembreManager(),
+            $this->getAdminManager(),
+            $this->getCommentManager(),
+            $this->getChapterManager(),
+            $this->getBooksManager(),
+            $this->getImagesManager()
+        );
+    }
+
+
     public function getMembreManager()
     {
         return new MembreManager($this->getPDO());
@@ -47,10 +72,12 @@ class Container
     }
     public function getChapterManager()
     {
-        $chapterManger = new ChapterManager($this->getPDO());
-        $chapterManger->setImagesManager($this->getImagesManager());
-        return $chapterManger;
+        $chapterManager = new ChapterManager($this->getPDO());
+        $chapterManager->setImagesManager($this->getImagesManager());
+        return $chapterManager;
     }
+
+
     public function getBooksManager()
     {
         return new BooksManager($this->getPDO());
@@ -59,33 +86,4 @@ class Container
     {
         return new ImagesManager($this->getPDO());
     }
-    public function getControllerBackend()
-    {
-        return new Backend(
-            $this->getMembreManager(),
-            $this->getAdminManager(),
-            $this->getCommentManager(),
-            $this->getChapterManager(),
-            $this->getBooksManager(),
-            $this->getImagesManager()
-        );
-    }
-    public function getControllerFrontend()
-    {
-        return new Frontend(
-            $this->getMembreManager(),
-            $this->getAdminManager(),
-            $this->getCommentManager(),
-            $this->getChapterManager(),
-            $this->getBooksManager(),
-            $this->getImagesManager()
-        );
-    }
-
-    public function getControllerServices()
-    {
-        return new Mail();
-    }
-
-
 }

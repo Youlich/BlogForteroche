@@ -15,7 +15,7 @@ foreach ($chapters as $chapter)
     <div class="post">
         <div class="image">
         <?php if ($chapter->getImageId()): ?>
-            <img src="<?php echo $chapter->getImageFileUrl(); ?>" HSPACE="15" />
+            <img src="<?php echo $chapter->getImageFileUrl(); ?>" HSPACE="15"  />
         <?php endif; ?>
         </div>
         <br/>
@@ -28,9 +28,10 @@ foreach ($chapters as $chapter)
         <strong><a href="index.php?action=chapter&amp;id=<?= $chapter->getId() ?>" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Lire la suite</a></strong>
         <br/><br/>
     </div>
+
     <?php
 }
 ?>
-<br/><br/>
 </div>
 </body>
+<br><br><br><br><br><br><br><br><br>

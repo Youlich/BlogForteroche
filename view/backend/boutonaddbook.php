@@ -15,7 +15,7 @@
     <br/><br/>
     <form action="index.php?action=addbook" method="post" >
         <div class= "input-group" >
-            <label for="titre">Nouveau titre de livre : </label>
+            <label for="titrelivre">Nouveau titre de livre : </label>
             <input type="text" name="titrelivre" id="titrelivre" style="width: 200%;"/>
         </div>
         <br/>
@@ -43,12 +43,12 @@
 
 
 <br/>
-<div id="endpage"> <a href="index.php?action=administration">Retour page d'administration</a>
+<div id="endpage" align="center">
+    <a href="index.php?action=administration">Retour page d'administration</a>
 <br/>
 <br/>
 </div>
+
+</div>
 </body>
 
-<?php
-unset($_SESSION['error']);
-unset($_SESSION['success']);?>

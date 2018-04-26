@@ -65,7 +65,7 @@ class ChapterManager extends Manager
      */
     public function resumContent($content)
     {
-        $nbr_caracteres_max = 200;
+        $nbr_caracteres_max = 150;
         $nbr_caracteres = strlen($content);
         if($nbr_caracteres >= $nbr_caracteres_max)
         {

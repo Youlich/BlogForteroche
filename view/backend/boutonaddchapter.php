@@ -80,11 +80,9 @@
 </div>
 
 <br/>
-<div align="center" id="endpage"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
+<div align="center" id="endpage">
+<a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 <br/>
 </body>
 
-<?php
-unset($_SESSION['error']);
-unset($_SESSION['success']);?>

@@ -75,15 +75,12 @@
         <input type="button" class="btn btn-secondary btn-lg btn-block" name="button" value="Supprimer un chapitre"></a>
     <br/><br/>
 
-</div>
+
 
 <br/>
 <div align="center" id="endpage"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
 <br/>
-
+</div>
 </body>
 
-<?php
-unset($_SESSION['error']);
-unset($_SESSION['success']);?>

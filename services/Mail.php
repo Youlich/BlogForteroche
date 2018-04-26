@@ -6,7 +6,7 @@ namespace services;
 class Mail
 {
 
-    public function Contact()
+    public function contact()
     {
         $errors = array(); // on crée une vérif de champs
         if(!array_key_exists('name', $_POST) || $_POST['name'] == '') {// on verifie l'existence du champ et d'un contenu
