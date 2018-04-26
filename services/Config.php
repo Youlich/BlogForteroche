@@ -113,7 +113,8 @@ class Config
             'addComment' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'addComment',
-            ], $params = [$_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']],
+                'params' => $_GET['id'], $_SESSION['pseudo'], 0, $_POST['comment'], $_SESSION['id']
+            ],
             'comment' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'comment',
