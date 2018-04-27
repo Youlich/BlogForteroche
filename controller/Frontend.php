@@ -1,6 +1,6 @@
 <?php
 namespace controller;
-use services\Container;
+
 use services\View;
 \Autoload::register();
 /**
@@ -275,6 +275,7 @@ Class Frontend
         $commentsMembre = $commentManager->listcomments($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+        $commentsMembre = (isset($commentsMembre)?$commentsMembre:null);
         $myView = new View('profilmembre');
         $myView->renderView(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $success, 'error'=> $error));
     }

@@ -1,12 +1,10 @@
 <?php
 namespace router;
-
 class Router
 {
     private $container;
     private $request_uri;
     private $routes = [];
-
     public function __construct($container, $routes, $request_uri) {
         $this->container = $container;
         $this->routes = $routes;
@@ -17,8 +15,9 @@ class Router
         try {
             /* Backend */
             $params = [];
-
             if (isset($this->request_uri)) {
+                if ($this->request_uri != 'BlogForteroche/index.php') {
+                    if ($this->request_uri != 'BlogForteroche/') {
                 foreach ($this->routes as $pattern => $controllerAction) {
                     if (preg_match($pattern, $this->request_uri, $matches)) {
                         $controller = $this->routes[$pattern]['controller'];
@@ -31,11 +30,18 @@ class Router
                         }
                     }
                 }
+                    } else {
+                        $controller = 'getControllerFrontend';
+                        $action = 'accueil';
+                    }
+                    } else {
+                        $controller = 'getControllerFrontend';
+                        $action = 'accueil';
+                    }
             } else {
                 $controller = 'getControllerFrontend';
                 $action = 'accueil';
             }
-
             // params POST
             if($_POST) {
                 foreach ($_POST as $value) {

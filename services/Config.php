@@ -1,6 +1,5 @@
 <?php
 namespace services;
-
 class Config
 {
     public static function start() //static car appelée qu'une seule fois
@@ -139,11 +138,6 @@ class Config
                 'controller' => 'getControllerFrontend',
                 'action' => 'accueil',
             ],
-
-            '#^index.php$#' => [
-                'controller' => 'getControllerFrontend',
-                'action' => 'accueil',
-            ],
             '#^loginmembre$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'loginmembre',
@@ -199,6 +193,10 @@ class Config
             '#^modifemail$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifEmail',
+            ],
+            '#^BlogForteroche$#' => [
+                'controller' => 'getControllerFrontend',
+                'action' => 'accueil',
             ],
             '#^contact$#' => [
                 'controller' => 'getControllerMail',
