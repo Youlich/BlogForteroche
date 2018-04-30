@@ -7,7 +7,7 @@
 <body>
 <br><br>
 
-<em><h5 class="link text-center"><a href="index.php?action=listChapters">Retour à la liste des chapitres</a></em> </h5>
+<em><h5 class="link text-center"><a href="index.php?action=listchapters">Retour à la liste des chapitres</a></em> </h5>
 <div class="contain">
 <div class="post">
     <p>
@@ -46,7 +46,7 @@
     <br>
 
     <?php if (isset($_SESSION['id'])) {?>
-    <form action="index.php?action=addComment&amp;id=<?= $lastchapter->getId() ?>" method="post">
+    <form action="index.php?action=addcomment&amp;id=<?= $lastchapter->getId() ?>" method="post">
         <div>
             <?php
             echo $_SESSION['pseudo']; ?>

@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=listComments" class="chapter"><img class="img-fluid" src="public/images/commentaires.jpg" alt=""></a>
+                    <a href="index.php?action=listcomments" class="chapter"><img class="img-fluid" src="public/images/commentaires.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">

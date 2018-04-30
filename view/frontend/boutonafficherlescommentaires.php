@@ -36,7 +36,7 @@
     <a href="index.php?action=boutonafficherlescommentaires">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Gérer mes commentaires"></a>
     <br/>
-    <form action="index.php?action=listcomments&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+    <form action="index.php?action=listcommentsmembre&idmembre=<?= $_SESSION['id']?>" method="post">
         <table class="table table-bordered text-center">
             <thead class="thead table-active">
             <tr>
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
             <?php
-            foreach ($commentsMembre as $comment)
+            foreach ($comments as $comment)
             {
                 ?>
                 <tr>
@@ -78,8 +78,8 @@
                         </td> <?php
                     } ?>
                     <td>
-                        <a href="index.php?action=comment&amp;numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
-                        <a href="index.php?action=deletecomment&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Supprimer"></a>
+                        <a href="index.php?action=comment&numComm=<?php echo $comment->getId(); ?>"><input type="button" value="Modifier"></a>
+                        <a href="index.php?action=deletecomment&id=<?php echo $comment->getId(); ?>"><input type="button" value="Supprimer"></a>
                     </td>
                 </tr>
                 <?php } ?>

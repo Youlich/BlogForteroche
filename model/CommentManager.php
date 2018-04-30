@@ -58,7 +58,7 @@ class CommentManager extends Manager
      * @return array : permet d'obtenir tous les commentaires de la table commentaires selon le chapitre et le livre sélectionné
      */
 
-    public function getComments()
+    public function listComments()
     {
         $comments = array();
         $db = $this->dbConnect();
@@ -85,26 +85,26 @@ class CommentManager extends Manager
      * @param $membreId
      * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
      */
-    public function listcomments($membreId)
+    public function listCommentsMembre($membreId)
     {
-        $commentsMembre = array();
+        $comments = array();
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM comments WHERE membreId = ? ORDER BY statut DESC');
         $req->execute(array($membreId));
         while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->hydrate($data);
-            $commentsMembre[] = $comment;
+            $comments[] = $comment;
             $chapterManager = $this->chapterManager;
             $chapter = $chapterManager->getChapter($comment->getChapterId());
             $bookManager = $this->booksManager;
             $book = $bookManager->getBook($chapter->getBookId());
             $comment->setChapter($chapter);
             $comment->setBook($book);
-
         }
-        return $commentsMembre;
+        return $comments;
     }
+
 
     /**
      * @param $numcomm
@@ -177,11 +177,11 @@ class CommentManager extends Manager
         }
         if ($modifLines) {
             $_SESSION['success'] = "Votre commentaire a bien été modifié";
-            header('Location: index.php?action=profilmembre&amp;afficher_commentaires'. "#endpage");
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             exit();
         }else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être modifié";
-            header('Location: index.php?action=profilmembre&amp;afficher_commentaires'. "#endpage");
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             exit();
         }
     }
@@ -240,9 +240,9 @@ class CommentManager extends Manager
             $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
-            header('Location: index.php?action=profilmembre&amp;afficher_commentaires');
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         }else {
-            header('Location: index.php?action=profilmembre&amp;afficher_commentaires');
+            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             $_SESSION['error'] = "Votre commentaire n'a pas pu être supprimé";
 
         }

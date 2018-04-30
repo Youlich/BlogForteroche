@@ -33,7 +33,7 @@
         <hr class="star-dark mb-5">
         <h3 class="titre roman text-center">Billet simple pour l'Alaska</h3>
         <br/>
-        <em><h5 class="link text-center"><a href="index.php?action=listChapters">Voir tous les chapitres</h5></em>
+        <em><h5 class="link text-center"><a href="index.php?action=listchapters">Voir tous les chapitres</h5></em>
         <br/>
         <em><h5 class="link text-center"><a href="index.php?action=lastchapter">Voir mon dernier chapitre</h5></em>
 

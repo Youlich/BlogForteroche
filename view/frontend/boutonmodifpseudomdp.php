@@ -26,7 +26,7 @@
     <a href="index.php?action=boutonmodifpseudomdp">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Modifier mon pseudo ou mon mot de passe"></a>
 
-            <form action="index.php?action=modifpseudomdp&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+            <form action="index.php?action=modifpseudomdp&idmembre=<?= $_SESSION['id']?>" method="post">
                 <div class="form-group">
                     <p>(*) informations obligatoires</p>
                     <br/><br/>

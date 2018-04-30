@@ -8,7 +8,7 @@
 <body>
 <div class="container" >
 
-<form action="index.php?action=modifComment&amp;numComm=<?= $comment->getId() ?>" method="post">
+<form action="index.php?action=modifcomment&numComm=<?= $comment->getId() ?>" method="post">
 
         <div class="form-group">
         <label for="nummComm"></label>

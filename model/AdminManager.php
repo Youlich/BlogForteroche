@@ -16,7 +16,7 @@ class AdminManager extends Manager
     /**
      * @return string
      */
-    public function loginadmin()
+    public function loginAdmin()
     {
         // toutes les vérifications
         if (isset($_POST['submit'])) {
@@ -53,7 +53,7 @@ class AdminManager extends Manager
      * @return Admin
      */
 
-    public function profiladmin($id)
+    public function profilAdmin($id)
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT * FROM admin WHERE id=2');
@@ -68,7 +68,7 @@ class AdminManager extends Manager
      * @return string
      */
 
-    public function modifmessage()
+    public function modifMessage()
     {
         $db = $this->dbConnect();
         $modif = $db->prepare('UPDATE admin SET message=:message WHERE id=:id');

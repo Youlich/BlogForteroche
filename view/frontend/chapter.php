@@ -6,7 +6,7 @@
 
 <body>
     <br><br>
-    <em><h5 class="link text-center"><a href="index.php?action=listChapters">Retour à la liste des chapitres</a></em> </h5>
+    <em><h5 class="link text-center"><a href="index.php?action=listchapters">Retour à la liste des chapitres</a></em> </h5>
 <div class="contain">
     <div class="post">
         <p>
@@ -33,7 +33,7 @@
         <br>
         <p><h6>Votre commentaire : </h6><?= htmlspecialchars($comment->getComment()) ?></p>
         <br/>
-        <a href="index.php?action=signaled&amp;id=<?php echo $chapter->getId() ?>"><input type="button" value="Signaler"></a>
+        <a href="index.php?action=signaled&id=<?php echo $chapter->getId() ?>"><input type="button" value="Signaler"></a>
     </div>
     <br/>
     <?php
@@ -44,7 +44,7 @@
             <br>
 
             <?php if (isset($_SESSION['id'])) {?>
-            <form action="index.php?action=addComment&amp;id=<?= $chapter->getId() ?>" method="post">
+            <form action="index.php?action=addcomment&id=<?= $chapter->getId() ?>" method="post">
                 <div>
                     <?php
                     echo $_SESSION['pseudo']; ?>

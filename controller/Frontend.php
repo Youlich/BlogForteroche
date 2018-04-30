@@ -57,11 +57,11 @@ Class Frontend
             $_SESSION['error'] = 'Aucun identifiant de chapitre envoyé';
         }
     }
-    public function comment () // pour "modifier" un commentaire : comment.php
+    public function comment ($numComm) // pour "modifier" un commentaire : comment.php
     {
-        if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
+        if (isset($numComm) && $numComm > 0) {
             $commentManager = $this->commentManager;
-            $comment = $commentManager->getComment($_GET['numComm']); // c'est l'id numComm qui est envoyé
+            $comment = $commentManager->getComment($numComm); // c'est l'id numComm qui est envoyé
             $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
             $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
             $myView = new View('comment');
@@ -97,22 +97,21 @@ Class Frontend
             'idlastchapter' => $idlastchapter, 'comments'=>$comments,'imagechapter' => $imagechapter,
             'image' => $image, 'nbComms' => $nbComms, 'success'=> $success, 'error'=> $error));
     }
-    public function listComments () // tableau des commentaires dans le profil du membre
+    public function listCommentsMembre() // tableau des commentaires dans le profil du membre
     {
         $commentManager = $this->commentManager;
-        $commentsMembre = $commentManager->listcomments($_SESSION['id']);
-        $nbComms = $commentManager->countCommentsChapter($_GET['id']);// affiche le nb de commentaires par chapitre
+        $comments = $commentManager->listCommentsMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profilmembre');
-        $myView->renderView(array('nbComms' => $nbComms, 'commentsMembre' => $commentsMembre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('comments' => $comments, 'success'=> $success, 'error'=> $error));
     }
-    public function addComment ($chapterId, $pseudo, $etat, $comment, $membreId) //ajout d'un commentaire dans un chapitre
+    public function addComment($chapterId) //ajout d'un commentaire dans un chapitre
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
                 $CommentManager = $this->commentManager;
-                $CommentManager->addComment($chapterId, $pseudo, $etat, $comment, $membreId);
+                $CommentManager->addComment($chapterId, $_SESSION['pseudo'], 'En attente', $_POST['comment'], $_SESSION['id']);
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
                 header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
@@ -141,7 +140,7 @@ Class Frontend
             exit();
         }
     }
-    public function deleteComment ($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
+    public function deleteComment($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
     {
         $deleteManager = $this->commentManager;
         $deleteComment = $deleteManager->deleteComment($membreId);
@@ -166,16 +165,16 @@ Class Frontend
             'success'=> $success, 'error'=> $error));
     }
     /*Partie Membre*/
-    public function loginmembre()
+    public function loginMembre()
     {
         $authMembreManager = $this->membreManager;
-        $authMembre = $authMembreManager->loginmembre();
+        $authMembre = $authMembreManager->loginMembre();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('loginmembre');
         $myView->renderView(array('authMembre' => $authMembre, 'success'=> $success, 'error'=> $error));
     }
-    public function logoutmembre()
+    public function logoutMembre()
     {
         session_destroy();
         header('Location: index.php');
@@ -190,10 +189,10 @@ Class Frontend
         $myView = new View('inscription');
         $myView->renderView(array('addMembre' => $addMembre, 'success'=> $success, 'error'=> $error));
     }
-    public function deleteaccount()
+    public function deleteAccount()
     {
         $suppMembre = $this->membreManager;
-        $suppMembre->deleteaccount();
+        $suppMembre->deleteAccount();
         $nbcomments = $this->membreManager;
     }
     public function boutonmodifpseudomdp()
@@ -219,7 +218,7 @@ Class Frontend
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $commentManager = $this->commentManager;
-        $commentsMembre = $commentManager->listcomments($_SESSION['id']);
+        $commentsMembre = $commentManager->listCommentsMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonafficherlescommentaires');
@@ -236,17 +235,19 @@ Class Frontend
     }
     public function modifPseudoMdp()
     {
+
         $nbcomments = $this->membreManager;
         $newpseudo = $this->membreManager;
         $modifmembre = $newpseudo->modifPseudoMdp();
-        if ($modifmembre === false) {
-            $_SESSION['error'] = 'Impossible de supprimer votre commentaire !';
-            header('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
-        } else {
+        if ($modifmembre) {
             $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
             $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
             $myView = new View('profilmembre');
             $myView->renderView(array('modifmembre' => $modifmembre, 'success'=> $success, 'error'=> $error));
+
+        } else {
+            $_SESSION['error'] = 'Impossible de modifier votre compte !';
+            header('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
         }
     }
     public function modifEmail()
@@ -267,22 +268,21 @@ Class Frontend
         $myView = new View('inscription');
         $myView->renderView(array());
     }
-    public function profilmembre()
+    public function profilMembre()
     {
         $membreManager = $this->membreManager;
         $membre=$membreManager->getMembre($_SESSION['id']);
-        $commentManager = $this->commentManager;
-        $commentsMembre = $commentManager->listcomments($_SESSION['id']);
+        #$commentManager = $this->commentManager;
+       #$commentsMembre = $commentManager->listCommentsMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
-        $commentsMembre = (isset($commentsMembre)?$commentsMembre:null);
         $myView = new View('profilmembre');
         $myView->renderView(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $success, 'error'=> $error));
     }
     public function accueil()
     {
         $adminmanager = $this->adminManager;
-        $admin = $adminmanager->profiladmin('2');
+        $admin = $adminmanager->profilAdmin('2');
         $chaptermanager = $this->chapterManager;
         $chapters = $chaptermanager->listChapters();
         $bookManager = $this->booksManager;

@@ -50,7 +50,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-    public function loginmembre()
+    public function loginMembre()
     {
         // toutes les vérifications
         if (isset($_POST['submit'])) {
@@ -148,7 +148,7 @@ class MembreManager extends Manager
      * @return string
      */
 
-        public function deleteaccount()
+        public function deleteAccount()
         {
             $db = $this->dbConnect();
             $req = $db->prepare("DELETE FROM membres WHERE id = :id");

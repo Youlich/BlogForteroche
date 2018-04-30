@@ -1,20 +1,12 @@
 <?php
-
-
 namespace services;
-
-
 class View
 {
-
     private $template;
-
-
     public function __construct($template)
     {
         $this->template = $template;
     }
-
     public function renderView($params = array())
     {
         extract($params); // création de la variable dynamiquement
@@ -33,5 +25,4 @@ class View
             include_once (VIEWFRONT.'_gabaritFront.php');
         }
     }
-
 }

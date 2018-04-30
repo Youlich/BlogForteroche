@@ -9,8 +9,8 @@ class Config
         define ('HOST','http://'.$host. '/BlogForteroche/');
         define('ROOT',$root);
         define ('CONTROLLER', ROOT . '/controller/');
-        define ('VIEWFRONT', ROOT . '/view/frontend/');
-        define ('VIEWBACK', ROOT . '/view/backend/');
+        define ('VIEWFRONT', ROOT. '/BlogForteroche/view/frontend/');
+        define ('VIEWBACK', ROOT . '/BlogForteroche/view/backend/');
         define ('MODEL', ROOT . '/model/');
         define ('ENTITY', ROOT . '/entity/');
         define ('ROUTER', ROOT . '/router/');
@@ -41,15 +41,15 @@ class Config
                 'controller' => 'getControllerBackend',
                 'action' => 'modifChapter',
             ],
-            '#^listComments$#' => [
+            '#^listcomments$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'listComments',
             ],
-            '#^approved$#' => [
+            '#^approved&id=$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'approvedComment',
             ],
-            '#^refused$#' => [
+            '#^refused&id=$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'refusedComment',
             ],
@@ -79,15 +79,15 @@ class Config
             ],
             '#^loginadmin$#' => [
                 'controller' => 'getControllerBackend',
-                'action' => 'loginadmin',
+                'action' => 'loginAdmin',
             ],
             '#^profiladmin$#' => [
                 'controller' => 'getControllerBackend',
-                'action' => 'profiladmin',
+                'action' => 'profilAdmin',
             ],
             '#^modifmessage$#' => [
                 'controller' => 'getControllerBackend',
-                'action' => 'modifmessage',
+                'action' => 'modifMessage',
             ],
             '#^administration$#' => [
                 'controller' => 'getControllerBackend',
@@ -95,10 +95,10 @@ class Config
             ],
             '#^logoutadmin$#' => [
                 'controller' => 'getControllerBackend',
-                'action' => 'logoutadmin',
+                'action' => 'logoutAdmin',
             ],
             /* Frontend*/
-            '#^listChapters$#' => [
+            '#^listchapters$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'listChapters',
             ],
@@ -110,27 +110,27 @@ class Config
                 'controller' => 'getControllerFrontend',
                 'action' => 'chapter',
             ],
-            '#^addComment$#' => [
+            '#^addcomment&id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'addComment',
             ],
-            '#^comment$#' => [
+            '#^comment&numComm=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'comment',
             ],
-            '#^listcomments$#' => [
+            '#^listcommentsmembre&idmembre=([0-9]+$#' => [
                 'controller' => 'getControllerFrontend',
-                'action' => 'listcomments',
+                'action' => 'listCommentsMembre',
             ],
-            '#^modifComment$#' => [
+            '#^modifcomment&numComm=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifComment',
             ],
-            '#^deletecomment$#' => [
+            '#^deletecomment&id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'deleteComment',
             ],
-            '#^signaled$#' => [
+            '#^signaled&$id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'signaledComment',
             ],
@@ -140,23 +140,23 @@ class Config
             ],
             '#^loginmembre$#' => [
                 'controller' => 'getControllerFrontend',
-                'action' => 'loginmembre',
+                'action' => 'loginMembre',
             ],
             '#^logoutmembre$#' => [
                 'controller' => 'getControllerFrontend',
-                'action' => 'logoutmembre',
+                'action' => 'logoutMembre',
             ],
             '#^inscription$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'inscription',
             ],
-            '#^deleteaccount$#' => [
+            '#^deleteaccount&id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
-                'action' => 'deleteaccount',
+                'action' => 'deleteAccount',
             ],
             '#^profilmembre$#' => [
                 'controller' => 'getControllerFrontend',
-                'action' => 'profilmembre',
+                'action' => 'profilMembre',
             ],
             '#^versinscription$#' => [
                 'controller' => 'getControllerFrontend',
@@ -186,11 +186,11 @@ class Config
                 'controller' => 'getControllerFrontend',
                 'action' => 'boutonsupprimerprofil',
             ],
-            '#^modifpseudomdp$#' => [
+            '#^modifpseudomdp&idmembre=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifPseudoMdp',
             ],
-            '#^modifemail$#' => [
+            '#^modifemail&idmembre=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'modifEmail',
             ],

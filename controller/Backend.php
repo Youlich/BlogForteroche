@@ -27,26 +27,26 @@ Class Backend
         $this->booksManager = $booksManager;
         $this->imagesManager = $imagesManager;
     }
-    public function loginadmin()
+    public function loginAdmin()
     {
         $authMembreManager = $this->adminManager;
-        $authMembreManager->loginadmin();
+        $authMembreManager->loginAdmin();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('loginadmin');
         $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
 
-    public function logoutadmin()
+    public function logoutAdmin()
     {
         session_destroy();
         header('Location: index.php');
         exit();
     }
-    public function profiladmin()
+    public function profilAdmin()
     {
         $adminmanager = $this->adminManager;
-        $admin = $adminmanager->profiladmin($_SESSION['id']);
+        $admin = $adminmanager->profilAdmin($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profiladmin');
@@ -55,8 +55,8 @@ Class Backend
     public function modifmessage()
     {
         $adminmanager = $this->adminManager;
-        $admin = $adminmanager->profiladmin($_SESSION['id']);
-        $adminmessage = $adminmanager->modifmessage();
+        $admin = $adminmanager->profilAdmin($_SESSION['id']);
+        $adminmessage = $adminmanager->modifMessage();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profiladmin');
@@ -66,7 +66,7 @@ Class Backend
     {
         $approved = $this->commentManager;
         $approved->approvedComment($_GET['id']);
-        $comments = $approved->getComments();
+        $comments = $approved->listComments();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
@@ -76,7 +76,7 @@ Class Backend
     {
         $refused = $this->commentManager;
         $refused->refusedComment($_GET['id']);
-        $comments = $refused->getComments();
+        $comments = $refused->listComments();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
@@ -85,7 +85,7 @@ Class Backend
     public function listComments()
     {
         $commentManager = $this->commentManager;
-        $comments = $commentManager->getComments();
+        $comments = $commentManager->listComments();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('listcomments');
@@ -191,10 +191,10 @@ Class Backend
         $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
 
-    public function addBook()
+    public function addBook($title)
     {
         $BookManager = $this->booksManager;
-        $addbook = $BookManager->addBook($_POST['titrelivre']);
+        $addbook = $BookManager->addBook($title);
         if ($addbook === false) {
             $_SESSION['error'] = 'Impossible d\'ajouter le livre !';
             header('Location: index.php?action=boutonaddbook' . "#endpage");
@@ -235,7 +235,7 @@ Class Backend
                     header('Location: index.php?action=boutonaddchapter' . "#endpage");
                 } else {
                     $chapterId = $Addchapter;
-                    $modifimage = $imagemanager->modifchapterImage($chapterId);
+                    $modifimage = $imagemanager->modifChapterImage($chapterId);
                     if ($modifimage === false ) {
                         $_SESSION['error'] = 'Votre image n\'a pas pu être ajoutée au chapitre';
                         header('Location: index.php?action=boutonaddchapter' . "#endpage");
@@ -277,7 +277,7 @@ Class Backend
                     header('Location: index.php?action=boutonmodifchapter' . "#endpage");
                 } else {
                     $chapterId = $_POST['chapterselect'];
-                    $modifimage = $imagemanager->modifchapterImage($chapterId);
+                    $modifimage = $imagemanager->modifChapterImage($chapterId);
                     if ($modifimage === false) {
                         $_SESSION['error'] = 'Impossible de modifier l\'image dans le chapitre';
                         header('Location: index.php?action=boutonmodifchapter' . "#endpage");

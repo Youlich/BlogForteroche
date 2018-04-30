@@ -5,6 +5,7 @@ class Router
     private $container;
     private $request_uri;
     private $routes = [];
+
     public function __construct($container, $routes, $request_uri) {
         $this->container = $container;
         $this->routes = $routes;
@@ -15,29 +16,31 @@ class Router
         try {
             /* Backend */
             $params = [];
+
             if (isset($this->request_uri)) {
                 if ($this->request_uri != 'BlogForteroche/index.php') {
                     if ($this->request_uri != 'BlogForteroche/') {
-                foreach ($this->routes as $pattern => $controllerAction) {
-                    if (preg_match($pattern, $this->request_uri, $matches)) {
-                        $controller = $this->routes[$pattern]['controller'];
-                        $action = $this->routes[$pattern]['action'];
-                        // params GET
-                        foreach ($matches as $key => $value) {
-                            if ($key > 0) {
-                                $params[] = $value;
+                        foreach ($this->routes as $pattern => $controllerAction) {
+                            if (preg_match($pattern, $this->request_uri, $matches)) {
+                                $controller = $this->routes[$pattern]['controller'];
+                                $action = $this->routes[$pattern]['action'];
+                                // params GET
+                                foreach ($matches as $key => $value) {
+                                    if ($key > 0) {
+                                        $params[] = $value;
+                                    }
+                                }
                             }
                         }
+                    }else {
+                        $controller = 'getControllerFrontend';
+                        $action = 'accueil';
                     }
+                }else {
+                    $controller = 'getControllerFrontend';
+                    $action = 'accueil';
                 }
-                    } else {
-                        $controller = 'getControllerFrontend';
-                        $action = 'accueil';
-                    }
-                    } else {
-                        $controller = 'getControllerFrontend';
-                        $action = 'accueil';
-                    }
+
             } else {
                 $controller = 'getControllerFrontend';
                 $action = 'accueil';

@@ -137,7 +137,7 @@ class ImagesManager extends Manager
      * permet de donner une valeur à la colonne chapterId de la table images
      */
 
-    public function ModifchapterImage($chapterId)
+    public function modifChapterImage($chapterId)
     {
         $file = $_FILES['image']['name'];
         $db = $this->dbConnect();
@@ -161,7 +161,7 @@ class ImagesManager extends Manager
      * @return bool
      * permet la suppression de l'image associée au chapitre
      */
-    public function DeleteImage($chapterId)
+    public function deleteImage($chapterId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM images WHERE chapterId = :id');
