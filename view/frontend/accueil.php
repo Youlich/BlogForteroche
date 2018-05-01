@@ -1,7 +1,7 @@
 
 <section class="bg-primary text-white mb-0" id="masthead">
         <section class="container">
-        <h1 class="text-center text-uppercase text-white">Bienvenue sur mon site <?php
+        <h2 class="text-center text-uppercase text-white" style="font-size: xx-large;">Bienvenue sur mon site <?php
 
                 if (isset($_SESSION['id'])){
                     if(($_SESSION['id']) != '2')
@@ -10,7 +10,7 @@
                 }
             }
             ?>
-        </h1>
+        </h2>
         <hr class="star-light mb-5">
         <br/>
         <p class="photo">

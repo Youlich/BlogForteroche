@@ -55,11 +55,12 @@
                 ?>
                 <tr>
                     <td>
-                        <?php echo $comment->getBook()->getTitle(); ?>
+                        <?php echo $comment->getBook()->getTitle();?>
                     </td>
                     <td>
-                        <?php echo $comment->getChapter()->getTitle(); ?>
+                        <?php echo $comment->getChapter()->getTitle();?>
                     </td>
+
                     <td>
                         <?php $date =  date_create($comment->getCommentDate());
                         echo date_format($date,'d.m.Y'); ?>

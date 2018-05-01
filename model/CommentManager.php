@@ -72,11 +72,12 @@ class CommentManager extends Manager
             $chapterManager = $this->chapterManager;
             $chapter = $chapterManager->getChapter($comment->getChapterId());
 
-            $bookManager = $this->booksManager;
-            $book = $bookManager->getBook($chapter->getBookId());
+            $booksManager = $this->booksManager;
+            $book = $booksManager->getBook($chapter->getBookId());
 
             $comment->setChapter($chapter);
             $comment->setBook($book);
+
         }
         return $comments;
     }

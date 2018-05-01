@@ -45,11 +45,11 @@ class Config
                 'controller' => 'getControllerBackend',
                 'action' => 'listComments',
             ],
-            '#^approved&id=$#' => [
+            '#^approved&id=([0-9]+)$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'approvedComment',
             ],
-            '#^refused&id=$#' => [
+            '#^refused&id=([0-9]+)$#' => [
                 'controller' => 'getControllerBackend',
                 'action' => 'refusedComment',
             ],
@@ -98,6 +98,14 @@ class Config
                 'action' => 'logoutAdmin',
             ],
             /* Frontend*/
+            '#^$#' => [
+                'controller' => 'getControllerFrontend',
+                'action' => 'accueil',
+            ],
+            '#^index.php$#' => [
+                'controller' => 'getControllerFrontend',
+                'action' => 'accueil',
+            ],
             '#^listchapters$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'listChapters',
@@ -118,7 +126,7 @@ class Config
                 'controller' => 'getControllerFrontend',
                 'action' => 'comment',
             ],
-            '#^listcommentsmembre&idmembre=([0-9]+$#' => [
+            '#^listcommentsmembre&idmembre=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'listCommentsMembre',
             ],
@@ -130,7 +138,7 @@ class Config
                 'controller' => 'getControllerFrontend',
                 'action' => 'deleteComment',
             ],
-            '#^signaled&$id=([0-9]+)$#' => [
+            '#^signaled&id=([0-9]+)$#' => [
                 'controller' => 'getControllerFrontend',
                 'action' => 'signaledComment',
             ],

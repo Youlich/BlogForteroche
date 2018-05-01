@@ -76,7 +76,7 @@ Class Frontend
         $chapters = $chapterManager->listChapters();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
-        $myView = new View('listchapters');
+        $myView = new View('listChapters');
         $myView->renderView(array('chapters' => $chapters, 'success'=> $success, 'error'=> $error));
     }
     public function lastChapter() //affiche le dernier chapitre créé par l'auteur
@@ -92,7 +92,7 @@ Class Frontend
         $nbComms = $commentManager->countCommentsChapter($idlastchapter);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
-        $myView = new View('lastchapter');
+        $myView = new View('lastChapter');
         $myView->renderView(array('lastchapter' => $lastchapter,
             'idlastchapter' => $idlastchapter, 'comments'=>$comments,'imagechapter' => $imagechapter,
             'image' => $image, 'nbComms' => $nbComms, 'success'=> $success, 'error'=> $error));
@@ -143,10 +143,11 @@ Class Frontend
     public function deleteComment($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
     {
         $deleteManager = $this->commentManager;
-        $deleteComment = $deleteManager->deleteComment($membreId);
-        $nbComms = $deleteManager->countCommentsChapter($_GET['id']);
+        $deleteComment = $deleteManager->deleteComment($_SESSION['id']);
+
     }
-    public function signaledComment($commentid) //signaler un commentaire abusif
+
+    public function signaledComment() //signaler un commentaire abusif
     {
         $signaleManager = $this->commentManager;
         $signaledComment = $signaleManager->signaledComment($_GET['id']);
@@ -218,11 +219,11 @@ Class Frontend
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $commentManager = $this->commentManager;
-        $commentsMembre = $commentManager->listCommentsMembre($_SESSION['id']);
+        $comments = $commentManager->listCommentsMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonafficherlescommentaires');
-        $myView->renderView(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre,'comments' => $comments, 'success'=> $success, 'error'=> $error));
     }
     public function boutonsupprimerprofil()
     {
@@ -272,12 +273,11 @@ Class Frontend
     {
         $membreManager = $this->membreManager;
         $membre=$membreManager->getMembre($_SESSION['id']);
-        #$commentManager = $this->commentManager;
-       #$commentsMembre = $commentManager->listCommentsMembre($_SESSION['id']);
+       #
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profilmembre');
-        $myView->renderView(array('membre' => $membre, 'commentsMembre' => $commentsMembre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error));
     }
     public function accueil()
     {

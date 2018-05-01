@@ -47,16 +47,16 @@ class ChapterManager extends Manager
      * @param $chapterId
      * @return Chapter : donne le chapitre selon l'id entré en paramètre
      */
-    public function getChapter ($chapterId)
+    public function getChapter($chapterId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
         $req->execute(array($chapterId));
         while ($data = $req->fetch()) {
-            $chapterselect = new Chapter();
-            $chapterselect->hydrate($data);
+            $chapter = new Chapter();
+            $chapter->hydrate($data);
         }
-        return $chapterselect;
+        return $chapter;
     }
 
     /**

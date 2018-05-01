@@ -66,7 +66,7 @@
 
     <?= $content; ?>
 
-<<!-- Errors -->
+<!-- Errors -->
 <div class="container">
     <div class="col-lg-4 mx-auto">
         <?php if (isset($error)){ ?>

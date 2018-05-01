@@ -18,7 +18,7 @@
         <th colspan="2">Action</th>
     </tr>
     </thead>
-    <tbody>
+
 <?php
 foreach ($comments as $comment)
 {
@@ -50,14 +50,14 @@ foreach ($comments as $comment)
                         </td> <?php
                     } ?>
                 <td>
-                    <a href="index.php?action=approved&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Accepter"></a>
-                    <a href="index.php?action=refused&amp;id=<?php echo $comment->getId(); ?>"><input type="button" value="Refuser">
+                    <a href="index.php?action=approved&id=<?php echo $comment->getId(); ?>"><input type="button" value="Accepter"></a>
+                    <a href="index.php?action=refused&id=<?php echo $comment->getId(); ?>"><input type="button" value="Refuser">
                 </td>
             </tr>
     <?php
 }
 ?>
-</tbody>
+
 </table>
 <div align="center"> <a href="index.php?action=administration">Retour page d'administration</a> </div>
 <br/>
