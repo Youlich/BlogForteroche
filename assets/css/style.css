@@ -86,7 +86,24 @@ li {
     padding-top: 10%;
 }
 
-
+@media only screen and (max-width : 320px) {
+    .bg-primary {
+        padding-top: 55%;
+    }
+    h1, h2, h3, h4, .text-uppercase
+    {
+        font-size : larger;
+    }
+}
+@media (min-width : 321px) and (max-width: 768px) {
+    .bg-primary {
+        padding-top: 30%;
+    }
+    h1, h2, h3, h4
+    {
+        font-size : larger;
+    }
+}
 
 /*en responsive*/
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover, button#sendMessageButton:hover
@@ -94,6 +111,8 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
     background-color: grey!important;
     border : grey;
 }
+
+
 
 /* bouton submit dans toutes les view*/
 .btn-success
@@ -127,3 +146,4 @@ a:hover
     text-decoration: none;
     color : #18bc9c;
 }
+

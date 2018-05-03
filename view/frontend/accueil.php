@@ -1,7 +1,7 @@
 
 <section class="bg-primary text-white mb-0" id="masthead">
         <section class="container">
-        <h2 class="text-center text-uppercase text-white" style="font-size: xx-large;">Bienvenue sur mon site <?php
+        <h2 class="text-uppercase text-center  text-white" style="font-size: xx-large;">Bienvenue sur mon site <?php
 
                 if (isset($_SESSION['id'])){
                     if(($_SESSION['id']) != '2')

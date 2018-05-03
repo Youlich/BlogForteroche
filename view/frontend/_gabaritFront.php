@@ -55,7 +55,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#contact">Contact</a>
                     </li>
                     <li class="nav-item dropdown mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="dropdown">Espace membre</a>
+                        <a href="#" class="dropdown-toggle nav-link py-3 px-0 px-lg-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace membre <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php if (isset($_SESSION['id'])) { ?>
 
