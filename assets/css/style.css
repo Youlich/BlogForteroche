@@ -94,6 +94,10 @@ li {
     {
         font-size : larger;
     }
+    .nav-item
+    {
+        font-size : small;
+    }
 }
 @media (min-width : 321px) and (max-width: 768px) {
     .bg-primary {
@@ -103,9 +107,13 @@ li {
     {
         font-size : larger;
     }
+    .nav-item
+    {
+        font-size : small;
+    }
 }
 
-/*en responsive*/
+
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover, button#sendMessageButton:hover
 {
     background-color: grey!important;

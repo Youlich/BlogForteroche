@@ -28,7 +28,6 @@
     <link href="<?php echo CSS; ?>freelancer.min.css" rel="stylesheet">
 
 
-
 </head>
 
 
