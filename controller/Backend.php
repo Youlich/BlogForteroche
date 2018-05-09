@@ -7,7 +7,7 @@ use services\View;
  * Class Backend
  * @package controller Backend
  */
-Class Backend
+Class Backend extends Controller
 {
     /**
      * @var
@@ -40,7 +40,7 @@ Class Backend
     public function logoutAdmin()
     {
         session_destroy();
-        header('Location: index.php');
+        $this->redirect('Location: index.php');
         exit();
     }
     public function profilAdmin()
@@ -197,10 +197,10 @@ Class Backend
         $addbook = $BookManager->addBook($title);
         if ($addbook === false) {
             $_SESSION['error'] = 'Impossible d\'ajouter le livre !';
-            header('Location: index.php?action=boutonaddbook' . "#endpage");
+            $this->redirect('Location: index.php?action=boutonaddbook' . "#endpage");
         } else {
             $_SESSION['success'] = 'Votre nouveau livre a bien été ajouté';
-            header('Location: index.php?action=boutonaddbook' . "#endpage");
+            $this->redirect('Location: index.php?action=boutonaddbook' . "#endpage");
         }
     }
     public function administration()
@@ -219,10 +219,10 @@ Class Backend
             $addchaptersansimage = $Chaptersansimage->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, '0');
             if ($addchaptersansimage === false) {
                 $_SESSION['error'] = 'Impossible d\'ajouter votre chapitre !';
-                header('Location: index.php?action=boutonaddchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
             } else {
                 $_SESSION['success'] = 'Votre chapitre a bien été ajouté';
-                header('Location: index.php?action=boutonaddchapter' . "#endpage");
+                $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
             }
         } else {
             $imagemanager = $this->imagesManager;
@@ -232,21 +232,21 @@ Class Backend
                 $Addchapter = $ChapterManager->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, $uploadResult['imageId']);
                 if ($Addchapter === false) {
                     $_SESSION['error'] = 'Votre chapitre n\'a pas pu être ajouté';
-                    header('Location: index.php?action=boutonaddchapter' . "#endpage");
+	                $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
                 } else {
                     $chapterId = $Addchapter;
                     $modifimage = $imagemanager->modifChapterImage($chapterId);
                     if ($modifimage === false ) {
                         $_SESSION['error'] = 'Votre image n\'a pas pu être ajoutée au chapitre';
-                        header('Location: index.php?action=boutonaddchapter' . "#endpage");
+	                    $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
                     } else {
                         $_SESSION['success'] = 'Votre chapitre a bien été ajouté avec son image';
-                        header('Location: index.php?action=boutonaddchapter' . "#endpage");
+	                    $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
                     }
                 }
             } else {
                 $_SESSION['error'] = 'Votre image n\'a pas pu être téléchargée';
-                header('Location: index.php?action=boutonaddchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
             }
         }
     }
@@ -259,10 +259,10 @@ Class Backend
             $modifLines = $ModifManager->modifChaptersansUpload($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], $resum);
             if ($modifLines === false) {
                 $_SESSION['error'] = 'Impossible de modifier le chapitre !';
-                header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
             } else {
                 $_SESSION['success'] = 'Votre chapitre a bien été modifié';
-                header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
             }
         } else {
             $imagemanager = $this->imagesManager;
@@ -271,24 +271,24 @@ Class Backend
                 $ModifManager = $this->chapterManager;
                 $modifLines = $ModifManager->modifChapter($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], $resum, $uploadResult['imageId']);
                 $_SESSION['success'] = 'Votre chapitre a bien été modifié';
-                header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
                 if ($modifLines === false) {
                     $_SESSION['error'] = 'Impossible de modifier le chapitre !';
-                    header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	                $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
                 } else {
                     $chapterId = $_POST['chapterselect'];
                     $modifimage = $imagemanager->modifChapterImage($chapterId);
                     if ($modifimage === false) {
                         $_SESSION['error'] = 'Impossible de modifier l\'image dans le chapitre';
-                        header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	                    $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
                     } else {
                         $_SESSION['success'] = 'Votre chapitre a bien été modifié avec son image';
-                        header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	                    $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
                     }
                 }
             } else {
                 $_SESSION['error'] = 'Votre image n\'a pas pu être téléchargée';
-                header('Location: index.php?action=boutonmodifchapter' . "#endpage");
+	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
             }
         }
     }
@@ -303,7 +303,7 @@ Class Backend
         }else {
             $_SESSION['error'] = "Votre chapitre n'a pas pu être supprimé";
         }
-        header('Location: index.php?action=boutondeletechapter' . "#endpage");
+	    $this->redirect('Location: index.php?action=boutondeletechapter' . "#endpage");
     }
 
 }

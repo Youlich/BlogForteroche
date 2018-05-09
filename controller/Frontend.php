@@ -7,7 +7,7 @@ use services\View;
  * Class Frontend
  * @package controller Frontend
  */
-Class Frontend
+Class Frontend extends Controller
 {
     private $membreManager;
     private $adminManager;
@@ -114,12 +114,12 @@ Class Frontend
                 $CommentManager->addComment($chapterId, $_SESSION['pseudo'], 'En attente', $_POST['comment'], $_SESSION['id']);
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
-                header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+	            $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
                 exit();
             }
         } else {
             $_SESSION['error'] = 'Aucun identifiant de billet envoyé';
-            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+	        $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
             exit();
         }
     }
@@ -131,12 +131,12 @@ Class Frontend
                 $ModifManager->modifComment();
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
-                header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+                $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
                 exit();
             }
         } else {
             $_SESSION['error'] = 'Aucun identifiant de billet envoyé';
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             exit();
         }
     }
@@ -178,7 +178,7 @@ Class Frontend
     public function logoutMembre()
     {
         session_destroy();
-        header('Location: index.php');
+        $this->redirect('Location: index.php');
         exit();
     }
     public function inscription()
@@ -248,7 +248,7 @@ Class Frontend
 
         } else {
             $_SESSION['error'] = 'Impossible de modifier votre compte !';
-            header('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
+            $this->redirect('Location: index.php?action=boutonmodifpseudomdp' . "#endpage");
         }
     }
     public function modifEmail()
@@ -258,10 +258,10 @@ Class Frontend
         $modifmembre = $newemail->modifEmail();
         if ($modifmembre){
             $_SESSION['success'] = 'Votre email a bien été modifiée';
-            header('Location: index.php?action=boutonmodifiermail' . "#endpage");
+            $this->redirect('Location: index.php?action=boutonmodifiermail' . "#endpage");
         } else {
             $_SESSION['error'] = 'Impossible de modifier votre mail !';
-            header('Location: index.php?action=boutonmodifiermail' . "#endpage");
+	        $this->redirect('Location: index.php?action=boutonmodifiermail' . "#endpage");
         }
     }
     public function versInscription ()
@@ -273,7 +273,6 @@ Class Frontend
     {
         $membreManager = $this->membreManager;
         $membre=$membreManager->getMembre($_SESSION['id']);
-       #
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('profilmembre');
