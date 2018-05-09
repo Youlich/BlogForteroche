@@ -24,8 +24,12 @@ class Container
 
     public function getPDO()
     {
+		$hostname=$this->parameters['host'];
+		$dbname=$this->parameters['dbname'];
+		$username=$this->parameters['username'];
+		$password= $this->parameters['password'];
         if ($this->pdo == null) {
-	        $this->pdo = new \PDO('mysql:host='.$this->parameters['host'].';dbname='.$this->parameters['dbname'].';charset=utf8', $this->parameters['username'], $this->parameters['passwd']);
+	        $this->pdo = new \PDO('mysql:host='.$hostname.';dbname='.$dbname.';charset=utf8', $username, $password);
         }
         return $this->pdo;
     }
