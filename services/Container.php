@@ -25,7 +25,7 @@ class Container
     public function getPDO()
     {
         if ($this->pdo == null) {
-            $this->pdo = new \PDO('mysql:host=localhost;dbname=projetblog;charset=utf8', 'root', '');
+	        $this->pdo = new \PDO('mysql:host='.$this->parameters['host'].';dbname='.$this->parameters['dbname'].';charset=utf8', $this->parameters['username'], $this->parameters['passwd']);
         }
         return $this->pdo;
     }

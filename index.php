@@ -5,7 +5,7 @@ Autoload::register();
 \services\Config::start();
 $routes = \services\Config::getRoutes();
 session_start();
-$container = new \services\Container([]);
+$container = new \services\Container(\services\Config::getConfigBDD());
 $router = new \router\Router($container, $routes, $_SERVER['REQUEST_URI']);
 $resolve = $router->resolve();
 $caller = $resolve['controller'];
