@@ -21,7 +21,7 @@ class AdminManager extends Manager
         // toutes les vérifications
         if (isset($_POST['submit'])) {
             if (!empty($_POST['login'] AND !empty($_POST['mdp']))) {
-                $verifadmin = new Verifications();
+                $verifadmin = new Verifications($this->dbConnect());
                 $verif = $verifadmin->loginadminExist($_POST['login']); //verif si le pseudo existe
                 if ($verif == "success") { // il existe, on continue
                     $verif = $verifadmin->verifadminPass($_POST['mdp']);
@@ -29,7 +29,7 @@ class AdminManager extends Manager
                         $verif = $verifadmin->verifadminHachPass();
                         if ($verif == "success") {
                             if ($verifadmin->sessionAdmin()) {
-                                header("Location:index.php?action=administration");
+                            	$this->redirect("Location:index.php?action=administration");
                                 exit();
                             }
                         } else {

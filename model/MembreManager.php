@@ -56,7 +56,7 @@ class MembreManager extends Manager
         if (isset($_POST['submit'])) {
             // vérification que tous les champs sont remplis
             if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
-                $verifmembre = new Verifications();
+                $verifmembre = new Verifications($this->dbConnect());
                 $verif = $verifmembre->verifPseudo($_POST['pseudo']);
                 if ($verif == "success") { //on continue
                     $verif = $verifmembre->pseudoExist($_POST['pseudo']); //verif si le pseudo existe
@@ -66,7 +66,7 @@ class MembreManager extends Manager
                             $verif = $verifmembre->verifHachPass();
                             if ($verif == "success") {
                                 if ($verifmembre->session()) {
-                                    header('Location: index.php?action=accueil');
+                                	$this->redirect('Location: index.php?action=accueil');
                                     exit();
                                 }
                             } else {
@@ -97,7 +97,7 @@ class MembreManager extends Manager
             if (isset($_POST['submit'])) {
                 // vérification que tous les champs sont remplis
                 if (!empty($_POST['pseudo'] AND !empty($_POST['pass'] AND !empty($_POST['newpass'] AND !empty($_POST['email']))))) {
-                    $verifmembre = new Verifications();
+                    $verifmembre = new Verifications($this->dbConnect());
                     $verif = $verifmembre->verifPseudo($_POST['pseudo']); // verif pseudo compris entre 3 et 255 caractères
                     if ($verif == "success") {
                         //on vérifie s'il n'est pas déjà existant dans la BDD
@@ -118,7 +118,7 @@ class MembreManager extends Manager
                                             'pseudo' => $_POST['pseudo'],
                                             'pass' => $pass_hache,
                                             'email' => $_POST['email']));
-                                            header('location: index.php?action=loginmembre');
+                                        $this->redirect('Location: index.php?action=loginmembre');
                                             $_SESSION['success'] = "Bravo ! Votre compte est créé, merci de vous connecter.";
                                             return $_SESSION['success'];
                                     } else {
@@ -154,10 +154,10 @@ class MembreManager extends Manager
             $req = $db->prepare("DELETE FROM membres WHERE id = :id");
             $supp = $req->execute(array(':id' => $_GET['id']));
             if ($supp== "success") {
-                header('location: index.php?action=accueil');
+            	$this->redirect('Location: index.php?action=accueil');
                 session_destroy();
             }else {
-                header('location: index.php?action=profilmembre');
+            	$this->redirect('Location: index.php?action=profilmembre');
                 $_SESSION['error'] = "Votre compte n'a pas pu être supprimé";
                 return $_SESSION['error'];
             }
@@ -170,7 +170,7 @@ class MembreManager extends Manager
     public function modifPseudoMdp()
     {
         if (isset($_POST['submit'])) {
-            $verification = new Verifications();
+            $verification = new Verifications($this->dbConnect());
             $verif = $verification->verifPseudo($_POST['pseudo']); // verif pseudo compris entre 3 et 255 caractères
             if ($verif == "success") {
                 $verif = $verification->verifPass($_POST['pass']); // verif mdp compris entre 6 et 255 caractères
@@ -190,7 +190,7 @@ class MembreManager extends Manager
                                 $newmodif->hydrate($data);
 
                             }
-                            header('location: index.php?action=loginmembre');
+                            $this->redirect('Location: index.php?action=loginmembre');
                             $_SESSION['success'] = "Bravo ! Vos informations de connexion sont modifiées, merci de vous connecter.";
                             return $_SESSION['success'];
 
@@ -212,7 +212,7 @@ class MembreManager extends Manager
     public function modifEmail()
     {
         if (isset($_POST['submit'])) {
-            $verification = new Verifications();
+            $verification = new Verifications($this->dbConnect());
             $verif = $verification->verifEmail($_POST['email']); // verif de la synthaxe du mail
             if ($verif == "success") {
                 $db = $this->dbConnect();
@@ -225,7 +225,7 @@ class MembreManager extends Manager
                     $newmodif->hydrate($data);
 
                 }
-               header ('location:index.php?action=profilmembre');
+                $this->redirect('Location:index.php?action=profilmembre');
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['success'] = "Bravo ! Votre email est modifié";
                 return $_SESSION['success'];

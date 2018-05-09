@@ -149,11 +149,11 @@ class CommentManager extends Manager
             $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été ajouté";
-            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+            $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
             exit();
         } else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté";
-            header('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+	        $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
             exit();
         }
     }
@@ -178,11 +178,11 @@ class CommentManager extends Manager
         }
         if ($modifLines) {
             $_SESSION['success'] = "Votre commentaire a bien été modifié";
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+            $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             exit();
         }else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être modifié";
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             exit();
         }
     }
@@ -241,9 +241,9 @@ class CommentManager extends Manager
             $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         }else {
-            header('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
+	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
             $_SESSION['error'] = "Votre commentaire n'a pas pu être supprimé";
 
         }

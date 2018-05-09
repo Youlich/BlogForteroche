@@ -4,7 +4,7 @@ namespace services;
 
 use model\Manager;
 
-class Verifications
+class Verifications extends Manager
 {
     private $pseudo;
     private $pass;
@@ -12,16 +12,6 @@ class Verifications
     private $email;
     private $login;
     private $mdp;
-
-
-    public function connectDb()
-    {
-        $container = new Container([]);
-        $pdo = $container->getPDO();
-        $manager = new Manager($pdo);
-        $db = $manager->dbConnect();
-        return $db;
-    }
 
 
     public function verifPseudo($pseudo)
@@ -84,7 +74,7 @@ class Verifications
 
     public function verifHachPass()
     {
-        $db = $this->connectDb();
+	    $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $_POST['pseudo']));
         $authMembre = $req->fetch();
@@ -103,7 +93,7 @@ class Verifications
 
     public function verifadminHachPass()
     {
-        $db = $this->connectDb();
+	    $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
         $req->execute(array('login' => $_POST['login']));
         $authadmin = $req->fetch();
@@ -134,7 +124,7 @@ class Verifications
     public function pseudoExist($pseudo)
     {
         $this->pseudo = $pseudo;
-        $db = $this->connectDb();
+        $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $_POST['pseudo']));
         $resultat = $req->fetch();
@@ -149,7 +139,7 @@ class Verifications
     public function loginadminExist($login)
     {
         $this->login = $login;
-        $db = $this->connectDb();
+	    $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM admin WHERE login = :login');
         $req->execute(array('login' => $_POST['login']));
         $resultat = $req->fetch();
@@ -163,7 +153,7 @@ class Verifications
 
     public function session()
     {
-        $db = $this->connectDb();
+	    $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, dateInscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
         $req->execute(array('pseudo' => $this->pseudo));
         $req = $req->fetch();
@@ -178,7 +168,7 @@ class Verifications
 
     public function sessionAdmin()
     {
-        $db = $this->connectDb();
+	    $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, login, mdp FROM admin WHERE login = :login');
         $req->execute(array('login' => $this->login));
         $req = $req->fetch();
