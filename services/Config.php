@@ -1,5 +1,6 @@
 <?php
 namespace services;
+
 class Config
 {
 	public static function start() //static car appelée qu'une seule fois
@@ -25,10 +26,10 @@ class Config
 	public static function getConfigBDD()
 	{
 		return [
-			'host' => '',
-			'dbname' => '',
-			'username' => '',
-			'password' => '',
+				'host' => 'localhost',
+				'dbname' => 'projetblog',
+				'username' => 'root',
+				'password' => '',
 		];
 	}
 

@@ -1,2 +1,8 @@
-DirectoryIndex index.php index.html /erreurs/erreur_403.php
+Options +FollowSymLinks
+
+RewriteEngine On
+DirectoryIndex index.php public/index.php
 ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+RewriteBase /
