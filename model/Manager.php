@@ -11,14 +11,14 @@ use controller\Controller;
 class Manager extends Controller
 
 {
-    private $pdo;
+	private $pdo;
 
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-    public function dbConnect()
-    {
-        return $this->pdo;
-    }
+	public function __construct($pdo)
+	{
+		$this->pdo = $pdo;
+	}
+	public function dbConnect()
+	{
+		return $this->pdo;
+	}
 }

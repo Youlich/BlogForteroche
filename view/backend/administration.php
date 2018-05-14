@@ -1,8 +1,8 @@
 <header class="bg-primary text-white text-center">
 
-        </br></br></br>
+        <br/><br/>
         <h1>Administration du site</h1>
-        </br></br></br>
+        <br/><br/><br/>
 
 </header>
 
@@ -19,19 +19,19 @@
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=publier" class="chapter"><img class="img-fluid" src="public/images/publications.jpg" alt=""></a>
+                    <a href="index.php?action=publier" class="chapter"><img class="img-fluid" src="<?php echo IMAGES; ?>publications.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=listmembres" class="chapter"><img class="img-fluid" src="public/images/membres.jpg" alt=""></a>
+                    <a href="index.php?action=listmembres" class="chapter"><img class="img-fluid" src="<?php echo IMAGES; ?>membres.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=listcomments" class="chapter"><img class="img-fluid" src="public/images/commentaires.jpg" alt=""></a>
+                    <a href="index.php?action=listcomments" class="chapter"><img class="img-fluid" src="<?php echo IMAGES; ?>commentaires.jpg" alt=""></a>
             </div>
             <div class="col-md-6 col-lg-6">
                 <a class="portfolio-item d-block mx-auto">
-                    <a href="index.php?action=profiladmin" class="chapter"><img class="img-fluid" src="public/images/profil.jpg" alt=""></a>
+                    <a href="index.php?action=profiladmin" class="chapter"><img class="img-fluid" src="<?php echo IMAGES; ?>profil.jpg" alt=""></a>
             </div>
         </div>
     </section>

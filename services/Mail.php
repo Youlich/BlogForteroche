@@ -2,10 +2,18 @@
 
 namespace services;
 
+/**
+ * Class Mail
+ * @package services
+ */
 
 class Mail
 {
 
+	/**
+	 * Fonction qui permet l'envoi de mail depuis le site vers jforteroche44@gmail.com
+	 * elle comprend un ensemble de vérifications
+	 */
     public function contact()
     {
         $errors = array(); // on crée une vérif de champs
@@ -25,7 +33,6 @@ class Mail
             header('Location: index.php?action=accueil#contact');
         }else{
             $_SESSION['success'] = 1;
-            // utilisation de l'applicatif sendmail pour pouvoir envoyer les mails en local, modif php.ini et modif localhost sur wamp et sur phpstorm (deployment) pour prendre le bon php.ini
             $message = htmlspecialchars($_POST['message']);
             // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
             $message = wordwrap($message, 70, "\r\n");

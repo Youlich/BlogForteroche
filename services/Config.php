@@ -1,8 +1,17 @@
 <?php
 namespace services;
 
+/**
+ * Class Config
+ * @package services
+ */
+
 class Config
 {
+
+	/**
+	 * Fonction qui permet de donner un nom à des chemins de dossiers ou serveur
+	 */
 	public static function start() //static car appelée qu'une seule fois
 	{
 		$root = $_SERVER['DOCUMENT_ROOT'];
@@ -20,8 +29,13 @@ class Config
 		define ('JS', HOST .'assets/js/');
 		define ('TINYMCE', HOST .'assets/js/tinymce/');
 		define ('MP', HOST .'assets/magnific-popup/');
-		define ('IMAGES', HOST . 'public/images');
+		define ('IMAGES', HOST . 'public/images/');
 	}
+
+	/**
+	 * Fonction qui donne la configuration d'accès à la BDD
+	 * @return array
+	 */
 
 	public static function getConfigBDD()
 	{
@@ -32,6 +46,11 @@ class Config
 				'password' => '',
 		];
 	}
+
+	/**
+	 *
+	 * @return array : avec le controller et l'action
+	 */
 
 	public static function getRoutes()
 	{

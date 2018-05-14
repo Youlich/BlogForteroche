@@ -27,19 +27,19 @@ class ImagesManager extends Manager
     }
 
     /**
-     * @param $id
+     * @param Images $image
      *
      * @return bool|Images
      * retourne l'image si elle existe
      */
-    public function getImageById($id)
+    public function getImageById(Images $image)
     {
-        if ($id == 0) {
+        if ($image->getId() == 0) {
             return false;
         } else {
             $db = $this->dbConnect();
             $PDOStatement = $db->prepare('SELECT * FROM images WHERE id = :id');
-            $PDOStatement->execute(array(':id' => $id));
+            $PDOStatement->execute(array(':id' => $image->getId()));
             while ($data = $PDOStatement->fetch(\PDO::FETCH_ASSOC)) {
                 $image = new Images();
                 $image->hydrate($data);

@@ -2,6 +2,7 @@
 namespace model;
 use entity\Chapter;
 use entity\Comment;
+use entity\Membres;
 
 
 /**
@@ -86,12 +87,12 @@ class CommentManager extends Manager
      * @param $membreId
      * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
      */
-    public function listCommentsMembre($membreId)
+    public function listCommentsMembre(Membres $membre)
     {
         $comments = array();
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM comments WHERE membreId = ? ORDER BY statut DESC');
-        $req->execute(array($membreId));
+        $req->execute(array($membre->getId()));
         while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->hydrate($data);
@@ -159,18 +160,19 @@ class CommentManager extends Manager
     }
 
     /**
+     * @param : Comment $comment
      * fonction qui permet la modification du commentaire dans la table commentaire
      */
 
-    public function modifComment ()
+    public function modifComment (Comment $comment)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET membrePseudo=:membrePseudo, membreId=:membreId, comment=:comment, statut=:statut WHERE id=:num LIMIT 1');
-        $comments->bindValue(':num', $_POST['numComm'], \PDO::PARAM_INT);
-        $comments->bindValue(':membreId', $_SESSION['id'], \PDO::PARAM_STR);
-        $comments->bindValue(':membrePseudo', $_SESSION['pseudo'], \PDO::PARAM_STR);
-        $comments->bindValue(':comment', htmlspecialchars($_POST['comment']), \PDO::PARAM_STR);
-        $comments->bindValue(':statut', 'En attente', \PDO::PARAM_STR);
+        $comments->bindValue(':num', $comment->getId(), \PDO::PARAM_INT);
+        $comments->bindValue(':membreId', $comment->getMembreId(), \PDO::PARAM_STR);
+        $comments->bindValue(':membrePseudo', $comment->getMembrePseudo(), \PDO::PARAM_STR);
+        $comments->bindValue(':comment', htmlspecialchars($comment->getComment()), \PDO::PARAM_STR);
+        $comments->bindValue(':statut', $comment->getStatut(), \PDO::PARAM_STR);
         $modifLines = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -188,16 +190,16 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $id
+     * @param Comment $comment
      * @return bool
      * fonction qui modifie l'état du commentaire après approbation de celui-ci par l'administrateur en statut "valide"
      */
-    public function approvedComment($id)
+    public function approvedComment(Comment $comment)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
-        $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
-        $comments->bindValue(':statut', 'Valide', \PDO::PARAM_STR);
+        $comments->bindValue(':num', $comment->getId(), \PDO::PARAM_INT);
+        $comments->bindValue(':statut', $comment->getStatut(), \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -207,17 +209,17 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $id
+     * @param Comment $comment
      * @return bool
      * fonction qui modifie l'état du commentaire après refus de celui-ci par l'administrateur en statut "Refus"
      */
 
-    public function refusedComment($id)
+    public function refusedComment(Comment $comment)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE id=:num LIMIT 1');
-        $comments->bindValue(':num', $_GET['id'], \PDO::PARAM_INT);
-        $comments->bindValue(':statut', 'Refus', \PDO::PARAM_STR);
+        $comments->bindValue(':num', $comment->getId(), \PDO::PARAM_INT);
+        $comments->bindValue(':statut', $comment->getStatut(), \PDO::PARAM_STR);
         $modifEtat = $comments->execute();
         while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
             $comment = new Comment();
@@ -253,23 +255,23 @@ class CommentManager extends Manager
      * @param $chapterid
      * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
      */
-    public function signaledComment($chapterid)
-    {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE comments SET statut=:statut WHERE chapterId=:num LIMIT 1');
-        $comments->bindValue(':num', $chapterid, \PDO::PARAM_INT);
-        $comments->bindValue(':statut', 'Alerte', \PDO::PARAM_STR);
-        $modifEtat = $comments->execute();
-        while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
-            $comment = new Comment();
-            $comment->hydrate($data);
-        }
-        if ($modifEtat) {
-            $_SESSION['success'] = "Ce commentaire a bien été signalé à Jean Forteroche";
-        }else {
-            $_SESSION['error'] = "Impossible de signaler ce commentaire";
-        }
-    }
+	public function signaledComment($chapterid)
+	{
+		$db = $this->dbConnect();
+		$comments = $db->prepare('UPDATE comments SET statut=:statut WHERE chapterId=:num LIMIT 1');
+		$comments->bindValue(':num', $chapterid, \PDO::PARAM_INT);
+		$comments->bindValue(':statut', 'Alerte', \PDO::PARAM_STR);
+		$modifEtat = $comments->execute();
+		while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
+			$comment = new Comment();
+			$comment->hydrate($data);
+		}
+		if ($modifEtat) {
+			$_SESSION['success'] = "Ce commentaire a bien été signalé à Jean Forteroche";
+		}else {
+			$_SESSION['error'] = "Impossible de signaler ce commentaire";
+		}
+	}
 
     /**
      * @param $chapterId

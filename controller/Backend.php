@@ -2,6 +2,7 @@
 namespace controller;
 use services\View;
 
+
 \Autoload::register();
 /**
  * Class Backend
@@ -18,6 +19,7 @@ Class Backend extends Controller
     private $chapterManager;
     private $booksManager;
     private $imagesManager;
+
     /** injection de dépendances : appelle de tous les modèles */
     public function __construct($membreManager, $adminManager, $commentManager, $chapterManager, $booksManager, $imagesManager) {
         $this->membreManager = $membreManager;
@@ -27,6 +29,7 @@ Class Backend extends Controller
         $this->booksManager = $booksManager;
         $this->imagesManager = $imagesManager;
     }
+
     public function loginAdmin()
     {
         $authMembreManager = $this->adminManager;
@@ -65,7 +68,9 @@ Class Backend extends Controller
     public function approvedComment()
     {
         $approved = $this->commentManager;
-        $approved->approvedComment($_GET['id']);
+        $comment = $approved->getComment($_GET['id']);
+            $comment->setStatut('Valide');
+        $commentapproved = $approved->approvedComment($comment);
         $comments = $approved->listComments();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
@@ -75,7 +80,9 @@ Class Backend extends Controller
     public function refusedComment()
     {
         $refused = $this->commentManager;
-        $refused->refusedComment($_GET['id']);
+	    $comment = $refused->getComment($_GET['id']);
+	        $comment->setStatut('Refus');
+        $commentrefused = $refused->refusedComment($comment);
         $comments = $refused->listComments();
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
@@ -210,53 +217,59 @@ Class Backend extends Controller
         $myView = new View('administration');
         $myView->renderView(array('success'=> $success, 'error'=> $error));
     }
-    public function addChapter()
-    {
-        $chaptermanager = $this->chapterManager;
-        $resum = $chaptermanager->resumContent($_POST['content']);
-        if($_FILES['image']['name']=='') {
-            $Chaptersansimage = $this->chapterManager;
-            $addchaptersansimage = $Chaptersansimage->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, '0');
-            if ($addchaptersansimage === false) {
-                $_SESSION['error'] = 'Impossible d\'ajouter votre chapitre !';
-	            $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-            } else {
-                $_SESSION['success'] = 'Votre chapitre a bien été ajouté';
-                $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-            }
-        } else {
-            $imagemanager = $this->imagesManager;
-            $uploadResult = $imagemanager->upload();
-            if ($uploadResult['result']) {
-                $ChapterManager = $this->chapterManager;
-                $Addchapter = $ChapterManager->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, $uploadResult['imageId']);
-                if ($Addchapter === false) {
-                    $_SESSION['error'] = 'Votre chapitre n\'a pas pu être ajouté';
-	                $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-                } else {
-                    $chapterId = $Addchapter;
-                    $modifimage = $imagemanager->modifChapterImage($chapterId);
-                    if ($modifimage === false ) {
-                        $_SESSION['error'] = 'Votre image n\'a pas pu être ajoutée au chapitre';
-	                    $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-                    } else {
-                        $_SESSION['success'] = 'Votre chapitre a bien été ajouté avec son image';
-	                    $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-                    }
-                }
-            } else {
-                $_SESSION['error'] = 'Votre image n\'a pas pu être téléchargée';
-	            $this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
-            }
-        }
-    }
+
+	public function addChapter()
+	{
+		$chaptermanager = $this->chapterManager;
+		$resum = $chaptermanager->resumContent($_POST['content']);
+		if($_FILES['image']['name']=='') {
+			$Chaptersansimage = $this->chapterManager;
+			$addchaptersansimage = $Chaptersansimage->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, '0');
+			if ($addchaptersansimage === false) {
+				$_SESSION['error'] = 'Impossible d\'ajouter votre chapitre !';
+				$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+			} else {
+				$_SESSION['success'] = 'Votre chapitre a bien été ajouté';
+				$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+			}
+		} else {
+			$imagemanager = $this->imagesManager;
+			$uploadResult = $imagemanager->upload();
+			if ($uploadResult['result']) {
+				$ChapterManager = $this->chapterManager;
+				$Addchapter = $ChapterManager->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, $uploadResult['imageId']);
+				if ($Addchapter === false) {
+					$_SESSION['error'] = 'Votre chapitre n\'a pas pu être ajouté';
+					$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+				} else {
+					$chapterId = $Addchapter;
+					$modifimage = $imagemanager->modifChapterImage($chapterId);
+					if ($modifimage === false ) {
+						$_SESSION['error'] = 'Votre image n\'a pas pu être ajoutée au chapitre';
+						$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+					} else {
+						$_SESSION['success'] = 'Votre chapitre a bien été ajouté avec son image';
+						$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+					}
+				}
+			} else {
+				$_SESSION['error'] = 'Votre image n\'a pas pu être téléchargée';
+				$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");
+			}
+		}
+	}
+
     public function modifChapter()
     {
         $chaptermanager = $this->chapterManager;
         $resum = $chaptermanager->resumContent($_POST['content']);
         if($_FILES['image']['name']=='') {
             $ModifManager = $this->chapterManager;
-            $modifLines = $ModifManager->modifChaptersansUpload($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], $resum);
+	        $chapter = $ModifManager->getChapter($_POST['chapterselect']);
+	                    $chapter->setTitle($_POST['titrechapter']);
+	                    $chapter->setContent($_POST['content']);
+	                    $chapter->setResum($resum);
+	        $modifLines = $ModifManager->modifChaptersansUpload($chapter);
             if ($modifLines === false) {
                 $_SESSION['error'] = 'Impossible de modifier le chapitre !';
 	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
@@ -269,7 +282,12 @@ Class Backend extends Controller
             $uploadResult = $imagemanager->upload();
             if ($uploadResult['result']) {
                 $ModifManager = $this->chapterManager;
-                $modifLines = $ModifManager->modifChapter($_POST['chapterselect'], $_POST['titrechapter'], $_POST['content'], $resum, $uploadResult['imageId']);
+	            $chapter = $ModifManager->getChapter($_POST['chapterselect']);
+	            $chapter->setTitle($_POST['titrechapter']);
+	            $chapter->setContent($_POST['content']);
+	            $chapter->setResum($resum);
+	            $chapter->setImageId($uploadResult['imageId']);
+	            $modifLines = $ModifManager->modifChapter($chapter);
                 $_SESSION['success'] = 'Votre chapitre a bien été modifié';
 	            $this->redirect('Location: index.php?action=boutonmodifchapter' . "#endpage");
                 if ($modifLines === false) {
@@ -295,7 +313,8 @@ Class Backend extends Controller
     public function deleteChapter()
     {
         $chapterManager = $this->chapterManager;
-        $supp = $chapterManager->deleteChapter($_POST['chapterselect']);
+        $chapter = $chapterManager->getChapter($_POST['chapterselect']);
+	    $supp = $chapterManager->deleteChapter($chapter);
         if ($supp === true) {
             $imageManager = $this->imagesManager;
             $deleteImageassoc=$imageManager->deleteImage($_POST['chapterselect']);

@@ -137,7 +137,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getMembreId ()
+    public function getMembreId()
     {
         return $this->membreId;
     }
@@ -145,7 +145,7 @@ class Comment
     /**
      * @param mixed $membreId
      */
-    public function setMembreId ($membreId)
+    public function setMembreId($membreId)
     {
         $this->membreId = $membreId;
     }

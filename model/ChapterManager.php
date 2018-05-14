@@ -36,7 +36,9 @@ class ChapterManager extends Manager
         while ($data = $req->fetch()) {
             $chapter = new Chapter();
             $chapter->hydrate($data);
-            $image = $imageManager->getImageById($chapter->getImageId());
+            $image = $imageManager->getImage($chapter->getId());
+            $image->setId($chapter->getImageId());
+	        $image = $imageManager->getImageById($image);
             $chapter->setImage($image);
             $chapters[] = $chapter;
         }
@@ -47,35 +49,36 @@ class ChapterManager extends Manager
      * @param $chapterId
      * @return Chapter : donne le chapitre selon l'id entré en paramètre
      */
-    public function getChapter($chapterId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
-        $req->execute(array($chapterId));
-        while ($data = $req->fetch()) {
-            $chapter = new Chapter();
-            $chapter->hydrate($data);
-        }
-        return $chapter;
-    }
+	public function getChapter($chapterId)
+	{
+		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT id, title, resum, bookId, content, imageId,  DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters WHERE id = ?');
+		$req->execute(array($chapterId));
+		while ($data = $req->fetch()) {
+			$chapter = new Chapter();
+			$chapter->hydrate($data);
+		}
+		return $chapter;
+	}
 
-    /**
+
+	/**
      * @param $content
      * @return bool|string : retourne le résumé du chapitre
      */
-    public function resumContent($content)
-    {
-        $nbr_caracteres_max = 150;
-        $nbr_caracteres = strlen($content);
-        if($nbr_caracteres >= $nbr_caracteres_max)
-        {
-            return substr($content, 0, $nbr_caracteres_max);
-        }
-        else
-        {
-            return $content;
-        }
-    }
+	public function resumContent($content)
+	{
+		$nbr_caracteres_max = 150;
+		$nbr_caracteres = strlen($content);
+		if($nbr_caracteres >= $nbr_caracteres_max)
+		{
+			return substr($content, 0, $nbr_caracteres_max);
+		}
+		else
+		{
+			return $content;
+		}
+	}
 
     /**
      * @return Chapter : donne le dernier chapitre saisi par l'éditeur
@@ -100,58 +103,56 @@ class ChapterManager extends Manager
      * @param $imageId
      * @return bool|string : ajoute un chapitre dans la table chapitre. Si c'est un succès on obtient son id créé, sinon on retourne false
      */
-    public function addChapter($bookId, $title, $content, $resum, $imageId)
-    {
-        $ChapterAdd = array();
-        $db = $this->dbConnect();
-        $req = $db->prepare("INSERT INTO chapters (bookId, chapterDate, title, content, resum, imageId) VALUES (?,NOW(),?,?,?,?)");
-        $Addchapter = $req->execute(array($bookId, $title, $content,$resum, $imageId));
-        while ($data = $req->fetch()) {
-            $chapteradd = new Chapter();
-            $chapteradd->hydrate($data);
-            $ChapterAdd[] = $chapteradd;
-        }
-        if ($Addchapter) {
-            return $db->lastInsertId();
-        }else {
-            return false;
-        }
-    }
+	public function addChapter($bookId, $title, $content, $resum, $imageId)
+	{
+		$ChapterAdd = array();
+		$db = $this->dbConnect();
+		$req = $db->prepare("INSERT INTO chapters (bookId, chapterDate, title, content, resum, imageId) VALUES (?,NOW(),?,?,?,?)");
+		$Addchapter = $req->execute(array($bookId, $title, $content,$resum, $imageId));
+		while ($data = $req->fetch()) {
+			$chapteradd = new Chapter();
+			$chapteradd->hydrate($data);
+			$ChapterAdd[] = $chapteradd;
+		}
+		if ($Addchapter) {
+			return $db->lastInsertId();
+		}else {
+			return false;
+		}
+	}
 
     /**
      * @param $chapter_id
      * @return bool : suppression d'un chapitre. Si c'est un succès on retourne true sinon false
      */
 
-    public function deleteChapter($chapter_id)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare("DELETE FROM chapters WHERE id = :id");
-        $deletechapter= $req->execute(array(':id' => $chapter_id));
-        if ($deletechapter) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+	public function deleteChapter(Chapter $chapter_id)
+	{
+		$db = $this->dbConnect();
+		$req = $db->prepare("DELETE FROM chapters WHERE id = :id");
+		$deletechapter= $req->execute(array(':id' => $chapter_id->getId()));
+		if ($deletechapter) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    /**
-     * @param $id
-     * @param $title
-     * @param $content
-     * @param $resum
-     * @param $imageId
-     * @return bool : modification du chapitre.Si c'est un succès on retourne true sinon false
-     */
-    public function modifChapter($id, $title, $content, $resum, $imageId)
+	/**
+	 * @param Chapter $chapter
+	 *
+	 * @return bool : modification du chapitre.Si c'est un succès on retourne true sinon false
+	 */
+
+    public function modifChapter(Chapter $chapter)
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum, imageId=:imageId WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
-        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
-        $chapters->bindValue(':resum', $resum, \PDO::PARAM_STR);
-        $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
-        $chapters->bindValue(':imageId', $imageId, \PDO::PARAM_INT);
+	    $chapters->bindValue(':titrechapter', $chapter->getTitle(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':content', $chapter->getContent(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':resum', $chapter->getResum(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':id', $chapter->getId(), \PDO::PARAM_INT);
+        $chapters->bindValue(':imageId', $chapter->getImageId(), \PDO::PARAM_INT);
         $modifLines = $chapters->execute();
         while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {
             $chapter = new Chapter();
@@ -165,21 +166,18 @@ class ChapterManager extends Manager
     }
 
     /**
-     * @param $id
-     * @param $title
-     * @param $content
-     * @param $resum
+     * @param Chapter $chapter
      * @return bool : modification du chapitre dans le cas où il n'y a pas d'image. Si c'est un succès on retourne true sinon false
      */
 
-    public function modifChaptersansUpload($id, $title, $content,$resum)
+    public function modifChaptersansUpload(Chapter $chapter)
     {
         $db = $this->dbConnect();
         $chapters = $db->prepare('UPDATE chapters SET chapterDate=NOW(), title=:titrechapter, content=:content, resum=:resum WHERE id=:id LIMIT 1');
-        $chapters->bindValue(':titrechapter', $title, \PDO::PARAM_STR);
-        $chapters->bindValue(':content', $content, \PDO::PARAM_STR);
-        $chapters->bindValue(':resum', $resum, \PDO::PARAM_STR);
-        $chapters->bindValue(':id', $id, \PDO::PARAM_INT);
+	    $chapters->bindValue(':titrechapter', $chapter->getTitle(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':content', $chapter->getContent(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':resum', $chapter->getResum(), \PDO::PARAM_STR);
+	    $chapters->bindValue(':id', $chapter->getId(), \PDO::PARAM_INT);
 
         $modifLines = $chapters->execute();
         while ($data = $chapters->fetch(\PDO::FETCH_ASSOC)) {

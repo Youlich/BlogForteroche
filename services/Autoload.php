@@ -27,7 +27,7 @@ class Autoload
 
         $file = str_replace('\\','/',$class); // on met 2\\ car \ en php est un caractère réservé
         $file = ltrim($file,'/');
-        require_once $file.'.php';
+	    require_once $file.'.php';
     }
 
 }

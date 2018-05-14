@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use entity\Membres;
 use services\View;
 \Autoload::register();
 /**
@@ -15,6 +16,7 @@ Class Frontend extends Controller
     private $chapterManager;
     private $booksManager;
     private $imagesManager;
+
     /**
      * Frontend constructor.
      * les modèles appelés :
@@ -128,7 +130,12 @@ Class Frontend extends Controller
         if (isset($_GET['numComm']) && $_GET['numComm'] > 0) {
             if (!empty($_SESSION['pseudo']) && !empty($_POST['comment'])) {
                 $ModifManager = $this->commentManager;
-                $ModifManager->modifComment();
+                $comment = $ModifManager->getComment($_POST['numComm']);
+	                $comment->setMembreId($_SESSION['id']);
+	                $comment->setMembrePseudo($_SESSION['pseudo']);
+	                $comment->setComment($_POST['comment']);
+	                $comment->setStatut('En attente');
+                $modifComment = $ModifManager->modifComment($comment);
             } else {
                 $_SESSION['error'] = 'Tous les champs ne sont pas remplis !';
                 $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
@@ -140,6 +147,7 @@ Class Frontend extends Controller
             exit();
         }
     }
+
     public function deleteComment($membreId) // suppression d'un commentaire dans le tableau des commentaires du profil du membre
     {
         $deleteManager = $this->commentManager;
@@ -147,24 +155,25 @@ Class Frontend extends Controller
 
     }
 
-    public function signaledComment() //signaler un commentaire abusif
-    {
-        $signaleManager = $this->commentManager;
-        $signaledComment = $signaleManager->signaledComment($_GET['id']);
-        $chapterManager = $this->chapterManager;
-        $commentManager = $this->commentManager;
-        $imageManager = $this->imagesManager;
-        $chapter = $chapterManager->getChapter($_GET['id']);
-        $comments = $commentManager->getCommentsChapter($_GET['id']);
-        $imagechapter = $imageManager->getImage($_GET['id']);
-        $image = $imagechapter->getFileUrl();
-        $nbComms = $commentManager->countCommentsChapter($_GET['id']);
-        $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
-        $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
-        $myView = new View('chapter');
-        $myView->renderView(array('signaledComment' => $signaledComment,'imagechapter' => $imagechapter, 'chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image,
-            'success'=> $success, 'error'=> $error));
-    }
+	public function signaledComment() //signaler un commentaire abusif
+	{
+		$signaleManager = $this->commentManager;
+		$signaledComment = $signaleManager->signaledComment($_GET['id']);
+		$chapterManager = $this->chapterManager;
+		$commentManager = $this->commentManager;
+		$imageManager = $this->imagesManager;
+		$chapter = $chapterManager->getChapter($_GET['id']);
+		$comments = $commentManager->getCommentsChapter($_GET['id']);
+		$imagechapter = $imageManager->getImage($_GET['id']);
+		$image = $imagechapter->getFileUrl();
+		$nbComms = $commentManager->countCommentsChapter($_GET['id']);
+		$success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+		$error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+		$myView = new View('chapter');
+		$myView->renderView(array('signaledComment' => $signaledComment,'imagechapter' => $imagechapter, 'chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image,
+		                          'success'=> $success, 'error'=> $error));
+	}
+
     /*Partie Membre*/
     public function loginMembre()
     {
@@ -199,7 +208,7 @@ Class Frontend extends Controller
     public function boutonmodifpseudomdp()
     {
         $membreManager = $this->membreManager;
-        $membre = $membreManager->getMembre($_SESSION['id']);
+        $membre = $membreManager->getMembre(($_SESSION['id']));
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonmodifpseudomdp');
@@ -219,7 +228,8 @@ Class Frontend extends Controller
         $membreManager = $this->membreManager;
         $membre = $membreManager->getMembre($_SESSION['id']);
         $commentManager = $this->commentManager;
-        $comments = $commentManager->listCommentsMembre($_SESSION['id']);
+            $membre->setId($_SESSION['id']);
+        $comments = $commentManager->listCommentsMembre($membre);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonafficherlescommentaires');

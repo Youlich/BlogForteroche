@@ -36,7 +36,7 @@
 
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
 	<div class="container">
-		<a href="public/index.php?action=accueil"><img src="public/images/LOGO.png" width="200px"/>
+		<a href="index.php?action=accueil"><img src="public/images/LOGO.png" width="200px"/>
 			<a class="navbar-brand js-scroll-trigger" href="#top"></a>
 			<button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				Menu
@@ -45,30 +45,30 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="public/index.php?action=accueil#portfolio">Blog</a>
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#portfolio">Blog</a>
 					</li>
 					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="public/index.php?action=accueil#bibliographie">Bibliographie</a>
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#bibliographie">Bibliographie</a>
 					</li>
 					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="public/index.php?action=accueil#contact">Contact</a>
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php?action=accueil#contact">Contact</a>
 					</li>
 					<li class="nav-item dropdown mx-0 mx-lg-1">
 						<a href="#" class="dropdown-toggle nav-link py-3 px-0 px-lg-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace membre <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<?php if (isset($_SESSION['id'])) { ?>
 
-								<li><a class="dropdown-item" href="public/index.php?action=logoutmembre">Se déconnecter</a></li>
+								<li><a class="dropdown-item" href="index.php?action=logoutmembre">Se déconnecter</a></li>
 								<li>
-									<a class="dropdown-item" href="public/index.php?action=profilmembre">Gérer mon compte
+									<a class="dropdown-item" href="index.php?action=profilmembre">Gérer mon compte
 									</a>
 								</li>
 
 
 							<?php } else { ?>
 
-								<li><a class="dropdown-item" href="public/index.php?action=loginmembre">Se connecter</a></li>
-								<li><a class="dropdown-item" href="public/index.php?action=charte">S'inscrire</a></li>
+								<li><a class="dropdown-item" href="index.php?action=loginmembre">Se connecter</a></li>
+								<li><a class="dropdown-item" href="index.php?action=charte">S'inscrire</a></li>
 							<?php } ?>
 
 
@@ -131,8 +131,8 @@
 <div class="copyright">
 	<div class="copyright py-4 text-center text-white">
 		<div class="container">
-			<small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="public/index.php?action=mentionslegales">Mentions légales</a> -
-				<a href="public/index.php?action=loginadmin">Administration</a></small>
+			<small>Copyright © 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - CDP dev - <a href="index.php?action=mentionslegales">Mentions légales</a> -
+				<a href="index.php?action=loginadmin">Administration</a></small>
 		</div>
 	</div>
 </div>

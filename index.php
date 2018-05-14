@@ -1,5 +1,5 @@
 <?php
-require_once( '../services/Autoload.php' );
+require_once( 'services/Autoload.php' );
 
 Autoload::register();
 \services\Config::start();
