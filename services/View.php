@@ -41,7 +41,11 @@ class View
 			$content = ob_get_clean();
 			include_once( VIEWFRONT . '_gabaritFront.php' );
 		} else {
-			include_once ('404.php');
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+			ob_start();
+			include_once (VIEWFRONT . '404.php');
+			$content = ob_get_clean();
+			include_once( VIEWFRONT . '_gabaritFront.php' );
 		}
 	}
 }

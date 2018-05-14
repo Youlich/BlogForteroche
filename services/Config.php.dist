@@ -29,7 +29,7 @@ class Config
 		define ('JS', HOST .'assets/js/');
 		define ('TINYMCE', HOST .'assets/js/tinymce/');
 		define ('MP', HOST .'assets/magnific-popup/');
-		define ('IMAGES', HOST . 'public/images');
+		define ('IMAGES', HOST . 'public/images/');
 	}
 
 	/**
