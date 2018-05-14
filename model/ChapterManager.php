@@ -27,23 +27,21 @@ class ChapterManager extends Manager
     /**
      * @return array : tableau qui affiche tous les chapitres
      */
-    public function listChapters()
-    {
-        $imageManager = $this->imagesManager;
-        $chapters = array();
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, resum, bookId, content, imageId, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
-        while ($data = $req->fetch()) {
-            $chapter = new Chapter();
-            $chapter->hydrate($data);
-            $image = $imageManager->getImage($chapter->getId());
-            $image->setId($chapter->getImageId());
-	        $image = $imageManager->getImageById($image);
-            $chapter->setImage($image);
-            $chapters[] = $chapter;
-        }
-        return $chapters;
-    }
+	public function listChapters()
+	{
+		$imageManager = $this->imagesManager;
+		$chapters = array();
+		$db = $this->dbConnect();
+		$req = $db->query('SELECT id, title, resum, bookId, content, imageId, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
+		while ($data = $req->fetch()) {
+			$chapter = new Chapter();
+			$chapter->hydrate($data);
+			$image = $imageManager->getImageById($chapter->getImageId());
+			$chapter->setImage($image);
+			$chapters[] = $chapter;
+		}
+		return $chapters;
+	}
 
     /**
      * @param $chapterId
@@ -101,14 +99,15 @@ class ChapterManager extends Manager
      * @param $content
      * @param $resum
      * @param $imageId
+     * @param Chapter $chapter
      * @return bool|string : ajoute un chapitre dans la table chapitre. Si c'est un succès on obtient son id créé, sinon on retourne false
      */
-	public function addChapter($bookId, $title, $content, $resum, $imageId)
+	public function addChapter(Chapter $chapter)
 	{
 		$ChapterAdd = array();
 		$db = $this->dbConnect();
 		$req = $db->prepare("INSERT INTO chapters (bookId, chapterDate, title, content, resum, imageId) VALUES (?,NOW(),?,?,?,?)");
-		$Addchapter = $req->execute(array($bookId, $title, $content,$resum, $imageId));
+		$Addchapter = $req->execute(array($chapter->getBookId(), $chapter->getTitle(), $chapter->getContent(),$chapter->getResum(), $chapter->getImageId()));
 		while ($data = $req->fetch()) {
 			$chapteradd = new Chapter();
 			$chapteradd->hydrate($data);

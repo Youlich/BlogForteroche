@@ -1,5 +1,6 @@
 <?php
 namespace controller;
+use entity\Chapter;
 use services\View;
 
 
@@ -221,10 +222,16 @@ Class Backend extends Controller
 	public function addChapter()
 	{
 		$chaptermanager = $this->chapterManager;
+		$chapter = new Chapter();
+		$chapter->setBookId($_POST['bookSelect']);
+		$chapter->setTitle($_POST['titrechapitre']);
+		$chapter->getContent($_POST['content']);
 		$resum = $chaptermanager->resumContent($_POST['content']);
+		$chapter->getResum($resum);
+		$chapter->setImageId('0');
 		if($_FILES['image']['name']=='') {
 			$Chaptersansimage = $this->chapterManager;
-			$addchaptersansimage = $Chaptersansimage->addChapter($_POST['bookSelect'], $_POST['titrechapitre'], $_POST['content'], $resum, '0');
+			$addchaptersansimage = $Chaptersansimage->addChapter($chapter);
 			if ($addchaptersansimage === false) {
 				$_SESSION['error'] = 'Impossible d\'ajouter votre chapitre !';
 				$this->redirect('Location: index.php?action=boutonaddchapter' . "#endpage");

@@ -1,4 +1,5 @@
 <?php
+
 require_once( 'services/Autoload.php' );
 // on fait appel à la fonction register de la classe Autoload qui permet l'autochargement des classes
 Autoload::register();
