@@ -1,7 +1,7 @@
 
 <header class="bg-primary text-white text-center">
         <br/><br/><br/>
-        <h1>Votre profil <?php echo $_SESSION['pseudo']?></h1>
+        <h1>Votre profil <?php echo $pseudo ?></h1>
         <br/><br/><br/>
 </header>
 <br/>
@@ -14,7 +14,7 @@
     <h5>Mon nombre de commentaires : <em> <?php echo $membre->getNbcomms();  ?></em></h5><br/>
     <h5>Ma date d'inscription : <em>le <?php $date = date_create($membre->getDateInscription()) ;
             echo date_format($date,'d.m.Y'); ?></em></h5><br/>
-    <h5> Mon email : <em><?php echo $_SESSION['email']?></em></h5><br/>
+    <h5> Mon email : <em><?php echo $email;?></em></h5><br/>
 
 
 </div>
@@ -30,12 +30,12 @@
     <!--Partie modifier mail-->
     <a href="index.php?action=boutonmodifiermail">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Modifier mon email"></a>
-        <form action="index.php?action=modifemail&amp;idmembre=<?= $_SESSION['id']?>" method="post">
+        <form action="index.php?action=modifemail&amp;idmembre=<?= $id?>" method="post">
             <div class="form-group">
                 <br/>
                 <label for="email" class="col-sm-6 col-form-label">Nouvelle adresse mail : </label>
-                <input type="hidden" name="idmembre" id="idmembre" value="<?php echo $_SESSION['id']?>" />
-                <input type="text" class="form-control" name="email" id="email" value="<?php echo $_SESSION['email']?>" /><br>
+                <input type="hidden" name="idmembre" id="idmembre" value="<?php echo $id ?>" />
+                <input type="text" class="form-control" name="email" id="email" value="<?php echo $email;?>" /><br>
                 <div align="center">
                     <input class="btn btn-success btn-md" type="submit" name="submit" value="Modifier" />
                 </div>

@@ -53,8 +53,11 @@ Class Frontend extends Controller
             $nbComms = $commentManager->countCommentsChapter($id);
             $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
             $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+            $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	        $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
             $myView = new View('chapter');
-            $myView->renderView(array('chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image, 'success'=> $success, 'error'=> $error));
+            $myView->renderView(array('chapter' => $chapter,'comments'=> $comments,'nbComms'=>$nbComms,'image'=>$image, 'success'=> $success,
+                                      'error'=> $error, 'pseudo'=>$pseudo, 'id'=>$id));
         } else {
             $_SESSION['error'] = 'Aucun identifiant de chapitre envoyé';
         }
@@ -94,10 +97,12 @@ Class Frontend extends Controller
         $nbComms = $commentManager->countCommentsChapter($idlastchapter);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+	    $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	    $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $myView = new View('lastChapter');
         $myView->renderView(array('lastchapter' => $lastchapter,
             'idlastchapter' => $idlastchapter, 'comments'=>$comments,'imagechapter' => $imagechapter,
-            'image' => $image, 'nbComms' => $nbComms, 'success'=> $success, 'error'=> $error));
+            'image' => $image, 'nbComms' => $nbComms, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo, 'id'=>$id));
     }
     public function listCommentsMembre() // tableau des commentaires dans le profil du membre
     {
@@ -212,8 +217,11 @@ Class Frontend extends Controller
         $membre = $membreManager->getMembre(($_SESSION['id']));
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+	    $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	    $email = (isset($_SESSION['email'])?$_SESSION['email']:null);
+	    $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $myView = new View('boutonmodifpseudomdp');
-        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo, 'email'=>$email, 'id'=>$id));
     }
     public function boutonmodifiermail()
     {
@@ -221,8 +229,11 @@ Class Frontend extends Controller
         $membre = $membreManager->getMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+	    $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	    $email = (isset($_SESSION['email'])?$_SESSION['email']:null);
+	    $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $myView = new View('boutonmodifiermail');
-        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo, 'email'=>$email, 'id'=>$id));
     }
     public function boutonafficherlescommentaires()
     {
@@ -231,10 +242,14 @@ Class Frontend extends Controller
         $commentManager = $this->commentManager;
             $membre->setId($_SESSION['id']);
         $comments = $commentManager->listCommentsMembre($membre);
+        $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+        $email = (isset($_SESSION['email'])?$_SESSION['email']:null);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+        $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('boutonafficherlescommentaires');
-        $myView->renderView(array('membre' => $membre,'comments' => $comments, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre,'comments' => $comments, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo,
+                                  'email'=>$email, 'id'=>$id));
     }
     public function boutonsupprimerprofil()
     {
@@ -242,8 +257,13 @@ Class Frontend extends Controller
         $membre = $membreManager->getMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+	    $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	    $email = (isset($_SESSION['email'])?$_SESSION['email']:null);
+	    $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
+	    $id = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $myView = new View('boutonsupprimerprofil');
-        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo,
+                                  'email'=>$email, 'id'=>$id));
     }
     public function modifPseudoMdp()
     {
@@ -286,8 +306,10 @@ Class Frontend extends Controller
         $membre=$membreManager->getMembre($_SESSION['id']);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
-        $myView = new View('profilmembre');
-        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error));
+	    $pseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
+	    $email = (isset($_SESSION['email'])?$_SESSION['email']:null);
+	    $myView = new View('profilmembre');
+        $myView->renderView(array('membre' => $membre, 'success'=> $success, 'error'=> $error, 'pseudo'=>$pseudo,'email'=>$email ));
     }
     public function accueil()
     {
@@ -297,11 +319,18 @@ Class Frontend extends Controller
         $chapters = $chaptermanager->listChapters();
         $bookManager = $this->booksManager;
         $books = $bookManager->getBooks();
-	    $session = (isset($_SESSION['id'])?$_SESSION['id']:null);
+	    $user_is_connected = (isset($_SESSION['id']))?true:false;
+	    $sessionId = (isset($_SESSION['id'])?$_SESSION['id']:null);
+	    $sessionPseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+        $name = (isset($_SESSION['inputs']['name'])?$_SESSION['inputs']['name'] : '');
+        $email = (isset($_SESSION['inputs']['email']) ? $_SESSION['inputs']['email'] : '');
+        $message = (isset($_SESSION['inputs']['message']) ? $_SESSION['inputs']['message'] : '');
         $myView = new View('accueil');
-        $myView->renderView(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books,'success'=> $success, 'error'=> $error, 'id'=> $session));
+	    $myView->renderView(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books,'success'=> $success, 'error'=> $error,
+	                              'user_is_connected'=> $user_is_connected, 'sessionId'=> $sessionId, 'sessionPseudo' => $sessionPseudo,
+		                            'name'=>$name, 'email'=>$email, 'message'=>$message));
     }
     public function mentionslegales ()
     {

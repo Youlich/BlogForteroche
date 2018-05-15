@@ -2,7 +2,7 @@
 
     <header class="bg-primary text-white text-center">
         <br/><br/><br/>
-        <h1>Votre profil <?php echo $_SESSION['pseudo']?></h1>
+        <h1>Votre profil <?php echo $pseudo ?></h1>
         <br/><br/><br/>
 </header>
 
@@ -16,7 +16,7 @@
     <h5>Mon nombre de commentaires : <em> <?php echo $membre->getNbcomms();  ?></em></h5><br/>
     <h5>Ma date d'inscription : <em>le <?php $date = date_create($membre->getDateInscription()) ;
             echo date_format($date,'d.m.Y'); ?></em></h5><br/>
-    <h5> Mon email : <em><?php echo $_SESSION['email']?></em></h5><br/>
+    <h5> Mon email : <em><?php echo $email ?></em></h5><br/>
 
 
 </div>
@@ -46,7 +46,7 @@
         <div align="center">
             <p class="confirmation">Etes-vous sur de vouloir supprimer votre compte ?</p>
 
-            <a href="index.php?action=deleteaccount&amp;id=<?php echo $_SESSION['id']?>">OUI</a><br/>
+            <a href="index.php?action=deleteaccount&amp;id=<?php echo $id ?>">OUI</a><br/>
             <a href="index.php?action=profilmembre">NON</a>
         </div>
         <br/><br/>

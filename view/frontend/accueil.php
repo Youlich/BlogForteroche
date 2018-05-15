@@ -1,12 +1,12 @@
 
 <section class="bg-primary text-white mb-0" id="masthead">
         <section class="container">
-        <h2 class="text-uppercase text-center  text-white" style="font-size: xx-large;">Bienvenue sur mon site <?php
+        <h2 class="text-uppercase text-center  text-white" style="font-size: xx-large;">Bienvenue sur mon site
 
-                if (isset($_SESSION['id'])){
-                    if(($_SESSION['id']) != '2')
+               <?php if ($user_is_connected) {
+                    if(($sessionId) != '2')
                     {
-                    echo $_SESSION['pseudo'] . ' !';
+                    echo $sessionPseudo . ' !';
                 }
             }
             ?>
@@ -87,38 +87,37 @@
 
             <h2 class="text-center text-uppercase text-secondary mb-0">Me contacter</h2>
             <hr class="star-dark mb-5">
+            <!-- Errors -->
+            <div align="center">
+		        <?php if (isset($error)){ ?>
+                <div class="alert alert-danger">
+			        <?php echo $error;} ?></div>
+		        <?php if (isset($success)){?>
+                <div class="alert alert-success">
+			        <?php echo $success;} ?></div>
+
+            </div>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <?php if(array_key_exists('success',$_SESSION)): ?>
-                        <div class="alert alert-success">
-                            Votre email à bien été transmis !
-                        </div>
-                    <?php endif; ?>
-                    <?php if(array_key_exists('errors',$_SESSION)): ?>
-                        <div class="alert alert-danger">
-                            <?= implode('<br>', $_SESSION['errors']); ?>
-                        </div>
-                    <?php endif; ?>
-
                     <form action="index.php?action=contact" method="post" name="contactform">
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nom</label>
-                                <input class="form-control" name='name' type="text" placeholder="Nom" value="<?php isset($_SESSION['inputs']['name']) ? $_SESSION['inputs']['name'] : ''; ?>">
+                                <input class="form-control" name='name' type="text" placeholder="Nom" value="<?php $name ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Adresse mail</label>
-                                <input class="form-control" name='email' type="text" placeholder="Adresse mail" value="<?php isset($_SESSION['inputs']['email']) ? $_SESSION['inputs']['email'] : ''; ?>">
+                                <input class="form-control" name='email' type="text" placeholder="Adresse mail" value="<?php $email ?>">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Message</label>
-                                <textarea class="form-control" name='message' rows="5" placeholder="Message" <?php isset($_SESSION['inputs']['message']) ? $_SESSION['inputs']['message'] : ''; ?>></textarea>
+                                <textarea class="form-control" name='message' rows="5" placeholder="Message" <?php $message ?>></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -139,6 +138,6 @@
 
 <?php
 unset($_SESSION['inputs']);
-unset($_SESSION['errors']);
+unset($_SESSION['error']);
 unset($_SESSION['success']);
 ?>

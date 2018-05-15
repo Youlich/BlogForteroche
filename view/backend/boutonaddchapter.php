@@ -33,7 +33,7 @@
         <br/>
     </form>
 
-    <?php if (isset($_POST['bookSelect'])) { ?>
+    <?php if ($bookSelect) { ?>
         <!-- Saisie des informations : titre, contenu et téléchargement image-->
 
         <form action="index.php?action=addchapter" method="post" enctype="multipart/form-data" >

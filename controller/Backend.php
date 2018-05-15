@@ -158,9 +158,10 @@ Class Backend extends Controller
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $bookId = (isset($bookId)?$bookId:null);
+	    $bookSelect = (isset($_POST['bookSelect'])?$_POST['bookSelect']:null);
         $myView = new View('boutonaddchapter');
         $myView->renderView(array('books' => $books, 'bookId' => $bookId, 'selectedbook' => $selectedbook,
-            'success'=> $success, 'error'=> $error));
+            'success'=> $success, 'error'=> $error, 'bookSelect'=>$bookSelect));
     }
     public function boutondeletechapter()
     {
@@ -215,8 +216,9 @@ Class Backend extends Controller
     {
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
+        $login = (isset($_SESSION['login'])?$_SESSION['login']:null);
         $myView = new View('administration');
-        $myView->renderView(array('success'=> $success, 'error'=> $error));
+        $myView->renderView(array('success'=> $success, 'error'=> $error, 'login' => $login));
     }
 
 	public function addChapter()

@@ -39,10 +39,10 @@
         </div>
     </form>
 
-    <?php if (isset($_POST['chapterselect'])): ?>
+    <?php if ($chapterselect): ?>
         <form action="index.php?action=modifchapter" method="post" enctype="multipart/form-data">
             <div class= "input-group" >
-                <input type="hidden" name="chapterselect" value="<?php echo $_POST['chapterselect']; ?>">
+                <input type="hidden" name="chapterselect" value="<?php echo $chapterselect->getId(); ?>">
                 <label for="titrechapter">Nouveau titre de chapitre : </label>
                 <input type="text" name="titrechapter" id="titrechapter" style="width: 200%;" value="<?php echo $chapterselect->getTitle();?>">
             </div>

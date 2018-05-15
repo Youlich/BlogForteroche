@@ -252,12 +252,5 @@ class Verifications extends Manager
 	 * @return bool
 	 */
 
-	public function sessionExist()
-	{
-		if (isset($_SESSION['id'])) {
-			return 'sucess';
-		}
-	}
-
 
 }

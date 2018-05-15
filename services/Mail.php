@@ -16,23 +16,23 @@ class Mail
 	 */
     public function contact()
     {
-        $errors = array(); // on crée une vérif de champs
+        $error = array(); // on crée une vérif de champs
         if(!array_key_exists('name', $_POST) || $_POST['name'] == '') {// on verifie l'existence du champ et d'un contenu
-            $errors ['name'] = "vous n'avez pas renseigné votre nom";
+            $error ['name'] = "vous n'avez pas renseigné votre nom";
         }
         if(!array_key_exists('email', $_POST) || $_POST['email'] == '' || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {// on verifie existence de la clé
-            $errors ['mail'] = "vous n'avez pas renseigné votre email";
+            $error ['mail'] = "vous n'avez pas renseigné votre email";
         }
         if(!array_key_exists('message', $_POST) || $_POST['message'] == '') {
-            $errors ['message'] = "vous n'avez pas renseigné votre message";
+            $error ['message'] = "vous n'avez pas renseigné votre message";
         }
         //On check les infos transmises lors de la validation
-        if(!empty($errors)){ // si erreur on renvoie vers la page précédente
-            $_SESSION['errors'] = $errors;//on stocke les erreurs
+        if(!empty($error)){ // si erreur on renvoie vers la page précédente
+            $_SESSION['error'] = $error;//on stocke les erreurs
             $_SESSION['inputs'] = $_POST;
             header('Location: index.php?action=accueil#contact');
         }else{
-            $_SESSION['success'] = 1;
+            $_SESSION['success'] = "Votre mail a bien été envoyé !";
             $message = htmlspecialchars($_POST['message']);
             // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
             $message = wordwrap($message, 70, "\r\n");

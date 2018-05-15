@@ -1,7 +1,7 @@
 
 <header class="bg-primary text-white text-center">
         <br/><br/><br/>
-        <h1>Votre profil <?php echo $_SESSION['pseudo']?></h1>
+        <h1>Votre profil <?php echo $pseudo?></h1>
         <br/><br/><br/>
 </header>
 
@@ -15,7 +15,7 @@
     <h5>Mon nombre de commentaires : <em> <?php echo $membre->getNbcomms(); ?></em></h5><br/>
     <h5>Ma date d'inscription : <em>le <?php $date = date_create($membre->getDateInscription()) ;
             echo date_format($date,'d.m.Y'); ?></em></h5><br/>
-    <h5> Mon email : <em><?php echo $_SESSION['email']?></em></h5><br/>
+    <h5> Mon email : <em><?php echo $email ?></em></h5><br/>
 
 </div>
 <br/><br/>
@@ -36,7 +36,7 @@
     <a href="index.php?action=boutonafficherlescommentaires">
             <input type="button" class="btn btn-secondary btn-lg btn-block" name= "button" value="Gérer mes commentaires"></a>
     <br/>
-    <form action="index.php?action=listcommentsmembre&idmembre=<?= $_SESSION['id']?>" method="post">
+    <form action="index.php?action=listcommentsmembre&idmembre=<?= $id?>" method="post">
         <table class="table table-bordered text-center">
             <thead class="thead table-active">
             <tr>

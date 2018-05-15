@@ -45,11 +45,11 @@
     <h5>Laisser un commentaire</h5>
     <br>
 
-    <?php if (isset($_SESSION['id'])) {?>
+    <?php if ($id) {?>
     <form action="index.php?action=addcomment&amp;id=<?= $lastchapter->getId() ?>" method="post">
         <div>
             <?php
-            echo $_SESSION['pseudo']; ?>
+            echo $pseudo ?>
 
         </div>
         <div>

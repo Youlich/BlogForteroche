@@ -50,47 +50,43 @@ class MembreManager extends Manager
      * @return string
      */
 
-    public function loginMembre()
-    {
-        // toutes les vérifications
-        if (isset($_POST['submit'])) {
-            // vérification que tous les champs sont remplis
-            if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
-                $verifmembre = new Verifications($this->dbConnect());
-                $verif = $verifmembre->verifPseudo($_POST['pseudo']);
-                if ($verif == "success") { //on continue
-                    $verif = $verifmembre->pseudoExist($_POST['pseudo']); //verif si le pseudo existe
-                    if ($verif == "success") { // il existe, on continue
-                        $verif = $verifmembre->verifPass($_POST['pass']);
-                        if ($verif == "success") {
-                            $verif = $verifmembre->verifHachPass();
-                            if ($verif == "success") {
-                                if ($verifmembre->session()) {
-                                	$session = $verifmembre->sessionExist();
-	                                if ($session == true) {
-	                                	$_SESSION['id'] = $session;
-                                	$this->redirect('Location: index.php?action=accueil');
-                                }
-	                                }
-
-                            } else {
-                                $_SESSION['error'] = $verif;
-                            }
-                            } else {
-                                $_SESSION['error'] = $verif;
-                            }
-                        } else {
-                            $_SESSION['error'] = "Votre pseudo n'existe pas";
-                        }
-                    } else {
-                        $_SESSION['error'] = $verif;
-                    }
-                } else {
-                    $_SESSION['error'] = "Merci de remplir tous les champs";
-                    return $_SESSION['error'];
-                }
-            }
-     }
+	public function loginMembre()
+	{
+		// toutes les vérifications
+		if (isset($_POST['submit'])) {
+			// vérification que tous les champs sont remplis
+			if (!empty($_POST['pseudo'] AND !empty($_POST['pass']))) {
+				$verifmembre = new Verifications($this->dbConnect());
+				$verif = $verifmembre->verifPseudo($_POST['pseudo']);
+				if ($verif == "success") { //on continue
+					$verif = $verifmembre->pseudoExist($_POST['pseudo']); //verif si le pseudo existe
+					if ($verif == "success") { // il existe, on continue
+						$verif = $verifmembre->verifPass($_POST['pass']);
+						if ($verif == "success") {
+							$verif = $verifmembre->verifHachPass();
+							if ($verif == "success") {
+								if ($verifmembre->session()) {
+									$this->redirect('Location: index.php?action=accueil');
+									exit();
+								}
+							} else {
+								$_SESSION['error'] = $verif;
+							}
+						} else {
+							$_SESSION['error'] = $verif;
+						}
+					} else {
+						$_SESSION['error'] = "Votre pseudo n'existe pas";
+					}
+				} else {
+					$_SESSION['error'] = $verif;
+				}
+			} else {
+				$_SESSION['error'] = "Merci de remplir tous les champs";
+				return $_SESSION['error'];
+			}
+		}
+	}
 
     /**
      * @return string

@@ -12,7 +12,7 @@
 
 <section class="portfolio" id="portfolio">
     <section class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Bienvenue <?php echo $_SESSION['login'] ?></h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">Bienvenue <?php echo $login ?></h2>
         <hr class="star-dark mb-5">
         <h3 class="titre roman text-center">Que souhaitez vous gérer aujourd'hui ?</h3>
         <br/>
