@@ -1,6 +1,7 @@
 <?php
 namespace services;
 
+
 /**
  * Class View
  * @package services
@@ -40,6 +41,7 @@ class View
 			include( VIEWFRONT . $template . '.php' );
 			$content = ob_get_clean();
 			include_once( VIEWFRONT . '_gabaritFront.php' );
+
 		} else {
 			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 			ob_start();

@@ -12,6 +12,7 @@ class Verifications extends Manager
 	private $email;
 	private $login;
 	private $mdp;
+	private $sessionexist;
 
 
 
@@ -246,5 +247,17 @@ class Verifications extends Manager
 
 		return 'success';
 	}
+
+	/**
+	 * @return bool
+	 */
+
+	public function sessionExist()
+	{
+		if (isset($_SESSION['id'])) {
+			return 'sucess';
+		}
+	}
+
 
 }

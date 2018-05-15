@@ -179,10 +179,11 @@ Class Frontend extends Controller
     {
         $authMembreManager = $this->membreManager;
         $authMembre = $authMembreManager->loginMembre();
+        $session = (isset($_SESSION['id']));
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('loginmembre');
-        $myView->renderView(array('authMembre' => $authMembre, 'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('authMembre' => $authMembre, 'success'=> $success, 'error'=> $error, 'id'=> $session));
     }
     public function logoutMembre()
     {
@@ -296,10 +297,11 @@ Class Frontend extends Controller
         $chapters = $chaptermanager->listChapters();
         $bookManager = $this->booksManager;
         $books = $bookManager->getBooks();
+	    $session = (isset($_SESSION['id'])?$_SESSION['id']:null);
         $success = (isset($_SESSION['success'])?$_SESSION['success']:null);
         $error = (isset($_SESSION['error'])?$_SESSION['error']:null);
         $myView = new View('accueil');
-        $myView->renderView(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books,'success'=> $success, 'error'=> $error));
+        $myView->renderView(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books,'success'=> $success, 'error'=> $error, 'id'=> $session));
     }
     public function mentionslegales ()
     {

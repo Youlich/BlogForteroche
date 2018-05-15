@@ -66,9 +66,13 @@ class MembreManager extends Manager
                             $verif = $verifmembre->verifHachPass();
                             if ($verif == "success") {
                                 if ($verifmembre->session()) {
+                                	$session = $verifmembre->sessionExist();
+	                                if ($session == true) {
+	                                	$_SESSION['id'] = $session;
                                 	$this->redirect('Location: index.php?action=accueil');
-                                    exit();
                                 }
+	                                }
+
                             } else {
                                 $_SESSION['error'] = $verif;
                             }
