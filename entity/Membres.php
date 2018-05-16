@@ -17,7 +17,7 @@ class Membres
     private $pass;
     private $email;
     private $dateInscription;
-    private $nbcomms;
+
 
     /**
      * @param array $donnees setters regroupés
@@ -35,21 +35,6 @@ class Membres
                 $this->$method($value);
             }
         }
-    }
-    /**
-     * @return mixed : donne le nombre de commentaires
-     */
-    public function getNbcomms()
-    {
-        return $this->nbcomms;
-    }
-
-    /**
-     * @param mixed $nbcomms
-     */
-    public function setNbcomms ($nbcomms)
-    {
-        $this->nbcomms = $nbcomms;
     }
 
     /**
