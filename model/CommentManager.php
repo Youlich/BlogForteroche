@@ -236,10 +236,6 @@ class CommentManager extends Manager
         $req = $db->prepare("DELETE FROM comments WHERE id = :id");
         $supp = $req->execute(array(':id' => $_GET['id']));
         if ($supp == "success") {
-            $db = $this->dbConnect();
-            $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms-1 WHERE id=:idmembre');
-            $newreq->bindValue(':idmembre',$membre->getId(),\PDO::PARAM_INT);
-            $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
 	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
         }else {

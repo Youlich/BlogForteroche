@@ -134,14 +134,8 @@ class ChapterManager extends Manager
 			$db = $this->dbConnect();
 			$newreq = $db->prepare('DELETE FROM comments WHERE chapterId=:id');
 			$newreq->bindValue(':id',$chapter_id->getId(),\PDO::PARAM_INT);
-			$commentsChapter = $newreq->execute();
-			if ($commentsChapter) {
-				$db = $this->dbConnect();
-				$newreq2 = $db->prepare('UPDATE membres SET nbcomms=nbcomms-1 WHERE id=:idmembre');
-				$newreq2->bindValue(':idmembre',$_SESSION['id'],\PDO::PARAM_INT);
-				$newreq2->execute();
-				return true;
-			}
+			$newreq->execute();
+			return true;
 		} else {
 			return false;
 		}

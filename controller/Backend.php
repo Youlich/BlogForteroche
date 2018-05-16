@@ -322,7 +322,7 @@ Class Backend extends Controller {
 		$supp           = $chapterManager->deleteChapter($chapter);
 		if ( $supp === true ) {
 			$imageManager        = $this->imagesManager;
-			$deleteImageassoc    = $imageManager->deleteImage( $_POST['chapterselect'] );
+			$deleteImageassoc    = $imageManager->deleteImage($_POST['chapterselect'] );
 			$_SESSION['success'] = "Votre chapitre a bien été supprimé";
 		} else {
 			$_SESSION['error'] = "Votre chapitre n'a pas pu être supprimé";
