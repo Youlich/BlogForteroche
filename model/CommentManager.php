@@ -48,9 +48,7 @@ class CommentManager extends Manager
         while ($data = $req->fetch()) {
             $comment = new Comment();
             $comment->hydrate($data);
-
             $comments[] = $comment;
-
         }
         return $comments;
     }
@@ -133,12 +131,12 @@ class CommentManager extends Manager
      * @param $membreId
      * ajout d'un commentaire dans la table commentaire avec le statut "en attante" puis si c'est un succès, on rajoute +1 dans nbcomms de la table membre
      */
-    public function addComment ($chapterId, $membrePseudo, $statut, $comment, $membreId) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
+    public function addComment (Comment $comment) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
     {
         $addcomment = array();
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments(chapterId, membrePseudo, statut, comment, commentDate, membreId) VALUES (?, ?, ?, ?, NOW(), ?)');
-        $Addcomment = $req->execute(array($chapterId, $membrePseudo, $statut = 'En attente',  htmlspecialchars($comment), $membreId));
+        $Addcomment = $req->execute(array($comment->getChapterId(), $comment->getMembrePseudo(), $comment->getStatut(), htmlspecialchars($comment->getComment()), $comment->getMembreId()));
         while ($data = $req->fetch()) {
             $commentadd = new Comment();
             $commentadd->hydrate($data);
@@ -147,14 +145,14 @@ class CommentManager extends Manager
         if ($Addcomment == "success") {
             $db = $this->dbConnect();
             $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms+1 WHERE id=:idmembre');
-            $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
+            $newreq->bindValue(':idmembre',$comment->getMembreId(),\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été ajouté";
-            $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+            $this->redirect('Location: index.php?action=chapter&id=' . $comment->getChapterId() . "#nbcomments");
             exit();
         } else {
             $_SESSION['error'] = "votre commentaire n'a pas pu être ajouté";
-	        $this->redirect('Location: index.php?action=chapter&id=' . $chapterId . "#nbcomments");
+	        $this->redirect('Location: index.php?action=chapter&id=' . $comment->getChapterId() . "#nbcomments");
             exit();
         }
     }
@@ -229,10 +227,10 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $membreId
+     * @param Membres $membre
      * fonction qui supprime le commentaire du membre par le membre
      */
-    public function deleteComment($membreId)
+    public function deleteComment(Membres $membre)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("DELETE FROM comments WHERE id = :id");
@@ -240,7 +238,7 @@ class CommentManager extends Manager
         if ($supp == "success") {
             $db = $this->dbConnect();
             $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms-1 WHERE id=:idmembre');
-            $newreq->bindValue(':idmembre',$membreId,\PDO::PARAM_INT);
+            $newreq->bindValue(':idmembre',$membre->getId(),\PDO::PARAM_INT);
             $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été supprimé";
 	        $this->redirect('Location: index.php?action=boutonafficherlescommentaires' . "#endpage");
@@ -255,12 +253,12 @@ class CommentManager extends Manager
      * @param $chapterid
      * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
      */
-	public function signaledComment($chapterid)
+	public function signaledComment(Comment $comment)
 	{
 		$db = $this->dbConnect();
 		$comments = $db->prepare('UPDATE comments SET statut=:statut WHERE chapterId=:num LIMIT 1');
-		$comments->bindValue(':num', $chapterid, \PDO::PARAM_INT);
-		$comments->bindValue(':statut', 'Alerte', \PDO::PARAM_STR);
+		$comments->bindValue(':num', $comment->getChapterId(), \PDO::PARAM_INT);
+		$comments->bindValue(':statut', $comment->getStatut(), \PDO::PARAM_STR);
 		$modifEtat = $comments->execute();
 		while ($data = $comments->fetch(\PDO::FETCH_ASSOC)) {
 			$comment = new Comment();

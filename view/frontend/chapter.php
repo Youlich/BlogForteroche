@@ -33,7 +33,7 @@
         <br>
         <p><h6>Votre commentaire : </h6><?= htmlspecialchars($comment->getComment()) ?></p>
         <br/>
-        <a href="index.php?action=signaled&id=<?php echo $chapter->getId() ?>"><input type="button" value="Signaler"></a>
+        <a href="index.php?action=signaled&id=<?php echo $chapter->getId() ?>&amp;numcomm=<?= $comment->getId() ?>"><input type="button" value="Signaler"></a>
     </div>
     <br/>
     <?php
@@ -43,7 +43,7 @@
             <h5>Laisser un commentaire</h5>
             <br>
 
-            <?php if ($id) {?>
+        <?php if ($user_is_connected) { ?>
             <form action="index.php?action=addcomment&id=<?= $chapter->getId() ?>" method="post">
                 <div>
                     <?php

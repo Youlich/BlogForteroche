@@ -40,6 +40,7 @@ class View
 			ob_start();
 			include( VIEWFRONT . $template . '.php' );
 			$content = ob_get_clean();
+			$user_is_connected = (isset($_SESSION['id']))?true:false;
 			include_once( VIEWFRONT . '_gabaritFront.php' );
 
 		} else {

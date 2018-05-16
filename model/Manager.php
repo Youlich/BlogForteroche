@@ -2,6 +2,7 @@
 
 namespace model;
 use controller\Controller;
+use entity\Membres;
 
 /**
  * Class Manager
@@ -21,4 +22,5 @@ class Manager extends Controller
 	{
 		return $this->pdo;
 	}
+
 }

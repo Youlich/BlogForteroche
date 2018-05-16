@@ -156,10 +156,11 @@ class MembreManager extends Manager
             $db = $this->dbConnect();
             $req = $db->prepare("DELETE FROM membres WHERE id = :id");
             $supp = $req->execute(array(':id' => $membre->getId()));
-	        if ($supp == "success") {
+	        if ($supp) {
 		        $db = $this->dbConnect();
 		        $newreq = $db->prepare('DELETE FROM comments WHERE membreId=:idmembre');
 		        $newreq->bindValue(':idmembre',$membre->getId(),\PDO::PARAM_INT);
+		        $newreq->execute();
 		        $this->redirect('Location: index.php?action=accueil');
 		        session_destroy();
 	        }else {
