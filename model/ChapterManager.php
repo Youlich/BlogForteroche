@@ -29,13 +29,13 @@ class ChapterManager extends Manager
      */
 	public function listChapters()
 	{
-		$imageManager = $this->imagesManager;
 		$chapters = array();
 		$db = $this->dbConnect();
 		$req = $db->query('SELECT id, title, resum, bookId, content, imageId, nbcomms, DATE_FORMAT(chapterDate, \'%d/%m/%Y / %HH%imin\') AS chapterDatefr FROM chapters ORDER BY id ASC LIMIT 0, 10');
 		while ($data = $req->fetch()) {
 			$chapter = new Chapter();
 			$chapter->hydrate($data);
+			$imageManager = $this->imagesManager;
 			$image = $imageManager->getImageById($chapter->getImageId());
 			$chapter->setImage($image);
 			$chapters[] = $chapter;
@@ -131,7 +131,17 @@ class ChapterManager extends Manager
 		$req = $db->prepare("DELETE FROM chapters WHERE id = :id");
 		$deletechapter= $req->execute(array(':id' => $chapter_id->getId()));
 		if ($deletechapter) {
-			return true;
+			$db = $this->dbConnect();
+			$newreq = $db->prepare('DELETE FROM comments WHERE chapterId=:id');
+			$newreq->bindValue(':id',$chapter_id->getId(),\PDO::PARAM_INT);
+			$commentsChapter = $newreq->execute();
+			if ($commentsChapter) {
+				$db = $this->dbConnect();
+				$newreq2 = $db->prepare('UPDATE membres SET nbcomms=nbcomms-1 WHERE id=:idmembre');
+				$newreq2->bindValue(':idmembre',$_SESSION['id'],\PDO::PARAM_INT);
+				$newreq2->execute();
+				return true;
+			}
 		} else {
 			return false;
 		}
