@@ -13,7 +13,7 @@
         <th scope="col">Pseudo</th>
         <th scope="col">Date d'inscription</th>
         <th scope="col">Email</th>
-        <th width="15%" scope="col">Nombre de commentaires</th>
+
 
     </tr>
     </thead>
@@ -31,7 +31,7 @@ foreach ($membres as $membre)
 
             <td><?php echo $membre->getEmail(); ?></td>
 
-            <td> <?php echo $membre->getNbcomms(); ?></td>
+
 
     </tr>
     <?php
