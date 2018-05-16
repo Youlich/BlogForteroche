@@ -323,7 +323,7 @@ Class Frontend extends Controller
 			$suppMembre->deleteAccount();
 			$membre = $suppMembre->getMembre($id_membre);
 			$suppMembre->deleteAccount($membre);
-			$nbcomments = $this->membreManager;
+
 		}
 	}
 
@@ -420,7 +420,6 @@ Class Frontend extends Controller
     public function modifPseudoMdp()
     {
 
-        $nbcomments = $this->membreManager;
         $newpseudo = $this->membreManager;
 	    $membreManager = $this->membreManager;
 	    $membre = $membreManager->getMembre($_SESSION['id']);
@@ -444,7 +443,6 @@ Class Frontend extends Controller
 	 */
     public function modifEmail()
     {
-        $nbcomments = $this->membreManager;
         $newemail = $this->membreManager;
 	    $membreManager = $this->membreManager;
 	    $membre = $membreManager->getMembre($_SESSION['id']);
