@@ -1,5 +1,6 @@
 <?php
 namespace model;
+use entity\Chapter;
 use entity\Comment;
 use entity\Membres;
 
@@ -81,7 +82,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param Membres $membre
+     * @param $membreId
      * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
      */
     public function listCommentsMembre(Membres $membre)
@@ -123,7 +124,11 @@ class CommentManager extends Manager
     }
 
     /**
-     * Comment $comment
+     * @param $chapterId
+     * @param $membrePseudo
+     * @param $statut
+     * @param $comment
+     * @param $membreId
      * ajout d'un commentaire dans la table commentaire avec le statut "en attante" puis si c'est un succès, on rajoute +1 dans nbcomms de la table membre
      */
     public function addComment (Comment $comment) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
@@ -138,10 +143,6 @@ class CommentManager extends Manager
             $addcomment[] = $commentadd;
         }
         if ($Addcomment == "success") {
-            $db = $this->dbConnect();
-            $newreq = $db->prepare('UPDATE membres SET nbcomms=nbcomms+1 WHERE id=:idmembre');
-            $newreq->bindValue(':idmembre',$comment->getMembreId(),\PDO::PARAM_INT);
-            $newreq->execute();
             $_SESSION['success'] = "Votre commentaire a bien été ajouté";
             $this->redirect('Location: index.php?action=chapter&id=' . $comment->getChapterId() . "#nbcomments");
             exit();
@@ -241,7 +242,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param Comment $comment
+     * @param $chapterid
      * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
      */
 	public function signaledComment(Comment $comment)

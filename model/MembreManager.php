@@ -113,7 +113,7 @@ class MembreManager extends Manager
 									$pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 									// Insertion
 									$db = $this->Dbconnect();
-									$req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription, nbcomms) VALUES (:pseudo, :pass, :email, CURDATE(),0)');
+									$req = $db->prepare('INSERT INTO membres(pseudo, pass, email, dateInscription) VALUES (:pseudo, :pass, :email, CURDATE())');
 									$insert = $req->execute(array(
 										'pseudo' => $_POST['pseudo'],
 										'pass' => $pass_hache,
@@ -170,7 +170,6 @@ class MembreManager extends Manager
          }
 
     /**
-     * @param Membres $membre
      * @return string
      */
 
@@ -213,7 +212,6 @@ class MembreManager extends Manager
     }
 
     /**
-     * @param Membres $membre
      * @return string
      */
     public function modifEmail(Membres $membre)
@@ -241,8 +239,5 @@ class MembreManager extends Manager
             }
             }
     }
-
-
-
 }
 

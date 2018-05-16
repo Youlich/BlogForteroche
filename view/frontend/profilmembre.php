@@ -10,7 +10,6 @@
 
     <div align="center">
 
-        <br/>
         <h5>Ma date d'inscription : <em>le <?php $date = date_create($membre->getDateInscription()) ;
                 echo date_format($date,'d.m.Y'); ?></em></h5><br/>
         <h5> Mon email : <em><?php echo $email ?></em></h5><br/>
