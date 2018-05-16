@@ -121,7 +121,7 @@ class ChapterManager extends Manager
 	}
 
     /**
-     * @param $chapter_id
+     * @param Chapter $chapter_id
      * @return bool : suppression d'un chapitre. Si c'est un succès on retourne true sinon false
      */
 

@@ -44,7 +44,8 @@ class BooksManager extends Manager
     }
 
     /**
-     * @param $title : permet d'ajouter un nouveau livre avec son titre obligatoire
+     * Books $book
+     * permet d'ajouter un nouveau livre avec son titre obligatoire
      * @return bool
      */
     public function addBook(Books $book)

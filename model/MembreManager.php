@@ -1,7 +1,6 @@
 <?php
 namespace model;
 
-use entity\Comment;
 use entity\Membres;
 use services\Verifications;
 
@@ -171,6 +170,7 @@ class MembreManager extends Manager
          }
 
     /**
+     * @param Membres $membre
      * @return string
      */
 
@@ -213,6 +213,7 @@ class MembreManager extends Manager
     }
 
     /**
+     * @param Membres $membre
      * @return string
      */
     public function modifEmail(Membres $membre)

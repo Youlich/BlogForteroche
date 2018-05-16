@@ -1,6 +1,5 @@
 <?php
 namespace model;
-use entity\Chapter;
 use entity\Comment;
 use entity\Membres;
 
@@ -82,7 +81,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $membreId
+     * @param Membres $membre
      * @return array : permet d'obtenir tous les commentaires d'un membre selon le chapitre et le livre sélectionné
      */
     public function listCommentsMembre(Membres $membre)
@@ -124,11 +123,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $chapterId
-     * @param $membrePseudo
-     * @param $statut
-     * @param $comment
-     * @param $membreId
+     * Comment $comment
      * ajout d'un commentaire dans la table commentaire avec le statut "en attante" puis si c'est un succès, on rajoute +1 dans nbcomms de la table membre
      */
     public function addComment (Comment $comment) // fonction qui permet de saisir un nouveau commentaire et l'enregistrer dans la BDD
@@ -246,7 +241,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * @param $chapterid
+     * @param Comment $comment
      * fonction qui modifie l'état du commentaire après signalement d'un membre, en statut "Alerte"
      */
 	public function signaledComment(Comment $comment)

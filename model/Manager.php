@@ -2,7 +2,6 @@
 
 namespace model;
 use controller\Controller;
-use entity\Membres;
 
 /**
  * Class Manager
