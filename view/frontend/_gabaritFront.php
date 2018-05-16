@@ -56,7 +56,7 @@
                     <li class="nav-item dropdown mx-0 mx-lg-1">
                         <a href="#" class="dropdown-toggle nav-link py-3 px-0 px-lg-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace membre <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-	                        <?php if ($user_is_connected) { ?>
+	                        <?php if ($sessionok) { ?>
 
                                 <li><a class="dropdown-item" href="index.php?action=logoutmembre">Se déconnecter</a></li>
                                 <li>

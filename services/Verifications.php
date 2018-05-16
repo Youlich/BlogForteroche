@@ -12,11 +12,10 @@ class Verifications extends Manager
 	private $email;
 	private $login;
 	private $mdp;
-	private $sessionexist;
 
 
 
-	// Vérifications admin
+// Vérifications admin
 
 	/**
 	 * Fonction qui permet de vérifier si le nb de caractères dans le login saisit est correct
@@ -115,7 +114,7 @@ class Verifications extends Manager
 	}
 
 
-	// Vérifications membre
+// Vérifications membre
 
 	/**
 	 * Fonction qui permet de vérifier si le nb de caractères dans le pseudo saisit est correct
@@ -236,14 +235,13 @@ class Verifications extends Manager
 	public function session()
 	{
 		$db = $this->dbConnect();
-		$req = $db->prepare('SELECT id, dateInscription, email, nbcomms FROM membres WHERE pseudo = :pseudo');
+		$req = $db->prepare('SELECT id, dateInscription, email FROM membres WHERE pseudo = :pseudo');
 		$req->execute(array('pseudo' => $this->pseudo));
 		$req = $req->fetch();
 		$_SESSION['id'] = $req['id'];
 		$_SESSION['pseudo'] = $this->pseudo;
 		$_SESSION['dateInscription'] = $req['dateInscription'];
 		$_SESSION['email'] = $req['email'];
-		$_SESSION['nbcomms'] = $req['nbcomms'];
 
 		return 'success';
 	}

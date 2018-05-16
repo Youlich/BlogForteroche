@@ -50,7 +50,7 @@ Class Frontend extends Controller
 		$chapters = $chaptermanager->listChapters();
 		$bookManager = $this->booksManager;
 		$books = $bookManager->getBooks();
-		$user_is_connected = (isset($_SESSION['id']))?true:false;
+		$sessionok = (isset($_SESSION['id']))?true:false;
 		$sessionId = (isset($_SESSION['id'])?$_SESSION['id']:null);
 		$sessionPseudo = (isset($_SESSION['pseudo'])?$_SESSION['pseudo']:null);
 		$success = (isset($_SESSION['success'])?$_SESSION['success']:null);
@@ -60,7 +60,7 @@ Class Frontend extends Controller
 		$message = (isset($_SESSION['inputs']['message']) ? $_SESSION['inputs']['message'] : '');
 		$myView = new View('accueil');
 		$myView->renderView(array('admin' => $admin, 'chapters' => $chapters, 'books' =>$books,'success'=> $success, 'error'=> $error,
-		                          'user_is_connected'=> $user_is_connected, 'sessionId'=> $sessionId, 'sessionPseudo' => $sessionPseudo,
+		                          'sessionok'=> $sessionok, 'sessionId'=> $sessionId, 'sessionPseudo' => $sessionPseudo,
 		                          'name'=>$name, 'email'=>$email, 'message'=>$message));
 	}
 

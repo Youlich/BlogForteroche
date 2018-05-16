@@ -3,7 +3,7 @@
         <section class="container">
         <h2 class="text-uppercase text-center  text-white" style="font-size: xx-large;">Bienvenue sur mon site
 
-               <?php if ($user_is_connected) {
+               <?php if ($sessionok) {
                     if(($sessionId) != '2')
                     {
                     echo $sessionPseudo . ' !';
