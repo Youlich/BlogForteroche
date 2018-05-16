@@ -1,9 +1,11 @@
 # BlogForteroche  
 
-## Connexion à la BDD  
+## Connexion à la BDD 
 
-Pour vous connecter à la base de données, veuillez rentrer vos informations de connexion dans le fichier Config.php.dist, au niveau de la méthode getConfigBDD(). Ce fichier se trouve dans le répertoire "services". 
-Vous pourrez ensuite le renommer en Config.php.
+Dans un premier temps, veuillez créer une nouvelle base de données sur votre application.
+Vous devez importer la base de données projetblog.sql fournie dans votre dossier de BDD.
+Ensuite, pour vous connecter à la base de données, veuillez rentrer vos informations de connexion dans le fichier Config.php.dist, au niveau de la méthode getConfigBDD(). Ce fichier se trouve dans le répertoire "services". 
+Vous devez ensuite le renommer en Config.php
 
 ## Enoncé du projet3 : création d'un Blog pour un écrivain
 
